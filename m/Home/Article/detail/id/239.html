@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+  <meta charset="UTF-8">
+  <title>【数据结构学习】线性表及其实现（一）|Winke's blog</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <link rel="alternate icon" type="image/png" href="../../../../Public/static/amaze/i/favicon.png">
+  <link rel="stylesheet" href="../../../../Public/static/amaze/css/amazeui.min.css"/>
+  <link rel="stylesheet" href="../../../../Public/static/ueditor/third-party/SyntaxHighlighter/shCoreDefault.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../Public/Home/css/blog.css">
+    <!--<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?e9ff349d5b883760c70a4e220c9ac8ca";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>-->
+    <style>
+    .g-hd {
+    background-image: url("../../../../Editor/2016-07-25/57962ebcddb49.png");
+    }
+
+    @media only screen and (min-width: 641px) {
+      .am-offcanvas {
+        display: block;
+        position: static;
+        background: none;
+      }
+
+      .am-offcanvas-bar {
+        position: static;
+        width: auto;
+        background: none;
+        -webkit-transform: translate3d(0, 0, 0);
+        -ms-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+      }
+      .am-offcanvas-bar:after {
+        content: none;
+      }
+
+    }
+    
+    @media only screen and (max-width: 640px) {
+      .am-offcanvas-bar .am-nav>li>a {
+        color:#ccc;
+        border-radius: 0;
+        border-top: 1px solid rgba(0,0,0,.3);
+        box-shadow: inset 0 1px 0 rgba(255,255,255,.05)
+      }
+
+      .am-offcanvas-bar .am-nav>li>a:hover {
+        background: #404040;
+        color: #fff
+      }
+
+      .am-offcanvas-bar .am-nav>li.am-nav-header {
+        color: #777;
+        background: #404040;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,.05);
+        text-shadow: 0 1px 0 rgba(0,0,0,.5);
+        border-top: 1px solid rgba(0,0,0,.3);
+        font-weight: 400;
+        font-size: 75%
+      }
+
+      .am-offcanvas-bar .am-nav>li.am-active>a {
+        background: #1a1a1a;
+        color: #fff;
+        box-shadow: inset 0 1px 3px rgba(0,0,0,.3)
+      }
+
+      .am-offcanvas-bar .am-nav>li+li {
+        margin-top: 0;
+      }
+    }
+
+    .my-head {
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    .my-button {
+      position: fixed;
+      top: 0;
+      right: 0;
+      border-radius: 0;
+    }
+    .my-sidebar {
+      padding-right: 0;
+      border-right: 1px solid #eeeeee;
+    }
+
+    .my-footer {
+      border-top: 1px solid #eeeeee;
+      padding: 10px 0;
+      margin-top: 10px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+<div class="g-hd" style="height:200px;"></div>
+<div class="m-hdimg" style="margin:-53px auto 0;display:block;text-align: center;">
+                <a class="hdimg img" href="../../../../old_index.html" >
+                    <img src="../../../../picture/avater2.jpg" height="96" width="96">
+                </a>
+            </div>
+<header class="am-g my-head">
+  <div class="am-u-sm-12 am-article">
+    <h1 class="am-article-title">【数据结构学习】线性表及其实现（一）</h1>
+    <p class="am-article-meta">王珂&nbsp;于&nbsp;2017-01-31 19:22</p>
+  </div>
+</header>
+<hr class="am-article-divider"/>
+<div class="am-g am-g-fixed">
+  <div class="am-u-md-12">
+    <div class="am-g">
+      <div class="am-u-sm-11 am-u-sm-centered">
+      <? php if($info.['description']!=''){ ?>
+      <blockquote>寒假学习系列...基本概念及顺序存储结构表示和实现</blockquote>
+      <? }  ?>
+        <div class="am-cf am-article">
+		<p><img src="../../../../Editor/2017-01-31/58907209c4c9e.jpg" title="什么是线性表.jpg"/><br/></p><p><img src="../../../../Editor/2017-01-31/589072181b2c1.jpg" title="基本操作.jpg"/></p><p><br/></p><p>表示的三种方式：</p><ol class=" list-paddingleft-2" style="list-style-type: decimal;"><li><p>顺序存储结构直接表示：C语言中的数组</p></li><li><p>顺序存储结构表示</p></li><li><p>链式存储结构表示<br/></p></li></ol><p><br/></p><p>线性表的<strong>顺序存储</strong>结构如下：</p><p><img src="../../../../Editor/2017-01-31/589072364eca8.jpg" title="存储结构.jpg"/></p><p>C语音实现：</p><pre class="brush:cpp;toolbar:false">/*
+&nbsp;*&nbsp;&nbsp;main.c
+&nbsp;*&nbsp;&nbsp;线性表的顺序存储实现
+&nbsp;*&nbsp;&nbsp;Created&nbsp;on:&nbsp;2017年1月19日
+&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Author:&nbsp;wangke
+&nbsp;*/
+#include&nbsp;&lt;stdio.h&gt;
+#include&nbsp;&lt;stdlib.h&gt;
+#define&nbsp;MAXSIZE&nbsp;10
+/**
+&nbsp;*&nbsp;线性表的顺序存储实现
+&nbsp;*&nbsp;利用数组的连续存储空间顺序存放线性表的各个元素
+&nbsp;*/
+typedef&nbsp;struct{
+	int&nbsp;Data[MAXSIZE];
+	int&nbsp;Last;
+}&nbsp;List;
+
+List&nbsp;*L;
+
+//初始化
+List&nbsp;*MakeEmpty(&nbsp;)
+{
+	List&nbsp;*PtrL;
+	PtrL&nbsp;=&nbsp;(List&nbsp;*)malloc(&nbsp;sizeof(List)&nbsp;);
+	PtrL-&gt;Last&nbsp;=&nbsp;-1;
+	return&nbsp;PtrL;
+}
+
+//查找&nbsp;平均时间性能为O(n)
+int&nbsp;Find(&nbsp;int&nbsp;X,&nbsp;List&nbsp;*PtrL&nbsp;)
+{
+	int&nbsp;i&nbsp;=&nbsp;0;
+	while(&nbsp;i&nbsp;&lt;=&nbsp;PtrL-&gt;Last&nbsp;&amp;&amp;&nbsp;PtrL-&gt;Data[i]!=&nbsp;X&nbsp;)
+		i++;
+	if&nbsp;(i&nbsp;&gt;&nbsp;PtrL-&gt;Last)&nbsp;return&nbsp;-1;&nbsp;/*&nbsp;如果没找到，返回-1&nbsp;*/
+	else&nbsp;return&nbsp;i;&nbsp;/*&nbsp;找到后返回的是存储位置&nbsp;*/
+}
+
+//插入&nbsp;平均移动次数n/2&nbsp;&nbsp;平均时间性能为O(n)
+void&nbsp;Insert(&nbsp;int&nbsp;X,&nbsp;int&nbsp;i,&nbsp;List&nbsp;*PtrL&nbsp;)
+{
+	int&nbsp;j;
+	if&nbsp;(&nbsp;PtrL-&gt;Last&nbsp;==&nbsp;MAXSIZE-1&nbsp;){&nbsp;/*&nbsp;表空间已满，不能插入*/
+	printf(&quot;表满&quot;);
+	return;
+	}
+	if&nbsp;(&nbsp;i&nbsp;&lt;&nbsp;1&nbsp;||&nbsp;i&nbsp;&gt;&nbsp;PtrL-&gt;Last+2)&nbsp;{&nbsp;/*检查插入位置的合法性*/
+	printf(&quot;位置不合法&quot;);
+	return;
+	}
+	for&nbsp;(&nbsp;j&nbsp;=&nbsp;PtrL-&gt;Last;&nbsp;j&nbsp;&gt;=&nbsp;i-1;&nbsp;j--&nbsp;)
+		PtrL-&gt;Data[j+1]&nbsp;=&nbsp;PtrL-&gt;Data[j];&nbsp;/*将&nbsp;ai～&nbsp;an倒序向后移动*/
+	PtrL-&gt;Data[i-1]&nbsp;=&nbsp;X;&nbsp;/*新元素插入*/
+	PtrL-&gt;Last++;&nbsp;/*Last仍指向最后元素*/
+	return;
+}
+
+//删除&nbsp;平均移动次数(n-1)/2&nbsp;&nbsp;平均时间性能为O(n)
+void&nbsp;Delete(&nbsp;int&nbsp;i,&nbsp;List&nbsp;*PtrL&nbsp;)
+{
+	int&nbsp;j;
+	if(&nbsp;i&nbsp;&lt;&nbsp;1&nbsp;||&nbsp;i&nbsp;&gt;&nbsp;PtrL-&gt;Last+1&nbsp;)&nbsp;{&nbsp;/*检查空表及删除位置的合法性*/
+	printf&nbsp;(&quot;存在第%d个元素&quot;,&nbsp;i&nbsp;);
+	return&nbsp;;
+	}
+	for&nbsp;(&nbsp;j&nbsp;=&nbsp;i;&nbsp;j&nbsp;&lt;=&nbsp;PtrL-&gt;Last;&nbsp;j++&nbsp;)
+		PtrL-&gt;Data[j-1]&nbsp;=&nbsp;PtrL-&gt;Data[j];&nbsp;/*将&nbsp;ai+1～&nbsp;an顺序向前移动*/
+	PtrL-&gt;Last--;&nbsp;/*Last仍指向最后元素*/
+	return;
+}
+
+void&nbsp;show(List&nbsp;*PtrL)
+{
+	for(int&nbsp;i=0;i&lt;PtrL-&gt;Last+1;i++&nbsp;)
+	{
+		printf(&quot;index&nbsp;%d:data&nbsp;%d\n&quot;,i+1,PtrL-&gt;Data[i]);
+	}
+	printf(&quot;\n&quot;);
+}
+
+int&nbsp;main(int&nbsp;argc,&nbsp;char&nbsp;*argv[])
+{
+	L&nbsp;=&nbsp;MakeEmpty();
+	Insert(1,1,L);
+	Insert(2,2,L);
+	Insert(3,3,L);
+	Insert(4,4,L);
+	show(L);
+	int&nbsp;index&nbsp;=&nbsp;Find(2,L);
+	printf(&quot;find&nbsp;2&nbsp;index:%d\n\n&quot;,index);
+	Delete(1,L);
+	show(L);
+	return&nbsp;0;
+}
+
+
+输出
+
+index&nbsp;1:data&nbsp;1
+index&nbsp;2:data&nbsp;2
+index&nbsp;3:data&nbsp;3
+index&nbsp;4:data&nbsp;4
+
+find&nbsp;2&nbsp;index:1
+
+index&nbsp;1:data&nbsp;2
+index&nbsp;2:data&nbsp;3
+index&nbsp;3:data&nbsp;4</pre><p>其中插入操作的图解：<br/></p><p><img src="../../../../Editor/2017-01-31/5890729d07a3d.jpg" title="插入操作.jpg"/></p>        </div>
+      </div>
+    </div>
+    <hr class="am-article-divider"/>
+    <div class="am-center" style="text-align:center;margin-bottom:15px;">
+    <a href="237.html">上一篇</a>    <a href="247.html">下一篇</a>    </div>
+    <!-- <hr class="am-article-divider"/> -->
+      </div>
+</div>
+    <div style="right: 15px;" class="amz-toolbar" id="amz-toolbar">
+    <a href="#top" title="回到顶部" class="am-icon-btn am-icon-arrow-up am-active" id="amz-go-top"></a>
+    </div>
+    <footer class="footer" style="background-color:#303336;">
+     <div class="g-ft" style="padding-top:20px;">
+     <div class="">
+      <div  style="float:left;width:50%;text-align:right;">
+        <ul class="m-bottom-nav" style="margin:0 20px 0 0;">
+          <li>
+                  <a href="../../../Index/index.html" target="_self">首页</a>
+              </li><li>
+                  <a href="http://www.zhangwenxuan.cn/" target="_blank">好基友</a>
+              </li><li>
+                  <a href="http://blog.wozhendehaoaini.cn/" target="_blank">老博客</a>
+              </li><li>
+                  <a href="66.html" target="_self">关于我</a>
+              </li>        </ul>
+      </div>
+      <div  style="float:right;width:50%;text-align:left;">
+        <ul class="m-bottom-nav" style="margin:0 0 0 20px;">
+           		<li>
+			<a href="../../lists/category/feeling.html">
+				<i class="icon-chevron-right"></i>随笔心情			</a>
+		</li>		<li>
+			<a href="../../lists/category/learnsth.html">
+				<i class="icon-chevron-right"></i>学习研究			</a>
+		</li>		<li>
+			<a href="../../lists/category/sizhou.html">
+				<i class="icon-chevron-right"></i>飞控研究			</a>
+		</li>		<li>
+			<a href="../../lists/category/Python.html">
+				<i class="icon-chevron-right"></i>Python			</a>
+		</li>		<li>
+			<a href="../../lists/category/wxmp.html">
+				<i class="icon-chevron-right"></i>微信平台			</a>
+		</li>        </ul>        
+      </div>
+    </div>
+           <p style="clear:both;padding-top:15px;" class="m-cprt">©&nbsp;<a href="../../../../index.html">花开花落</a>&nbsp;京ICP备15006955号-1&nbsp;|&nbsp;Powered by <a href="../../../../index.html">Winke</a></p> 
+    </div>
+    </footer>
+
+<!--[if lt IE 9]>
+<script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
+<script src="/Public/static/amaze/js/polyfill/rem.min.js"></script>
+<script src="/Public/static/amaze/js/polyfill/respond.min.js"></script>
+<script src="/Public/static/amaze/js/amazeui.legacy.js"></script>
+<![endif]-->
+
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script src="../../../../Public/static/amaze/js/jquery.min.js"></script>
+<script src="../../../../Public/static/amaze/js/amazeui.min.js"></script>
+<script type="text/javascript" src="../../../../Public/static/ueditor/third-party/SyntaxHighlighter/shCore.js"></script>
+<script src="../../../../Public/Home/js/blog.js"></script>
+<script type="text/javascript"> SyntaxHighlighter.all(); </script>
+<!--<![endif]-->
+</body>
+</html>

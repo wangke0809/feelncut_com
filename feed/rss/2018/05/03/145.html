@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+xmlns="http://purl.org/rss/1.0/"
+xmlns:dc="http://purl.org/dc/elements/1.1/">
+<channel rdf:about="https://feelncut.com/feed/rss/2018/05/03/145.html">
+<title>小王同学 - 搭建多人共用的GPU服务器 的评论</title>
+<link>https://feelncut.com/2018/05/03/145.html</link>
+<description>[TOC]
+
+#### 背景
+
+目前实验室GPU使用情况是：大部分同学的配有单台1080/TITAN Xp。后来购入了两台4卡的机器，老师的意思是希望可以作为服务器使用，能够多人同时使用，互不影...</description>
+<items>
+<rdf:Seq>
+<rdf:li resource="https://feelncut.com/2018/05/03/145.html#comment-24"/>
+<rdf:li resource="https://feelncut.com/2018/05/03/145.html#comment-21"/>
+<rdf:li resource="https://feelncut.com/2018/05/03/145.html#comment-18"/>
+<rdf:li resource="https://feelncut.com/2018/05/03/145.html#comment-17"/>
+<rdf:li resource="https://feelncut.com/2018/05/03/145.html#comment-16"/>
+<rdf:li resource="https://feelncut.com/2018/05/03/145.html#comment-15"/>
+<rdf:li resource="https://feelncut.com/2018/05/03/145.html#comment-14"/>
+<rdf:li resource="https://feelncut.com/2018/05/03/145.html#comment-13"/>
+<rdf:li resource="https://feelncut.com/2018/05/03/145.html#comment-12"/>
+<rdf:li resource="https://feelncut.com/2018/05/03/145.html#comment-11"/>
+</rdf:Seq>
+</items>
+</channel>
+<item rdf:about="https://feelncut.com/2018/05/03/145.html#comment-24">
+<title>pizi</title>
+<link>https://feelncut.com/2018/05/03/145.html#comment-24</link>
+<dc:date>2020-02-21T00:47:08+08:00</dc:date>
+<description>一个卡就不要限制资源了...错开时间跑吧...</description>
+</item>
+<item rdf:about="https://feelncut.com/2018/05/03/145.html#comment-21">
+<title>padluo</title>
+<link>https://feelncut.com/2018/05/03/145.html#comment-21</link>
+<dc:date>2019-07-14T11:34:58+08:00</dc:date>
+<description>请问如何控制到用户使用1个GPU卡的具体多少资源呢？</description>
+</item>
+<item rdf:about="https://feelncut.com/2018/05/03/145.html#comment-18">
+<title>pizi</title>
+<link>https://feelncut.com/2018/05/03/145.html#comment-18</link>
+<dc:date>2018-12-14T09:04:19+08:00</dc:date>
+<description>文章里写了的，lxc config device add yourContainerName gpu gpu</description>
+</item>
+<item rdf:about="https://feelncut.com/2018/05/03/145.html#comment-17">
+<title>zzd</title>
+<link>https://feelncut.com/2018/05/03/145.html#comment-17</link>
+<dc:date>2018-12-08T21:55:15+08:00</dc:date>
+<description>lxc config device add yourContainerName gpu0 gpu id=0如果是 挂载多个GPU呢。。。。</description>
+</item>
+<item rdf:about="https://feelncut.com/2018/05/03/145.html#comment-16">
+<title>Fangxin Wang</title>
+<link>https://feelncut.com/2018/05/03/145.html#comment-16</link>
+<dc:date>2018-08-09T15:03:21+08:00</dc:date>
+<description>是自动并且强制安装新的显卡驱动的，我还是用run包安装吧，再次感谢</description>
+</item>
+<item rdf:about="https://feelncut.com/2018/05/03/145.html#comment-15">
+<title>pizi</title>
+<link>https://feelncut.com/2018/05/03/145.html#comment-15</link>
+<dc:date>2018-08-09T14:21:27+08:00</dc:date>
+<description>如上条回复中安装过程那篇文章，我安装cuda都是通过`cuda_xx_xx.sh`文件安装，安装时提示是否安装cuda中带有的显卡驱动，由于已经自己安装，所以选择否，不让cuda自己安装驱动。所以没有遇到你说的这种问题。你在安装`deb`包的过程中，是提示你是否安装该版本显卡驱动，还是强制必须安装该版本？</description>
+</item>
+<item rdf:about="https://feelncut.com/2018/05/03/145.html#comment-14">
+<title>Fangxin Wang</title>
+<link>https://feelncut.com/2018/05/03/145.html#comment-14</link>
+<dc:date>2018-08-09T14:10:03+08:00</dc:date>
+<description>谢谢，安装的时候还有一个问题，我在host上先装了390.77的显卡驱动，然后安装了cuda 9.0的deb包，然后安装过程中提示我要改变显卡驱动的版本号，安装完毕后，显卡驱动变成了384.130；而容器和host上的驱动版本应保持一致，所以我必须在容器里先安装驱动，再安装cuda9.0，只是为了把驱动降级；那如果我以后在host上安装cuda9.2，它又会自动将驱动版本升级为398.xx，那么这样的话，是不是已经创建的容器，我每个都要再装一次cuda9.2 来使其和host上面的显卡驱动保持一致呢</description>
+</item>
+<item rdf:about="https://feelncut.com/2018/05/03/145.html#comment-13">
+<title>pizi</title>
+<link>https://feelncut.com/2018/05/03/145.html#comment-13</link>
+<dc:date>2018-08-09T13:54:08+08:00</dc:date>
+<description>ld.so.config参见https://feelncut.com/2018/01/09/46.html，文章中只配置了cuda环境变量和动态库，cudnn因为安装到了cuda目录中，所以配置一次即可。如果cudnn不在cuda目录中，按照配置cuda的方法配置一次cudnn即可。</description>
+</item>
+<item rdf:about="https://feelncut.com/2018/05/03/145.html#comment-12">
+<title>Fangxin Wang</title>
+<link>https://feelncut.com/2018/05/03/145.html#comment-12</link>
+<dc:date>2018-08-08T23:05:06+08:00</dc:date>
+<description>我在host上安装了显卡驱动，cuda9.0和cuda9.2， 分别把cudnn v7和cudnn v7.1复制到了里面。用lxd创建了一个容器，挂载了host上的/usr/local，并在容器内设置了LD_LIBRARY_PATH和PATH分别指向cuda9.0的lib64和bin。在host上，输入nvidia-smi，会出现显卡的信息，而在容器内输入nvidia-smi，会出现Failed to initialize NVML: Driver/library version mismatch。如果想其它教程中所说的，在host和容器上分别装一次driver，cuda和cudnn，则不会出现问题，但我想这失去了容器的意义。看到您所说的通过添加库文件和相关路径，即可在多个容器间共享cuda和cudnn，非常兴奋，希望您能在您的文章中给出具体的步骤，谢谢</description>
+</item>
+<item rdf:about="https://feelncut.com/2018/05/03/145.html#comment-11">
+<title>Fangxin Wang</title>
+<link>https://feelncut.com/2018/05/03/145.html#comment-11</link>
+<dc:date>2018-08-08T19:58:17+08:00</dc:date>
+<description>放到ld.so.config是什么操作</description>
+</item>
+</rdf:RDF>

@@ -1,0 +1,265 @@
+<!DOCTYPE HTML>
+<html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width,user-scalable=no">
+    <title>分类 代码片段 下的文章 - 小王同学</title>
+	<!--[if lt IE 9]>
+    <script type="text/javascript" src="https://feelncut.com/usr/themes/maupassant/javascript/html5shiv.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" href="../../../admin/css/normalize.css">
+    <link rel="stylesheet" href="../../../usr/themes/maupassant/style.css">
+    <meta name="description" content="代码片段笔记" />
+<meta name="keywords" content="代码片段" />
+<link rel="alternate" type="application/rss+xml" title="代码片段 &raquo; 小王同学 &raquo; RSS 2.0" href="../../../feed/category/code/index.html" />
+<link rel="alternate" type="application/rdf+xml" title="代码片段 &raquo; 小王同学 &raquo; RSS 1.0" href="../../../feed/rss/category/code/index.html" />
+<link rel="alternate" type="application/atom+xml" title="代码片段 &raquo; 小王同学 &raquo; ATOM 1.0" href="../../../feed/atom/category/code/index.html" />
+<script> var _hmt = _hmt || []; (function() {   var hm = document.createElement("script");   hm.src = "https://hm.baidu.com/hm.js?e9ff349d5b883760c70a4e220c9ac8ca";   var s = document.getElementsByTagName("script")[0];    s.parentNode.insertBefore(hm, s); })(); </script></head>
+<body>
+
+<header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                                    <a id="logo" href="../../../index.html">
+                        小王同学                    </a>
+                        	    <p class="description">希望通过自我加工，成为有点用的人</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class=" " href="../../../index.html">博客</a>
+															<a href="../../../archives.html" title="归档">归档</a>
+										<a href="../../../tools.html" title="Tools">Tools</a>
+										<a href="../../../about.html" title="关于">关于</a>
+									</nav>
+            </div>
+        </div>
+    </div>
+</header>
+<div id="body">
+    <div class="container">
+        <div class="col-group">
+<div class="col-8" id="main">
+	<div class="res-cons">
+        <h3 class="archive-title">分类 代码片段 下的文章		</h3>
+            	            <article class="post">
+    			<header>
+				<h2 class="post-title">
+					<a href="../../../2018/04/09/139.html">Python 统计 SAE 日志脚本</a>
+				</h2>
+			</header>
+			<date class="post-meta">
+				April 9, 2018			</date>
+                <div class="post-content">
+        		<div id="md_content_1" class="md_content" style="min-height: 50px;"><textarea id="append-test" style="display:none;">> 之前统计教务系统客户端分布写的脚本，整理备忘。移动教务系统很纯粹，几乎没有任何后台功能，也没xx统计，只能靠分析近期日志进行粗略统计了。
+
+![](/images/2018/04/1209604956.png)
+
+![](/images/2018/04/4203486238.png)
+
+</textarea></div><p class="more"><a href="../../../2018/04/09/139.html" title="Python 统计 SAE 日志脚本">- 阅读剩余部分 -</a></p>                </div>
+    		</article>
+		            <article class="post">
+    			<header>
+				<h2 class="post-title">
+					<a href="../../../2018/03/22/109.html">Latex速查</a>
+				</h2>
+			</header>
+			<date class="post-meta">
+				March 22, 2018			</date>
+                <div class="post-content">
+        		<div id="md_content_2" class="md_content" style="min-height: 50px;"><textarea id="append-test" style="display:none;">转自[一份不太简短的 LATEX2e 介绍](http://www.mohu.org/info/lshort-cn.pdf "一份不太简短的 LATEX2e 介绍")
+
+
+[latex.pdf](https://image.feelncut.com/2018/03/1734916613.pdf)</textarea></div>                </div>
+    		</article>
+		            <article class="post">
+    			<header>
+				<h2 class="post-title">
+					<a href="../../../2018/03/01/98.html">Ubuntu下通过ssh别名快速连接远程服务器以及传输文件</a>
+				</h2>
+			</header>
+			<date class="post-meta">
+				March 1, 2018			</date>
+                <div class="post-content">
+        		<div id="md_content_3" class="md_content" style="min-height: 50px;"><textarea id="append-test" style="display:none;">[TOC]
+
+###  本机公钥写入服务器
+生成密钥对之后把公钥写入服务器`cat id_dsa.pub >> ~/.ssh/authorized_keys `
+
+### 修改本机ssh配置
+`/etc/ssh/ssh_config`
+添加
+```
+Host qcloud
+    HostName 123.x.x.x
+    Port 22
+    User ubuntu
+    # IdentityFile  ~/.ssh/id_rsa.pub
+    IdentitiesOnly yes
+```
+
+### 连接ssh
+
+`ssh qcloud`
+
+### 使用scp
+
+`scp /path/file qcloud:path/file`</textarea></div>                </div>
+    		</article>
+		            <article class="post">
+    			<header>
+				<h2 class="post-title">
+					<a href="../../../2018/01/25/88.html">Ubuntu下快速安装配置 ssh</a>
+				</h2>
+			</header>
+			<date class="post-meta">
+				January 25, 2018			</date>
+                <div class="post-content">
+        		<div id="md_content_4" class="md_content" style="min-height: 50px;"><textarea id="append-test" style="display:none;">[TOC]
+### 安装
+通过`sudo apt-get install openssh-server`安装ssh服务端。
+
+### 配置
+配置文件路径`/etc/ssh/sshd_config`，可以修改连接端口等
+
+### 启动
+修改后需要`service sshd restart`。ssh以服务的形式管理，当然可以`service sshd start/stop/restart`。
+
+### 免密码登录
+![](/images/2018/01/1536740574.png)
+图片来源：https://www.jianshu.com/p/d40a85df1a43
+
+如图所示，需要用到`ssh-keygen`命令生成公私匙，并且需要把公式放到认证文件中`cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys`</textarea></div>                </div>
+    		</article>
+		            <article class="post">
+    			<header>
+				<h2 class="post-title">
+					<a href="../../../2018/01/24/87.html">Ubuntu16.04 下安装并配置 VNC 远程访问服务</a>
+				</h2>
+			</header>
+			<date class="post-meta">
+				January 24, 2018			</date>
+                <div class="post-content">
+        		<div id="md_content_5" class="md_content" style="min-height: 50px;"><textarea id="append-test" style="display:none;">> 在实验室一直通过ssh使用宿舍PC，今天感觉用Jupyter NoteBook写代码其实并没有PyCharm那么方便，所以想通过VNC在GUI界面下开心的写代码。
+
+和往常一样，`sudo apt-get install vnc4server`一顿操作后看log说font目录怎样怎样，没有办法正常加载。
+
+于是这次换个VNC服务端试一试，安装主要参考：[这里](http://blog.csdn.net/songbaiyao/article/details/72858087 "这里")。
+
+自己也记录一下，方便下次安装。
+
+</textarea></div><p class="more"><a href="../../../2018/01/24/87.html" title="Ubuntu16.04 下安装并配置 VNC 远程访问服务">- 阅读剩余部分 -</a></p>                </div>
+    		</article>
+		                <ol class="page-navigator"><li class="prev"><a href="../1/index.html">&laquo; 前一页</a></li><li><a href="../1/index.html">1</a></li><li class="current"><a href="index.html">2</a></li><li><a href="../3/index.html">3</a></li><li><a href="../4/index.html">4</a></li><li class="next"><a href="../3/index.html">后一页 &raquo;</a></li></ol>	</div>
+</div>
+<div id="secondary">
+	<section class="widget">
+        <form id="search" method="post" action="index.html">
+            <input type="text" name="s" class="text" placeholder="搜索..." />
+            <button type="submit" class="submit icon-search"></button>
+        </form>
+    </section>
+
+	    <section class="widget">
+		<h3 class="widget-title">最新文章</h3>
+        <ul class="widget-list">
+            <li><a href="../../../2020/08/24/323.html">ETH 2.0 资源汇总（持续更新）</a></li><li><a href="../../../2020/08/24/322.html">ETH 2.0 测试网验证节点质押流程体验</a></li><li><a href="../../../2020/06/06/312.html">通过 openssl 导出 HTTPS 网站 SSL 证书链</a></li><li><a href="../../../2020/05/20/308.html">如何开发一款区块链浏览器？</a></li><li><a href="../../../2020/02/02/288.html">EOS 提交交易失败分析</a></li><li><a href="../../../2019/12/09/giaocamerarobot.html">小 Giao 之死</a></li><li><a href="../../../2019/10/04/267.html">《凶宅》和《疯人院》</a></li><li><a href="../../../2018/10/17/228.html"> 以太坊多重签名原理分析</a></li><li><a href="../../../2018/09/11/188.html">OpenCV 初识图像</a></li><li><a href="../../../2018/09/11/184.html">为什么要系统的学习一下Pyhton-OpenCV?</a></li>        </ul>
+    </section>
+    
+        <section class="widget">
+		<h3 class="widget-title">最近回复</h3>
+        <ul class="widget-list">
+                            <li><a href="../../../2020/08/24/323.html#comment-26">pizi</a>: https://be...</li>
+                    <li><a href="../../../2020/08/24/323.html#comment-25">何先生</a>: 请问有没有ETH2....</li>
+                    <li><a href="../../../2018/05/03/145.html#comment-24">pizi</a>: 一个卡就不要限制资源...</li>
+                    <li><a href="../../../about.html#comment-23">pizi</a>: 有特殊技巧的啊，从阿...</li>
+                    <li><a href="../../../about.html#comment-22">一网友</a>: 有钱人新浪数据库很贵吧</li>
+                    <li><a href="../../../2018/05/03/145.html#comment-21">padluo</a>: 请问如何控制到用户使...</li>
+                    <li><a href="../../../about.html#comment-20">小白</a>: 板凳是我的！</li>
+                    <li><a href="../../../2018/02/08/90.html#comment-19">无耻的我</a>: 大佬，能发一份吗，原...</li>
+                    <li><a href="../../../2018/05/03/145.html#comment-18">pizi</a>: 文章里写了的，lxc...</li>
+                    <li><a href="../../../2018/05/03/145.html#comment-17">zzd</a>: lxc config...</li>
+                </ul>
+    </section>
+    
+        <section class="widget">
+		<h3 class="widget-title">分类</h3>
+        <ul class="widget-list">
+            <li><a href="../../feel/index.html">随笔心情</a> (4)</li><li><a href="../index.html">代码片段</a> (17)</li><li><a href="../../ojbk/index.html">折腾着玩</a> (7)</li><li><a href="../../ml/index.html">机器学习</a> (9)</li><li><a href="../../blockChain/index.html">区块链</a> (10)</li><li><a href="../../python-opencv/index.html">Python-OpenCV</a> (2)</li><li><a href="../../video/index.html">视频剪辑</a> (0)</li><li><a href="../../leetcode/index.html">leetcode</a> (1)</li>        </ul>
+	</section>
+    
+        <section class="widget">
+		<h3 class="widget-title">归档</h3>
+        <ul class="widget-list">
+            <li><a href="../../../2020/08/index.html">August 2020</a></li><li><a href="../../../2020/06/index.html">June 2020</a></li><li><a href="../../../2020/05/index.html">May 2020</a></li><li><a href="../../../2020/02/index.html">February 2020</a></li><li><a href="../../../2019/12/index.html">December 2019</a></li><li><a href="../../../2019/10/index.html">October 2019</a></li><li><a href="../../../2018/10/index.html">October 2018</a></li><li><a href="../../../2018/09/index.html">September 2018</a></li><li><a href="../../../2018/08/index.html">August 2018</a></li><li><a href="../../../2018/05/index.html">May 2018</a></li><li><a href="../../../2018/04/index.html">April 2018</a></li><li><a href="../../../2018/03/index.html">March 2018</a></li><li><a href="../../../2018/02/index.html">February 2018</a></li><li><a href="../../../2018/01/index.html">January 2018</a></li>        </ul>
+	</section>
+    
+    	<section class="widget">
+		<h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+                            <li class="last"><a href="../../../admin/login.php.html">登录</a></li>
+                        <li><a href="../../../feed/index.html">文章 RSS</a></li>
+            <li><a href="../../../feed/comments/index.html">评论 RSS</a></li>
+            <li><a href="http://www.typecho.org">Typecho</a></li>
+        </ul>
+	</section>
+    </div>		</div>
+    </div>
+</div>
+<footer id="footer">
+	<div class="container">
+		&copy; 2023 <a rel="nofollow" href="../../../index.html">小王同学</a>. 模板由<a href="http://pagecho.com">cho</a>制作.
+	</div>
+</footer>
+<link rel="stylesheet" href="../../../usr/plugins/EditorMD/css/editormd.css" />
+<link rel="stylesheet" href="../../../usr/plugins/EditorMD/css/emojify.min.css" />
+<script type="text/javascript">
+    window.jQuery || document.write(unescape('%3Cscript%20type%3D%22text/javascript%22%20src%3D%22https://feelncut.com/usr/plugins/EditorMD/lib/jquery.min.js%22%3E%3C/script%3E'));
+</script>
+<script src="../../../usr/plugins/EditorMD/lib/marked.min.js"></script>
+<script src="../../../usr/plugins/EditorMD/lib/prettify.min.js"></script>
+<script src="../../../usr/plugins/EditorMD/lib/raphael.min.js"></script>
+<script src="../../../usr/plugins/EditorMD/lib/underscore.min.js"></script>
+<script src="../../../usr/plugins/EditorMD/lib/sequence-diagram.min.js"></script>
+<script src="../../../usr/plugins/EditorMD/lib/flowchart.min.js"></script>
+<script src="../../../usr/plugins/EditorMD/lib/jquery.flowchart.min.js"></script>
+<script src="../../../usr/plugins/EditorMD/js/editormd.min.js"></script>
+<script src="../../../usr/plugins/EditorMD/js/emojify.min.js"></script>
+<script type="text/javascript">
+$(function() {
+    var markdowns = document.getElementsByClassName("md_content");
+    $(markdowns).each(function(){
+        var markdown = $(this).children("#append-test").text();
+        //$('#md_content_'+i).text('');
+        var testEditormdView;
+        testEditormdView = editormd.markdownToHTML($(this).attr("id"), {
+            markdown: markdown,//+ "\r\n" + $("#append-test").text(),
+            toolbarAutoFixed : false,
+            htmlDecode: true,
+            emoji: true,
+            tex: true,
+            toc: true,
+            tocm: true,
+            taskList: true,
+            flowChart: true,
+            sequenceDiagram: true,
+        });
+    });
+    emojify.setConfig({
+        img_dir: 'https:' == document.location.protocol ? "https://staticfile.qnssl.com/emoji-cheat-sheet/1.0.0" : "http://cdn.staticfile.org/emoji-cheat-sheet/1.0.0",
+        blacklist: {
+            'ids': [],
+            'classes': ['no-emojify'],
+            'elements': ['^script$', '^textarea$', '^pre$', '^code$']
+        },
+    });
+    emojify.run();
+});
+</script>
+</body>
+</html>

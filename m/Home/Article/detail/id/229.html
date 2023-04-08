@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+  <meta charset="UTF-8">
+  <title>Centos下搭建SVN服务器并同步仓库内容到WEB目录|Winke's blog</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <link rel="alternate icon" type="image/png" href="../../../../Public/static/amaze/i/favicon.png">
+  <link rel="stylesheet" href="../../../../Public/static/amaze/css/amazeui.min.css"/>
+  <link rel="stylesheet" href="../../../../Public/static/ueditor/third-party/SyntaxHighlighter/shCoreDefault.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../Public/Home/css/blog.css">
+    <!--<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?e9ff349d5b883760c70a4e220c9ac8ca";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>-->
+    <style>
+    .g-hd {
+    background-image: url("../../../../Editor/2016-07-25/57962ebcddb49.png");
+    }
+
+    @media only screen and (min-width: 641px) {
+      .am-offcanvas {
+        display: block;
+        position: static;
+        background: none;
+      }
+
+      .am-offcanvas-bar {
+        position: static;
+        width: auto;
+        background: none;
+        -webkit-transform: translate3d(0, 0, 0);
+        -ms-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+      }
+      .am-offcanvas-bar:after {
+        content: none;
+      }
+
+    }
+    
+    @media only screen and (max-width: 640px) {
+      .am-offcanvas-bar .am-nav>li>a {
+        color:#ccc;
+        border-radius: 0;
+        border-top: 1px solid rgba(0,0,0,.3);
+        box-shadow: inset 0 1px 0 rgba(255,255,255,.05)
+      }
+
+      .am-offcanvas-bar .am-nav>li>a:hover {
+        background: #404040;
+        color: #fff
+      }
+
+      .am-offcanvas-bar .am-nav>li.am-nav-header {
+        color: #777;
+        background: #404040;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,.05);
+        text-shadow: 0 1px 0 rgba(0,0,0,.5);
+        border-top: 1px solid rgba(0,0,0,.3);
+        font-weight: 400;
+        font-size: 75%
+      }
+
+      .am-offcanvas-bar .am-nav>li.am-active>a {
+        background: #1a1a1a;
+        color: #fff;
+        box-shadow: inset 0 1px 3px rgba(0,0,0,.3)
+      }
+
+      .am-offcanvas-bar .am-nav>li+li {
+        margin-top: 0;
+      }
+    }
+
+    .my-head {
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    .my-button {
+      position: fixed;
+      top: 0;
+      right: 0;
+      border-radius: 0;
+    }
+    .my-sidebar {
+      padding-right: 0;
+      border-right: 1px solid #eeeeee;
+    }
+
+    .my-footer {
+      border-top: 1px solid #eeeeee;
+      padding: 10px 0;
+      margin-top: 10px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+<div class="g-hd" style="height:200px;"></div>
+<div class="m-hdimg" style="margin:-53px auto 0;display:block;text-align: center;">
+                <a class="hdimg img" href="../../../../old_index.html" >
+                    <img src="../../../../picture/avater2.jpg" height="96" width="96">
+                </a>
+            </div>
+<header class="am-g my-head">
+  <div class="am-u-sm-12 am-article">
+    <h1 class="am-article-title">Centos下搭建SVN服务器并同步仓库内容到WEB目录</h1>
+    <p class="am-article-meta">王珂&nbsp;于&nbsp;2016-12-31 23:22</p>
+  </div>
+</header>
+<hr class="am-article-divider"/>
+<div class="am-g am-g-fixed">
+  <div class="am-u-md-12">
+    <div class="am-g">
+      <div class="am-u-sm-11 am-u-sm-centered">
+      <? php if($info.['description']!=''){ ?>
+      <blockquote>最近接一个项目，这次不想用SAE了，太贵了，阿里云服务器上搭建个SVN方便代码管理。</blockquote>
+      <? }  ?>
+        <div class="am-cf am-article">
+		<p><strong>第一步：安装svnversion</strong></p><p><br/></p><p>Centos下可以使用yum安装，自动配置环境变量</p><pre class="plain" style="margin-top: 4px; margin-bottom: 4px; background-color: rgb(240, 240, 240); font-size: 12px;" name="code">yum&nbsp;install&nbsp;subversion</pre><p>安装完成后可以用</p><pre class="plain" style="margin-top: 4px; margin-bottom: 4px; background-color: rgb(240, 240, 240); font-size: 12px;" name="code">svn&nbsp;help</pre><p>来检查是否安装成功</p><p><br/></p><p><strong>第二步：配置svnversion</strong></p><p><br/></p><pre class="plain" style="margin-top: 4px; margin-bottom: 4px; background-color: rgb(240, 240, 240); font-size: 12px;" name="code">mkdir&nbsp;-p&nbsp;/home/svn/repos&nbsp;&nbsp;#创建版本库目录&nbsp;repos目录名可以自定义
+svnadmin&nbsp;create&nbsp;/home/svn/repos&nbsp;#创建版本</pre><p>然后修改配置文件进行配置</p><p>编辑/home/svn/repos/conf/svnserve.conf</p><pre class="html" style="margin-top: 4px; margin-bottom: 4px; background-color: rgb(240, 240, 240); font-size: 12px;" name="code">[general]
+anon-access&nbsp;=&nbsp;none&nbsp;#匿名登录无权限
+auth-access&nbsp;=&nbsp;write&nbsp;#认证可写
+password-db&nbsp;=&nbsp;passwd&nbsp;&nbsp;#用户密码文件
+authz-db&nbsp;=&nbsp;authz&nbsp;&nbsp;#授权登录文件
+realm&nbsp;=&nbsp;repos</pre><p>注意：</p><p>*这里的配置修改后需要重启服务</p><p><br/></p><p>编辑用户密码</p><p>编辑/home/svn/repos/conf/passw</p><pre class="plain" style="margin-top: 4px; margin-bottom: 4px; background-color: rgb(240, 240, 240); font-size: 12px;" name="code">[users]
+username&nbsp;=&nbsp;password&nbsp;#每行一个用户&nbsp;用户名&nbsp;=&nbsp;密码</pre><p>编辑用户权限</p><p>编辑/home/svn/repos/conf/authz</p><pre class="plain" style="margin-top: 4px; margin-bottom: 4px; background-color: rgb(240, 240, 240); font-size: 12px;" name="code">[groups]
+#组名&nbsp;=&nbsp;用户名&nbsp;其中，1个用户组可以包含1个或多个用户，用户间以逗号分隔。
+#比如&nbsp;admin&nbsp;=&nbsp;user1,user2
+admin&nbsp;=&nbsp;username
+[/]
+#[/]&nbsp;为根目录权限
+@admin&nbsp;=&nbsp;rw&nbsp;#组名前必须加@
+username&nbsp;=&nbsp;rw&nbsp;#也可以直接给某个用户设置权限</pre><p>注意：<br/>* 权限配置文件中出现的用户名必须已在用户配置文件中定义。<br/>* 对权限配置文件的修改立即生效，不必重启svn。</p><p><br/></p><p>用户组格式：<br/><br/>版本库目录格式：<br/>[&lt;版本库&gt;:/项目/目录]<br/>@&lt;用户组名&gt; = &lt;权限&gt;<br/>&lt;用户名&gt; = &lt;权限&gt;<br/>其中，方框号内部分可以有多种写法:<br/>[/],表示根目录及以下，根目录是svnserve启动时指定的，我们指定为/home/svn，[/]就是表示对全部版本库设置权限。<br/>[repos:/] 表示对版本库repos设置权限；<br/>[repos:/abc] 表示对版本库repos中的abc项目设置权限；<br/>[repos:/abc/aaa] 表示对版本库repos中的abc项目的aaa目录设置权限；<br/>权限主体可以是用户组、用户或*，用户组在前面加@，*表示全部用户。<br/>权限可以是w、r、wr和空，空表示没有任何权限。<br/><!--权限--><!--用户名--><!--权限--><!--用户组名--><!--版本库--></p><p><br/></p><p>启动服务</p><pre class="plain" style="margin-top: 4px; margin-bottom: 4px; background-color: rgb(240, 240, 240); font-size: 12px;" name="code">svnserve&nbsp;-d&nbsp;--listen-port&nbsp;8080&nbsp;-r&nbsp;/home/svn&nbsp;#这里注意目录&nbsp;是/home/svn&nbsp;不是/home/svn/repos
+-d&nbsp;：表示以daemon方式（后台运行）运行；
+--listen-port&nbsp;8080&nbsp;：表示使用8080端口
+-r&nbsp;/home/svn：指定根目录是/home/svn。</pre><p>停止服务：</p><pre class="plain" style="margin-top: 4px; margin-bottom: 4px; background-color: rgb(240, 240, 240); font-size: 12px;" name="code">killall&nbsp;svnserve</pre><p>至此SVN已经配置完毕</p><p>可以通过:</p><pre class="plain" style="margin-top: 4px; margin-bottom: 4px; background-color: rgb(240, 240, 240); font-size: 12px;" name="code">svn&nbsp;co&nbsp;svn://ip:port/repos/</pre><p>进行测试</p><p><br/></p><p><strong>第三步：自动同步到WEB目录</strong></p><p><br/></p><p>在/home/svn/repos/hooks目录下</p><pre class="plain" style="margin-top: 4px; margin-bottom: 4px; background-color: rgb(240, 240, 240); font-size: 12px;" name="code">cp&nbsp;post-commit.tmpl&nbsp;post-commit</pre><p>修改内容为：</p><pre class="html" style="margin-top: 4px; margin-bottom: 4px; background-color: rgb(240, 240, 240); font-size: 12px;" name="code">#!/bin/sh
+WEB=/home/wwwroot/wwb/web/&nbsp;#web的目录
+cd&nbsp;$WEB&nbsp;&amp;&amp;&nbsp;/usr/bin/svn&nbsp;update&nbsp;--username&nbsp;winke&nbsp;--password&nbsp;772930093&nbsp;--no-auth-cache
+chmod&nbsp;755&nbsp;post-commit&nbsp;#别忘了这一步</pre><p><br/></p><p>参考文章：</p><p>[1]:https://my.oschina.net/u/163208/blog/186797</p><p>[2]:http://stackoverflow.com/questions/7841591/svn-post-commit-hook-error-255</p><p><br/></p>        </div>
+      </div>
+    </div>
+    <hr class="am-article-divider"/>
+    <div class="am-center" style="text-align:center;margin-bottom:15px;">
+    <a href="218.html">上一篇</a>    <a href="230.html">下一篇</a>    </div>
+    <!-- <hr class="am-article-divider"/> -->
+      </div>
+</div>
+    <div style="right: 15px;" class="amz-toolbar" id="amz-toolbar">
+    <a href="#top" title="回到顶部" class="am-icon-btn am-icon-arrow-up am-active" id="amz-go-top"></a>
+    </div>
+    <footer class="footer" style="background-color:#303336;">
+     <div class="g-ft" style="padding-top:20px;">
+     <div class="">
+      <div  style="float:left;width:50%;text-align:right;">
+        <ul class="m-bottom-nav" style="margin:0 20px 0 0;">
+          <li>
+                  <a href="../../../Index/index.html" target="_self">首页</a>
+              </li><li>
+                  <a href="http://www.zhangwenxuan.cn/" target="_blank">好基友</a>
+              </li><li>
+                  <a href="http://blog.wozhendehaoaini.cn/" target="_blank">老博客</a>
+              </li><li>
+                  <a href="66.html" target="_self">关于我</a>
+              </li>        </ul>
+      </div>
+      <div  style="float:right;width:50%;text-align:left;">
+        <ul class="m-bottom-nav" style="margin:0 0 0 20px;">
+           		<li>
+			<a href="../../lists/category/feeling.html">
+				<i class="icon-chevron-right"></i>随笔心情			</a>
+		</li>		<li>
+			<a href="../../lists/category/learnsth.html">
+				<i class="icon-chevron-right"></i>学习研究			</a>
+		</li>		<li>
+			<a href="../../lists/category/sizhou.html">
+				<i class="icon-chevron-right"></i>飞控研究			</a>
+		</li>		<li>
+			<a href="../../lists/category/Python.html">
+				<i class="icon-chevron-right"></i>Python			</a>
+		</li>		<li>
+			<a href="../../lists/category/wxmp.html">
+				<i class="icon-chevron-right"></i>微信平台			</a>
+		</li>        </ul>        
+      </div>
+    </div>
+           <p style="clear:both;padding-top:15px;" class="m-cprt">©&nbsp;<a href="../../../../index.html">花开花落</a>&nbsp;京ICP备15006955号-1&nbsp;|&nbsp;Powered by <a href="../../../../index.html">Winke</a></p> 
+    </div>
+    </footer>
+
+<!--[if lt IE 9]>
+<script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
+<script src="/Public/static/amaze/js/polyfill/rem.min.js"></script>
+<script src="/Public/static/amaze/js/polyfill/respond.min.js"></script>
+<script src="/Public/static/amaze/js/amazeui.legacy.js"></script>
+<![endif]-->
+
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script src="../../../../Public/static/amaze/js/jquery.min.js"></script>
+<script src="../../../../Public/static/amaze/js/amazeui.min.js"></script>
+<script type="text/javascript" src="../../../../Public/static/ueditor/third-party/SyntaxHighlighter/shCore.js"></script>
+<script src="../../../../Public/Home/js/blog.js"></script>
+<script type="text/javascript"> SyntaxHighlighter.all(); </script>
+<!--<![endif]-->
+</body>
+</html>

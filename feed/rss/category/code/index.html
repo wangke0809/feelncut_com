@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+xmlns="http://purl.org/rss/1.0/"
+xmlns:dc="http://purl.org/dc/elements/1.1/">
+<channel rdf:about="https://feelncut.com/feed/rss/category/code/">
+<title>小王同学 - 代码片段</title>
+<link>https://feelncut.com/category/code/</link>
+<description>代码片段笔记</description>
+<items>
+<rdf:Seq>
+<rdf:li resource="https://feelncut.com/2020/06/06/312.html"/>
+<rdf:li resource="https://feelncut.com/2018/09/11/182.html"/>
+<rdf:li resource="https://feelncut.com/2018/09/05/181.html"/>
+<rdf:li resource="https://feelncut.com/2018/08/09/171.html"/>
+<rdf:li resource="https://feelncut.com/2018/05/14/150.html"/>
+<rdf:li resource="https://feelncut.com/2018/04/09/139.html"/>
+<rdf:li resource="https://feelncut.com/2018/03/22/109.html"/>
+<rdf:li resource="https://feelncut.com/2018/03/01/98.html"/>
+<rdf:li resource="https://feelncut.com/2018/01/25/88.html"/>
+<rdf:li resource="https://feelncut.com/2018/01/24/87.html"/>
+</rdf:Seq>
+</items>
+</channel>
+<item rdf:about="https://feelncut.com/2020/06/06/312.html">
+<title>通过 openssl 导出 HTTPS 网站 SSL 证书链</title>
+<link>https://feelncut.com/2020/06/06/312.html</link>
+<dc:date>2020-06-06T13:15:56+08:00</dc:date>
+<description>用 c 写 https 客户端的时候需要自己去验证服务器 ssl 证书，验证的时候需要给定证书链，使用 openssl 可以很方便的导出。
+
+- 输入 openssl 进入交互模式
+- s_client -showcerts -connect www.baidu.com:443
+</description>
+</item>
+<item rdf:about="https://feelncut.com/2018/09/11/182.html">
+<title>使用Python与OpenCV为图像增加高斯噪声，雾霾等降质因素</title>
+<link>https://feelncut.com/2018/09/11/182.html</link>
+<dc:date>2018-09-11T11:33:00+08:00</dc:date>
+<description>使用Python与OpenCV为图像增加高斯噪声，雾霾，低照度，高斯模糊，JPG压缩失真降质因素。
+环境要求：Python3.5+, opencv-python3.4+
+
+[...]</description>
+</item>
+<item rdf:about="https://feelncut.com/2018/09/05/181.html">
+<title>Python3串口操作及字节与无符号整数之间的转换</title>
+<link>https://feelncut.com/2018/09/05/181.html</link>
+<dc:date>2018-09-05T16:22:00+08:00</dc:date>
+<description>学校的某项目，嵌入式用C语言完成，移位操作，各种拼接，不同位数的整数相互装换，都很方便。为了测试功能，用Python写了个简单的上位机，整理下在Python中如何操作串口与字节。
+
+
+------------
+
+做区块链浏览器解析script时发现，对于一个字节数组data：
+`type(data[0])`为`int`，而`type(data[0:1])`为`bytes`。
+
+------------
+
+
+[...]</description>
+</item>
+<item rdf:about="https://feelncut.com/2018/08/09/171.html">
+<title>Python 判断数组中含有某元素的个数</title>
+<link>https://feelncut.com/2018/08/09/171.html</link>
+<dc:date>2018-08-09T14:04:27+08:00</dc:date>
+<description>为了测试uuid1方法批量生成uuid时是否会重复，就把生成的uuid放到了一个数组中，之前不知道数组还有`count`方法...
+
+```python
+import uuid
+
+r = []
+
+for i in range(1000):
+ r.append(str(uuid.uuid1()))
+
+for i in r:
+  print(r.count(i))
+```</description>
+</item>
+<item rdf:about="https://feelncut.com/2018/05/14/150.html">
+<title>Python 进程池和线程池的简单使用</title>
+<link>https://feelncut.com/2018/05/14/150.html</link>
+<dc:date>2018-05-14T15:19:07+08:00</dc:date>
+<description>
+- 并不是池子越大越好，综合CPU核数与任务资源占用类型考虑。
+- map 与 map_async 的区别是map后直接运行线程/进程，运行结束后再执行之后语句（阻塞），async呢不阻塞，遇到wait()才阻塞。测试用例来自[Stack Overflow](https://stackoverflow.com/questions/35908987/python-multiprocessing-map-vs-map-async "Stack Overflow")见下：
+
+```python
+from multiprocessing import Pool
+import time
+
+def f(x):
+    print x*x
+
+if __name__ == '__main__':
+    pool = Pool(processes=4)
+    pool.map(f, range(10))
+    r  = pool.map_async(f, range(10))
+    # DO STUFF
+    print 'HERE'
+    print 'MORE'
+    r.wait()
+    print 'DONE'
+```
+[...]</description>
+</item>
+<item rdf:about="https://feelncut.com/2018/04/09/139.html">
+<title>Python 统计 SAE 日志脚本</title>
+<link>https://feelncut.com/2018/04/09/139.html</link>
+<dc:date>2018-04-09T15:08:00+08:00</dc:date>
+<description>> 之前统计教务系统客户端分布写的脚本，整理备忘。移动教务系统很纯粹，几乎没有任何后台功能，也没xx统计，只能靠分析近期日志进行粗略统计了。
+
+![](/images/2018/04/1209604956.png)
+
+![](/images/2018/04/4203486238.png)
+
+[...]</description>
+</item>
+<item rdf:about="https://feelncut.com/2018/03/22/109.html">
+<title>Latex速查</title>
+<link>https://feelncut.com/2018/03/22/109.html</link>
+<dc:date>2018-03-22T11:28:44+08:00</dc:date>
+<description>转自[一份不太简短的 LATEX2e 介绍](http://www.mohu.org/info/lshort-cn.pdf "一份不太简短的 LATEX2e 介绍")
+
+
+[latex.pdf](https://image.feelncut.com/2018/03/1734916613.pdf)</description>
+</item>
+<item rdf:about="https://feelncut.com/2018/03/01/98.html">
+<title>Ubuntu下通过ssh别名快速连接远程服务器以及传输文件</title>
+<link>https://feelncut.com/2018/03/01/98.html</link>
+<dc:date>2018-03-01T11:16:00+08:00</dc:date>
+<description>[TOC]
+
+###  本机公钥写入服务器
+生成密钥对之后把公钥写入服务器`cat id_dsa.pub >> ~/.ssh/authorized_keys `
+
+### 修改本机ssh配置
+`/etc/ssh/ssh_config`
+添加
+```
+Host qcloud
+    HostName 123.x.x.x
+    Port 22
+    User ubuntu
+    # IdentityFile  ~/.ssh/id_rsa.pub
+    IdentitiesOnly yes
+```
+
+### 连接ssh
+
+`ssh qcloud`
+
+### 使用scp
+
+`scp /path/file qcloud:path/file`</description>
+</item>
+<item rdf:about="https://feelncut.com/2018/01/25/88.html">
+<title>Ubuntu下快速安装配置 ssh</title>
+<link>https://feelncut.com/2018/01/25/88.html</link>
+<dc:date>2018-01-25T20:30:00+08:00</dc:date>
+<description>[TOC]
+### 安装
+通过`sudo apt-get install openssh-server`安装ssh服务端。
+
+### 配置
+配置文件路径`/etc/ssh/sshd_config`，可以修改连接端口等
+
+### 启动
+修改后需要`service sshd restart`。ssh以服务的形式管理，当然可以`service sshd start/stop/restart`。
+
+### 免密码登录
+![](/images/2018/01/1536740574.png)
+图片来源：https://www.jianshu.com/p/d40a85df1a43
+
+如图所示，需要用到`ssh-keygen`命令生成公私匙，并且需要把公式放到认证文件中`cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys`</description>
+</item>
+<item rdf:about="https://feelncut.com/2018/01/24/87.html">
+<title>Ubuntu16.04 下安装并配置 VNC 远程访问服务</title>
+<link>https://feelncut.com/2018/01/24/87.html</link>
+<dc:date>2018-01-24T15:43:00+08:00</dc:date>
+<description>> 在实验室一直通过ssh使用宿舍PC，今天感觉用Jupyter NoteBook写代码其实并没有PyCharm那么方便，所以想通过VNC在GUI界面下开心的写代码。
+
+和往常一样，`sudo apt-get install vnc4server`一顿操作后看log说font目录怎样怎样，没有办法正常加载。
+
+于是这次换个VNC服务端试一试，安装主要参考：[这里](http://blog.csdn.net/songbaiyao/article/details/72858087 "这里")。
+
+自己也记录一下，方便下次安装。
+
+[...]</description>
+</item>
+</rdf:RDF>

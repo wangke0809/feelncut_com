@@ -1,0 +1,391 @@
+<!DOCTYPE HTML>
+<html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width,user-scalable=no">
+    <title>2018年3月 - 小王同学</title>
+	<!--[if lt IE 9]>
+    <script type="text/javascript" src="https://feelncut.com/usr/themes/maupassant/javascript/html5shiv.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" href="../../../../admin/css/normalize.css">
+    <link rel="stylesheet" href="../../../../usr/themes/maupassant/style.css">
+    <meta name="description" content="希望通过自我加工，成为有点用的人" />
+<link rel="alternate" type="application/rss+xml" title="2018年3月 &raquo; 小王同学 &raquo; RSS 2.0" href="../../../../feed/2018/03/index.html" />
+<link rel="alternate" type="application/rdf+xml" title="2018年3月 &raquo; 小王同学 &raquo; RSS 1.0" href="../../../../feed/rss/2018/03/index.html" />
+<link rel="alternate" type="application/atom+xml" title="2018年3月 &raquo; 小王同学 &raquo; ATOM 1.0" href="../../../../feed/atom/2018/03/index.html" />
+<script> var _hmt = _hmt || []; (function() {   var hm = document.createElement("script");   hm.src = "https://hm.baidu.com/hm.js?e9ff349d5b883760c70a4e220c9ac8ca";   var s = document.getElementsByTagName("script")[0];    s.parentNode.insertBefore(hm, s); })(); </script></head>
+<body>
+
+<header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                                    <a id="logo" href="../../../../index.html">
+                        小王同学                    </a>
+                        	    <p class="description">希望通过自我加工，成为有点用的人</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class=" " href="../../../../index.html">博客</a>
+															<a href="../../../../archives.html" title="归档">归档</a>
+										<a href="../../../../tools.html" title="Tools">Tools</a>
+										<a href="../../../../about.html" title="关于">关于</a>
+									</nav>
+            </div>
+        </div>
+    </div>
+</header>
+<div id="body">
+    <div class="container">
+        <div class="col-group">
+<div class="col-8" id="main">
+	<div class="res-cons">
+        <h3 class="archive-title">2018年3月		</h3>
+            	            <article class="post">
+    			<header>
+				<h2 class="post-title">
+					<a href="../../22/109.html">Latex速查</a>
+				</h2>
+			</header>
+			<date class="post-meta">
+				March 22, 2018			</date>
+                <div class="post-content">
+        		<div id="md_content_1" class="md_content" style="min-height: 50px;"><textarea id="append-test" style="display:none;">转自[一份不太简短的 LATEX2e 介绍](http://www.mohu.org/info/lshort-cn.pdf "一份不太简短的 LATEX2e 介绍")
+
+
+[latex.pdf](https://image.feelncut.com/2018/03/1734916613.pdf)</textarea></div>                </div>
+    		</article>
+		            <article class="post">
+    			<header>
+				<h2 class="post-title">
+					<a href="../../22/107.html">对于朴素贝叶斯算法的理解</a>
+				</h2>
+			</header>
+			<date class="post-meta">
+				March 22, 2018			</date>
+                <div class="post-content">
+        		<div id="md_content_2" class="md_content" style="min-height: 50px;"><textarea id="append-test" style="display:none;">[TOC]
+
+### 算法的基础
+贝叶斯定理：已知P(B|A)求P(A|B)。公式：
+```math
+P(A|B)= \frac {P(A)\times P(B|A)}{P(B)}
+```
+
+### 何来朴素
+
+因为对所有条件概率分布作了条件独立性的假设，目的是简化计算量。
+
+### 极大似然估计与贝叶斯估计
+
+前者可能出现$$P(B_i|A)=0$$的情况，此时会影响到后验概率的计算结果，使分类产生偏差，不能很好的你和测试集。所以引出了贝叶斯估计。拉普拉斯平滑是条件概率贝叶斯估计的一个特例（$$\lambda=1$$）</textarea></div>                </div>
+    		</article>
+		            <article class="post">
+    			<header>
+				<h2 class="post-title">
+					<a href="../../09/knn.html">对于K近邻K-NN算法的理解</a>
+				</h2>
+			</header>
+			<date class="post-meta">
+				March 9, 2018			</date>
+                <div class="post-content">
+        		<div id="md_content_3" class="md_content" style="min-height: 50px;"><textarea id="append-test" style="display:none;">[TOC]
+
+### 整体思想
+
+今天看了K-NN算法，该算法适用于分类，整体思想是把训练数据集当成了一个数据库，在训练数据集找与输入数据最临近的k个数据，这k个数据中的多数属于某个类，这个输入就输入某个类。特别地， k=1 是称为最近邻算法。
+
+### 如何定义近邻
+
+可以用欧氏距离，$$L_p$$距离，Minkowski距离等。
+
+### k值的选择
+
+k太小，学习的近似误差会减小，估计误差会增大，比如遇到噪声，这时候容易发生过拟合。
+
+k过大，会增加不相近的数据对输入的干扰，虽然增大了学习的近似误差，但是减少了估计误差，k的增大意味着整体模型变得简单。
+
+k=N，对于一个输入用上了全部数据，不可取。
+
+### 分类决策规则
+
+多数投票表决规则等价于经验风险最小化，除了投票还有求均值等规则。
+
+### 实现
+
+书上介绍通过kd树实现训练数据存储，然后在kd树上查找最近邻。除了kd树还有很多优化算法。</textarea></div>                </div>
+    		</article>
+		            <article class="post">
+    			<header>
+				<h2 class="post-title">
+					<a href="../../08/perceptron.html">对于感知机Perceptron算法的理解</a>
+				</h2>
+			</header>
+			<date class="post-meta">
+				March 8, 2018			</date>
+                <div class="post-content">
+        		<div id="md_content_4" class="md_content" style="min-height: 50px;"><textarea id="append-test" style="display:none;">[TOC]
+
+# 算法的适用范围
+
+目标二分类，数据集线性可分。之所以不能学习XOR是因为XOR线性不可分。
+
+# 几何意义
+
+特征空间$$R^n$$中的一个超平面$$S$$将特征空间划分为两个部分。这两个部分分别代表两类。这个超平面称为**分离超平面**。
+
+# 学习策略
+
+感知机的损失函数由误分类点到超平面的距离之后推出，根据空间点到面的距离得到损失函数。
+
+# 原始形式和对偶形式的区别
+
+感知机学习算法分为原始形式和对偶形式，我的理解是原始形式和对偶形式本质上是一样的（废话），不同点在于计算顺序不同。假定处理高维数据，对偶形式的好处为可以首先并行计算出Gram矩阵，然后通过查表更新参数。而原始形式串行处理每组数据进行更新参数。
+
+知乎的[这个](https://www.zhihu.com/question/26526858 "这个")答案解释的有点过了吧。
+
+# 收敛性证明
+
+收敛性证明的思路为递推缩放，主要是推导以下两个不等式。
+```latex
+||\hat{W}_k|| \cdot ||\hat{W}_{opt}||\leq k \eta \gamma  
+```
+```math
+||\hat{W}_k||^2 \leq k \eta^2 R^2
+```
+
+
+# 多解的原因
+
+- 初值不同
+- 误分类点出现顺序不同
+
+# 代码
+
+通过`sklearn`实现：[Github](https://github.com/wangke0809/learn-statistical-learning-method/blob/master/Perceptron.py)</textarea></div>                </div>
+    		</article>
+		            <article class="post">
+    			<header>
+				<h2 class="post-title">
+					<a href="../../06/104.html">投票私链交付文档</a>
+				</h2>
+			</header>
+			<date class="post-meta">
+				March 6, 2018			</date>
+                <div class="post-content">
+        		<div id="md_content_5" class="md_content" style="min-height: 50px;"><textarea id="append-test" style="display:none;"><!--hidden:start:123321123-->
+[TOC]
+
+### 环境要求
+
+开发环境：
+Ubuntu 16.04
+Python 3.5+
+PM2
+
+创世区块分配钱包地址为：`0x4a244BF6834f7569A726DB8ec0D3B24D31ce52c3`
+私钥为：`0x4a115bf4ec4e27fce40db37c974d526953e50cc5c1edbffef3f724062fcb01c7`
+
+### 环境安装
+
+#### 安装PM2
+
+PM2用于管理Geth和Web API后台进程。
+**参考安装方式**：通过 nvm 安装 NodeJS
+
+```
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.32.1/install.sh | bash
+source ~/.bashrc
+nvm install v6.9.1
+npm install -g pm2
+```
+
+#### 安装Python环境
+
+安装Web API 必须环境：
+
+安装时注意python应使用python3，如果系统带有python2.7和python3.5，下面命令应使用`python3`。
+
+```
+# python 包管理器pip
+sudo apt-get python3-pip
+sudo pip install --upgrade pip
+# python web framework
+sudo pip install flask
+# python web server
+sudo pip install gunicorn
+# install web3.py
+sudo apt-get install libssl-dev libffi-dev autoconf automake libtool
+git clone git@github.com:ethereum/web3.py.git
+cd web3.py
+pip install -r requirements-dev.txt
+pip install -e .[tester]
+# install pyethereum
+sudo apt-get install libssl-dev build-essential automake pkg-config libtool libffi-dev libgmp-dev libyaml-cpp-dev
+git clone https://github.com/ethereum/pyethereum/
+cd pyethereum
+python setup.py install
+```
+
+### 部署节点
+
+#### 部署主节点
+```
+cd vote_master
+# start block chain
+pm2 start geth.sh
+# start web api
+pm2 start web.sh
+# show pm2 list
+pm2 list
+# show nodeInfo
+./geth attach http://127.0.0.1:8545
+# 控制台内输入
+admin.nodeInfo
+```
+保存nodeInfo中的enode：
+
+```
+"enode://7c2222797bc4579e5675d75a4ed6803606f7ea925ffd83ce58712e21488c5a30c107758ac69098e791f4589a23663cfb8484d0f56663e06f4d1b9517f3b685f0@[::]:30101"
+```
+注意：`[::]`替换为`ip`
+
+更多pm2命令参考：http://pm2.keymetrics.io/docs/usage/quick-start/
+
+#### 部署挖矿节点
+
+```
+cd vote_miner
+#  初始化挖矿节点
+bash init.sh
+```
+在`data`目录下新建`static-nodes.json`，保存一下内容，注意替换`ip`：
+```
+["enode://7c2222797bc4579e5675d75a4ed6803606f7ea925ffd83ce58712e21488c5a30c107758ac69098e791f4589a23663cfb8484d0f56663e06f4d1b9517f3b685f0@ip:30101"]
+```
+```
+# 启动节点
+pm2 start miner.sh
+```
+至此，环境部署完毕。
+
+### 智能合约
+
+`smart contracts`下`token contract`为代币智能合约源代码，`abu.js`和`votes.js`为合约部署文件。部署智能合约参考推荐在控制台中部署。
+
+
+
+<!--hidden:end--></textarea></div>                </div>
+    		</article>
+		                <ol class="page-navigator"><li class="current"><a href="index.html">1</a></li><li><a href="../2/index.html">2</a></li><li class="next"><a href="../2/index.html">后一页 &raquo;</a></li></ol>	</div>
+</div>
+<div id="secondary">
+	<section class="widget">
+        <form id="search" method="post" action="index.html">
+            <input type="text" name="s" class="text" placeholder="搜索..." />
+            <button type="submit" class="submit icon-search"></button>
+        </form>
+    </section>
+
+	    <section class="widget">
+		<h3 class="widget-title">最新文章</h3>
+        <ul class="widget-list">
+            <li><a href="../../../../2020/08/24/323.html">ETH 2.0 资源汇总（持续更新）</a></li><li><a href="../../../../2020/08/24/322.html">ETH 2.0 测试网验证节点质押流程体验</a></li><li><a href="../../../../2020/06/06/312.html">通过 openssl 导出 HTTPS 网站 SSL 证书链</a></li><li><a href="../../../../2020/05/20/308.html">如何开发一款区块链浏览器？</a></li><li><a href="../../../../2020/02/02/288.html">EOS 提交交易失败分析</a></li><li><a href="../../../../2019/12/09/giaocamerarobot.html">小 Giao 之死</a></li><li><a href="../../../../2019/10/04/267.html">《凶宅》和《疯人院》</a></li><li><a href="../../../10/17/228.html"> 以太坊多重签名原理分析</a></li><li><a href="../../../09/11/188.html">OpenCV 初识图像</a></li><li><a href="../../../09/11/184.html">为什么要系统的学习一下Pyhton-OpenCV?</a></li>        </ul>
+    </section>
+    
+        <section class="widget">
+		<h3 class="widget-title">最近回复</h3>
+        <ul class="widget-list">
+                            <li><a href="../../../../2020/08/24/323.html#comment-26">pizi</a>: https://be...</li>
+                    <li><a href="../../../../2020/08/24/323.html#comment-25">何先生</a>: 请问有没有ETH2....</li>
+                    <li><a href="../../../05/03/145.html#comment-24">pizi</a>: 一个卡就不要限制资源...</li>
+                    <li><a href="../../../../about.html#comment-23">pizi</a>: 有特殊技巧的啊，从阿...</li>
+                    <li><a href="../../../../about.html#comment-22">一网友</a>: 有钱人新浪数据库很贵吧</li>
+                    <li><a href="../../../05/03/145.html#comment-21">padluo</a>: 请问如何控制到用户使...</li>
+                    <li><a href="../../../../about.html#comment-20">小白</a>: 板凳是我的！</li>
+                    <li><a href="../../../02/08/90.html#comment-19">无耻的我</a>: 大佬，能发一份吗，原...</li>
+                    <li><a href="../../../05/03/145.html#comment-18">pizi</a>: 文章里写了的，lxc...</li>
+                    <li><a href="../../../05/03/145.html#comment-17">zzd</a>: lxc config...</li>
+                </ul>
+    </section>
+    
+        <section class="widget">
+		<h3 class="widget-title">分类</h3>
+        <ul class="widget-list">
+            <li><a href="../../../../category/feel/index.html">随笔心情</a> (4)</li><li><a href="../../../../category/code/index.html">代码片段</a> (17)</li><li><a href="../../../../category/ojbk/index.html">折腾着玩</a> (7)</li><li><a href="../../../../category/ml/index.html">机器学习</a> (9)</li><li><a href="../../../../category/blockChain/index.html">区块链</a> (10)</li><li><a href="../../../../category/python-opencv/index.html">Python-OpenCV</a> (2)</li><li><a href="../../../../category/video/index.html">视频剪辑</a> (0)</li><li><a href="../../../../category/leetcode/index.html">leetcode</a> (1)</li>        </ul>
+	</section>
+    
+        <section class="widget">
+		<h3 class="widget-title">归档</h3>
+        <ul class="widget-list">
+            <li><a href="../../../../2020/08/index.html">August 2020</a></li><li><a href="../../../../2020/06/index.html">June 2020</a></li><li><a href="../../../../2020/05/index.html">May 2020</a></li><li><a href="../../../../2020/02/index.html">February 2020</a></li><li><a href="../../../../2019/12/index.html">December 2019</a></li><li><a href="../../../../2019/10/index.html">October 2019</a></li><li><a href="../../../10/index.html">October 2018</a></li><li><a href="../../../09/index.html">September 2018</a></li><li><a href="../../../08/index.html">August 2018</a></li><li><a href="../../../05/index.html">May 2018</a></li><li><a href="../../../04/index.html">April 2018</a></li><li><a href="../../index.html">March 2018</a></li><li><a href="../../../02/index.html">February 2018</a></li><li><a href="../../../01/index.html">January 2018</a></li>        </ul>
+	</section>
+    
+    	<section class="widget">
+		<h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+                            <li class="last"><a href="../../../../admin/login.php.html">登录</a></li>
+                        <li><a href="../../../../feed/index.html">文章 RSS</a></li>
+            <li><a href="../../../../feed/comments/index.html">评论 RSS</a></li>
+            <li><a href="http://www.typecho.org">Typecho</a></li>
+        </ul>
+	</section>
+    </div>		</div>
+    </div>
+</div>
+<footer id="footer">
+	<div class="container">
+		&copy; 2023 <a rel="nofollow" href="../../../../index.html">小王同学</a>. 模板由<a href="http://pagecho.com">cho</a>制作.
+	</div>
+</footer>
+<link rel="stylesheet" href="../../../../usr/plugins/EditorMD/css/editormd.css" />
+<link rel="stylesheet" href="../../../../usr/plugins/EditorMD/css/emojify.min.css" />
+<script type="text/javascript">
+    window.jQuery || document.write(unescape('%3Cscript%20type%3D%22text/javascript%22%20src%3D%22https://feelncut.com/usr/plugins/EditorMD/lib/jquery.min.js%22%3E%3C/script%3E'));
+</script>
+<script src="../../../../usr/plugins/EditorMD/lib/marked.min.js"></script>
+<script src="../../../../usr/plugins/EditorMD/lib/prettify.min.js"></script>
+<script src="../../../../usr/plugins/EditorMD/lib/raphael.min.js"></script>
+<script src="../../../../usr/plugins/EditorMD/lib/underscore.min.js"></script>
+<script src="../../../../usr/plugins/EditorMD/lib/sequence-diagram.min.js"></script>
+<script src="../../../../usr/plugins/EditorMD/lib/flowchart.min.js"></script>
+<script src="../../../../usr/plugins/EditorMD/lib/jquery.flowchart.min.js"></script>
+<script src="../../../../usr/plugins/EditorMD/js/editormd.min.js"></script>
+<script src="../../../../usr/plugins/EditorMD/js/emojify.min.js"></script>
+<script type="text/javascript">
+$(function() {
+    var markdowns = document.getElementsByClassName("md_content");
+    $(markdowns).each(function(){
+        var markdown = $(this).children("#append-test").text();
+        //$('#md_content_'+i).text('');
+        var testEditormdView;
+        testEditormdView = editormd.markdownToHTML($(this).attr("id"), {
+            markdown: markdown,//+ "\r\n" + $("#append-test").text(),
+            toolbarAutoFixed : false,
+            htmlDecode: true,
+            emoji: true,
+            tex: true,
+            toc: true,
+            tocm: true,
+            taskList: true,
+            flowChart: true,
+            sequenceDiagram: true,
+        });
+    });
+    emojify.setConfig({
+        img_dir: 'https:' == document.location.protocol ? "https://staticfile.qnssl.com/emoji-cheat-sheet/1.0.0" : "http://cdn.staticfile.org/emoji-cheat-sheet/1.0.0",
+        blacklist: {
+            'ids': [],
+            'classes': ['no-emojify'],
+            'elements': ['^script$', '^textarea$', '^pre$', '^code$']
+        },
+    });
+    emojify.run();
+});
+</script>
+</body>
+</html>

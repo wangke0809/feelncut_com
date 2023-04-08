@@ -1,0 +1,261 @@
+<!DOCTYPE HTML>
+<html class="no-js">
+
+<head>
+	  <meta charset="UTF-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="花开花落——Winke's个人博客">
+  <meta name="keywords" content="花开花落——Winke's个人博客,王珂,北方工业大学">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>Centos下搭建SVN服务器并同步仓库内容到WEB目录|Winke's blog</title>
+  <link rel="stylesheet" href="../../../../Public/static/amaze/css/amazeui.min.css">
+  <link rel="stylesheet" href="../../../../Public/Home/css/blog.css">
+<style>
+	.g-hd {
+    background-image: url("../../../../picture/bg.png");
+	}
+  .pic{
+  width: 28%;
+  /*height: 100px;*/
+  margin:5px;
+  }
+  .mpic{
+    margin: 10px auto;
+  }
+</style>
+
+<link rel="stylesheet" href="../../../../Public/static/ueditor/third-party/SyntaxHighlighter/shCoreDefault.css" type="text/css" />
+<style type="text/css">
+</style>	
+
+
+<!-- 页面header钩子，一般用于加载插件CSS文件和代码 -->
+
+	<!--<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?e9ff349d5b883760c70a4e220c9ac8ca";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>-->
+</head>
+<body>
+	<!-- 头部 -->
+	<div class="g-hd"></div>
+	<!-- /头部 -->
+	
+	<!-- 主体 -->
+	<div class="am-g box">
+<!-- am-show-lg-only -->
+<div class="">  
+  <div class="g-bd bd">
+    <div class="g-sd">
+			<div class="m-hdimg">
+				<a class="hdimg img" href="../../../../old_index.html">
+					<img src="../../../../picture/avater2.jpg" height="96" width="96">
+				</a>
+			</div>
+			<h1 class="m-ttl">
+				<a href="../../../../index.html">花开花落</a>
+			</h1>
+			<p class="m-about">深情不及久伴。</p>
+
+			<ul class="m-nav">
+				
+				<li>
+                            <a href="../../../Index/index.html" target="_self">首页</a>
+                        </li><li>
+                            <a href="http://www.zhangwenxuan.cn/" target="_blank">好基友</a>
+                        </li><li>
+                            <a href="http://blog.wozhendehaoaini.cn/" target="_blank">老博客</a>
+                        </li><li>
+                            <a href="66.html" target="_self">关于我</a>
+                        </li>				
+				<!-- Search 
+				<li class="m-sch">
+					<a id="j-lnksch" href="#">搜索</a>
+					<form id="j-schform" class="form" method="get" action="/search">
+						<input name="q" class="txt" placeholder="输入关键字" type="text">
+					</form>
+				</li>-->
+			</ul>
+			<ul class="m-nav">
+				
+				
+                    		<li>
+			<a href="../../lists/category/feeling.html">
+				<i class="icon-chevron-right"></i>随笔心情			</a>
+		</li>		<li>
+			<a href="../../lists/category/learnsth.html">
+				<i class="icon-chevron-right"></i>学习研究			</a>
+		</li>		<li>
+			<a href="../../lists/category/sizhou.html">
+				<i class="icon-chevron-right"></i>飞控研究			</a>
+		</li>		<li>
+			<a href="../../lists/category/Python.html">
+				<i class="icon-chevron-right"></i>Python			</a>
+		</li>		<li>
+			<a href="../../lists/category/wxmp.html">
+				<i class="icon-chevron-right"></i>微信平台			</a>
+		</li>				
+				<!-- Search 
+				<li class="m-sch">
+					<a id="j-lnksch" href="#">搜索</a>
+					<form id="j-schform" class="form" method="get" action="/search">
+						<input name="q" class="txt" placeholder="输入关键字" type="text">
+					</form>
+				</li>-->
+			</ul>
+		</div>
+
+        <div class="g-mn">
+            <div class="g-mnc box"> 
+                
+                <div class="m-postlst">
+                
+    <header class="jumbotron subhead" id="overview">
+		<div class="container">
+			<h2>Centos下搭建SVN服务器并同步仓库内容到WEB目录</h2>
+			
+		</div>
+	</header>
+
+                
+    <div class="span9 main-content">
+        <!-- Contents
+        ================================================== -->
+        <section id="contents"><p><strong>第一步：安装svnversion</strong></p><p><br/></p><p>Centos下可以使用yum安装，自动配置环境变量</p><pre class="plain" style="margin-top: 4px; margin-bottom: 4px; background-color: rgb(240, 240, 240); font-size: 12px;" name="code">yum&nbsp;install&nbsp;subversion</pre><p>安装完成后可以用</p><pre class="plain" style="margin-top: 4px; margin-bottom: 4px; background-color: rgb(240, 240, 240); font-size: 12px;" name="code">svn&nbsp;help</pre><p>来检查是否安装成功</p><p><br/></p><p><strong>第二步：配置svnversion</strong></p><p><br/></p><pre class="plain" style="margin-top: 4px; margin-bottom: 4px; background-color: rgb(240, 240, 240); font-size: 12px;" name="code">mkdir&nbsp;-p&nbsp;/home/svn/repos&nbsp;&nbsp;#创建版本库目录&nbsp;repos目录名可以自定义
+svnadmin&nbsp;create&nbsp;/home/svn/repos&nbsp;#创建版本</pre><p>然后修改配置文件进行配置</p><p>编辑/home/svn/repos/conf/svnserve.conf</p><pre class="html" style="margin-top: 4px; margin-bottom: 4px; background-color: rgb(240, 240, 240); font-size: 12px;" name="code">[general]
+anon-access&nbsp;=&nbsp;none&nbsp;#匿名登录无权限
+auth-access&nbsp;=&nbsp;write&nbsp;#认证可写
+password-db&nbsp;=&nbsp;passwd&nbsp;&nbsp;#用户密码文件
+authz-db&nbsp;=&nbsp;authz&nbsp;&nbsp;#授权登录文件
+realm&nbsp;=&nbsp;repos</pre><p>注意：</p><p>*这里的配置修改后需要重启服务</p><p><br/></p><p>编辑用户密码</p><p>编辑/home/svn/repos/conf/passw</p><pre class="plain" style="margin-top: 4px; margin-bottom: 4px; background-color: rgb(240, 240, 240); font-size: 12px;" name="code">[users]
+username&nbsp;=&nbsp;password&nbsp;#每行一个用户&nbsp;用户名&nbsp;=&nbsp;密码</pre><p>编辑用户权限</p><p>编辑/home/svn/repos/conf/authz</p><pre class="plain" style="margin-top: 4px; margin-bottom: 4px; background-color: rgb(240, 240, 240); font-size: 12px;" name="code">[groups]
+#组名&nbsp;=&nbsp;用户名&nbsp;其中，1个用户组可以包含1个或多个用户，用户间以逗号分隔。
+#比如&nbsp;admin&nbsp;=&nbsp;user1,user2
+admin&nbsp;=&nbsp;username
+[/]
+#[/]&nbsp;为根目录权限
+@admin&nbsp;=&nbsp;rw&nbsp;#组名前必须加@
+username&nbsp;=&nbsp;rw&nbsp;#也可以直接给某个用户设置权限</pre><p>注意：<br/>* 权限配置文件中出现的用户名必须已在用户配置文件中定义。<br/>* 对权限配置文件的修改立即生效，不必重启svn。</p><p><br/></p><p>用户组格式：<br/><br/>版本库目录格式：<br/>[&lt;版本库&gt;:/项目/目录]<br/>@&lt;用户组名&gt; = &lt;权限&gt;<br/>&lt;用户名&gt; = &lt;权限&gt;<br/>其中，方框号内部分可以有多种写法:<br/>[/],表示根目录及以下，根目录是svnserve启动时指定的，我们指定为/home/svn，[/]就是表示对全部版本库设置权限。<br/>[repos:/] 表示对版本库repos设置权限；<br/>[repos:/abc] 表示对版本库repos中的abc项目设置权限；<br/>[repos:/abc/aaa] 表示对版本库repos中的abc项目的aaa目录设置权限；<br/>权限主体可以是用户组、用户或*，用户组在前面加@，*表示全部用户。<br/>权限可以是w、r、wr和空，空表示没有任何权限。<br/><!--权限--><!--用户名--><!--权限--><!--用户组名--><!--版本库--></p><p><br/></p><p>启动服务</p><pre class="plain" style="margin-top: 4px; margin-bottom: 4px; background-color: rgb(240, 240, 240); font-size: 12px;" name="code">svnserve&nbsp;-d&nbsp;--listen-port&nbsp;8080&nbsp;-r&nbsp;/home/svn&nbsp;#这里注意目录&nbsp;是/home/svn&nbsp;不是/home/svn/repos
+-d&nbsp;：表示以daemon方式（后台运行）运行；
+--listen-port&nbsp;8080&nbsp;：表示使用8080端口
+-r&nbsp;/home/svn：指定根目录是/home/svn。</pre><p>停止服务：</p><pre class="plain" style="margin-top: 4px; margin-bottom: 4px; background-color: rgb(240, 240, 240); font-size: 12px;" name="code">killall&nbsp;svnserve</pre><p>至此SVN已经配置完毕</p><p>可以通过:</p><pre class="plain" style="margin-top: 4px; margin-bottom: 4px; background-color: rgb(240, 240, 240); font-size: 12px;" name="code">svn&nbsp;co&nbsp;svn://ip:port/repos/</pre><p>进行测试</p><p><br/></p><p><strong>第三步：自动同步到WEB目录</strong></p><p><br/></p><p>在/home/svn/repos/hooks目录下</p><pre class="plain" style="margin-top: 4px; margin-bottom: 4px; background-color: rgb(240, 240, 240); font-size: 12px;" name="code">cp&nbsp;post-commit.tmpl&nbsp;post-commit</pre><p>修改内容为：</p><pre class="html" style="margin-top: 4px; margin-bottom: 4px; background-color: rgb(240, 240, 240); font-size: 12px;" name="code">#!/bin/sh
+WEB=/home/wwwroot/wwb/web/&nbsp;#web的目录
+cd&nbsp;$WEB&nbsp;&amp;&amp;&nbsp;/usr/bin/svn&nbsp;update&nbsp;--username&nbsp;winke&nbsp;--password&nbsp;772930093&nbsp;--no-auth-cache
+chmod&nbsp;755&nbsp;post-commit&nbsp;#别忘了这一步</pre><p><br/></p><p>参考文章：</p><p>[1]:https://my.oschina.net/u/163208/blog/186797</p><p>[2]:http://stackoverflow.com/questions/7841591/svn-post-commit-hook-error-255</p><p><br/></p></section>
+        <hr/>
+        <p>
+				<span  class="pull-left">
+					<span class="author">Winke</span>
+					<span> 发表于 2016-12-31 23:22</span>
+				</span>
+				<span class="pull-right">
+					<a href="218.html">上一篇</a>                    <a href="230.html">下一篇</a>				</span>
+			</p>
+		<hr/>
+            </div>
+ 
+                </div>
+                
+                
+                <!-- Pager -->
+                
+                
+                
+            </div>
+        </div>
+    </div>
+   </div>
+ </div>
+	<!-- /主体 -->
+
+	<!-- 底部 -->
+	
+    <!-- 底部
+    ================================================== -->
+    <footer class="footer">
+       <div class="g-ft">
+		   <p class="m-cprt">©&nbsp;<a href="../../../../index.html">花开花落</a>&nbsp;京ICP备15006955号-1&nbsp;|&nbsp;Powered by <a href="../../../../index.html">Winke</a></p> 
+	   </div>
+    </footer>
+
+    <div style="right: 119.5px;" class="amz-toolbar" id="amz-toolbar">
+    <a href="#top" title="回到顶部" class="am-icon-btn am-icon-arrow-up am-active" id="amz-go-top"></a>
+    </div>
+
+<script type="text/javascript">
+(function(){
+	var ThinkPHP = window.Think = {
+		"ROOT"   : "", //当前网站地址
+		"APP"    : "", //当前项目地址
+		"PUBLIC" : "/Public", //项目公共目录地址
+		"DEEP"   : "/", //PATHINFO分割符
+		"MODEL"  : ["2", "", "html"],
+		"VAR"    : ["m", "c", "a"]
+	}
+})();
+</script>
+<script src="../../../../Public/static/amaze/js/jquery.min.js"></script>
+<script src="../../../../Public/static/amaze/js/amazeui.min.js"></script>
+<script src="../../../../Public/Home/js/blog.js"></script>
+
+<script type="text/javascript" src="../../../../Public/static/ueditor/third-party/SyntaxHighlighter/shCore.js"></script>
+<script type="text/javascript"> SyntaxHighlighter.all(); </script>
+<script type="text/javascript">
+	$(function () { 
+  // Line wrap back 
+  var shLineWrap = function () { 
+    $('.syntaxhighlighter').each(function () { 
+      // Fetch 
+      var $sh = $(this), 
+        $gutter = $sh.find('td.gutter'), 
+        $code = $sh.find('td.code') 
+        ; 
+      // Cycle through lines 
+      $gutter.children('.line').each(function (i) { 
+        // Fetch 
+        var $gutterLine = $(this), 
+          $codeLine = $code.find('.line:nth-child(' + (i + 1) + ')') 
+          ; 
+        //alert($gutterLine); 
+        // Fetch height 
+        var height = $codeLine.height() || 0; 
+        if (!height) { 
+          height = 'auto'; 
+        } 
+        else { 
+          height = height += 'px'; 
+          //alert(height); 
+        } 
+        // Copy height over 
+        $gutterLine.attr('style', 'height: ' + height + ' !important'); // fix by Edi, for JQuery 1.7+ under Firefox 15.0 
+        console.debug($gutterLine.height(), height, $gutterLine.text(), $codeLine); 
+      }); 
+    }); 
+  }; 
+  // Line wrap back when syntax highlighter has done it's stuff 
+  var shLineWrapWhenReady = function () { 
+    if ($('.syntaxhighlighter').length === 0) { 
+      setTimeout(shLineWrapWhenReady, 10); 
+    } 
+    else { 
+      shLineWrap(); 
+    } 
+  }; 
+  // Fire 
+  shLineWrapWhenReady();});
+</script>	
+ <!-- 用于加载js代码 -->
+<!-- 页面footer钩子，一般用于加载插件JS文件和JS代码 -->
+<div class="hidden"><!-- 用于加载统计代码等隐藏元素 -->
+	
+</div>
+
+	<!-- /底部 -->
+</body>
+</html>

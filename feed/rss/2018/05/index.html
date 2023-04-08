@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+xmlns="http://purl.org/rss/1.0/"
+xmlns:dc="http://purl.org/dc/elements/1.1/">
+<channel rdf:about="https://feelncut.com/feed/rss/2018/05/">
+<title>小王同学 - 2018年5月</title>
+<link>https://feelncut.com/2018/05/</link>
+<description>希望通过自我加工，成为有点用的人</description>
+<items>
+<rdf:Seq>
+<rdf:li resource="https://feelncut.com/2018/05/14/150.html"/>
+<rdf:li resource="https://feelncut.com/2018/05/03/145.html"/>
+</rdf:Seq>
+</items>
+</channel>
+<item rdf:about="https://feelncut.com/2018/05/14/150.html">
+<title>Python 进程池和线程池的简单使用</title>
+<link>https://feelncut.com/2018/05/14/150.html</link>
+<dc:date>2018-05-14T15:19:07+08:00</dc:date>
+<description>
+- 并不是池子越大越好，综合CPU核数与任务资源占用类型考虑。
+- map 与 map_async 的区别是map后直接运行线程/进程，运行结束后再执行之后语句（阻塞），async呢不阻塞，遇到wait()才阻塞。测试用例来自[Stack Overflow](https://stackoverflow.com/questions/35908987/python-multiprocessing-map-vs-map-async "Stack Overflow")见下：
+
+```python
+from multiprocessing import Pool
+import time
+
+def f(x):
+    print x*x
+
+if __name__ == '__main__':
+    pool = Pool(processes=4)
+    pool.map(f, range(10))
+    r  = pool.map_async(f, range(10))
+    # DO STUFF
+    print 'HERE'
+    print 'MORE'
+    r.wait()
+    print 'DONE'
+```
+[...]</description>
+</item>
+<item rdf:about="https://feelncut.com/2018/05/03/145.html">
+<title>搭建多人共用的GPU服务器</title>
+<link>https://feelncut.com/2018/05/03/145.html</link>
+<dc:date>2018-05-03T17:12:00+08:00</dc:date>
+<description>[TOC]
+
+#### 背景
+
+目前实验室GPU使用情况是：大部分同学的配有单台1080/TITAN Xp。后来购入了两台4卡的机器，老师的意思是希望可以作为服务器使用，能够多人同时使用，互不影响。于是便开始了本次折腾，记录采坑经历。
+
+通过本文，多卡读者可以实现分配每块GPU给特定同学使用，也可以多人共用多块GPU。单卡读者可以实现多人共用一块GPU。
+
+[...]</description>
+</item>
+</rdf:RDF>

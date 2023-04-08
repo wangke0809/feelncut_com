@@ -1,0 +1,312 @@
+<!DOCTYPE HTML>
+<html class="no-js">
+
+<head>
+	  <meta charset="UTF-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="花开花落——Winke's个人博客">
+  <meta name="keywords" content="花开花落——Winke's个人博客,王珂,北方工业大学">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>Python中的排列和组合|Winke's blog</title>
+  <link rel="stylesheet" href="../../../../Public/static/amaze/css/amazeui.min.css">
+  <link rel="stylesheet" href="../../../../Public/Home/css/blog.css">
+<style>
+	.g-hd {
+    background-image: url("../../../../picture/bg.png");
+	}
+  .pic{
+  width: 28%;
+  /*height: 100px;*/
+  margin:5px;
+  }
+  .mpic{
+    margin: 10px auto;
+  }
+</style>
+
+<link rel="stylesheet" href="../../../../Public/static/ueditor/third-party/SyntaxHighlighter/shCoreDefault.css" type="text/css" />
+<style type="text/css">
+</style>	
+
+
+<!-- 页面header钩子，一般用于加载插件CSS文件和代码 -->
+
+	<!--<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?e9ff349d5b883760c70a4e220c9ac8ca";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>-->
+</head>
+<body>
+	<!-- 头部 -->
+	<div class="g-hd"></div>
+	<!-- /头部 -->
+	
+	<!-- 主体 -->
+	<div class="am-g box">
+<!-- am-show-lg-only -->
+<div class="">  
+  <div class="g-bd bd">
+    <div class="g-sd">
+			<div class="m-hdimg">
+				<a class="hdimg img" href="../../../../old_index.html">
+					<img src="../../../../picture/avater2.jpg" height="96" width="96">
+				</a>
+			</div>
+			<h1 class="m-ttl">
+				<a href="../../../../index.html">花开花落</a>
+			</h1>
+			<p class="m-about">深情不及久伴。</p>
+
+			<ul class="m-nav">
+				
+				<li>
+                            <a href="../../../Index/index.html" target="_self">首页</a>
+                        </li><li>
+                            <a href="http://www.zhangwenxuan.cn/" target="_blank">好基友</a>
+                        </li><li>
+                            <a href="http://blog.wozhendehaoaini.cn/" target="_blank">老博客</a>
+                        </li><li>
+                            <a href="66.html" target="_self">关于我</a>
+                        </li>				
+				<!-- Search 
+				<li class="m-sch">
+					<a id="j-lnksch" href="#">搜索</a>
+					<form id="j-schform" class="form" method="get" action="/search">
+						<input name="q" class="txt" placeholder="输入关键字" type="text">
+					</form>
+				</li>-->
+			</ul>
+			<ul class="m-nav">
+				
+				
+                    		<li>
+			<a href="../../lists/category/feeling.html">
+				<i class="icon-chevron-right"></i>随笔心情			</a>
+		</li>		<li>
+			<a href="../../lists/category/learnsth.html">
+				<i class="icon-chevron-right"></i>学习研究			</a>
+		</li>		<li>
+			<a href="../../lists/category/sizhou.html">
+				<i class="icon-chevron-right"></i>飞控研究			</a>
+		</li>		<li>
+			<a href="../../lists/category/Python.html">
+				<i class="icon-chevron-right"></i>Python			</a>
+		</li>		<li>
+			<a href="../../lists/category/wxmp.html">
+				<i class="icon-chevron-right"></i>微信平台			</a>
+		</li>				
+				<!-- Search 
+				<li class="m-sch">
+					<a id="j-lnksch" href="#">搜索</a>
+					<form id="j-schform" class="form" method="get" action="/search">
+						<input name="q" class="txt" placeholder="输入关键字" type="text">
+					</form>
+				</li>-->
+			</ul>
+		</div>
+
+        <div class="g-mn">
+            <div class="g-mnc box"> 
+                
+                <div class="m-postlst">
+                
+    <header class="jumbotron subhead" id="overview">
+		<div class="container">
+			<h2>Python中的排列和组合</h2>
+			
+		</div>
+	</header>
+
+                
+    <div class="span9 main-content">
+        <!-- Contents
+        ================================================== -->
+        <section id="contents"><p>今天写一个判断是否为循环素数的题，题干如下</p><hr/><p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; outline: none; color: rgb(102, 102, 102); font-family: Arial, &quot;Hiragino Sans GB&quot;, SimSun, 宋体, serif; font-size: 12px; background-color: rgb(255, 255, 255); white-space: normal;"><strong>题目内容：</strong></p><p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; outline: none; color: rgb(102, 102, 102); font-family: Arial, &quot;Hiragino Sans GB&quot;, SimSun, 宋体, serif; font-size: 12px; background-color: rgb(255, 255, 255); white-space: normal;">数字197可以被称为循环素数，因为197的三个数位循环移位后的数字：197,971,719均为素数。100以内这样的数字包括13个，2,3,5,7,11,13,17,31,37,71,73,79,97。要求<span style="word-wrap: break-word; white-space: pre-wrap; font-family: Arial, &quot;Hiragino Sans GB&quot;, SimSun, 宋体, Georgia, serif;">任意正整数n以内</span>一共有多少个这样的循环素数。</p><p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; outline: none; color: rgb(102, 102, 102); font-family: Arial, &quot;Hiragino Sans GB&quot;, SimSun, 宋体, serif; font-size: 12px; background-color: rgb(255, 255, 255); white-space: normal;"><br/></p><p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; outline: none; color: rgb(102, 102, 102); font-family: Arial, &quot;Hiragino Sans GB&quot;, SimSun, 宋体, serif; font-size: 12px; background-color: rgb(255, 255, 255); white-space: normal;"><strong>输入格式:</strong><br/></p><p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; outline: none; color: rgb(102, 102, 102); font-family: Arial, &quot;Hiragino Sans GB&quot;, SimSun, 宋体, serif; font-size: 12px; background-color: rgb(255, 255, 255); white-space: normal;">一个正整数n。</p><p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; outline: none; color: rgb(102, 102, 102); font-family: Arial, &quot;Hiragino Sans GB&quot;, SimSun, 宋体, serif; font-size: 12px; background-color: rgb(255, 255, 255); white-space: normal;"><br/></p><p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; outline: none; color: rgb(102, 102, 102); font-family: Arial, &quot;Hiragino Sans GB&quot;, SimSun, 宋体, serif; font-size: 12px; background-color: rgb(255, 255, 255); white-space: normal;"><strong>输出格式：</strong><br/></p><p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; outline: none; color: rgb(102, 102, 102); font-family: Arial, &quot;Hiragino Sans GB&quot;, SimSun, 宋体, serif; font-size: 12px; background-color: rgb(255, 255, 255); white-space: normal;">n以内循环素数的数目。</p><p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; outline: none; color: rgb(102, 102, 102); font-family: Arial, &quot;Hiragino Sans GB&quot;, SimSun, 宋体, serif; font-size: 12px; background-color: rgb(255, 255, 255); white-space: normal;"><br/></p><p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; outline: none; color: rgb(102, 102, 102); font-family: Arial, &quot;Hiragino Sans GB&quot;, SimSun, 宋体, serif; font-size: 12px; background-color: rgb(255, 255, 255); white-space: normal;"><strong>输入样例：</strong><br/></p><p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; outline: none; color: rgb(102, 102, 102); font-family: Arial, &quot;Hiragino Sans GB&quot;, SimSun, 宋体, serif; font-size: 12px; background-color: rgb(255, 255, 255); white-space: normal;">100</p><p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; outline: none; color: rgb(102, 102, 102); font-family: Arial, &quot;Hiragino Sans GB&quot;, SimSun, 宋体, serif; font-size: 12px; background-color: rgb(255, 255, 255); white-space: normal;"><br/></p><p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; outline: none; color: rgb(102, 102, 102); font-family: Arial, &quot;Hiragino Sans GB&quot;, SimSun, 宋体, serif; font-size: 12px; background-color: rgb(255, 255, 255); white-space: normal;"><strong>输出样例：</strong><br/></p><p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; outline: none; color: rgb(102, 102, 102); font-family: Arial, &quot;Hiragino Sans GB&quot;, SimSun, 宋体, serif; font-size: 12px; background-color: rgb(255, 255, 255); white-space: normal;">13</p><hr/><p>其中需要拆分一个整数各位并进行重新组合，不过这里的组合只是循环移位就可以了。本题目我的实现代码如下</p><pre class="brush:python;toolbar:false">#python&nbsp;2.7可用，3.0+需要更改input&nbsp;和&nbsp;print()
+import&nbsp;math
+
+def&nbsp;split(num):
+&nbsp;&nbsp;&nbsp;&nbsp;data&nbsp;=&nbsp;[]
+&nbsp;&nbsp;&nbsp;&nbsp;while&nbsp;num&nbsp;!=&nbsp;0:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data.append(num&nbsp;%&nbsp;10)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;num&nbsp;//=&nbsp;10
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;data
+
+def&nbsp;combine(data):
+&nbsp;&nbsp;&nbsp;&nbsp;return_data&nbsp;=&nbsp;[]
+&nbsp;&nbsp;&nbsp;&nbsp;lens&nbsp;=&nbsp;len(data)
+&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;i&nbsp;in&nbsp;range(lens):
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sum&nbsp;=&nbsp;0
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;j&nbsp;in&nbsp;range(lens):
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;index&nbsp;=&nbsp;i+j
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;index&nbsp;&gt;=&nbsp;lens:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;index&nbsp;-=lens
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sum&nbsp;+=&nbsp;data[index]*10**j
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return_data.append(sum)
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;return_data
+
+
+def&nbsp;isPrime(n):&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;n&nbsp;&lt;=&nbsp;1:&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;False
+&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;i&nbsp;in&nbsp;range(2,&nbsp;int(math.sqrt(n))&nbsp;+&nbsp;1):&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;n&nbsp;%&nbsp;i&nbsp;==&nbsp;0:&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;False
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;True
+
+
+def&nbsp;isCirclePrime(n):
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;isPrime(n):
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;i&nbsp;in&nbsp;combine(split(n)):
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;not&nbsp;isPrime(i):
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;False
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;True
+&nbsp;&nbsp;&nbsp;&nbsp;else:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;False
+
+n&nbsp;=&nbsp;int(raw_input())
+
+count&nbsp;=&nbsp;0
+
+for&nbsp;i&nbsp;in&nbsp;range(1,n):
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;isCirclePrime(i):
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;count&nbsp;+=1
+
+print&nbsp;count</pre><p>在慕课上提交代码，提示第二个例子通过（14ms），第一个提示超时，百度了下题目，发现之前的时间限制是2000ms，而这次是500ms，目测是时间限制的问题，于是乎，试了两次第一个例子的输入值，第一次试的1000000，输出55依然超时，第二次测试100000，输出43直接通过啦，真尴尬。</p><p><br/></p><p>做这个题的时候联想到了一个问题，如何组合排列n个字符？</p><p><br/></p><p>本来想动手写算法，但转念一想，万能的python说不定已经实现了呢？</p><p><br/></p><p>百度之</p><pre class="brush:python;toolbar:false">import&nbsp;itertools
+
+lists&nbsp;=&nbsp;[&#39;a&#39;,&#39;b&#39;,&#39;c&#39;,&#39;d&#39;]
+
+for&nbsp;i&nbsp;in&nbsp;range(1,len(lists)+1):
+&nbsp;&nbsp;&nbsp;&nbsp;print&nbsp;(list(itertools.permutations(lists,i)))#排列，和顺序有关
+&nbsp;&nbsp;&nbsp;&nbsp;print&nbsp;(list(itertools.combinations(lists,i)))#组合，和顺序无关
+
+输出：
+
+[(&#39;a&#39;,),&nbsp;(&#39;b&#39;,),&nbsp;(&#39;c&#39;,),&nbsp;(&#39;d&#39;,)]
+[(&#39;a&#39;,),&nbsp;(&#39;b&#39;,),&nbsp;(&#39;c&#39;,),&nbsp;(&#39;d&#39;,)]
+
+[(&#39;a&#39;,&nbsp;&#39;b&#39;),&nbsp;(&#39;a&#39;,&nbsp;&#39;c&#39;),&nbsp;(&#39;a&#39;,&nbsp;&#39;d&#39;),&nbsp;(&#39;b&#39;,&nbsp;&#39;a&#39;),&nbsp;(&#39;b&#39;,&nbsp;&#39;c&#39;),&nbsp;(&#39;b&#39;,&nbsp;&#39;d&#39;),&nbsp;(&#39;c&#39;,&nbsp;&#39;a&#39;),&nbsp;(&#39;c&#39;,&nbsp;&#39;b&#39;),&nbsp;(&#39;c&#39;,&nbsp;&#39;d&#39;),&nbsp;(&#39;d&#39;,&nbsp;&#39;a&#39;),&nbsp;(&#39;d&#39;,&nbsp;&#39;b&#39;),&nbsp;(&#39;d&#39;,&nbsp;&#39;c&#39;)]
+[(&#39;a&#39;,&nbsp;&#39;b&#39;),&nbsp;(&#39;a&#39;,&nbsp;&#39;c&#39;),&nbsp;(&#39;a&#39;,&nbsp;&#39;d&#39;),&nbsp;(&#39;b&#39;,&nbsp;&#39;c&#39;),&nbsp;(&#39;b&#39;,&nbsp;&#39;d&#39;),&nbsp;(&#39;c&#39;,&nbsp;&#39;d&#39;)]
+
+[(&#39;a&#39;,&nbsp;&#39;b&#39;,&nbsp;&#39;c&#39;),&nbsp;(&#39;a&#39;,&nbsp;&#39;b&#39;,&nbsp;&#39;d&#39;),&nbsp;(&#39;a&#39;,&nbsp;&#39;c&#39;,&nbsp;&#39;b&#39;),&nbsp;(&#39;a&#39;,&nbsp;&#39;c&#39;,&nbsp;&#39;d&#39;),&nbsp;(&#39;a&#39;,&nbsp;&#39;d&#39;,&nbsp;&#39;b&#39;),&nbsp;(&#39;a&#39;,&nbsp;&#39;d&#39;,&nbsp;&#39;c&#39;),&nbsp;(&#39;b&#39;,&nbsp;&#39;a&#39;,&nbsp;&#39;c&#39;),&nbsp;(&#39;b&#39;,&nbsp;&#39;a&#39;,&nbsp;&#39;d&#39;),&nbsp;(&#39;b&#39;,&nbsp;&#39;c&#39;,&nbsp;&#39;a&#39;),&nbsp;(&#39;b&#39;,&nbsp;&#39;c&#39;,&nbsp;&#39;d&#39;),&nbsp;(&#39;b&#39;,&nbsp;&#39;d&#39;,&nbsp;&#39;a&#39;),&nbsp;(&#39;b&#39;,&nbsp;&#39;d&#39;,&nbsp;&#39;c&#39;),&nbsp;(&#39;c&#39;,&nbsp;&#39;a&#39;,&nbsp;&#39;b&#39;),&nbsp;(&#39;c&#39;,&nbsp;&#39;a&#39;,&nbsp;&#39;d&#39;),&nbsp;(&#39;c&#39;,&nbsp;&#39;b&#39;,&nbsp;&#39;a&#39;),&nbsp;(&#39;c&#39;,&nbsp;&#39;b&#39;,&nbsp;&#39;d&#39;),&nbsp;(&#39;c&#39;,&nbsp;&#39;d&#39;,&nbsp;&#39;a&#39;),&nbsp;(&#39;c&#39;,&nbsp;&#39;d&#39;,&nbsp;&#39;b&#39;),&nbsp;(&#39;d&#39;,&nbsp;&#39;a&#39;,&nbsp;&#39;b&#39;),&nbsp;(&#39;d&#39;,&nbsp;&#39;a&#39;,&nbsp;&#39;c&#39;),&nbsp;(&#39;d&#39;,&nbsp;&#39;b&#39;,&nbsp;&#39;a&#39;),&nbsp;(&#39;d&#39;,&nbsp;&#39;b&#39;,&nbsp;&#39;c&#39;),&nbsp;(&#39;d&#39;,&nbsp;&#39;c&#39;,&nbsp;&#39;a&#39;),&nbsp;(&#39;d&#39;,&nbsp;&#39;c&#39;,&nbsp;&#39;b&#39;)]
+[(&#39;a&#39;,&nbsp;&#39;b&#39;,&nbsp;&#39;c&#39;),&nbsp;(&#39;a&#39;,&nbsp;&#39;b&#39;,&nbsp;&#39;d&#39;),&nbsp;(&#39;a&#39;,&nbsp;&#39;c&#39;,&nbsp;&#39;d&#39;),&nbsp;(&#39;b&#39;,&nbsp;&#39;c&#39;,&nbsp;&#39;d&#39;)]
+
+[(&#39;a&#39;,&nbsp;&#39;b&#39;,&nbsp;&#39;c&#39;,&nbsp;&#39;d&#39;),&nbsp;(&#39;a&#39;,&nbsp;&#39;b&#39;,&nbsp;&#39;d&#39;,&nbsp;&#39;c&#39;),&nbsp;(&#39;a&#39;,&nbsp;&#39;c&#39;,&nbsp;&#39;b&#39;,&nbsp;&#39;d&#39;),&nbsp;(&#39;a&#39;,&nbsp;&#39;c&#39;,&nbsp;&#39;d&#39;,&nbsp;&#39;b&#39;),&nbsp;(&#39;a&#39;,&nbsp;&#39;d&#39;,&nbsp;&#39;b&#39;,&nbsp;&#39;c&#39;),&nbsp;(&#39;a&#39;,&nbsp;&#39;d&#39;,&nbsp;&#39;c&#39;,&nbsp;&#39;b&#39;),&nbsp;(&#39;b&#39;,&nbsp;&#39;a&#39;,&nbsp;&#39;c&#39;,&nbsp;&#39;d&#39;),&nbsp;(&#39;b&#39;,&nbsp;&#39;a&#39;,&nbsp;&#39;d&#39;,&nbsp;&#39;c&#39;),&nbsp;(&#39;b&#39;,&nbsp;&#39;c&#39;,&nbsp;&#39;a&#39;,&nbsp;&#39;d&#39;),&nbsp;(&#39;b&#39;,&nbsp;&#39;c&#39;,&nbsp;&#39;d&#39;,&nbsp;&#39;a&#39;),&nbsp;(&#39;b&#39;,&nbsp;&#39;d&#39;,&nbsp;&#39;a&#39;,&nbsp;&#39;c&#39;),&nbsp;(&#39;b&#39;,&nbsp;&#39;d&#39;,&nbsp;&#39;c&#39;,&nbsp;&#39;a&#39;),&nbsp;(&#39;c&#39;,&nbsp;&#39;a&#39;,&nbsp;&#39;b&#39;,&nbsp;&#39;d&#39;),&nbsp;(&#39;c&#39;,&nbsp;&#39;a&#39;,&nbsp;&#39;d&#39;,&nbsp;&#39;b&#39;),&nbsp;(&#39;c&#39;,&nbsp;&#39;b&#39;,&nbsp;&#39;a&#39;,&nbsp;&#39;d&#39;),&nbsp;(&#39;c&#39;,&nbsp;&#39;b&#39;,&nbsp;&#39;d&#39;,&nbsp;&#39;a&#39;),&nbsp;(&#39;c&#39;,&nbsp;&#39;d&#39;,&nbsp;&#39;a&#39;,&nbsp;&#39;b&#39;),&nbsp;(&#39;c&#39;,&nbsp;&#39;d&#39;,&nbsp;&#39;b&#39;,&nbsp;&#39;a&#39;),&nbsp;(&#39;d&#39;,&nbsp;&#39;a&#39;,&nbsp;&#39;b&#39;,&nbsp;&#39;c&#39;),&nbsp;(&#39;d&#39;,&nbsp;&#39;a&#39;,&nbsp;&#39;c&#39;,&nbsp;&#39;b&#39;),&nbsp;(&#39;d&#39;,&nbsp;&#39;b&#39;,&nbsp;&#39;a&#39;,&nbsp;&#39;c&#39;),&nbsp;(&#39;d&#39;,&nbsp;&#39;b&#39;,&nbsp;&#39;c&#39;,&nbsp;&#39;a&#39;),&nbsp;(&#39;d&#39;,&nbsp;&#39;c&#39;,&nbsp;&#39;a&#39;,&nbsp;&#39;b&#39;),&nbsp;(&#39;d&#39;,&nbsp;&#39;c&#39;,&nbsp;&#39;b&#39;,&nbsp;&#39;a&#39;)]
+[(&#39;a&#39;,&nbsp;&#39;b&#39;,&nbsp;&#39;c&#39;,&nbsp;&#39;d&#39;)]</pre><p><br/></p><p>或许之后会用到，记录一下。</p><p><br/></p></section>
+        <hr/>
+        <p>
+				<span  class="pull-left">
+					<span class="author">Winke</span>
+					<span> 发表于 2017-02-01 19:28</span>
+				</span>
+				<span class="pull-right">
+					<a href="125.html">上一篇</a>                    <a href="251.html">下一篇</a>				</span>
+			</p>
+		<hr/>
+            </div>
+ 
+                </div>
+                
+                
+                <!-- Pager -->
+                
+                
+                
+            </div>
+        </div>
+    </div>
+   </div>
+ </div>
+	<!-- /主体 -->
+
+	<!-- 底部 -->
+	
+    <!-- 底部
+    ================================================== -->
+    <footer class="footer">
+       <div class="g-ft">
+		   <p class="m-cprt">©&nbsp;<a href="../../../../index.html">花开花落</a>&nbsp;京ICP备15006955号-1&nbsp;|&nbsp;Powered by <a href="../../../../index.html">Winke</a></p> 
+	   </div>
+    </footer>
+
+    <div style="right: 119.5px;" class="amz-toolbar" id="amz-toolbar">
+    <a href="#top" title="回到顶部" class="am-icon-btn am-icon-arrow-up am-active" id="amz-go-top"></a>
+    </div>
+
+<script type="text/javascript">
+(function(){
+	var ThinkPHP = window.Think = {
+		"ROOT"   : "", //当前网站地址
+		"APP"    : "", //当前项目地址
+		"PUBLIC" : "/Public", //项目公共目录地址
+		"DEEP"   : "/", //PATHINFO分割符
+		"MODEL"  : ["2", "", "html"],
+		"VAR"    : ["m", "c", "a"]
+	}
+})();
+</script>
+<script src="../../../../Public/static/amaze/js/jquery.min.js"></script>
+<script src="../../../../Public/static/amaze/js/amazeui.min.js"></script>
+<script src="../../../../Public/Home/js/blog.js"></script>
+
+<script type="text/javascript" src="../../../../Public/static/ueditor/third-party/SyntaxHighlighter/shCore.js"></script>
+<script type="text/javascript"> SyntaxHighlighter.all(); </script>
+<script type="text/javascript">
+	$(function () { 
+  // Line wrap back 
+  var shLineWrap = function () { 
+    $('.syntaxhighlighter').each(function () { 
+      // Fetch 
+      var $sh = $(this), 
+        $gutter = $sh.find('td.gutter'), 
+        $code = $sh.find('td.code') 
+        ; 
+      // Cycle through lines 
+      $gutter.children('.line').each(function (i) { 
+        // Fetch 
+        var $gutterLine = $(this), 
+          $codeLine = $code.find('.line:nth-child(' + (i + 1) + ')') 
+          ; 
+        //alert($gutterLine); 
+        // Fetch height 
+        var height = $codeLine.height() || 0; 
+        if (!height) { 
+          height = 'auto'; 
+        } 
+        else { 
+          height = height += 'px'; 
+          //alert(height); 
+        } 
+        // Copy height over 
+        $gutterLine.attr('style', 'height: ' + height + ' !important'); // fix by Edi, for JQuery 1.7+ under Firefox 15.0 
+        console.debug($gutterLine.height(), height, $gutterLine.text(), $codeLine); 
+      }); 
+    }); 
+  }; 
+  // Line wrap back when syntax highlighter has done it's stuff 
+  var shLineWrapWhenReady = function () { 
+    if ($('.syntaxhighlighter').length === 0) { 
+      setTimeout(shLineWrapWhenReady, 10); 
+    } 
+    else { 
+      shLineWrap(); 
+    } 
+  }; 
+  // Fire 
+  shLineWrapWhenReady();});
+</script>	
+ <!-- 用于加载js代码 -->
+<!-- 页面footer钩子，一般用于加载插件JS文件和JS代码 -->
+<div class="hidden"><!-- 用于加载统计代码等隐藏元素 -->
+	
+</div>
+
+	<!-- /底部 -->
+</body>
+</html>

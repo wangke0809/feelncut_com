@@ -1,0 +1,689 @@
+<!DOCTYPE HTML>
+<html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width,user-scalable=no">
+    <title>搭建多人共用的GPU服务器 - 小王同学</title>
+	<!--[if lt IE 9]>
+    <script type="text/javascript" src="https://feelncut.com/usr/themes/maupassant/javascript/html5shiv.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" href="../../../admin/css/normalize.css">
+    <link rel="stylesheet" href="../../../usr/themes/maupassant/style.css">
+    <meta name="description" content="[TOC]
+
+#### 背景
+
+目前实验室GPU使用情况是：大部分同学的配有单台1080/TITAN Xp。后来购入了两台4卡的机器，老师的意思是希望可以作为服务器使用，能够多人同时使用，互不影..." />
+<link rel="alternate" type="application/rss+xml" title="搭建多人共用的GPU服务器 &raquo; 小王同学 &raquo; RSS 2.0" href="../../../feed/2018/05/03/145.html" />
+<link rel="alternate" type="application/rdf+xml" title="搭建多人共用的GPU服务器 &raquo; 小王同学 &raquo; RSS 1.0" href="../../../feed/rss/2018/05/03/145.html" />
+<link rel="alternate" type="application/atom+xml" title="搭建多人共用的GPU服务器 &raquo; 小王同学 &raquo; ATOM 1.0" href="../../../feed/atom/2018/05/03/145.html" />
+<script type="text/javascript">
+(function () {
+    window.TypechoComment = {
+        dom : function (id) {
+            return document.getElementById(id);
+        },
+    
+        create : function (tag, attr) {
+            var el = document.createElement(tag);
+        
+            for (var key in attr) {
+                el.setAttribute(key, attr[key]);
+            }
+        
+            return el;
+        },
+
+        reply : function (cid, coid) {
+            var comment = this.dom(cid), parent = comment.parentNode,
+                response = this.dom('respond-post-145'), input = this.dom('comment-parent'),
+                form = 'form' == response.tagName ? response : response.getElementsByTagName('form')[0],
+                textarea = response.getElementsByTagName('textarea')[0];
+
+            if (null == input) {
+                input = this.create('input', {
+                    'type' : 'hidden',
+                    'name' : 'parent',
+                    'id'   : 'comment-parent'
+                });
+
+                form.appendChild(input);
+            }
+
+            input.setAttribute('value', coid);
+
+            if (null == this.dom('comment-form-place-holder')) {
+                var holder = this.create('div', {
+                    'id' : 'comment-form-place-holder'
+                });
+
+                response.parentNode.insertBefore(holder, response);
+            }
+
+            comment.appendChild(response);
+            this.dom('cancel-comment-reply-link').style.display = '';
+
+            if (null != textarea && 'text' == textarea.name) {
+                textarea.focus();
+            }
+
+            return false;
+        },
+
+        cancelReply : function () {
+            var response = this.dom('respond-post-145'),
+            holder = this.dom('comment-form-place-holder'), input = this.dom('comment-parent');
+
+            if (null != input) {
+                input.parentNode.removeChild(input);
+            }
+
+            if (null == holder) {
+                return true;
+            }
+
+            this.dom('cancel-comment-reply-link').style.display = 'none';
+            holder.parentNode.insertBefore(response, holder);
+            return false;
+        }
+    };
+})();
+</script>
+<script type="text/javascript">
+(function () {
+    var event = document.addEventListener ? {
+        add: 'addEventListener',
+        triggers: ['scroll', 'mousemove', 'keyup', 'touchstart'],
+        load: 'DOMContentLoaded'
+    } : {
+        add: 'attachEvent',
+        triggers: ['onfocus', 'onmousemove', 'onkeyup', 'ontouchstart'],
+        load: 'onload'
+    }, added = false;
+
+    document[event.add](event.load, function () {
+        var r = document.getElementById('respond-post-145'),
+            input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = '_';
+        input.value = (function () {
+    var _5HnJV = //'6'
+'cd'+/* '1y'//'1y' */''+'6c6'//'vNC'
++//'UWO'
+'f'+//'T1B'
+'f1'+'1e9'//'BF0'
++/* '9'//'9' */''+//'m'
+'0dd'+//'hJj'
+'5'+//'O3I'
+'0'+'f2'//'dy'
++'4d0'//'5No'
++'b3'//'7'
++/* 's'//'s' */''+'bt2'//'bt2'
++'5e'//'Y'
++'431'//'n'
++'a7'//'gKM'
++//'J'
+'f'+//'JRC'
+'JRC'+'j'//'j'
++'No3'//'No3'
++''///*'ig1'*/'ig1'
++''///*'b'*/'b'
++/* 'Ah'//'Ah' */''+'0'//'G'
+, _epn = [[23,26],[31,34],[31,32],[31,34]];
+    
+    for (var i = 0; i < _epn.length; i ++) {
+        _5HnJV = _5HnJV.substring(0, _epn[i][0]) + _5HnJV.substring(_epn[i][1]);
+    }
+
+    return _5HnJV;
+})();
+
+        if (null != r) {
+            var forms = r.getElementsByTagName('form');
+            if (forms.length > 0) {
+                function append() {
+                    if (!added) {
+                        forms[0].appendChild(input);
+                        added = true;
+                    }
+                }
+            
+                for (var i = 0; i < event.triggers.length; i ++) {
+                    var trigger = event.triggers[i];
+                    document[event.add](trigger, append);
+                    window[event.add](trigger, append);
+                }
+            }
+        }
+    });
+})();
+</script><script> var _hmt = _hmt || []; (function() {   var hm = document.createElement("script");   hm.src = "https://hm.baidu.com/hm.js?e9ff349d5b883760c70a4e220c9ac8ca";   var s = document.getElementsByTagName("script")[0];    s.parentNode.insertBefore(hm, s); })(); </script></head>
+<body>
+
+<header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                                    <a id="logo" href="../../../index.html">
+                        小王同学                    </a>
+                        	    <p class="description">希望通过自我加工，成为有点用的人</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class=" current" href="../../../index.html">博客</a>
+															<a href="../../../archives.html" title="归档">归档</a>
+										<a href="../../../tools.html" title="Tools">Tools</a>
+										<a href="../../../about.html" title="关于">关于</a>
+									</nav>
+            </div>
+        </div>
+    </div>
+</header>
+<div id="body">
+    <div class="container">
+        <div class="col-group">
+<div class="col-8" id="main">
+	<div class="res-cons">
+		<article class="post">
+			<header>
+				<h1 class="post-title">搭建多人共用的GPU服务器</h1>
+			</header>
+			<date class="post-meta">
+				May 3, 2018			</date>
+			<div class="post-content">
+				<div id="md_content_2" class="md_content" style="min-height: 50px;"><textarea id="append-test" style="display:none;">[TOC]
+
+#### 背景
+
+目前实验室GPU使用情况是：大部分同学的配有单台1080/TITAN Xp。后来购入了两台4卡的机器，老师的意思是希望可以作为服务器使用，能够多人同时使用，互不影响。于是便开始了本次折腾，记录采坑经历。
+
+通过本文，多卡读者可以实现分配每块GPU给特定同学使用，也可以多人共用多块GPU。单卡读者可以实现多人共用一块GPU。
+
+<!--more-->
+
+#### 需求
+
+说需求之前先来列一下机器配置：
+
+CPU:  i7-6850K CPU
+内存：DDR4 2400Hz 32G \*4
+存储：512G SSD \*1 + 4TB 机械 \*3
+显卡：TITAN Xp \*4
+
+需求很明显：**像使用一台带有GPU的自己的机器一样使用服务器**。
+
+具体来说要满足：
+
+- 不同用户之间不能相互影响且可以同时使用
+- 用户要能方便地访问自己的“机器”
+- 用户有所有权限
+- 用户不被允许直接操作宿主机
+- 灵活配置GPU，可以每一分一块GPU，只有一个人用的时候可以用四块。
+- 上网方便，使用自己的校园网帐号上网，可以使用IPV6
+
+#### 调研
+
+首先可以肯定，Ubuntu多用户下可能存在误删其他同学文件，所需软件版本不兼容，GPU使用需要代码中指定等问题。
+
+经过多方调研对比，在此省略xx字，最终选择使用LXD来搭建容器，实现上述需求。
+
+我主要看好LXD：
+
+- 相比LXC更简单，功能更强大
+- 相比部署应用用的Docker更时候做操作使用的容器
+- 相比KVM更轻便
+- 支持GPU等设备Passthrough
+- 调研过程中看到的资料足够满足我实现上述需求
+- 支持RESTful API
+
+所以整体思路是通过LXD容器实现多用户共用GPU服务器。
+
+主要参考文献见文章最后一章节。
+
+#### 安装
+
+安装过程主要安装了
+ - ZFS 用于管理物理磁盘，支持LXD高级功能
+ - LXD 实现虚拟容器
+ - bridge-utils 用于搭建网桥
+
+```bash
+sudo apt install zfs
+sudo apt -t xenial-backports install lxd
+sudo apt install bridge-utils
+```
+#### 配置
+
+##### 配置LXD
+
+`sudo lxd init`,按照提示，这里我选择将第一块1TB的机械硬盘通过ZFS作为容器的存储后端。当提示是否创建bridge时，选择否。`lxd init`创建的bridge每个容器通过宿主机用NAT上网，我更希望每个人分配一个IP，通过自己的校园网上网。如果不需要，请选择是并忽略下一个章节。
+
+##### 配置网桥
+
+修改`/etc/network/interfaces`，内容如下：
+
+```bash
+auto lo
+iface lo inet loopback
+
+auto br0
+iface br0 inet dhcp
+   bridge_ports enp14s0
+ 
+iface enp14s0 inet manual
+```
+
+其中`enp14s0`可通过`ifconfig`查看网卡信息得到。
+
+配置LXD`lxc network attach-profile br0 default eth0`。配置完成后需要重启下机器。
+
+##### 新建容器
+
+如果你网速可以:`lxc launch ubuntu:xenial yourContainerName`可以试试直接下载，100M多点。
+
+如果有网速不行建议添加清华大学的镜像，并且IPV6正好免校园网流量：
+```bash
+lxc remote add tuna-images https://mirrors.tuna.tsinghua.edu.cn/lxc-images/ --protocol=simplestreams --public
+lxc image list tuna-images:
+```
+之后使用`lxc launch tuna-images:biasOrfootprint yourContainerName`新建容器。
+
+##### 安装驱动
+
+`lxc exec yourContainerName bash`可进入容器bash，在容器中显卡驱动不需要安装内核文件，只需要`sudo sh /NVIDIA-Linux-x86_64-xxx.xx.run --no-kernel-module`进行安装。
+
+##### 配置显卡
+
+为容器添加所有GPU: `lxc config device add yourContainerName gpu gpu`。
+
+添加指定GPU： `lxc config device add yourContainerName gpu0 gpu id=0`
+
+##### 共享目录
+
+```bash
+lxc config set yourContainerName security.privileged true
+lxc config device add privilegedContainerName shareName disk source=path1 path=path2
+```
+path1为宿主机路径，path2为容器内路径。
+
+##### nvidia-uvm
+
+兴冲冲的装好环境，发现TensorFlow无法使用显卡，原因是宿主机没有/dev/nvidia-uvm设备，需要通过以下命令挂载设备：
+
+```bash
+/sbin/modprobe nvidia-uvm
+D=`grep nvidia-uvm /proc/devices | awk '{print $1}'`
+mknod -m 666 /dev/nvidia-uvm c $D 0
+```
+
+挂载设备到容器：
+
+```bash
+lxc config device add yourContainerName nvidia-uvm unix-char path=/dev/nvidia-uvm
+```
+
+##### 桌面环境
+
+考虑到需要桌面环境的同学，我们通过VNC访问桌面环境。首先尝试的配置Ubuntu自带桌面，多次尝试失败，后来选择使用gnome桌面。
+
+```bash
+# 可选 --no-install-recommends 安装不必要组建
+apt install ubuntu-desktop gnome-panel gnome-settings-daemon metacity nautilus gnome-terminal vnc4server -y
+```
+
+在` ~/.vnc/xstartup`文件中加入:
+```bash
+gnome-panel &
+gnome-settings-daemon &
+metacity &
+nautilus &
+```
+
+然后即可使用`vnc4server`，VNC具体使用不再赘述。
+
+##### CUDA与cuDNN
+
+CUDA与cuDNN安装本质上来讲只是解压文件（头文件，动态库等），所以我把不同版本的CUDA与cuDNN安装到了公共磁盘上，这个公共磁盘通过配置文件默认挂载到所有容器，其他同学在使用时按需添加环境变量和动态库路径即可。
+
+##### 其他
+
+我整体的解决方案是把配置好的容器做成镜像，后续创建从这个镜像创建。这个镜像配置了SSH,VNC,普通用户等。
+
+第二块硬盘通过ZFS管理`zpool create A-pool /dev/sdb`。通过配置文件挂载到容器。CUDA和cuDNN安装在这里。后续拷贝大型数据集也可以直接通过物理机拷贝。
+
+上网处理可以通过VNC打开浏览器上网外，用上了之前写的一个Python登录校园网的库，可以通过脚本登录网络。
+
+GPU默认通过配置文件挂载到容器。LXD相关操作见参考中的[3]，用到了编辑配置文件，快照，镜像等相关操作，本文没有细说。
+
+写份使用说明，并告知用户一定要修改默认SSH和VNC密码。
+
+因为有RESTful API，所以可以做个WEB管理系统，后来发现了`lxdui`还挺好用：
+
+![](/images/2018/05/3738921138.png)
+
+由于加载镜像拖慢速度，对代码简单进行了修改备用。后续准备基于`lxdui`增加权限控制等功能，每个用户可以方便的对自己的容器进行控制，快照等。
+
+#### 总结
+
+本次折腾完美解决了需求，每个人通过SSH + VNC使用完全属于自己的机器，作为宿主机的管理员，我深知责任重大，更应该严守宿主机密码，常常以删除容器来威胁舍友，耐心帮助同学。
+
+此外，有RESTful API还能做很多好玩的事情。
+
+#### 参考
+- [1] https://blog.yangl1996.com/2018/01/11/gpu-passthrough-for-lxc.html
+- [2 ]https://abcdabcd987.com/setup-shared-gpu-server-for-labs/
+- [3] https://linux.cn/article-7618-1.html
+
+</textarea></div>			</div>
+		</article>
+		<div id="comments">
+        	<span class="widget-title">已有 12 条评论</span>
+    <ol class="comment-list"><li itemscope itemtype="http://schema.org/UserComments" id="comment-9" class="comment-body comment-parent comment-odd">
+    <div class="comment-author" itemprop="creator" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="image"><img class="avatar" src="https://secure.gravatar.com/avatar/e05d6386eed3377b7c64752dccd99182?s=32&amp;r=X&amp;d=" alt="Fangxin Wang" width="32" height="32" /></span>
+        <cite class="fn" itemprop="name">Fangxin Wang</cite>
+    </div>
+    <div class="comment-meta">
+        <a href="145.html#comment-9"><time itemprop="commentTime" datetime="2018-08-08T15:24:46+08:00">August 8th, 2018 at 03:24 pm</time></a>
+            </div>
+    <div class="comment-content" itemprop="commentText">
+    <p>请问，我记得cudnn文件必须添加到cuda目录里面，您说的只通过创建链接，怎么把不同版本的cudnn链接过去呢</p>    </div>
+    <div class="comment-reply">
+        <a href="145.html%3FreplyTo=9.html#respond-post-145" rel="nofollow" onclick="return TypechoComment.reply('comment-9', 9);">回复</a>    </div>
+        <div class="comment-children" itemprop="discusses">
+        <ol class="comment-list"><li itemscope itemtype="http://schema.org/UserComments" id="comment-10" class="comment-body comment-child comment-level-odd comment-odd comment-by-author">
+    <div class="comment-author" itemprop="creator" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="image"><img class="avatar" src="https://secure.gravatar.com/avatar/adb1ded20ab626050681881cd286374d?s=32&amp;r=X&amp;d=" alt="pizi" width="32" height="32" /></span>
+        <cite class="fn" itemprop="name"><a href="../../../index.html" rel="external nofollow">pizi</a></cite>
+    </div>
+    <div class="comment-meta">
+        <a href="145.html#comment-10"><time itemprop="commentTime" datetime="2018-08-08T15:59:38+08:00">August 8th, 2018 at 03:59 pm</time></a>
+            </div>
+    <div class="comment-content" itemprop="commentText">
+    <p>用到哪个版本的cudnn就把cudnn所在路径放到环境变量里，然后也要把cudnn动态库所在路径放到ld.so.config中。<br>
+cudnn文件添加到cuda目录里面时，配置一次路径即可，因为cuda路径里包含了cudnn，分开的话，同样的步骤，把cudnn路径也配置一次环境变量和注册动态库路径。</p>    </div>
+    <div class="comment-reply">
+        <a href="145.html%3FreplyTo=10.html#respond-post-145" rel="nofollow" onclick="return TypechoComment.reply('comment-10', 10);">回复</a>    </div>
+    </li>
+</ol>    </div>
+    </li>
+<li itemscope itemtype="http://schema.org/UserComments" id="comment-11" class="comment-body comment-parent comment-even">
+    <div class="comment-author" itemprop="creator" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="image"><img class="avatar" src="https://secure.gravatar.com/avatar/e05d6386eed3377b7c64752dccd99182?s=32&amp;r=X&amp;d=" alt="Fangxin Wang" width="32" height="32" /></span>
+        <cite class="fn" itemprop="name">Fangxin Wang</cite>
+    </div>
+    <div class="comment-meta">
+        <a href="145.html#comment-11"><time itemprop="commentTime" datetime="2018-08-08T19:58:17+08:00">August 8th, 2018 at 07:58 pm</time></a>
+            </div>
+    <div class="comment-content" itemprop="commentText">
+    <p>放到ld.so.config是什么操作</p>    </div>
+    <div class="comment-reply">
+        <a href="145.html%3FreplyTo=11.html#respond-post-145" rel="nofollow" onclick="return TypechoComment.reply('comment-11', 11);">回复</a>    </div>
+    </li>
+<li itemscope itemtype="http://schema.org/UserComments" id="comment-12" class="comment-body comment-parent comment-odd">
+    <div class="comment-author" itemprop="creator" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="image"><img class="avatar" src="https://secure.gravatar.com/avatar/e05d6386eed3377b7c64752dccd99182?s=32&amp;r=X&amp;d=" alt="Fangxin Wang" width="32" height="32" /></span>
+        <cite class="fn" itemprop="name">Fangxin Wang</cite>
+    </div>
+    <div class="comment-meta">
+        <a href="145.html#comment-12"><time itemprop="commentTime" datetime="2018-08-08T23:05:06+08:00">August 8th, 2018 at 11:05 pm</time></a>
+            </div>
+    <div class="comment-content" itemprop="commentText">
+    <p>我在host上安装了显卡驱动，cuda9.0和cuda9.2， 分别把cudnn v7和cudnn v7.1复制到了里面。用lxd创建了一个容器，挂载了host上的/usr/local，并在容器内设置了LD_LIBRARY_PATH和PATH分别指向cuda9.0的lib64和bin。在host上，输入nvidia-smi，会出现显卡的信息，而在容器内输入nvidia-smi，会出现Failed to initialize NVML: Driver/library version mismatch。如果想其它教程中所说的，在host和容器上分别装一次driver，cuda和cudnn，则不会出现问题，但我想这失去了容器的意义。看到您所说的通过添加库文件和相关路径，即可在多个容器间共享cuda和cudnn，非常兴奋，希望您能在您的文章中给出具体的步骤，谢谢</p>    </div>
+    <div class="comment-reply">
+        <a href="145.html%3FreplyTo=12.html#respond-post-145" rel="nofollow" onclick="return TypechoComment.reply('comment-12', 12);">回复</a>    </div>
+        <div class="comment-children" itemprop="discusses">
+        <ol class="comment-list"><li itemscope itemtype="http://schema.org/UserComments" id="comment-13" class="comment-body comment-child comment-level-odd comment-odd comment-by-author">
+    <div class="comment-author" itemprop="creator" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="image"><img class="avatar" src="https://secure.gravatar.com/avatar/adb1ded20ab626050681881cd286374d?s=32&amp;r=X&amp;d=" alt="pizi" width="32" height="32" /></span>
+        <cite class="fn" itemprop="name"><a href="../../../index.html" rel="external nofollow">pizi</a></cite>
+    </div>
+    <div class="comment-meta">
+        <a href="145.html#comment-13"><time itemprop="commentTime" datetime="2018-08-09T13:54:08+08:00">August 9th, 2018 at 01:54 pm</time></a>
+            </div>
+    <div class="comment-content" itemprop="commentText">
+    <p>ld.so.config参见https://feelncut.com/2018/01/09/46.html，文章中只配置了cuda环境变量和动态库，cudnn因为安装到了cuda目录中，所以配置一次即可。如果cudnn不在cuda目录中，按照配置cuda的方法配置一次cudnn即可。</p>    </div>
+    <div class="comment-reply">
+        <a href="145.html%3FreplyTo=13.html#respond-post-145" rel="nofollow" onclick="return TypechoComment.reply('comment-13', 13);">回复</a>    </div>
+    </li>
+</ol>    </div>
+    </li>
+<li itemscope itemtype="http://schema.org/UserComments" id="comment-14" class="comment-body comment-parent comment-even">
+    <div class="comment-author" itemprop="creator" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="image"><img class="avatar" src="https://secure.gravatar.com/avatar/e05d6386eed3377b7c64752dccd99182?s=32&amp;r=X&amp;d=" alt="Fangxin Wang" width="32" height="32" /></span>
+        <cite class="fn" itemprop="name">Fangxin Wang</cite>
+    </div>
+    <div class="comment-meta">
+        <a href="145.html#comment-14"><time itemprop="commentTime" datetime="2018-08-09T14:10:03+08:00">August 9th, 2018 at 02:10 pm</time></a>
+            </div>
+    <div class="comment-content" itemprop="commentText">
+    <p>谢谢，安装的时候还有一个问题，我在host上先装了390.77的显卡驱动，然后安装了cuda 9.0的deb包，然后安装过程中提示我要改变显卡驱动的版本号，安装完毕后，显卡驱动变成了384.130；而容器和host上的驱动版本应保持一致，所以我必须在容器里先安装驱动，再安装cuda9.0，只是为了把驱动降级；那如果我以后在host上安装cuda9.2，它又会自动将驱动版本升级为398.xx，那么这样的话，是不是已经创建的容器，我每个都要再装一次cuda9.2 来使其和host上面的显卡驱动保持一致呢</p>    </div>
+    <div class="comment-reply">
+        <a href="145.html%3FreplyTo=14.html#respond-post-145" rel="nofollow" onclick="return TypechoComment.reply('comment-14', 14);">回复</a>    </div>
+        <div class="comment-children" itemprop="discusses">
+        <ol class="comment-list"><li itemscope itemtype="http://schema.org/UserComments" id="comment-15" class="comment-body comment-child comment-level-odd comment-odd comment-by-author">
+    <div class="comment-author" itemprop="creator" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="image"><img class="avatar" src="https://secure.gravatar.com/avatar/adb1ded20ab626050681881cd286374d?s=32&amp;r=X&amp;d=" alt="pizi" width="32" height="32" /></span>
+        <cite class="fn" itemprop="name"><a href="../../../index.html" rel="external nofollow">pizi</a></cite>
+    </div>
+    <div class="comment-meta">
+        <a href="145.html#comment-15"><time itemprop="commentTime" datetime="2018-08-09T14:21:27+08:00">August 9th, 2018 at 02:21 pm</time></a>
+            </div>
+    <div class="comment-content" itemprop="commentText">
+    <p>如上条回复中安装过程那篇文章，我安装cuda都是通过`cuda_xx_xx.sh`文件安装，安装时提示是否安装cuda中带有的显卡驱动，由于已经自己安装，所以选择否，不让cuda自己安装驱动。所以没有遇到你说的这种问题。你在安装`deb`包的过程中，是提示你是否安装该版本显卡驱动，还是强制必须安装该版本？</p>    </div>
+    <div class="comment-reply">
+        <a href="145.html%3FreplyTo=15.html#respond-post-145" rel="nofollow" onclick="return TypechoComment.reply('comment-15', 15);">回复</a>    </div>
+    </li>
+</ol>    </div>
+    </li>
+<li itemscope itemtype="http://schema.org/UserComments" id="comment-16" class="comment-body comment-parent comment-odd">
+    <div class="comment-author" itemprop="creator" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="image"><img class="avatar" src="https://secure.gravatar.com/avatar/e05d6386eed3377b7c64752dccd99182?s=32&amp;r=X&amp;d=" alt="Fangxin Wang" width="32" height="32" /></span>
+        <cite class="fn" itemprop="name">Fangxin Wang</cite>
+    </div>
+    <div class="comment-meta">
+        <a href="145.html#comment-16"><time itemprop="commentTime" datetime="2018-08-09T15:03:21+08:00">August 9th, 2018 at 03:03 pm</time></a>
+            </div>
+    <div class="comment-content" itemprop="commentText">
+    <p>是自动并且强制安装新的显卡驱动的，我还是用run包安装吧，再次感谢</p>    </div>
+    <div class="comment-reply">
+        <a href="145.html%3FreplyTo=16.html#respond-post-145" rel="nofollow" onclick="return TypechoComment.reply('comment-16', 16);">回复</a>    </div>
+    </li>
+<li itemscope itemtype="http://schema.org/UserComments" id="comment-17" class="comment-body comment-parent comment-even">
+    <div class="comment-author" itemprop="creator" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="image"><img class="avatar" src="https://secure.gravatar.com/avatar/92569704105a11da6d293f184b6c8d1d?s=32&amp;r=X&amp;d=" alt="zzd" width="32" height="32" /></span>
+        <cite class="fn" itemprop="name">zzd</cite>
+    </div>
+    <div class="comment-meta">
+        <a href="145.html#comment-17"><time itemprop="commentTime" datetime="2018-12-08T21:55:15+08:00">December 8th, 2018 at 09:55 pm</time></a>
+            </div>
+    <div class="comment-content" itemprop="commentText">
+    <p>lxc config device add yourContainerName gpu0 gpu id=0</p><p>如果是 挂载多个GPU呢。。。。</p>    </div>
+    <div class="comment-reply">
+        <a href="145.html%3FreplyTo=17.html#respond-post-145" rel="nofollow" onclick="return TypechoComment.reply('comment-17', 17);">回复</a>    </div>
+        <div class="comment-children" itemprop="discusses">
+        <ol class="comment-list"><li itemscope itemtype="http://schema.org/UserComments" id="comment-18" class="comment-body comment-child comment-level-odd comment-odd comment-by-author">
+    <div class="comment-author" itemprop="creator" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="image"><img class="avatar" src="https://secure.gravatar.com/avatar/adb1ded20ab626050681881cd286374d?s=32&amp;r=X&amp;d=" alt="pizi" width="32" height="32" /></span>
+        <cite class="fn" itemprop="name"><a href="../../../index.html" rel="external nofollow">pizi</a></cite>
+    </div>
+    <div class="comment-meta">
+        <a href="145.html#comment-18"><time itemprop="commentTime" datetime="2018-12-14T09:04:19+08:00">December 14th, 2018 at 09:04 am</time></a>
+            </div>
+    <div class="comment-content" itemprop="commentText">
+    <p>文章里写了的，lxc config device add yourContainerName gpu gpu</p>    </div>
+    <div class="comment-reply">
+        <a href="145.html%3FreplyTo=18.html#respond-post-145" rel="nofollow" onclick="return TypechoComment.reply('comment-18', 18);">回复</a>    </div>
+    </li>
+</ol>    </div>
+    </li>
+<li itemscope itemtype="http://schema.org/UserComments" id="comment-21" class="comment-body comment-parent comment-odd">
+    <div class="comment-author" itemprop="creator" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="image"><img class="avatar" src="https://secure.gravatar.com/avatar/12b8942de679b090274e41a9ac786b0d?s=32&amp;r=X&amp;d=" alt="padluo" width="32" height="32" /></span>
+        <cite class="fn" itemprop="name">padluo</cite>
+    </div>
+    <div class="comment-meta">
+        <a href="145.html#comment-21"><time itemprop="commentTime" datetime="2019-07-14T11:34:58+08:00">July 14th, 2019 at 11:34 am</time></a>
+            </div>
+    <div class="comment-content" itemprop="commentText">
+    <p>请问如何控制到用户使用1个GPU卡的具体多少资源呢？</p>    </div>
+    <div class="comment-reply">
+        <a href="145.html%3FreplyTo=21.html#respond-post-145" rel="nofollow" onclick="return TypechoComment.reply('comment-21', 21);">回复</a>    </div>
+        <div class="comment-children" itemprop="discusses">
+        <ol class="comment-list"><li itemscope itemtype="http://schema.org/UserComments" id="comment-24" class="comment-body comment-child comment-level-odd comment-odd comment-by-author">
+    <div class="comment-author" itemprop="creator" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="image"><img class="avatar" src="https://secure.gravatar.com/avatar/adb1ded20ab626050681881cd286374d?s=32&amp;r=X&amp;d=" alt="pizi" width="32" height="32" /></span>
+        <cite class="fn" itemprop="name"><a href="../../../index.html" rel="external nofollow">pizi</a></cite>
+    </div>
+    <div class="comment-meta">
+        <a href="145.html#comment-24"><time itemprop="commentTime" datetime="2020-02-21T00:47:08+08:00">February 21st, 2020 at 12:47 am</time></a>
+            </div>
+    <div class="comment-content" itemprop="commentText">
+    <p>一个卡就不要限制资源了...错开时间跑吧...</p>    </div>
+    <div class="comment-reply">
+        <a href="145.html%3FreplyTo=24.html#respond-post-145" rel="nofollow" onclick="return TypechoComment.reply('comment-24', 24);">回复</a>    </div>
+    </li>
+</ol>    </div>
+    </li>
+</ol>                <div id="respond-post-145" class="respond">
+        <div class="cancel-comment-reply">
+        <a id="cancel-comment-reply-link" href="145.html#respond-post-145" rel="nofollow" onclick="return TypechoComment.cancelReply();">取消回复</a>        </div>
+    	<span id="response" class="widget-title">添加新评论</span>
+    	<form method="post" action="https://feelncut.com/2018/05/03/145.html/comment?parent=21" id="comment-form">
+			<div class="col1">
+			<p>
+                <textarea rows="8" cols="50" name="text" class="textarea"></textarea>
+            </p>
+			</div>
+			<div class="col2">
+                		<p>
+                <label for="author" class="required">称呼</label>
+    			<input type="text" name="author" id="author" class="text" value="" />
+    		</p>
+    		<p>
+                <label for="mail" class="required">邮箱</label>
+    			<input type="email" name="mail" id="mail" class="text" value="" />
+    		</p>
+    		<p>
+                <label for="url">网站</label>
+    			<input type="url" name="url" id="url" class="text" placeholder="可空" value="" />
+    		</p>
+                		<p>
+                <button type="submit" class="submit">提交评论</button>
+            </p>
+			</div>
+			<div class="clear"></div>
+    	</form>
+    </div>
+    </div>	</div>
+</div>
+<div id="secondary">
+	<section class="widget">
+        <form id="search" method="post" action="https://feelncut.com/2018/05/03/">
+            <input type="text" name="s" class="text" placeholder="搜索..." />
+            <button type="submit" class="submit icon-search"></button>
+        </form>
+    </section>
+
+	    <section class="widget">
+		<h3 class="widget-title">最新文章</h3>
+        <ul class="widget-list">
+            <li><a href="../../../2020/08/24/323.html">ETH 2.0 资源汇总（持续更新）</a></li><li><a href="../../../2020/08/24/322.html">ETH 2.0 测试网验证节点质押流程体验</a></li><li><a href="../../../2020/06/06/312.html">通过 openssl 导出 HTTPS 网站 SSL 证书链</a></li><li><a href="../../../2020/05/20/308.html">如何开发一款区块链浏览器？</a></li><li><a href="../../../2020/02/02/288.html">EOS 提交交易失败分析</a></li><li><a href="../../../2019/12/09/giaocamerarobot.html">小 Giao 之死</a></li><li><a href="../../../2019/10/04/267.html">《凶宅》和《疯人院》</a></li><li><a href="../../10/17/228.html"> 以太坊多重签名原理分析</a></li><li><a href="../../09/11/188.html">OpenCV 初识图像</a></li><li><a href="../../09/11/184.html">为什么要系统的学习一下Pyhton-OpenCV?</a></li>        </ul>
+    </section>
+    
+        <section class="widget">
+		<h3 class="widget-title">最近回复</h3>
+        <ul class="widget-list">
+                            <li><a href="../../../2020/08/24/323.html#comment-26">pizi</a>: https://be...</li>
+                    <li><a href="../../../2020/08/24/323.html#comment-25">何先生</a>: 请问有没有ETH2....</li>
+                    <li><a href="145.html#comment-24">pizi</a>: 一个卡就不要限制资源...</li>
+                    <li><a href="../../../about.html#comment-23">pizi</a>: 有特殊技巧的啊，从阿...</li>
+                    <li><a href="../../../about.html#comment-22">一网友</a>: 有钱人新浪数据库很贵吧</li>
+                    <li><a href="145.html#comment-21">padluo</a>: 请问如何控制到用户使...</li>
+                    <li><a href="../../../about.html#comment-20">小白</a>: 板凳是我的！</li>
+                    <li><a href="../../02/08/90.html#comment-19">无耻的我</a>: 大佬，能发一份吗，原...</li>
+                    <li><a href="145.html#comment-18">pizi</a>: 文章里写了的，lxc...</li>
+                    <li><a href="145.html#comment-17">zzd</a>: lxc config...</li>
+                </ul>
+    </section>
+    
+        <section class="widget">
+		<h3 class="widget-title">分类</h3>
+        <ul class="widget-list">
+            <li><a href="../../../category/feel/index.html">随笔心情</a> (4)</li><li><a href="../../../category/code/index.html">代码片段</a> (17)</li><li><a href="../../../category/ojbk/index.html">折腾着玩</a> (7)</li><li><a href="../../../category/ml/index.html">机器学习</a> (9)</li><li><a href="../../../category/blockChain/index.html">区块链</a> (10)</li><li><a href="../../../category/python-opencv/index.html">Python-OpenCV</a> (2)</li><li><a href="../../../category/video/index.html">视频剪辑</a> (0)</li><li><a href="../../../category/leetcode/index.html">leetcode</a> (1)</li>        </ul>
+	</section>
+    
+        <section class="widget">
+		<h3 class="widget-title">归档</h3>
+        <ul class="widget-list">
+            <li><a href="../../../2020/08/index.html">August 2020</a></li><li><a href="../../../2020/06/index.html">June 2020</a></li><li><a href="../../../2020/05/index.html">May 2020</a></li><li><a href="../../../2020/02/index.html">February 2020</a></li><li><a href="../../../2019/12/index.html">December 2019</a></li><li><a href="../../../2019/10/index.html">October 2019</a></li><li><a href="../../10/index.html">October 2018</a></li><li><a href="../../09/index.html">September 2018</a></li><li><a href="../../08/index.html">August 2018</a></li><li><a href="../index.html">May 2018</a></li><li><a href="../../04/index.html">April 2018</a></li><li><a href="../../03/index.html">March 2018</a></li><li><a href="../../02/index.html">February 2018</a></li><li><a href="../../01/index.html">January 2018</a></li>        </ul>
+	</section>
+    
+    	<section class="widget">
+		<h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+                            <li class="last"><a href="../../../admin/login.php.html">登录</a></li>
+                        <li><a href="../../../feed/index.html">文章 RSS</a></li>
+            <li><a href="../../../feed/comments/index.html">评论 RSS</a></li>
+            <li><a href="http://www.typecho.org">Typecho</a></li>
+        </ul>
+	</section>
+    </div>		</div>
+    </div>
+</div>
+<footer id="footer">
+	<div class="container">
+		&copy; 2023 <a rel="nofollow" href="../../../index.html">小王同学</a>. 模板由<a href="http://pagecho.com">cho</a>制作.
+	</div>
+</footer>
+<link rel="stylesheet" href="../../../usr/plugins/EditorMD/css/editormd.css" />
+<link rel="stylesheet" href="../../../usr/plugins/EditorMD/css/emojify.min.css" />
+<script type="text/javascript">
+    window.jQuery || document.write(unescape('%3Cscript%20type%3D%22text/javascript%22%20src%3D%22https://feelncut.com/usr/plugins/EditorMD/lib/jquery.min.js%22%3E%3C/script%3E'));
+</script>
+<script src="../../../usr/plugins/EditorMD/lib/marked.min.js"></script>
+<script src="../../../usr/plugins/EditorMD/lib/prettify.min.js"></script>
+<script src="../../../usr/plugins/EditorMD/lib/raphael.min.js"></script>
+<script src="../../../usr/plugins/EditorMD/lib/underscore.min.js"></script>
+<script src="../../../usr/plugins/EditorMD/lib/sequence-diagram.min.js"></script>
+<script src="../../../usr/plugins/EditorMD/lib/flowchart.min.js"></script>
+<script src="../../../usr/plugins/EditorMD/lib/jquery.flowchart.min.js"></script>
+<script src="../../../usr/plugins/EditorMD/js/editormd.min.js"></script>
+<script src="../../../usr/plugins/EditorMD/js/emojify.min.js"></script>
+<script type="text/javascript">
+$(function() {
+    var markdowns = document.getElementsByClassName("md_content");
+    $(markdowns).each(function(){
+        var markdown = $(this).children("#append-test").text();
+        //$('#md_content_'+i).text('');
+        var testEditormdView;
+        testEditormdView = editormd.markdownToHTML($(this).attr("id"), {
+            markdown: markdown,//+ "\r\n" + $("#append-test").text(),
+            toolbarAutoFixed : false,
+            htmlDecode: true,
+            emoji: true,
+            tex: true,
+            toc: true,
+            tocm: true,
+            taskList: true,
+            flowChart: true,
+            sequenceDiagram: true,
+        });
+    });
+    emojify.setConfig({
+        img_dir: 'https:' == document.location.protocol ? "https://staticfile.qnssl.com/emoji-cheat-sheet/1.0.0" : "http://cdn.staticfile.org/emoji-cheat-sheet/1.0.0",
+        blacklist: {
+            'ids': [],
+            'classes': ['no-emojify'],
+            'elements': ['^script$', '^textarea$', '^pre$', '^code$']
+        },
+    });
+    emojify.run();
+});
+</script>
+</body>
+</html>

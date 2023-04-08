@@ -1,0 +1,241 @@
+<!DOCTYPE HTML>
+<html class="no-js">
+
+<head>
+	  <meta charset="UTF-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="花开花落——Winke's个人博客">
+  <meta name="keywords" content="花开花落——Winke's个人博客,王珂,北方工业大学">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>Java面向对象基础学习笔记|Winke's blog</title>
+  <link rel="stylesheet" href="../../../../Public/static/amaze/css/amazeui.min.css">
+  <link rel="stylesheet" href="../../../../Public/Home/css/blog.css">
+<style>
+	.g-hd {
+    background-image: url("../../../../picture/bg.png");
+	}
+  .pic{
+  width: 28%;
+  /*height: 100px;*/
+  margin:5px;
+  }
+  .mpic{
+    margin: 10px auto;
+  }
+</style>
+
+<link rel="stylesheet" href="../../../../Public/static/ueditor/third-party/SyntaxHighlighter/shCoreDefault.css" type="text/css" />
+<style type="text/css">
+</style>	
+
+
+<!-- 页面header钩子，一般用于加载插件CSS文件和代码 -->
+
+	<!--<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?e9ff349d5b883760c70a4e220c9ac8ca";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>-->
+</head>
+<body>
+	<!-- 头部 -->
+	<div class="g-hd"></div>
+	<!-- /头部 -->
+	
+	<!-- 主体 -->
+	<div class="am-g box">
+<!-- am-show-lg-only -->
+<div class="">  
+  <div class="g-bd bd">
+    <div class="g-sd">
+			<div class="m-hdimg">
+				<a class="hdimg img" href="../../../../old_index.html">
+					<img src="../../../../picture/avater2.jpg" height="96" width="96">
+				</a>
+			</div>
+			<h1 class="m-ttl">
+				<a href="../../../../index.html">花开花落</a>
+			</h1>
+			<p class="m-about">深情不及久伴。</p>
+
+			<ul class="m-nav">
+				
+				<li>
+                            <a href="../../../Index/index.html" target="_self">首页</a>
+                        </li><li>
+                            <a href="http://www.zhangwenxuan.cn/" target="_blank">好基友</a>
+                        </li><li>
+                            <a href="http://blog.wozhendehaoaini.cn/" target="_blank">老博客</a>
+                        </li><li>
+                            <a href="66.html" target="_self">关于我</a>
+                        </li>				
+				<!-- Search 
+				<li class="m-sch">
+					<a id="j-lnksch" href="#">搜索</a>
+					<form id="j-schform" class="form" method="get" action="/search">
+						<input name="q" class="txt" placeholder="输入关键字" type="text">
+					</form>
+				</li>-->
+			</ul>
+			<ul class="m-nav">
+				
+				
+                    		<li>
+			<a href="../../lists/category/feeling.html">
+				<i class="icon-chevron-right"></i>随笔心情			</a>
+		</li>		<li>
+			<a href="../../lists/category/learnsth.html">
+				<i class="icon-chevron-right"></i>学习研究			</a>
+		</li>		<li>
+			<a href="../../lists/category/sizhou.html">
+				<i class="icon-chevron-right"></i>飞控研究			</a>
+		</li>		<li>
+			<a href="../../lists/category/Python.html">
+				<i class="icon-chevron-right"></i>Python			</a>
+		</li>		<li>
+			<a href="../../lists/category/wxmp.html">
+				<i class="icon-chevron-right"></i>微信平台			</a>
+		</li>				
+				<!-- Search 
+				<li class="m-sch">
+					<a id="j-lnksch" href="#">搜索</a>
+					<form id="j-schform" class="form" method="get" action="/search">
+						<input name="q" class="txt" placeholder="输入关键字" type="text">
+					</form>
+				</li>-->
+			</ul>
+		</div>
+
+        <div class="g-mn">
+            <div class="g-mnc box"> 
+                
+                <div class="m-postlst">
+                
+    <header class="jumbotron subhead" id="overview">
+		<div class="container">
+			<h2>Java面向对象基础学习笔记</h2>
+			
+		</div>
+	</header>
+
+                
+    <div class="span9 main-content">
+        <!-- Contents
+        ================================================== -->
+        <section id="contents"><p>构造函数和类名相同，不能有返回类型</p><p>可以带参数，重载。this();调用不带参数的构造函数。</p><p><br/></p><p>本地变量 成员变量</p><p><br/></p><p>private public 只能用于成员变量。私有针对于类 不针对于对象。同一个类可以相互访问私有成员。</p><p><br/></p><p>没有指定private或者public的为friendly，同一个包内的类类可以访问。</p><p><br/></p><p>一个源代码为一个编译单元。</p><p><br/></p><p>一个编译单元只能有一个public class，未指定的class只能在这个编译单元内被调用。</p><p><br/></p><p>不同包需要import，同一个包不需要。不import时，new的时候必须写包名.类名。</p><p>包内部可以再来个包。代表文件夹的层次。</p><p><br/></p><p>static修饰的成员 类变量 类变量改变时，同一个类的不同实例所对应的类变量也都改变，其实都是同一个类变量。</p><p>static修饰的函数 只属于这个类，类函数只可以访问类函数。</p><p><br/></p><p>容器类 管理者</p><p><br/></p><p>for-each循环对于数组和对象数组不同</p><p><br/></p><p>HashMap里面只能是对象不能是基本元素。用包裹类型。如何遍历？keySet</p><p><br/></p><p><br/></p><p>extend 扩展 -》继承</p><p><br/></p><p>super 子类调用父类的构造函数 super只能用一次，还必须首先执行（必须在构造函数的第一行）。</p><p>继承时 先是父类定义初始化，然后构造初始化，然后子类定义初始化，子类构造初始化。</p><p>子类通过super.method调用父类的方法。</p><p><br/></p><p>父类的private的成员在子类里仍然是存在的，只是子类中不能直接访问。我们不可以在子类中重新定义继承得到的成员的访问属性。如果我们试图重新定义一个在父类中已经存在的成员变量，那么我们是在定义一个与父类的成员变量完全无关的变量，在子类中我们可以访问这个定义在子类中的变量，在父类的方法中访问父类的那个。尽管它们同名但是互不影响。</p><p><br/></p><p>多态 声明类型 动态类型 声明类型为父类 把子类给父类声明出的变量为向上造型</p><p><br/></p><p>java不同与CPP，不能两个对象直接赋值，管理者的概念，为管理者更改管理的内容，而不是修改原有的内容。</p><p><br/></p><p>强制转换与造型不同，造型类型不变的。</p><p><br/></p><p>函数调用的绑定，静态绑定和动态绑定。默认所有的绑定都是动态绑定，前者根据变量的声明类型来决定，后者根据变量的动态类型来决定，在成员函数中调用其他成员函数通过this这个变量来调用，也属于动态绑定。</p><p><br/></p><p>覆盖 override，保证函数名，参数，返回值一致。</p><p><br/></p><p>单根结构 除了CPP</p><p>都集成自Object toString equals</p><p><br/></p><p>设计原则</p><p><br/></p><p>可扩展性 可维护性</p><p><br/></p><p>代码复制是设计不良的体现。</p><p><br/></p><p>对于类的设计来说，有两个核心术语：耦合和聚合。 耦合这个词指的是类和类之间的联系。程序设计的目标是一系列通 过定义明确的接口通信来协同工作的类。耦合度反映了这些类联系的紧密度。我们努力要获得 低的耦合度，或者叫作松耦合（loose coupling）。</p><p>耦合度决定修改应用程序的容易程度。在一个紧耦合的结构中，对一个类的修改也会导致 对其他一些类的修改。这是要努力避免的，否则，一点小小的改变就可能使整个应用程序发生 改变。另外，要想找到所有需要修改的地方，并一一加以修改，却是一件既困难又费时的事情。 另一方面，在一个松耦合的系统中，常常可以修改一个类，但同时不会修改其他类，而且 整个程序还可以正常运作。</p><p><br/></p><p>聚合与程序中一个单独的单元所承担的任务的数量和种类相对应有关，它是针对类或方法 这样大小的程序单元而言的理想情况下，一个代码单元应该负责一个聚合的任务（也就是说，一个任务可以被看作是 一个逻辑单元）。一个方法应该实现一个逻辑操作，而一个类应该代表一定类型的实体。聚合 理论背后的要点是重用：如果一个方法或类是只负责一件定义明确的事情，那么就很有可能在 另外不同的上下文环境中使用。遵循这个理论的一个额外的好处是，当程序某部分的代码需要 改变时，在某个代码单元中很可能会找到所有需要改变的相关代码段。</p><p><br/></p><p>拼接字符串如果用String会开销很大，用StringBuffer 进行 append 最后toString。</p><p><br/></p><p>用封装降低耦合。</p><p>用接口实现聚合。</p><p>用容器实现灵活性。</p><p><br/></p><p>从程序中识别出框架和数据，以代码实现框架，将部分功能以数据的方式加载，这样能在很大程度上实现可扩展性。</p><p><br/></p><p>abstract 抽象</p><p>与具体相对的抽象 与细节相对的抽象</p><p><br/></p><p>数据与表现分离&nbsp;</p><p><br/></p><p>只有CPP多继承，其他OOP语言一般都是单继承。</p><p><br/></p><p>interface</p><p>接口表达概念 规范</p><p>implements</p><p><br/></p><p>接口如何继承？</p><p><br/></p><p>面向接口的编程</p><p><br/></p><p>内部类</p><p>匿名类</p><p><br/></p><p>try catch 异常机制 printStackTrace</p><p><br/></p><p>当覆盖一个函数的时候，子类不能声明抛出比父类的版本多的异常。</p><p><br/></p><p>在子类的构造函数中，必须声明父类可能抛出的全部异常。</p><p><br/></p><p>参考：</p><p>【1】http://www.cnblogs.com/hellojava/archive/2013/02/27/2935450.html</p><p>【2】慕课网浙大翁恺老师的面向对象程序设计——Java语言</p></section>
+        <hr/>
+        <p>
+				<span  class="pull-left">
+					<span class="author">Winke</span>
+					<span> 发表于 2017-01-26 22:48</span>
+				</span>
+				<span class="pull-right">
+					<a href="234.html">上一篇</a>                    <a href="237.html">下一篇</a>				</span>
+			</p>
+		<hr/>
+            </div>
+ 
+                </div>
+                
+                
+                <!-- Pager -->
+                
+                
+                
+            </div>
+        </div>
+    </div>
+   </div>
+ </div>
+	<!-- /主体 -->
+
+	<!-- 底部 -->
+	
+    <!-- 底部
+    ================================================== -->
+    <footer class="footer">
+       <div class="g-ft">
+		   <p class="m-cprt">©&nbsp;<a href="../../../../index.html">花开花落</a>&nbsp;京ICP备15006955号-1&nbsp;|&nbsp;Powered by <a href="../../../../index.html">Winke</a></p> 
+	   </div>
+    </footer>
+
+    <div style="right: 119.5px;" class="amz-toolbar" id="amz-toolbar">
+    <a href="#top" title="回到顶部" class="am-icon-btn am-icon-arrow-up am-active" id="amz-go-top"></a>
+    </div>
+
+<script type="text/javascript">
+(function(){
+	var ThinkPHP = window.Think = {
+		"ROOT"   : "", //当前网站地址
+		"APP"    : "", //当前项目地址
+		"PUBLIC" : "/Public", //项目公共目录地址
+		"DEEP"   : "/", //PATHINFO分割符
+		"MODEL"  : ["2", "", "html"],
+		"VAR"    : ["m", "c", "a"]
+	}
+})();
+</script>
+<script src="../../../../Public/static/amaze/js/jquery.min.js"></script>
+<script src="../../../../Public/static/amaze/js/amazeui.min.js"></script>
+<script src="../../../../Public/Home/js/blog.js"></script>
+
+<script type="text/javascript" src="../../../../Public/static/ueditor/third-party/SyntaxHighlighter/shCore.js"></script>
+<script type="text/javascript"> SyntaxHighlighter.all(); </script>
+<script type="text/javascript">
+	$(function () { 
+  // Line wrap back 
+  var shLineWrap = function () { 
+    $('.syntaxhighlighter').each(function () { 
+      // Fetch 
+      var $sh = $(this), 
+        $gutter = $sh.find('td.gutter'), 
+        $code = $sh.find('td.code') 
+        ; 
+      // Cycle through lines 
+      $gutter.children('.line').each(function (i) { 
+        // Fetch 
+        var $gutterLine = $(this), 
+          $codeLine = $code.find('.line:nth-child(' + (i + 1) + ')') 
+          ; 
+        //alert($gutterLine); 
+        // Fetch height 
+        var height = $codeLine.height() || 0; 
+        if (!height) { 
+          height = 'auto'; 
+        } 
+        else { 
+          height = height += 'px'; 
+          //alert(height); 
+        } 
+        // Copy height over 
+        $gutterLine.attr('style', 'height: ' + height + ' !important'); // fix by Edi, for JQuery 1.7+ under Firefox 15.0 
+        console.debug($gutterLine.height(), height, $gutterLine.text(), $codeLine); 
+      }); 
+    }); 
+  }; 
+  // Line wrap back when syntax highlighter has done it's stuff 
+  var shLineWrapWhenReady = function () { 
+    if ($('.syntaxhighlighter').length === 0) { 
+      setTimeout(shLineWrapWhenReady, 10); 
+    } 
+    else { 
+      shLineWrap(); 
+    } 
+  }; 
+  // Fire 
+  shLineWrapWhenReady();});
+</script>	
+ <!-- 用于加载js代码 -->
+<!-- 页面footer钩子，一般用于加载插件JS文件和JS代码 -->
+<div class="hidden"><!-- 用于加载统计代码等隐藏元素 -->
+	
+</div>
+
+	<!-- /底部 -->
+</body>
+</html>

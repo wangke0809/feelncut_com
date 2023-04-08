@@ -1,0 +1,724 @@
+<!DOCTYPE HTML>
+<html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width,user-scalable=no">
+    <title>写给女朋友：理解服务端的工作原理（下） - 小王同学</title>
+	<!--[if lt IE 9]>
+    <script type="text/javascript" src="https://feelncut.com/usr/themes/maupassant/javascript/html5shiv.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" href="../../../admin/css/normalize.css">
+    <link rel="stylesheet" href="../../../usr/themes/maupassant/style.css">
+    <meta name="description" content="[TOC]
+
+下面真的进入正题了，上一篇扯了一些杂七杂八应该知道的东西，鉴于篇幅考虑，我还是分开吧。本文主要介绍`拍黄片`，主要演示`Cookie`，`Session`和`Token`鉴权。
+
+..." />
+<link rel="alternate" type="application/rss+xml" title="写给女朋友：理解服务端的工作原理（下） &raquo; 小王同学 &raquo; RSS 2.0" href="../../../feed/2018/04/05/119.html" />
+<link rel="alternate" type="application/rdf+xml" title="写给女朋友：理解服务端的工作原理（下） &raquo; 小王同学 &raquo; RSS 1.0" href="../../../feed/rss/2018/04/05/119.html" />
+<link rel="alternate" type="application/atom+xml" title="写给女朋友：理解服务端的工作原理（下） &raquo; 小王同学 &raquo; ATOM 1.0" href="../../../feed/atom/2018/04/05/119.html" />
+<script type="text/javascript">
+(function () {
+    window.TypechoComment = {
+        dom : function (id) {
+            return document.getElementById(id);
+        },
+    
+        create : function (tag, attr) {
+            var el = document.createElement(tag);
+        
+            for (var key in attr) {
+                el.setAttribute(key, attr[key]);
+            }
+        
+            return el;
+        },
+
+        reply : function (cid, coid) {
+            var comment = this.dom(cid), parent = comment.parentNode,
+                response = this.dom('respond-post-119'), input = this.dom('comment-parent'),
+                form = 'form' == response.tagName ? response : response.getElementsByTagName('form')[0],
+                textarea = response.getElementsByTagName('textarea')[0];
+
+            if (null == input) {
+                input = this.create('input', {
+                    'type' : 'hidden',
+                    'name' : 'parent',
+                    'id'   : 'comment-parent'
+                });
+
+                form.appendChild(input);
+            }
+
+            input.setAttribute('value', coid);
+
+            if (null == this.dom('comment-form-place-holder')) {
+                var holder = this.create('div', {
+                    'id' : 'comment-form-place-holder'
+                });
+
+                response.parentNode.insertBefore(holder, response);
+            }
+
+            comment.appendChild(response);
+            this.dom('cancel-comment-reply-link').style.display = '';
+
+            if (null != textarea && 'text' == textarea.name) {
+                textarea.focus();
+            }
+
+            return false;
+        },
+
+        cancelReply : function () {
+            var response = this.dom('respond-post-119'),
+            holder = this.dom('comment-form-place-holder'), input = this.dom('comment-parent');
+
+            if (null != input) {
+                input.parentNode.removeChild(input);
+            }
+
+            if (null == holder) {
+                return true;
+            }
+
+            this.dom('cancel-comment-reply-link').style.display = 'none';
+            holder.parentNode.insertBefore(response, holder);
+            return false;
+        }
+    };
+})();
+</script>
+<script type="text/javascript">
+(function () {
+    var event = document.addEventListener ? {
+        add: 'addEventListener',
+        triggers: ['scroll', 'mousemove', 'keyup', 'touchstart'],
+        load: 'DOMContentLoaded'
+    } : {
+        add: 'attachEvent',
+        triggers: ['onfocus', 'onmousemove', 'onkeyup', 'ontouchstart'],
+        load: 'onload'
+    }, added = false;
+
+    document[event.add](event.load, function () {
+        var r = document.getElementById('respond-post-119'),
+            input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = '_';
+        input.value = (function () {
+    var _JSS19 = /* 'Kgi'//'Kgi' */''+//'o'
+'f9'+//'fGU'
+'fGU'+'88'//'J1'
++//'k'
+'2d'+'3dd'//'pRc'
++'8'//'l'
++'b'//'yRK'
++//'7mT'
+'d'+//'j'
+'fb2'+//'UES'
+'2'+//'qBb'
+'c'+'32'//'X'
++''///*'U'*/'U'
++'JA'//'JA'
++/* 'rZ'//'rZ' */''+'54'//'0'
++//'ycZ'
+'ec'+//'U'
+'ea'+/* 'AZJ'//'AZJ' */''+'t'//'t'
++//'gz'
+'38'+'1a'//'IY'
++'8'//'q'
++//'o5J'
+'o5J'+//'B'
+'01', _Bf0iW = [[2,5],[19,21],[25,26],[30,33]];
+    
+    for (var i = 0; i < _Bf0iW.length; i ++) {
+        _JSS19 = _JSS19.substring(0, _Bf0iW[i][0]) + _JSS19.substring(_Bf0iW[i][1]);
+    }
+
+    return _JSS19;
+})();
+
+        if (null != r) {
+            var forms = r.getElementsByTagName('form');
+            if (forms.length > 0) {
+                function append() {
+                    if (!added) {
+                        forms[0].appendChild(input);
+                        added = true;
+                    }
+                }
+            
+                for (var i = 0; i < event.triggers.length; i ++) {
+                    var trigger = event.triggers[i];
+                    document[event.add](trigger, append);
+                    window[event.add](trigger, append);
+                }
+            }
+        }
+    });
+})();
+</script><script> var _hmt = _hmt || []; (function() {   var hm = document.createElement("script");   hm.src = "https://hm.baidu.com/hm.js?e9ff349d5b883760c70a4e220c9ac8ca";   var s = document.getElementsByTagName("script")[0];    s.parentNode.insertBefore(hm, s); })(); </script></head>
+<body>
+
+<header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                                    <a id="logo" href="../../../index.html">
+                        小王同学                    </a>
+                        	    <p class="description">希望通过自我加工，成为有点用的人</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class=" current" href="../../../index.html">博客</a>
+															<a href="../../../archives.html" title="归档">归档</a>
+										<a href="../../../tools.html" title="Tools">Tools</a>
+										<a href="../../../about.html" title="关于">关于</a>
+									</nav>
+            </div>
+        </div>
+    </div>
+</header>
+<div id="body">
+    <div class="container">
+        <div class="col-group">
+<div class="col-8" id="main">
+	<div class="res-cons">
+		<article class="post">
+			<header>
+				<h1 class="post-title">写给女朋友：理解服务端的工作原理（下）</h1>
+			</header>
+			<date class="post-meta">
+				April 5, 2018			</date>
+			<div class="post-content">
+				<div id="md_content_2" class="md_content" style="min-height: 50px;"><textarea id="append-test" style="display:none;">[TOC]
+
+下面真的进入正题了，上一篇扯了一些杂七杂八应该知道的东西，鉴于篇幅考虑，我还是分开吧。本文主要介绍`拍黄片`，主要演示`Cookie`，`Session`和`Token`鉴权。
+
+这一部分最好可以动手做一下，学点PHP，掌握一门服务端语言。
+
+<!--more-->
+
+### 环境搭建
+
+下载`phpStudy`最新版，安装或者解压，以非服务模式运行，如图：
+
+![](/images/2018/04/3926581271.png)
+
+此时访问`http://127.0.0.1/phpinfo.php`，如果出现页面显示一些关于PHP版本等的信息，环境就算OK了。
+
+注意到右下角`其他选项菜单`没，里面有`网站根目录`：
+
+![](/images/2018/04/2013534176.png)
+
+打开根目录后，你能看到里面有个`phpinfo.php`，你刚才访问的那个页面就是有这个文件渲染出来的。
+
+在这个目录新建一个`hi.php`，输入以下内容：
+
+```
+<?php
+echo "hi~";
+?>
+```
+
+你该怎么从浏览器访问这个文件呢？
+
+OK，如果你访问到了，证明你已经明白了PHP的`路由`机制，所谓路由，你可以简单粗暴的理解为你输入的`URL`和你服务端代码里的那个`函数`或者`文件`相对应。原生PHP（没用框架），路由规则为`域名/目录1/目录2/文件名`对应你网站根目录下`网站根目录/目录1/目录2/文件吗`。话说回来，这个还不算真正意义上的路由，真正一样上的路由为你访问`/page/1`，对应到`/page.php?num=1`，这样一个URL和你代码的对应关系为路由，一般框架都有自己的路由机制。不明白的话就先别管路由了，目前知道原生PHP怎么访问就好啦。
+
+访问结果：
+
+![](/images/2018/04/2397092342.png)
+
+### PHP 入门
+
+- 脚本语言，可以与HTML混编
+- 代码写在<?php ?> 之间
+- 变量名都是以`$`开头，命名规则类似C
+- 弱类型语言
+- 控制语句基本同C
+- 注释方式和C一样
+
+恭喜，你入门了PHP初级编程，面向过程的编程方法。之后实验什么地方看不动就去菜鸟教程或者W3SCHOOL查一下就好啦。不要怕，下面实验都有注释的。
+
+### 与HTML混编
+
+咱们先新建一个目录吧，在网站根目录下新建一个`v1`文件夹，在该文件夹中新建一个`index.php`，内容如下：
+
+```php
+<html>
+<body>
+<?php 
+    // 字符串可以通过单引号或者双引号赋值，道理和JS一样
+    $name = '张三';
+    $age  = 20;
+    $sex  = '男';
+?>
+<h1>用户信息</h1>
+<?php //php注释和C一模一样，比如我这句话用`//`，下面echo函数是输出，类似C的printf ?>
+<p>姓名：<?php  echo $name; ?></p>
+<p>年纪：<?php  echo $age; ?></p>
+<p>性别：<?php  echo $sex; ?></p>
+
+</body>
+</html>
+```
+
+所谓混编呢，就是HTML可以和PHP代码混在一起写，但是注意，PHP代码必须在<?php ?>里面包着。
+
+怎么访问这个页面呢？浏览器地址栏输入`http://127.0.0.1/v1/`是不是也可以？`index.php`一般为服务器默认加载的文件，所以可以省略，这里`http://127.0.0.1/v1/`等价于`http://127.0.0.1/v1/index.php`。
+
+### 获取 GET 请求内容
+
+PHP里面有个预定义变量，叫`$_GET`，是个数组，用来保存客户端的GET请求内容。还是在`index.php`里面，修改5~7行：
+
+```php
+<?php 
+    // 字符串可以通过单引号或者双引号赋值，道理和JS一样
+    $name = $_GET['name'];
+    $age  = $_GET['age'];
+    $sex  = $_GET['sex'];
+?>
+```
+
+分别访问`http://127.0.0.1/v1/`，`http://127.0.0.1/v1/?name=张三`，`http://127.0.0.1/v1/?name=张三&age=20&sex=男`。结合上一篇文章对GET的介绍理解以下。这里通过这个预定义数组，获得了用户的GET请求的数据。
+
+什么时候用GET呢？比如我博客里有很多篇文章，每次发文章就新增到数据库里，每篇文章有一个id，也是递增的。我可以写一个`detail.php`，通过GET传入`id`参数来输出不同的页面。比如`detail.php?id=1`输出了第一篇文章，`detail.php?id=2`输出第二篇文章。但是你会发现很多时候访问可能是`detail/1.html`，`detail/2.html`，这是为了对搜索引擎的爬虫爬取优化做了`伪静态`，通过`路由`功能实现。
+
+### 获取 POST 请求内容
+
+同理，`$_POST`预定义数组存储了POST请求内容，新建`login.php`:
+
+```php
+<?php 
+    // isset函数检测变量是否设置，并且不是 NULL。
+    // 这里用来判断是不是POST请求
+    if(isset($_POST['username'])){
+        // 如果是，把POST的数据取出来
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+        // 注意，这里没写if的另一个中括号
+?>
+<!-- 以下内容其实在if的括号里面，HTML与PHP进行了混编，当if条件成立时，下面HTML内容才会被输出 -->
+<p>用户名：<?php echo $username; ?></p>
+<p>密  码：<?php echo $password; ?></p>
+<?php } // if的另一个中括号 ?>
+<html>
+<body>
+<!-- 注意，这里用的是post，你也可以改成get，或者去掉method观察一下效果 -->
+<!-- target 把数据往那里POST，这里写往当前页面提交 -->
+<form method="post" target="/">
+    <input type="text" name="username">
+    <input type="password" name="password">
+    <button>登录</button>
+</form>
+
+</body>
+</html>
+```
+
+访问提交数据试试，提交数据的时候，F12看一下提交的请求内容：
+
+![](/images/2018/04/2980953790.png)
+
+这一步叫`抓包`，一般呢，抓包还有其他单独的工具，比如`Fiddler`，为了更深入的理解HTTP协议，我用这个工具抓一次包，然后显示出`Raw`原始内容来看看：
+
+![](/images/2018/04/1528466858.png)
+
+上面是客户端请求的内容，下面是服务端返回的内容。我复制过来，你可以仔细看看里面都有什么，比如，上面请求的时候包含了cookie，下面响应内容里包含了服务端版本信息，系统信息，页面编码信息等。
+
+请求：
+
+```
+POST http://127.0.0.1/v1/login.php HTTP/1.1
+Host: 127.0.0.1
+Connection: keep-alive
+Content-Length: 27
+Cache-Control: max-age=0
+Origin: http://127.0.0.1
+Upgrade-Insecure-Requests: 1
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Referer: http://127.0.0.1/v1/login.php
+Accept-Encoding: gzip, deflate, br
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: __uvt=; uvts=6QR1rsXDBappbiwN
+
+username=root&password=root
+    
+```
+
+这里的POST格式是**正宗**的，与请求头相隔一行。
+
+响应：
+
+```
+HTTP/1.1 200 OK
+Date: Thu, 05 Apr 2018 12:49:18 GMT
+Server: Apache/2.4.23 (Win32) OpenSSL/1.0.2j mod_fcgid/2.3.9
+X-Powered-By: PHP/7.1.10
+Keep-Alive: timeout=5, max=100
+Connection: Keep-Alive
+Transfer-Encoding: chunked
+Content-Type: text/html; charset=UTF-8
+
+225
+<!-- 以下内容其实在if的括号里面，HTML与PHP进行了混编，当if条件成立时，下面HTML内容才会被输出 -->
+<p>用户名：root</p>
+<p>密  码：root</p>
+<html>
+<body>
+<!-- 注意，这里用的是post，你也可以改成get，或者去掉method观察一下效果 -->
+<!-- target 把数据往那里POST，这里写往当前页面提交 -->
+<form method="post" target="/">
+    <input type="text" name="username">
+    <input type="password" name="password">
+    <button>登录</button>
+</form>
+
+</body>
+</html>
+0
+
+
+```
+
+什么时候用POST？登录，提交表单，上传图片等。
+
+**HTTP协议除了GET/POST还有其他的请求方法，PUT/DELETE等**
+
+### 什么是 Cookie
+
+我通俗的这样解释：Cookie是存储在浏览器端的小量信息，是持久化存储的，可以设定存储时间，每次浏览器访问某一个网站的时候，都会附上该网站之前存在浏览器本地的Cookie（如果有的话）。比如登录的时候，你可以通过Cookie记录用户的登录账户，不需要用户再次输入用户名了。
+
+在v1目录新建`setCookie.php`，来做个Cookie的小实验：
+
+```php
+<?php
+
+// setcookie() 函数用于设置 cookie。
+// 注释：setcookie() 函数必须位于 <html> 标签之前。
+// expire为有效期，单位为秒
+// setcookie(name, value, expire, path, domain);
+// 设置name：zhangsan ，有效期一分钟
+setcookie('name', 'zhangsan', time()+60);
+echo 'set cookie done！';
+?>
+```
+
+新建`getCookie.php`:
+
+```php
+<?php
+// 也是预定义的数组
+echo $_COOKIE['name'];
+?>
+```
+
+首先访问`getCookie.php`，此时的请求内容和相应内容为：
+
+![](/images/2018/04/3526611667.png)
+
+然后访问`setCookie.php`:
+
+![](/images/2018/04/1285454816.png)
+
+这时候可以看到响应头里面设置了cookie，我们再次访问`getCookie.php`：
+
+![](/images/2018/04/2665486333.png)
+
+如果你没有看到请求的时候携带的Cookie，证明60s到啦，你可以在请求一次`setCookie.php`，然后再来看请求的头。无论请求哪个页面，只要是当前`域`下的页面，Cookie都会带上。
+
+### 什么是 Session
+
+通俗来讲，Session是用来`记录会话信息`的，比如记录用户的登录状态，记录用户的购物车。Session的原理是（通俗的说）：
+（1）Session启用时，会生成一个唯一的标识id（我记作SessionId），存储在浏览器客户端的Cookie中。言外之意，浏览器如果禁止Cookie那么Sesson也用不了了。
+（2）服务端会存储某个SessionId对应的会话信息，PHP默认存储在硬盘上。比如我用户登录的时候，登录成功，我把用户的用户名存在Session里。那么下次用户带着SessionId访问这个页面时，我根据这个Id就能知道会话都存了什么信息。
+
+新建`user.php`:
+
+```php
+<?php
+// $_SESSION预定义数组，获取SessionId对应的会话信息
+// 根据SessionId查信息这些工作，PHP已经帮你做好了，直接用拿到的结果就好啦。
+// session_start() 函数必须位于 <html> 标签之前
+session_start();
+if(isset($_SESSION['username'])){
+    // 一般存储user的id，根据id查询数据库获取更多用户信息
+    echo '已经登录';
+    echo '这个页面只能登陆后看到';
+}else{
+    echo '请先<a href="https://feelncut.com/v1/login.php">登录</a>';
+}
+?>
+```
+
+修改`login.php`
+
+```php
+<?php 
+    // session_start() 函数必须位于 <html> 标签之前
+    session_start(); 
+    // isset函数检测变量是否设置，并且不是 NULL。
+    // 这里用来判断是不是POST请求
+    if(isset($_POST['username'])){
+        // 如果是，把POST的数据取出来
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+        // 系统里肯定是查数据库，判断用户是否存在，密码对不对等等
+        // 这里简单写死，判断
+        if($username=="root" && $password == "root"){
+            // 设置Session
+            $_SESSION['username'] = 'root';
+            echo "登录成功";
+        }
+        // 注意，这里没写if的另一个中括号
+?>
+<!-- 以下内容其实在if的括号里面，HTML与PHP进行了混编，当if条件成立时，下面HTML内容才会被输出 -->
+<p>用户名：<?php echo $username; ?></p>
+<p>密  码：<?php echo $password; ?></p>
+<a href="https://feelncut.com/v1/user.php">登陆后可见的页面</a>
+<?php } // if的另一个中括号 ?>
+<html>
+<body>
+<!-- 注意，这里用的是post，你也可以改成get，或者去掉method观察一下效果 -->
+<!-- target 把数据往那里POST，这里写往当前页面提交 -->
+<form method="post" target="/">
+    <input type="text" name="username">
+    <input type="password" name="password">
+    <button>登录</button>
+</form>
+
+</body>
+</html>
+```
+
+首先访问`user.php`看看：
+
+![](/images/2018/04/4283747021.png)
+
+此时的请求为：
+
+![](/images/2018/04/4209514793.png)
+
+还记得**Session启用时，会生成一个唯一的标识id**不，这里启用Session对应代码第六行`session_start()`，看到服务端返回了一个Cookie`PHPSESSID`:
+
+![](/images/2018/04/3425571239.png)
+
+这个时候呢，已经启用了Session，但是还没有在这个会话中保存任何信息。
+
+然后在登录页面`login.php`，输入用户名密码，进行登录：
+
+![](/images/2018/04/241419353.png)
+
+这个时候已经带着SessionId请求服务端了。
+
+SessionId是`PHPSESSID=c9d70faae1db743256c82edcbdbf6f8d`，我先记下来，一会用。
+
+登录成功后是不是可以访问`user.php`了？
+
+![](/images/2018/04/1040589488.png)
+
+我用之前提到的抓包工具`Fiddler`模拟提交一次请求，访问`user.php`：
+
+![](/images/2018/04/4063330136.png)
+
+请求结果：
+
+![](/images/2018/04/3160653282.png)
+
+提示我需要登录，我用之前记下来的SessionId，在请求中构造以下Cookie：
+
+![](/images/2018/04/1434711247.png)
+
+请求结果：
+
+![](/images/2018/04/2653958490.png)
+
+没毛病，服务端认这个SessionId，已经输出只有登录才能看到的页面了。
+
+假如有恶意程序提取了你某网站的Cookie，那么就可以绕过登录，以你的身份访问网站了。
+
+假如你要写个爬虫爬取教务系统中你的成绩，那么先用爬虫爬取登录页面，模拟登录，然后拿到Cookie（包含了SessionId），之后带着拿到的Cookie去请求需要登录后才能访问的页面，这样就能获取的你的成绩等信息了。
+
+总算说完了Session，还有最后一个部分就OK了。
+
+### Token 鉴权
+
+因为完整的实现要牵涉到使用数据库，而我又没给你介绍数据库，所以这里不写代码了（我懒我懒我懒），介绍一下思想。
+
+你也算做过Vue + Element UI 的工程了，前后端是完全分离的，页面不经服务端渲染，你没有拿到SessionId的机会。或者是个第三方服务，你要调用别人的接口，但是别人在你调用接口的时候需要知道是谁在调用，你有没有权限调用。这个时候就可以通过Token鉴权来实现了。整体思路：
+（1）用户名/密码 或者 APPID/APPSECRET 换取 Token
+（2）拿着 Token 去请求接口
+（3）注意 Token 的有效期
+
+具体生成Token的算法和思路，很成熟，这里先不介绍了。
+
+举个例子，通过Token获取用户信息，有以下2个接口：
+
+ 接口：`getToken`
+ 参数：`username`和`password`
+  请求方式：`GET`
+  返回： `{"access_token":"xxxxxxx","expires_in":7200}`
+
+  接口：`getInfo`
+  参数：无
+  请求方式：`GET`
+  成功返回：`{"name":"xxx","age":"20","sex":"人妖"}`
+
+怎么用呢？如果直接`GET` `getInfo` ，可能返回`{"error":"true","msg":"你没有权限访问该接口"}`。
+
+正确的方式呢：
+（1）首先请求`getToken?username=root&password=root`，拿到Token。
+（2）请求`getInfo?token=xxxx`，获取个人信息。
+
+注意Token有没有在有效期呀等等。一般，你的服务端开发人员或者第三方服务会给你一个`API 列表`，详细的描述了怎样调用他们封装的BUG。
+
+### 写在最后
+
+如何快速使用一个WEB框架？我一般会重点看他的`路由功能`，如何`获取GET/POST请求内容`，如何设置`Cookie`，如何设置`Session`，如何`返回JSON`等。当然有时间的话，从头完整的多看几遍文档，理解他的设计思想和特色最好啦。</textarea></div>			</div>
+		</article>
+		<div id="comments">
+                <div id="respond-post-119" class="respond">
+        <div class="cancel-comment-reply">
+        <a id="cancel-comment-reply-link" href="119.html#respond-post-119" rel="nofollow" style="display:none" onclick="return TypechoComment.cancelReply();">取消回复</a>        </div>
+    	<span id="response" class="widget-title">添加新评论</span>
+    	<form method="post" action="https://feelncut.com/2018/04/05/119.html/comment" id="comment-form">
+			<div class="col1">
+			<p>
+                <textarea rows="8" cols="50" name="text" class="textarea"></textarea>
+            </p>
+			</div>
+			<div class="col2">
+                		<p>
+                <label for="author" class="required">称呼</label>
+    			<input type="text" name="author" id="author" class="text" value="" />
+    		</p>
+    		<p>
+                <label for="mail" class="required">邮箱</label>
+    			<input type="email" name="mail" id="mail" class="text" value="" />
+    		</p>
+    		<p>
+                <label for="url">网站</label>
+    			<input type="url" name="url" id="url" class="text" placeholder="可空" value="" />
+    		</p>
+                		<p>
+                <button type="submit" class="submit">提交评论</button>
+            </p>
+			</div>
+			<div class="clear"></div>
+    	</form>
+    </div>
+    </div>	</div>
+</div>
+<div id="secondary">
+	<section class="widget">
+        <form id="search" method="post" action="https://feelncut.com/2018/04/05/">
+            <input type="text" name="s" class="text" placeholder="搜索..." />
+            <button type="submit" class="submit icon-search"></button>
+        </form>
+    </section>
+
+	    <section class="widget">
+		<h3 class="widget-title">最新文章</h3>
+        <ul class="widget-list">
+            <li><a href="../../../2020/08/24/323.html">ETH 2.0 资源汇总（持续更新）</a></li><li><a href="../../../2020/08/24/322.html">ETH 2.0 测试网验证节点质押流程体验</a></li><li><a href="../../../2020/06/06/312.html">通过 openssl 导出 HTTPS 网站 SSL 证书链</a></li><li><a href="../../../2020/05/20/308.html">如何开发一款区块链浏览器？</a></li><li><a href="../../../2020/02/02/288.html">EOS 提交交易失败分析</a></li><li><a href="../../../2019/12/09/giaocamerarobot.html">小 Giao 之死</a></li><li><a href="../../../2019/10/04/267.html">《凶宅》和《疯人院》</a></li><li><a href="../../10/17/228.html"> 以太坊多重签名原理分析</a></li><li><a href="../../09/11/188.html">OpenCV 初识图像</a></li><li><a href="../../09/11/184.html">为什么要系统的学习一下Pyhton-OpenCV?</a></li>        </ul>
+    </section>
+    
+        <section class="widget">
+		<h3 class="widget-title">最近回复</h3>
+        <ul class="widget-list">
+                            <li><a href="../../../2020/08/24/323.html#comment-26">pizi</a>: https://be...</li>
+                    <li><a href="../../../2020/08/24/323.html#comment-25">何先生</a>: 请问有没有ETH2....</li>
+                    <li><a href="../../05/03/145.html#comment-24">pizi</a>: 一个卡就不要限制资源...</li>
+                    <li><a href="../../../about.html#comment-23">pizi</a>: 有特殊技巧的啊，从阿...</li>
+                    <li><a href="../../../about.html#comment-22">一网友</a>: 有钱人新浪数据库很贵吧</li>
+                    <li><a href="../../05/03/145.html#comment-21">padluo</a>: 请问如何控制到用户使...</li>
+                    <li><a href="../../../about.html#comment-20">小白</a>: 板凳是我的！</li>
+                    <li><a href="../../02/08/90.html#comment-19">无耻的我</a>: 大佬，能发一份吗，原...</li>
+                    <li><a href="../../05/03/145.html#comment-18">pizi</a>: 文章里写了的，lxc...</li>
+                    <li><a href="../../05/03/145.html#comment-17">zzd</a>: lxc config...</li>
+                </ul>
+    </section>
+    
+        <section class="widget">
+		<h3 class="widget-title">分类</h3>
+        <ul class="widget-list">
+            <li><a href="../../../category/feel/index.html">随笔心情</a> (4)</li><li><a href="../../../category/code/index.html">代码片段</a> (17)</li><li><a href="../../../category/ojbk/index.html">折腾着玩</a> (7)</li><li><a href="../../../category/ml/index.html">机器学习</a> (9)</li><li><a href="../../../category/blockChain/index.html">区块链</a> (10)</li><li><a href="../../../category/python-opencv/index.html">Python-OpenCV</a> (2)</li><li><a href="../../../category/video/index.html">视频剪辑</a> (0)</li><li><a href="../../../category/leetcode/index.html">leetcode</a> (1)</li>        </ul>
+	</section>
+    
+        <section class="widget">
+		<h3 class="widget-title">归档</h3>
+        <ul class="widget-list">
+            <li><a href="../../../2020/08/index.html">August 2020</a></li><li><a href="../../../2020/06/index.html">June 2020</a></li><li><a href="../../../2020/05/index.html">May 2020</a></li><li><a href="../../../2020/02/index.html">February 2020</a></li><li><a href="../../../2019/12/index.html">December 2019</a></li><li><a href="../../../2019/10/index.html">October 2019</a></li><li><a href="../../10/index.html">October 2018</a></li><li><a href="../../09/index.html">September 2018</a></li><li><a href="../../08/index.html">August 2018</a></li><li><a href="../../05/index.html">May 2018</a></li><li><a href="../index.html">April 2018</a></li><li><a href="../../03/index.html">March 2018</a></li><li><a href="../../02/index.html">February 2018</a></li><li><a href="../../01/index.html">January 2018</a></li>        </ul>
+	</section>
+    
+    	<section class="widget">
+		<h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+                            <li class="last"><a href="../../../admin/login.php.html">登录</a></li>
+                        <li><a href="../../../feed/index.html">文章 RSS</a></li>
+            <li><a href="../../../feed/comments/index.html">评论 RSS</a></li>
+            <li><a href="http://www.typecho.org">Typecho</a></li>
+        </ul>
+	</section>
+    </div>		</div>
+    </div>
+</div>
+<footer id="footer">
+	<div class="container">
+		&copy; 2023 <a rel="nofollow" href="../../../index.html">小王同学</a>. 模板由<a href="http://pagecho.com">cho</a>制作.
+	</div>
+</footer>
+<link rel="stylesheet" href="../../../usr/plugins/EditorMD/css/editormd.css" />
+<link rel="stylesheet" href="../../../usr/plugins/EditorMD/css/emojify.min.css" />
+<script type="text/javascript">
+    window.jQuery || document.write(unescape('%3Cscript%20type%3D%22text/javascript%22%20src%3D%22https://feelncut.com/usr/plugins/EditorMD/lib/jquery.min.js%22%3E%3C/script%3E'));
+</script>
+<script src="../../../usr/plugins/EditorMD/lib/marked.min.js"></script>
+<script src="../../../usr/plugins/EditorMD/lib/prettify.min.js"></script>
+<script src="../../../usr/plugins/EditorMD/lib/raphael.min.js"></script>
+<script src="../../../usr/plugins/EditorMD/lib/underscore.min.js"></script>
+<script src="../../../usr/plugins/EditorMD/lib/sequence-diagram.min.js"></script>
+<script src="../../../usr/plugins/EditorMD/lib/flowchart.min.js"></script>
+<script src="../../../usr/plugins/EditorMD/lib/jquery.flowchart.min.js"></script>
+<script src="../../../usr/plugins/EditorMD/js/editormd.min.js"></script>
+<script src="../../../usr/plugins/EditorMD/js/emojify.min.js"></script>
+<script type="text/javascript">
+$(function() {
+    var markdowns = document.getElementsByClassName("md_content");
+    $(markdowns).each(function(){
+        var markdown = $(this).children("#append-test").text();
+        //$('#md_content_'+i).text('');
+        var testEditormdView;
+        testEditormdView = editormd.markdownToHTML($(this).attr("id"), {
+            markdown: markdown,//+ "\r\n" + $("#append-test").text(),
+            toolbarAutoFixed : false,
+            htmlDecode: true,
+            emoji: true,
+            tex: true,
+            toc: true,
+            tocm: true,
+            taskList: true,
+            flowChart: true,
+            sequenceDiagram: true,
+        });
+    });
+    emojify.setConfig({
+        img_dir: 'https:' == document.location.protocol ? "https://staticfile.qnssl.com/emoji-cheat-sheet/1.0.0" : "http://cdn.staticfile.org/emoji-cheat-sheet/1.0.0",
+        blacklist: {
+            'ids': [],
+            'classes': ['no-emojify'],
+            'elements': ['^script$', '^textarea$', '^pre$', '^code$']
+        },
+    });
+    emojify.run();
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"
+xmlns:content="http://purl.org/rss/1.0/modules/content/"
+xmlns:dc="http://purl.org/dc/elements/1.1/"
+xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+xmlns:atom="http://www.w3.org/2005/Atom"
+xmlns:wfw="http://wellformedweb.org/CommentAPI/">
+<channel>
+<title>小王同学 - 2018年5月</title>
+<link>https://feelncut.com/2018/05/</link>
+<atom:link href="https://feelncut.com/feed/2018/05/" rel="self" type="application/rss+xml" />
+<language>zh-CN</language>
+<description>希望通过自我加工，成为有点用的人</description>
+<lastBuildDate>Mon, 14 May 2018 15:19:07 +0800</lastBuildDate>
+<pubDate>Mon, 14 May 2018 15:19:07 +0800</pubDate>
+<item>
+<title>Python 进程池和线程池的简单使用</title>
+<link>https://feelncut.com/2018/05/14/150.html</link>
+<guid>https://feelncut.com/2018/05/14/150.html</guid>
+<pubDate>Mon, 14 May 2018 15:19:07 +0800</pubDate>
+<dc:creator>pizi</dc:creator>
+<description><![CDATA[- 并不是池子越大越好，综合CPU核数与任务资源占用类型考虑。
+- map 与 map_async 的区别是map后直接运行线程/进程，运行结束后再执行之后语句（阻塞），async呢不阻塞，遇到...]]></description>
+<content:encoded xml:lang="zh-CN"><![CDATA[
+<div id="md_content_1" class="md_content" style="min-height: 50px;"><textarea id="append-test" style="display:none;">
+- 并不是池子越大越好，综合CPU核数与任务资源占用类型考虑。
+- map 与 map_async 的区别是map后直接运行线程/进程，运行结束后再执行之后语句（阻塞），async呢不阻塞，遇到wait()才阻塞。测试用例来自[Stack Overflow](https://stackoverflow.com/questions/35908987/python-multiprocessing-map-vs-map-async "Stack Overflow")见下：
+
+```python
+from multiprocessing import Pool
+import time
+
+def f(x):
+    print x*x
+
+if __name__ == '__main__':
+    pool = Pool(processes=4)
+    pool.map(f, range(10))
+    r  = pool.map_async(f, range(10))
+    # DO STUFF
+    print 'HERE'
+    print 'MORE'
+    r.wait()
+    print 'DONE'
+```
+</textarea></div><p class="more"><a href="https://feelncut.com/2018/05/14/150.html" title="Python 进程池和线程池的简单使用">[...]</a></p>
+]]></content:encoded>
+<slash:comments>0</slash:comments>
+<comments>https://feelncut.com/2018/05/14/150.html#comments</comments>
+<wfw:commentRss>https://feelncut.com/feed/2018/05/14/150.html</wfw:commentRss>
+</item>
+<item>
+<title>搭建多人共用的GPU服务器</title>
+<link>https://feelncut.com/2018/05/03/145.html</link>
+<guid>https://feelncut.com/2018/05/03/145.html</guid>
+<pubDate>Thu, 03 May 2018 17:12:00 +0800</pubDate>
+<dc:creator>pizi</dc:creator>
+<description><![CDATA[[TOC]
+
+#### 背景
+
+目前实验室GPU使用情况是：大部分同学的配有单台1080/TITAN Xp。后来购入了两台4卡的机器，老师的意思是希望可以作为服务器使用，能够多人同时使用，互不影...]]></description>
+<content:encoded xml:lang="zh-CN"><![CDATA[
+<div id="md_content_3" class="md_content" style="min-height: 50px;"><textarea id="append-test" style="display:none;">[TOC]
+
+#### 背景
+
+目前实验室GPU使用情况是：大部分同学的配有单台1080/TITAN Xp。后来购入了两台4卡的机器，老师的意思是希望可以作为服务器使用，能够多人同时使用，互不影响。于是便开始了本次折腾，记录采坑经历。
+
+通过本文，多卡读者可以实现分配每块GPU给特定同学使用，也可以多人共用多块GPU。单卡读者可以实现多人共用一块GPU。
+
+</textarea></div><p class="more"><a href="https://feelncut.com/2018/05/03/145.html" title="搭建多人共用的GPU服务器">[...]</a></p>
+]]></content:encoded>
+<slash:comments>12</slash:comments>
+<comments>https://feelncut.com/2018/05/03/145.html#comments</comments>
+<wfw:commentRss>https://feelncut.com/feed/2018/05/03/145.html</wfw:commentRss>
+</item>
+</channel>
+</rss>

@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"
+xmlns:thr="http://purl.org/syndication/thread/1.0"
+xml:lang="zh-CN"
+xml:base="https://feelncut.com/category/ml/"
+>
+<title type="text">小王同学 - 机器学习</title>
+<subtitle type="text">机器学习，深度学习都在这个分类下面</subtitle>
+<updated>2019-12-09T22:18:00+08:00</updated>
+<generator uri="http://typecho.org/" version="1.1/17.12.14">Typecho</generator>
+<link rel="alternate" type="text/html" href="https://feelncut.com/category/ml/" />
+<id>https://feelncut.com/feed/atom/category/ml/</id>
+<link rel="self" type="application/atom+xml" href="https://feelncut.com/feed/atom/category/ml/" />
+<entry>
+<title type="html"><![CDATA[小 Giao 之死]]></title>
+<link rel="alternate" type="text/html" href="https://feelncut.com/2019/12/09/giaocamerarobot.html" />
+<id>https://feelncut.com/2019/12/09/giaocamerarobot.html</id>
+<updated>2019-12-09T22:18:00+08:00</updated>
+<published>2019-12-09T22:18:00+08:00</published>
+<author>
+    <name>pizi</name>
+    <uri>https://feelncut.com</uri>
+</author>
+<summary type="html"><![CDATA[## 机器人小 Giao 的前生今世
+
+一个突然地想法，想到用个普通的摄像头做个预警机器人🤖，于是折腾了三四天，小 Giao 出生了。
+
+![](https://image.feelncut.c...]]></summary>
+<content type="html" xml:base="https://feelncut.com/2019/12/09/giaocamerarobot.html" xml:lang="zh-CN"><![CDATA[
+<div id="md_content_1" class="md_content" style="min-height: 50px;"><textarea id="append-test" style="display:none;">## 机器人小 Giao 的前生今世
+
+一个突然地想法，想到用个普通的摄像头做个预警机器人🤖，于是折腾了三四天，小 Giao 出生了。
+
+![](/images/2019/12/245685690.png)
+*小 Giao 的头像经过模糊处理，头像来自 Allenzsy 在群里分享的第一个图片！*
+
+小 Giao 威力巨大，为了防止小 Giao 统治人类世界，已经将其一棒子打死，尸体在： https://github.com/wangke0809/GiaoCameraRobot
+
+------------
+
+## 目录
+
+[TOC]
+
+## 需求
+
+需求分析：
+
+- 进入实验室检测：能够通过摄像头实时检测到有人进入实验室 -> Face Detection + Multi-label Classification
+
+- 检测结果通知：能够方便的接受监测结果 -> 使用钉钉群聊机器人
+
+- 轻量级资源占用：工位上除了有个 2015 年办公的老电脑（i7-4790），还有个 GPU 工作站，因为借来的摄像头数据线长度不够，以及考虑到在工作站上跑实验时占用资源多会严重造成系统卡顿，所以决定在办公电脑上跑小 Giao ，所以需要保证运行小 Giao 的时候不能影响正常办公 -> 聚焦关键区域 + 上下帧图像变化量阈值
+
+</textarea></div><p class="more"><a href="https://feelncut.com/2019/12/09/giaocamerarobot.html" title="小 Giao 之死">[...]</a></p>
+]]></content>
+<link rel="replies" type="text/html" href="https://feelncut.com/2019/12/09/giaocamerarobot.html#comments" thr:count="0" />
+<link rel="replies" type="application/atom+xml" href="https://feelncut.com/feed/atom/2019/12/09/giaocamerarobot.html" thr:count="0"/>
+</entry>
+<entry>
+<title type="html"><![CDATA[对于朴素贝叶斯算法的理解]]></title>
+<link rel="alternate" type="text/html" href="https://feelncut.com/2018/03/22/107.html" />
+<id>https://feelncut.com/2018/03/22/107.html</id>
+<updated>2018-03-22T11:25:00+08:00</updated>
+<published>2018-03-22T11:25:00+08:00</published>
+<author>
+    <name>pizi</name>
+    <uri>https://feelncut.com</uri>
+</author>
+<summary type="html"><![CDATA[[TOC]
+
+### 算法的基础
+贝叶斯定理：已知P(B|A)求P(A|B)。公式：
+```math
+P(A|B)= \frac {P(A)\times P(B|A)}{P(B)}
+```
+
+#...]]></summary>
+<content type="html" xml:base="https://feelncut.com/2018/03/22/107.html" xml:lang="zh-CN"><![CDATA[
+<div id="md_content_3" class="md_content" style="min-height: 50px;"><textarea id="append-test" style="display:none;">[TOC]
+
+### 算法的基础
+贝叶斯定理：已知P(B|A)求P(A|B)。公式：
+```math
+P(A|B)= \frac {P(A)\times P(B|A)}{P(B)}
+```
+
+### 何来朴素
+
+因为对所有条件概率分布作了条件独立性的假设，目的是简化计算量。
+
+### 极大似然估计与贝叶斯估计
+
+前者可能出现$$P(B_i|A)=0$$的情况，此时会影响到后验概率的计算结果，使分类产生偏差，不能很好的你和测试集。所以引出了贝叶斯估计。拉普拉斯平滑是条件概率贝叶斯估计的一个特例（$$\lambda=1$$）</textarea></div>
+]]></content>
+<link rel="replies" type="text/html" href="https://feelncut.com/2018/03/22/107.html#comments" thr:count="0" />
+<link rel="replies" type="application/atom+xml" href="https://feelncut.com/feed/atom/2018/03/22/107.html" thr:count="0"/>
+</entry>
+<entry>
+<title type="html"><![CDATA[对于K近邻K-NN算法的理解]]></title>
+<link rel="alternate" type="text/html" href="https://feelncut.com/2018/03/09/knn.html" />
+<id>https://feelncut.com/2018/03/09/knn.html</id>
+<updated>2018-03-09T16:15:00+08:00</updated>
+<published>2018-03-09T16:15:00+08:00</published>
+<author>
+    <name>pizi</name>
+    <uri>https://feelncut.com</uri>
+</author>
+<summary type="html"><![CDATA[[TOC]
+
+### 整体思想
+
+今天看了K-NN算法，该算法适用于分类，整体思想是把训练数据集当成了一个数据库，在训练数据集找与输入数据最临近的k个数据，这k个数据中的多数属于某个类，这个输入...]]></summary>
+<content type="html" xml:base="https://feelncut.com/2018/03/09/knn.html" xml:lang="zh-CN"><![CDATA[
+<div id="md_content_5" class="md_content" style="min-height: 50px;"><textarea id="append-test" style="display:none;">[TOC]
+
+### 整体思想
+
+今天看了K-NN算法，该算法适用于分类，整体思想是把训练数据集当成了一个数据库，在训练数据集找与输入数据最临近的k个数据，这k个数据中的多数属于某个类，这个输入就输入某个类。特别地， k=1 是称为最近邻算法。
+
+### 如何定义近邻
+
+可以用欧氏距离，$$L_p$$距离，Minkowski距离等。
+
+### k值的选择
+
+k太小，学习的近似误差会减小，估计误差会增大，比如遇到噪声，这时候容易发生过拟合。
+
+k过大，会增加不相近的数据对输入的干扰，虽然增大了学习的近似误差，但是减少了估计误差，k的增大意味着整体模型变得简单。
+
+k=N，对于一个输入用上了全部数据，不可取。
+
+### 分类决策规则
+
+多数投票表决规则等价于经验风险最小化，除了投票还有求均值等规则。
+
+### 实现
+
+书上介绍通过kd树实现训练数据存储，然后在kd树上查找最近邻。除了kd树还有很多优化算法。</textarea></div>
+]]></content>
+<link rel="replies" type="text/html" href="https://feelncut.com/2018/03/09/knn.html#comments" thr:count="0" />
+<link rel="replies" type="application/atom+xml" href="https://feelncut.com/feed/atom/2018/03/09/knn.html" thr:count="0"/>
+</entry>
+<entry>
+<title type="html"><![CDATA[对于感知机Perceptron算法的理解]]></title>
+<link rel="alternate" type="text/html" href="https://feelncut.com/2018/03/08/perceptron.html" />
+<id>https://feelncut.com/2018/03/08/perceptron.html</id>
+<updated>2018-03-08T17:01:00+08:00</updated>
+<published>2018-03-08T17:01:00+08:00</published>
+<author>
+    <name>pizi</name>
+    <uri>https://feelncut.com</uri>
+</author>
+<summary type="html"><![CDATA[[TOC]
+
+# 算法的适用范围
+
+目标二分类，数据集线性可分。之所以不能学习XOR是因为XOR线性不可分。
+
+# 几何意义
+
+特征空间$$R^n$$中的一个超平面$$S$$将特征空间划分为两个...]]></summary>
+<content type="html" xml:base="https://feelncut.com/2018/03/08/perceptron.html" xml:lang="zh-CN"><![CDATA[
+<div id="md_content_7" class="md_content" style="min-height: 50px;"><textarea id="append-test" style="display:none;">[TOC]
+
+# 算法的适用范围
+
+目标二分类，数据集线性可分。之所以不能学习XOR是因为XOR线性不可分。
+
+# 几何意义
+
+特征空间$$R^n$$中的一个超平面$$S$$将特征空间划分为两个部分。这两个部分分别代表两类。这个超平面称为**分离超平面**。
+
+# 学习策略
+
+感知机的损失函数由误分类点到超平面的距离之后推出，根据空间点到面的距离得到损失函数。
+
+# 原始形式和对偶形式的区别
+
+感知机学习算法分为原始形式和对偶形式，我的理解是原始形式和对偶形式本质上是一样的（废话），不同点在于计算顺序不同。假定处理高维数据，对偶形式的好处为可以首先并行计算出Gram矩阵，然后通过查表更新参数。而原始形式串行处理每组数据进行更新参数。
+
+知乎的[这个](https://www.zhihu.com/question/26526858 "这个")答案解释的有点过了吧。
+
+# 收敛性证明
+
+收敛性证明的思路为递推缩放，主要是推导以下两个不等式。
+```latex
+||\hat{W}_k|| \cdot ||\hat{W}_{opt}||\leq k \eta \gamma  
+```
+```math
+||\hat{W}_k||^2 \leq k \eta^2 R^2
+```
+
+
+# 多解的原因
+
+- 初值不同
+- 误分类点出现顺序不同
+
+# 代码
+
+通过`sklearn`实现：[Github](https://github.com/wangke0809/learn-statistical-learning-method/blob/master/Perceptron.py)</textarea></div>
+]]></content>
+<link rel="replies" type="text/html" href="https://feelncut.com/2018/03/08/perceptron.html#comments" thr:count="0" />
+<link rel="replies" type="application/atom+xml" href="https://feelncut.com/feed/atom/2018/03/08/perceptron.html" thr:count="0"/>
+</entry>
+<entry>
+<title type="html"><![CDATA[kaggle房价预测：使用Python综合探索数据]]></title>
+<link rel="alternate" type="text/html" href="https://feelncut.com/2018/01/23/62.html" />
+<id>https://feelncut.com/2018/01/23/62.html</id>
+<updated>2018-01-23T18:30:00+08:00</updated>
+<published>2018-01-23T18:30:00+08:00</published>
+<author>
+    <name>pizi</name>
+    <uri>https://feelncut.com</uri>
+</author>
+<summary type="html"><![CDATA[&gt; 学习[COMPREHENSIVE DATA EXPLORATION WITH PYTHON](https://www.kaggle.com/pmarcelino/comprehensive-...]]></summary>
+<content type="html" xml:base="https://feelncut.com/2018/01/23/62.html" xml:lang="zh-CN"><![CDATA[
+<div id="md_content_9" class="md_content" style="min-height: 50px;"><textarea id="append-test" style="display:none;">> 学习[COMPREHENSIVE DATA EXPLORATION WITH PYTHON](https://www.kaggle.com/pmarcelino/comprehensive-data-exploration-with-python "COMPREHENSIVE DATA EXPLORATION WITH PYTHON")笔记
+
+**'The most difficult thing in life is to know yourself'**
+
+</textarea></div><p class="more"><a href="https://feelncut.com/2018/01/23/62.html" title="kaggle房价预测：使用Python综合探索数据">[...]</a></p>
+]]></content>
+<link rel="replies" type="text/html" href="https://feelncut.com/2018/01/23/62.html#comments" thr:count="0" />
+<link rel="replies" type="application/atom+xml" href="https://feelncut.com/feed/atom/2018/01/23/62.html" thr:count="0"/>
+</entry>
+<entry>
+<title type="html"><![CDATA[Ubuntu 16.04下安装Jupyter Notebook并开启远程访问]]></title>
+<link rel="alternate" type="text/html" href="https://feelncut.com/2018/01/09/50.html" />
+<id>https://feelncut.com/2018/01/09/50.html</id>
+<updated>2018-01-09T20:40:00+08:00</updated>
+<published>2018-01-09T20:40:00+08:00</published>
+<author>
+    <name>pizi</name>
+    <uri>https://feelncut.com</uri>
+</author>
+<summary type="html"><![CDATA[&gt; 因为电脑在宿舍，所以开一个Jupyter Notebook远程访问还是比较方便测试程序的。]]></summary>
+<content type="html" xml:base="https://feelncut.com/2018/01/09/50.html" xml:lang="zh-CN"><![CDATA[
+<div id="md_content_11" class="md_content" style="min-height: 50px;"><textarea id="append-test" style="display:none;">> 因为电脑在宿舍，所以开一个Jupyter Notebook远程访问还是比较方便测试程序的。
+
+</textarea></div><p class="more"><a href="https://feelncut.com/2018/01/09/50.html" title="Ubuntu 16.04下安装Jupyter Notebook并开启远程访问">[...]</a></p>
+]]></content>
+<link rel="replies" type="text/html" href="https://feelncut.com/2018/01/09/50.html#comments" thr:count="0" />
+<link rel="replies" type="application/atom+xml" href="https://feelncut.com/feed/atom/2018/01/09/50.html" thr:count="0"/>
+</entry>
+<entry>
+<title type="html"><![CDATA[Ubuntu 16.04下安装MXNet 1.0 GPU版]]></title>
+<link rel="alternate" type="text/html" href="https://feelncut.com/2018/01/09/Mxnet.html" />
+<id>https://feelncut.com/2018/01/09/Mxnet.html</id>
+<updated>2018-01-09T20:27:00+08:00</updated>
+<published>2018-01-09T20:27:00+08:00</published>
+<author>
+    <name>pizi</name>
+    <uri>https://feelncut.com</uri>
+</author>
+<summary type="html"><![CDATA[虚拟环境已经在[安装TensorFlow](https://feelncut.com/2018/01/09/TensorFlow.html)的过程中安装好了，在改虚拟环境的基础上进行安装MXNe...]]></summary>
+<content type="html" xml:base="https://feelncut.com/2018/01/09/Mxnet.html" xml:lang="zh-CN"><![CDATA[
+<div id="md_content_13" class="md_content" style="min-height: 50px;"><textarea id="append-test" style="display:none;">虚拟环境已经在[安装TensorFlow](https://feelncut.com/2018/01/09/TensorFlow.html)的过程中安装好了，在改虚拟环境的基础上进行安装MXNet1.0 版本。
+主要参考官方安装指南：
+> https://mxnet.apache.org/install/index.html
+
+</textarea></div><p class="more"><a href="https://feelncut.com/2018/01/09/Mxnet.html" title="Ubuntu 16.04下安装MXNet 1.0 GPU版">[...]</a></p>
+]]></content>
+<link rel="replies" type="text/html" href="https://feelncut.com/2018/01/09/Mxnet.html#comments" thr:count="0" />
+<link rel="replies" type="application/atom+xml" href="https://feelncut.com/feed/atom/2018/01/09/Mxnet.html" thr:count="0"/>
+</entry>
+<entry>
+<title type="html"><![CDATA[Ubuntu 16.04下安装TensorFlow最新GPU版]]></title>
+<link rel="alternate" type="text/html" href="https://feelncut.com/2018/01/09/TensorFlow.html" />
+<id>https://feelncut.com/2018/01/09/TensorFlow.html</id>
+<updated>2018-01-09T20:15:00+08:00</updated>
+<published>2018-01-09T20:15:00+08:00</published>
+<author>
+    <name>pizi</name>
+    <uri>https://feelncut.com</uri>
+</author>
+<summary type="html"><![CDATA[在安装TensorFlow GPU版本之前，需要安装好CUDA 8.0 + cuDNN 6.0，安装过程见[这里](/2018/01/09/46.html)。其他版本的CUDA与cuDNN也可以...]]></summary>
+<content type="html" xml:base="https://feelncut.com/2018/01/09/TensorFlow.html" xml:lang="zh-CN"><![CDATA[
+<div id="md_content_15" class="md_content" style="min-height: 50px;"><textarea id="append-test" style="display:none;">
+在安装TensorFlow GPU版本之前，需要安装好CUDA 8.0 + cuDNN 6.0，安装过程见[这里](/2018/01/09/46.html)。其他版本的CUDA与cuDNN也可以参考这个安装步骤。
+
+>**补充：由于TF更新很快，本教程只适用于依赖CUDA 8.0 + cuDNN 6.0的TF版本，不过我按照同样的方法成功安装了CUDA 9.0 + cuDNN 7.0 和 TensorFlow 1.6版本，`注意环境变量添加的时候目录改成CUDA-9.0`。**
+
+本次安装主要按照官网的安装指南进行安装，通过`virtualenv`安装了Python3.5 GPU版本，官网安装指南：
+> https://www.tensorflow.org/install/install_linux#InstallingVirtualenv
+
+</textarea></div><p class="more"><a href="https://feelncut.com/2018/01/09/TensorFlow.html" title="Ubuntu 16.04下安装TensorFlow最新GPU版">[...]</a></p>
+]]></content>
+<link rel="replies" type="text/html" href="https://feelncut.com/2018/01/09/TensorFlow.html#comments" thr:count="0" />
+<link rel="replies" type="application/atom+xml" href="https://feelncut.com/feed/atom/2018/01/09/TensorFlow.html" thr:count="0"/>
+</entry>
+<entry>
+<title type="html"><![CDATA[Ubuntu 16.04下安装NVIDIA驱动程序 + CUDA 8.0 + cuDNN 6.0]]></title>
+<link rel="alternate" type="text/html" href="https://feelncut.com/2018/01/09/46.html" />
+<id>https://feelncut.com/2018/01/09/46.html</id>
+<updated>2018-01-09T18:39:00+08:00</updated>
+<published>2018-01-09T18:39:00+08:00</published>
+<author>
+    <name>pizi</name>
+    <uri>https://feelncut.com</uri>
+</author>
+<summary type="html"><![CDATA[&gt; 吃鸡总有吃腻的那天，看着屏幕前倒在我枪口下的队友，我毅然决然的决定在自己的[PC机](https://feelncut.com/2018/01/09/44.html)上装个Ubuntu，开始...]]></summary>
+<content type="html" xml:base="https://feelncut.com/2018/01/09/46.html" xml:lang="zh-CN"><![CDATA[
+<div id="md_content_17" class="md_content" style="min-height: 50px;"><textarea id="append-test" style="display:none;">> 吃鸡总有吃腻的那天，看着屏幕前倒在我枪口下的队友，我毅然决然的决定在自己的[PC机](https://feelncut.com/2018/01/09/44.html)上装个Ubuntu，开始步入深度调参这条不归路...
+
+#### **安装其他版本的CUDA与cuDNN步骤一样！！**
+
+原本PC上只有一块M.2的固态硬盘，为了搭建深度学习环境，搞了一块500G的古董机械硬盘，首先分出来100G在Win下用~~装GTAV~~，剩下不到400G用来装Ubuntu。
+
+我看着手中的U盘微微一笑:smirk:，熟练的把他插进了机箱上的USB口。如题目所讲，我装了一个`Ubuntu16.04 LTS`，台式机硬件配置见[这里](https://feelncut.com/2018/01/09/44.html)。
+
+</textarea></div><p class="more"><a href="https://feelncut.com/2018/01/09/46.html" title="Ubuntu 16.04下安装NVIDIA驱动程序 + CUDA 8.0 + cuDNN 6.0">[...]</a></p>
+]]></content>
+<link rel="replies" type="text/html" href="https://feelncut.com/2018/01/09/46.html#comments" thr:count="0" />
+<link rel="replies" type="application/atom+xml" href="https://feelncut.com/feed/atom/2018/01/09/46.html" thr:count="0"/>
+</entry>
+</feed>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+xmlns="http://purl.org/rss/1.0/"
+xmlns:dc="http://purl.org/dc/elements/1.1/">
+<channel rdf:about="https://feelncut.com/feed/rss/2019/12/">
+<title>小王同学 - 2019年12月</title>
+<link>https://feelncut.com/2019/12/</link>
+<description>希望通过自我加工，成为有点用的人</description>
+<items>
+<rdf:Seq>
+<rdf:li resource="https://feelncut.com/2019/12/09/giaocamerarobot.html"/>
+</rdf:Seq>
+</items>
+</channel>
+<item rdf:about="https://feelncut.com/2019/12/09/giaocamerarobot.html">
+<title>小 Giao 之死</title>
+<link>https://feelncut.com/2019/12/09/giaocamerarobot.html</link>
+<dc:date>2019-12-09T22:18:00+08:00</dc:date>
+<description>## 机器人小 Giao 的前生今世
+
+一个突然地想法，想到用个普通的摄像头做个预警机器人🤖，于是折腾了三四天，小 Giao 出生了。
+
+![](/images/2019/12/245685690.png)
+*小 Giao 的头像经过模糊处理，头像来自 Allenzsy 在群里分享的第一个图片！*
+
+小 Giao 威力巨大，为了防止小 Giao 统治人类世界，已经将其一棒子打死，尸体在： https://github.com/wangke0809/GiaoCameraRobot
+
+------------
+
+## 目录
+
+[TOC]
+
+## 需求
+
+需求分析：
+
+- 进入实验室检测：能够通过摄像头实时检测到有人进入实验室 -> Face Detection + Multi-label Classification
+
+- 检测结果通知：能够方便的接受监测结果 -> 使用钉钉群聊机器人
+
+- 轻量级资源占用：工位上除了有个 2015 年办公的老电脑（i7-4790），还有个 GPU 工作站，因为借来的摄像头数据线长度不够，以及考虑到在工作站上跑实验时占用资源多会严重造成系统卡顿，所以决定在办公电脑上跑小 Giao ，所以需要保证运行小 Giao 的时候不能影响正常办公 -> 聚焦关键区域 + 上下帧图像变化量阈值
+
+[...]</description>
+</item>
+</rdf:RDF>

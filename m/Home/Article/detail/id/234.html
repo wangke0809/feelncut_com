@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+  <meta charset="UTF-8">
+  <title>Java运算符优先级|Winke's blog</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <link rel="alternate icon" type="image/png" href="../../../../Public/static/amaze/i/favicon.png">
+  <link rel="stylesheet" href="../../../../Public/static/amaze/css/amazeui.min.css"/>
+  <link rel="stylesheet" href="../../../../Public/static/ueditor/third-party/SyntaxHighlighter/shCoreDefault.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../Public/Home/css/blog.css">
+    <!--<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?e9ff349d5b883760c70a4e220c9ac8ca";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>-->
+    <style>
+    .g-hd {
+    background-image: url("../../../../Editor/2016-07-25/57962ebcddb49.png");
+    }
+
+    @media only screen and (min-width: 641px) {
+      .am-offcanvas {
+        display: block;
+        position: static;
+        background: none;
+      }
+
+      .am-offcanvas-bar {
+        position: static;
+        width: auto;
+        background: none;
+        -webkit-transform: translate3d(0, 0, 0);
+        -ms-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+      }
+      .am-offcanvas-bar:after {
+        content: none;
+      }
+
+    }
+    
+    @media only screen and (max-width: 640px) {
+      .am-offcanvas-bar .am-nav>li>a {
+        color:#ccc;
+        border-radius: 0;
+        border-top: 1px solid rgba(0,0,0,.3);
+        box-shadow: inset 0 1px 0 rgba(255,255,255,.05)
+      }
+
+      .am-offcanvas-bar .am-nav>li>a:hover {
+        background: #404040;
+        color: #fff
+      }
+
+      .am-offcanvas-bar .am-nav>li.am-nav-header {
+        color: #777;
+        background: #404040;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,.05);
+        text-shadow: 0 1px 0 rgba(0,0,0,.5);
+        border-top: 1px solid rgba(0,0,0,.3);
+        font-weight: 400;
+        font-size: 75%
+      }
+
+      .am-offcanvas-bar .am-nav>li.am-active>a {
+        background: #1a1a1a;
+        color: #fff;
+        box-shadow: inset 0 1px 3px rgba(0,0,0,.3)
+      }
+
+      .am-offcanvas-bar .am-nav>li+li {
+        margin-top: 0;
+      }
+    }
+
+    .my-head {
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    .my-button {
+      position: fixed;
+      top: 0;
+      right: 0;
+      border-radius: 0;
+    }
+    .my-sidebar {
+      padding-right: 0;
+      border-right: 1px solid #eeeeee;
+    }
+
+    .my-footer {
+      border-top: 1px solid #eeeeee;
+      padding: 10px 0;
+      margin-top: 10px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+<div class="g-hd" style="height:200px;"></div>
+<div class="m-hdimg" style="margin:-53px auto 0;display:block;text-align: center;">
+                <a class="hdimg img" href="../../../../old_index.html" >
+                    <img src="../../../../picture/avater2.jpg" height="96" width="96">
+                </a>
+            </div>
+<header class="am-g my-head">
+  <div class="am-u-sm-12 am-article">
+    <h1 class="am-article-title">Java运算符优先级</h1>
+    <p class="am-article-meta">王珂&nbsp;于&nbsp;2017-01-25 22:58</p>
+  </div>
+</header>
+<hr class="am-article-divider"/>
+<div class="am-g am-g-fixed">
+  <div class="am-u-md-12">
+    <div class="am-g">
+      <div class="am-u-sm-11 am-u-sm-centered">
+      <? php if($info.['description']!=''){ ?>
+      <blockquote></blockquote>
+      <? }  ?>
+        <div class="am-cf am-article">
+		<p></p><p><table style="width: 720px;" border="1" cellspacing="0" cellpadding="0"><tbody><tr><td width="60"><p style="text-align:center;"><span style="color: #0000ff;"><strong>序列号</strong></span></p></td><td width="60"><p style="text-align:center;"><span style="color: #0000ff;"><strong>符号</strong></span></p></td><td width="132"><p style="text-align:center;"><span style="color: #0000ff;"><strong>名称</strong></span></p></td><td width="120"><p style="text-align:center;"><span style="color: #0000ff;"><strong>结合性(与操作数)</strong></span></p></td><td width="96"><p style="text-align:center;"><span style="color: #0000ff;"><strong>目数</strong></span></p></td><td valign="top" width="252"><p style="text-align:center;"><span style="color: #0000ff;"><strong>说明</strong></span></p></td></tr><tr><td rowspan="3" width="60"><p style="text-align:center;"><strong>1</strong></p></td><td width="60"><p style="text-align:center;"><span style="color: #800000;"><strong>.</strong></span></p></td><td width="132"><p style="text-align:center;"><span style="color: #008000;"><strong>点</strong></span></p></td><td width="120"><p style="text-align:center;"><span style="color: #0000ff;"><strong>从左到右</strong></span></p></td><td width="96"><p style="text-align:center;"><strong>双目</strong></p></td><td valign="top" width="252"><p style="text-align:center;">&nbsp;</p></td></tr><tr><td width="60"><p style="text-align:center;"><span style="color: #800000;"><strong>( )</strong></span></p></td><td width="132"><p style="text-align:center;"><span style="color: #008000;"><strong>圆括号</strong></span></p></td><td width="120"><p style="text-align:center;"><span style="color: #0000ff;"><strong>从左到右</strong></span></p></td><td width="96"><p style="text-align:center;"><strong>&nbsp;</strong></p></td><td valign="top" width="252"><p style="text-align:center;">&nbsp;</p></td></tr><tr><td width="60"><p style="text-align:center;"><span style="color: #800000;"><strong>[ ]</strong></span></p></td><td width="132"><p style="text-align:center;"><span style="color: #008000;"><strong>方括号</strong></span></p></td><td width="120"><p style="text-align:center;"><span style="color: #0000ff;"><strong>从左到右</strong></span></p></td><td width="96"><p style="text-align:center;"><strong>&nbsp;</strong></p></td><td valign="top" width="252"><p style="text-align:center;">&nbsp;</p></td></tr><tr><td rowspan="6" width="60"><p style="text-align:center;"><strong>2</strong></p></td><td width="60"><p style="text-align:center;"><span style="color: #800000;"><strong>+</strong></span></p></td><td width="132"><p style="text-align:center;"><span style="color: #008000;"><strong>正号</strong></span></p></td><td width="120"><p style="text-align:center;"><span style="color: #0000ff;"><strong>从右到左</strong></span></p></td><td width="96"><p style="text-align:center;"><strong>单目</strong></p></td><td valign="top" width="252"><p style="text-align:center;">&nbsp;</p></td></tr><tr><td width="60"><p style="text-align:center;"><span style="color: #800000;">-</span></p></td><td width="132"><p style="text-align:center;"><span style="color: #008000;"><strong>负号</strong></span></p></td><td width="120"><p style="text-align:center;"><span style="color: #0000ff;"><strong>从右到左</strong></span></p></td><td width="96"><p style="text-align:center;"><strong>单目</strong></p></td><td valign="top" width="252"><p style="text-align:center;">&nbsp;</p></td></tr><tr><td width="60"><p style="text-align:center;"><span style="color: #800000;"><strong>++</strong></span></p></td><td width="132"><p style="text-align:center;"><span style="color: #008000;"><strong>自增</strong></span></p></td><td width="120"><p style="text-align:center;"><span style="color: #0000ff;"><strong>从右到左</strong></span></p></td><td rowspan="2" width="96"><p style="text-align:center;"><strong>单目</strong></p></td><td valign="top" width="252"><p style="text-align:center;">前缀增，后缀增</p></td></tr><tr><td width="60"><p style="text-align:center;"><span style="color: #800000;">- -</span></p></td><td width="132"><p style="text-align:center;"><span style="color: #008000;"><strong>自减</strong></span></p></td><td width="120"><p style="text-align:center;"><span style="color: #0000ff;"><strong>从右到左</strong></span></p></td><td valign="top" width="252"><p style="text-align:center;">前缀减，后缀减</p></td></tr><tr><td width="60"><p style="text-align:center;"><span style="color: #800000;"><strong>~</strong></span></p></td><td width="132"><p style="text-align:center;"><span style="color: #008000;"><strong>按位非/取补运算</strong></span></p></td><td width="120"><p style="text-align:center;"><span style="color: #0000ff;"><strong>从右到左</strong></span></p></td><td width="96"><p style="text-align:center;"><strong>单目</strong></p></td><td valign="top" width="252"><p style="text-align:center;">&nbsp;</p></td></tr><tr><td width="60"><p style="text-align:center;"><span style="color: #800000;"><strong>！</strong></span></p></td><td width="132"><p style="text-align:center;"><span style="color: #008000;"><strong>逻辑非</strong></span></p></td><td width="120"><p style="text-align:center;"><span style="color: #0000ff;"><strong>从右到左</strong></span></p></td><td width="96"><p style="text-align:center;"><strong>单目</strong></p></td><td valign="top" width="252"><p style="text-align:center;">“!”不可以与“=”联用</p></td></tr><tr><td rowspan="3" width="60"><p style="text-align:center;"><strong>3</strong></p></td><td width="60"><p style="text-align:center;"><span style="color: #800000;"><strong>*</strong></span></p></td><td width="132"><p style="text-align:center;"><span style="color: #008000;"><strong>乘</strong></span></p></td><td width="120"><p style="text-align:center;"><span style="color: #0000ff;"><strong>从左到右</strong></span></p></td><td width="96"><p style="text-align:center;"><strong>双目</strong></p></td><td valign="top" width="252"><p style="text-align:center;">&nbsp;</p></td></tr><tr><td width="60"><p style="text-align:center;"><span style="color: #800000;"><strong>/</strong></span></p></td><td width="132"><p style="text-align:center;"><span style="color: #008000;"><strong>除</strong></span></p></td><td width="120"><p style="text-align:center;"><span style="color: #0000ff;"><strong>从左到右</strong></span></p></td><td width="96"><p style="text-align:center;"><strong>双目</strong></p></td><td valign="top" width="252"><p style="text-align:center;">整数除法：取商的整数部分，小数部分去掉，不四舍五入</p></td></tr><tr><td width="60"><p style="text-align:center;"><span style="color: #800000;"><strong>%</strong></span></p></td><td width="132"><p style="text-align:center;"><span style="color: #008000;"><strong>取余</strong></span></p></td><td width="120"><p style="text-align:center;"><span style="color: #0000ff;"><strong>从左到右</strong></span></p></td><td width="96"><p style="text-align:center;"><strong>双目</strong></p></td><td valign="top" width="252"><p style="text-align:center;">&nbsp;</p></td></tr><tr><td rowspan="2" width="60"><p style="text-align:center;"><strong>4</strong></p></td><td width="60"><p style="text-align:center;"><span style="color: #800000;"><strong>+</strong></span></p></td><td width="132"><p style="text-align:center;"><span style="color: #008000;"><strong>加</strong></span></p></td><td width="120"><p style="text-align:center;"><span style="color: #0000ff;"><strong>从左到右</strong></span></p></td><td width="96"><p style="text-align:center;"><strong>双目</strong></p></td><td valign="top" width="252"><p style="text-align:center;">&nbsp;</p></td></tr><tr><td width="60"><p style="text-align:center;"><span style="color: #800000;"><strong>-</strong></span></p></td><td width="132"><p style="text-align:center;"><span style="color: #008000;"><strong>减</strong></span></p></td><td width="120"><p style="text-align:center;"><span style="color: #0000ff;"><strong>从左到右</strong></span></p></td><td width="96"><p style="text-align:center;"><strong>双目</strong></p></td><td valign="top" width="252"><p style="text-align:center;">&nbsp;</p></td></tr><tr><td rowspan="3" width="60"><p style="text-align:center;"><strong>5</strong></p></td><td width="60"><p style="text-align:center;"><span style="color: #800000;"><strong>&lt;&lt;&nbsp;</strong></span></p></td><td width="132"><p style="text-align:center;"><span style="color: #008000;"><strong>左移位运算符</strong></span></p></td><td width="120"><p style="text-align:center;"><span style="color: #0000ff;"><strong>从左到右</strong></span></p></td><td width="96"><p style="text-align:center;"><strong>双目</strong></p></td><td valign="top" width="252"><p style="text-align:center;">&nbsp;</p></td></tr><tr><td width="60"><p style="text-align:center;"><span style="color: #800000;"><strong>&gt;&gt;&nbsp;</strong></span></p></td><td width="132"><p style="text-align:center;"><span style="color: #008000;"><strong>带符号右移位运算符</strong></span></p></td><td width="120"><p style="text-align:center;"><span style="color: #0000ff;"><strong>从左到右</strong></span></p></td><td width="96"><p style="text-align:center;"><strong>双目</strong></p></td><td valign="top" width="252"><p style="text-align:center;">&nbsp;</p></td></tr><tr><td width="60"><p style="text-align:center;"><span style="color: #800000;"><strong>&gt;&gt;&gt;&nbsp;</strong></span></p></td><td width="132"><p style="text-align:center;"><span style="color: #008000;"><strong>无符号右移</strong></span></p></td><td width="120"><p style="text-align:center;"><span style="color: #0000ff;"><strong>从左到右</strong></span></p></td><td width="96"><p style="text-align:center;"><strong>双目</strong></p></td><td valign="top" width="252"><p style="text-align:center;">&nbsp;</p></td></tr><tr><td rowspan="5" width="60"><p style="text-align:center;"><strong>6</strong></p></td><td width="60"><p style="text-align:center;"><span style="color: #800000;"><strong>&lt;&nbsp;</strong></span></p></td><td width="132"><p style="text-align:center;"><span style="color: #008000;"><strong>小于</strong></span></p></td><td width="120"><p style="text-align:center;"><span style="color: #0000ff;"><strong>从左到右</strong></span></p></td><td width="96"><p style="text-align:center;"><strong>双目</strong></p></td><td valign="top" width="252" style="word-break: break-all;"><br/></td></tr><tr><td width="60"><p style="text-align:center;"><span style="color: #800000;"><strong>&lt;=</strong></span></p></td><td width="132"><p style="text-align:center;"><span style="color: #008000;"><strong>小于或等于</strong></span></p></td><td width="120"><p style="text-align:center;"><span style="color: #0000ff;"><strong>从左到右</strong></span></p></td><td width="96"><p style="text-align:center;"><strong>双目</strong></p></td><td valign="top" width="252"><p style="text-align:center;">&nbsp;</p></td></tr><tr><td width="60"><p style="text-align:center;"><span style="color: #800000;"><strong>&gt;&nbsp;</strong></span></p></td><td width="132"><p style="text-align:center;"><span style="color: #008000;"><strong>大于</strong></span></p></td><td width="120"><p style="text-align:center;"><span style="color: #0000ff;"><strong>从左到右</strong></span></p></td><td width="96"><p style="text-align:center;"><strong>双目</strong></p></td><td valign="top" width="252"><p style="text-align:center;">&nbsp;</p></td></tr><tr><td width="60"><p style="text-align:center;"><span style="color: #800000;"><strong>&gt;=</strong></span></p></td><td width="132"><p style="text-align:center;"><span style="color: #008000;"><strong>大于或等于</strong></span></p></td><td width="120"><p style="text-align:center;"><span style="color: #0000ff;"><strong>从左到右</strong></span></p></td><td width="96"><p style="text-align:center;"><strong>双目</strong></p></td><td valign="top" width="252"><p style="text-align:center;">&nbsp;</p></td></tr><tr><td width="60"><p style="text-align:center;"><span style="color: #800000;"><strong>instanceof</strong></span></p></td><td width="132"><p style="text-align:center;"><span style="color: #008000;"><strong>确定某对象是否属于指定的类</strong></span></p></td><td width="120"><p style="text-align:center;"><span style="color: #0000ff;"><strong>从左到右</strong></span></p></td><td width="96"><p style="text-align:center;"><strong>双目</strong></p></td><td valign="top" width="252"><p style="text-align:center;">&nbsp;</p></td></tr><tr><td rowspan="2" width="60"><p style="text-align:center;"><strong>7</strong></p></td><td width="60"><p style="text-align:center;"><span style="color: #800000;"><strong>==</strong></span></p></td><td width="132"><p style="text-align:center;"><span style="color: #008000;"><strong>等于</strong></span></p></td><td width="120"><p style="text-align:center;"><span style="color: #0000ff;"><strong>从左到右</strong></span></p></td><td width="96"><p style="text-align:center;"><strong>双目</strong></p></td><td valign="top" width="252" style="word-break: break-all;"><br/></td></tr><tr><td width="60"><p style="text-align:center;"><span style="color: #800000;"><strong>!=</strong></span></p></td><td width="132"><p style="text-align:center;"><span style="color: #008000;"><strong>不等于</strong></span></p></td><td width="120"><p style="text-align:center;"><span style="color: #0000ff;"><strong>从左到右</strong></span></p></td><td width="96"><p style="text-align:center;"><strong>双目</strong></p></td><td valign="top" width="252"><p style="text-align:center;">&nbsp;</p></td></tr><tr><td width="60"><p style="text-align:center;"><strong>8</strong></p></td><td width="60"><p style="text-align:center;"><span style="color: #800000;"><strong>&amp;</strong></span></p></td><td width="132"><p style="text-align:center;"><span style="color: #008000;"><strong>按位与</strong></span></p></td><td width="120"><p style="text-align:center;"><span style="color: #0000ff;"><strong>从左到右</strong></span></p></td><td width="96"><p style="text-align:center;"><strong>双目</strong></p></td><td valign="top" width="252"><p style="text-align:center;">&nbsp;</p></td></tr><tr><td width="60"><p style="text-align:center;"><strong>9</strong></p></td><td width="60"><p style="text-align:center;"><span style="color: #800000;"><strong>|</strong></span></p></td><td width="132"><p style="text-align:center;"><span style="color: #008000;"><strong>按位或</strong></span></p></td><td width="120"><p style="text-align:center;"><span style="color: #0000ff;"><strong>从左到右</strong></span></p></td><td width="96"><p style="text-align:center;"><strong>双目</strong></p></td><td valign="top" width="252"><p style="text-align:center;">&nbsp;</p></td></tr><tr><td width="60"><p style="text-align:center;"><strong>10</strong></p></td><td width="60"><p style="text-align:center;"><span style="color: #800000;"><strong>^</strong></span></p></td><td width="132"><p style="text-align:center;"><span style="color: #008000;"><strong>按位异或</strong></span></p></td><td width="120"><p style="text-align:center;"><span style="color: #0000ff;"><strong>从左到右</strong></span></p></td><td width="96"><p style="text-align:center;"><strong>双目</strong></p></td><td valign="top" width="252"><p style="text-align:center;">&nbsp;</p></td></tr><tr><td width="60"><p style="text-align:center;"><strong>11</strong></p></td><td width="60"><p style="text-align:center;"><span style="color: #800000;"><strong>&amp;&amp;</strong></span></p></td><td width="132"><p style="text-align:center;"><span style="color: #008000;"><strong>短路与</strong></span></p></td><td width="120"><p style="text-align:center;"><span style="color: #0000ff;"><strong>从左到右</strong></span></p></td><td width="96"><p style="text-align:center;"><strong>双目</strong></p></td><td valign="top" width="252"><p style="text-align:center;">&nbsp;</p></td></tr><tr><td width="60"><p style="text-align:center;"><strong>12</strong></p></td><td width="60"><p style="text-align:center;"><span style="color: #800000;"><strong>||</strong></span></p></td><td width="132"><p style="text-align:center;"><span style="color: #008000;"><strong>短路或</strong></span></p></td><td width="120"><p style="text-align:center;"><span style="color: #0000ff;"><strong>从左到右</strong></span></p></td><td width="96"><p style="text-align:center;"><strong>双目</strong></p></td><td valign="top" width="252"><p style="text-align:center;">&nbsp;</p></td></tr><tr><td width="60"><p style="text-align:center;"><strong>13</strong></p></td><td width="60"><p style="text-align:center;"><span style="color: #800000;"><strong>? :</strong></span></p></td><td width="132"><p style="text-align:center;"><span style="color: #008000;"><strong>条件运算符</strong></span></p></td><td width="120"><p style="text-align:center;"><span style="color: #0000ff;"><strong>从右到左</strong></span></p></td><td width="96"><p style="text-align:center;"><strong>三目</strong></p></td><td valign="top" width="252"><p style="text-align:center;">&nbsp;</p></td></tr><tr><td rowspan="12" width="60"><p style="text-align:center;"><strong>14</strong></p></td><td width="60"><p style="text-align:center;"><span style="color: #800000;"><strong>=</strong></span></p></td><td width="132"><p style="text-align:center;"><span style="color: #008000;"><strong>赋值运算符</strong></span></p></td><td rowspan="12" width="120"><p style="text-align:center;"><span style="color: #0000ff;"><strong>从右到左</strong></span></p></td><td rowspan="12" width="96"><p style="text-align:center;"><strong>双目</strong></p></td><td valign="top" width="252"><p style="text-align:center;">&nbsp;</p></td></tr><tr><td width="60"><p style="text-align:center;"><span style="color: #800000;"><strong>+=</strong></span></p></td><td rowspan="11" width="132"><p style="text-align:center;"><span style="color: #008000;"><strong>混合赋值运算符</strong></span></p></td><td valign="top" width="252"><p style="text-align:center;"><strong>&nbsp;</strong></p></td></tr><tr><td width="60"><p style="text-align:center;"><span style="color: #800000;"><strong>-=</strong></span></p></td><td valign="top" width="252"><p style="text-align:center;"><strong>&nbsp;</strong></p></td></tr><tr><td width="60"><p style="text-align:center;"><span style="color: #800000;"><strong>*=</strong></span></p></td><td valign="top" width="252"><p style="text-align:center;"><strong>&nbsp;</strong></p></td></tr><tr><td width="60"><p style="text-align:center;"><span style="color: #800000;"><strong>/=</strong></span></p></td><td valign="top" width="252"><p style="text-align:center;"><strong>&nbsp;</strong></p></td></tr><tr><td width="60"><p style="text-align:center;"><span style="color: #800000;"><strong>%=</strong></span></p></td><td valign="top" width="252"><p style="text-align:center;"><strong>&nbsp;</strong></p></td></tr><tr><td width="60"><p style="text-align:center;"><span style="color: #800000;"><strong>&amp;=</strong></span></p></td><td valign="top" width="252"><p style="text-align:center;"><strong>&nbsp;</strong></p></td></tr><tr><td width="60"><p style="text-align:center;"><span style="color: #800000;"><strong>|=</strong></span></p></td><td valign="top" width="252"><p style="text-align:center;"><strong>&nbsp;</strong></p></td></tr><tr><td width="60"><p style="text-align:center;"><span style="color: #800000;"><strong>^=</strong></span></p></td><td valign="top" width="252"><p style="text-align:center;"><strong>&nbsp;</strong></p></td></tr><tr><td width="60"><p style="text-align:center;"><span style="color: #800000;"><strong>&lt;&lt;=</strong></span></p></td><td valign="top" width="252"><p style="text-align:center;"><strong>&nbsp;</strong></p></td></tr><tr><td width="60"><p style="text-align:center;"><span style="color: #800000;"><strong>&gt;&gt;=</strong></span></p></td><td valign="top" width="252"><p style="text-align:center;"><strong>&nbsp;</strong></p></td></tr><tr><td width="60"><p style="text-align:center;"><span style="color: #800000;"><strong>&gt;&gt;&gt;=</strong></span></p></td><td valign="top" width="252"><p style="text-align:center;"><strong>&nbsp;</strong></p></td></tr></tbody></table></p><p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);"><strong style="margin: 0px; padding: 0px;">说明：</strong></p><p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);"><strong style="margin: 0px; padding: 0px;">　　1、算数运算符</strong></p><p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);">　　　　+ :加法</p><p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);">　　　　- ：减法</p><p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);">　　　　* ：乘法</p><p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);">　　　　/ ：除法</p><p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);">　　　　% ：取余运算</p><p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);">　　<strong style="margin: 0px; padding: 0px;">2、关系运算符</strong></p><p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);">　　　　&lt; ：只能比较基本类型数据之间的关系，不能比较对象之间的关系。</p><p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);">　　　　&gt; : (同关系运算符“&lt;”)</p><p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);">　　　　&lt;=: (同关系运算符“&lt;”)</p><p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);">　　　　&gt;=: (同关系运算符“&lt;”)</p><p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);">　　　　== ：若使用该运算符比较两个对象的引用（变量），则实质上是比较两个变量是否引用了相同的对象。所谓相同的对象是指，是否是在堆栈（Heap）中开辟的同一块儿内存单元中存放的对象。</p><p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);">　　若比较两个对象的引用(变量)所引用的对象的内容是否相同，则应该使用equals()方法，该方法的返回值类型是布尔值。需要注意的是：若用类库中的类创建对象，则对象的引用调用equals()方法比较的是对象的内容；若用自定义的类来创建对象，则对象的引用调用equals()方法比较的是两个引用是否引用了同一个对象，因为第二种情况equals()方法默认的是比较引用。</p><p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);">　　　　!= ：(同关系运算符“==”)</p><p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);"><strong style="margin: 0px; padding: 0px;">　　3、逻辑运算符 （<span style="margin: 0px; padding: 0px; line-height: 1.8; color: rgb(255, 0, 0);">操作符只能是布尔类型的</span>）</strong></p><p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);">　　　　&amp;&amp;</p><p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);">　　　　||</p><p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);">　　　　!</p><p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);"><strong style="margin: 0px; padding: 0px;">&nbsp; &nbsp; &nbsp; 4、位运算符</strong></p><p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);">　　　　&amp;</p><p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);">　　　　|</p><p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);">　　　　^</p><p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);">　　　　! ：不可以与=联用，因为!是一元操作符；不可以对布尔类型的数据进行按位非运算</p><p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);"><strong style="margin: 0px; padding: 0px;">　　5、移位运算符（只能处理整数运算符）</strong></p><p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);">　　Char、byte、short类型，在进行移位之前，都将被转换成int类型，移位后的结果也是int类型；移位符号右边的操作数只截取其二进制的后5位（目的是防止因为移位操作而超出int类型的表示范围：2的5次方是32，int类型的最大范围是32位）；对long类型进行移位，结果仍然是long类型，移位符号右边的操作符只截取其二进制的后6位。</p><p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);">　　&lt;&lt; ：</p><p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);">　　&gt;&gt; ：若符号位为正，则在最高位插入0；若符号位为负，则在最高位插入1</p><p style="margin: 10px auto; padding: 0px; color: rgb(51, 51, 51); font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);">　　&gt;&gt;&gt; ：无论正负，都在最高位插入0</p><p><br/></p><p>转自:http://www.cnblogs.com/gw811/archive/2012/10/13/2722752.html</p>        </div>
+      </div>
+    </div>
+    <hr class="am-article-divider"/>
+    <div class="am-center" style="text-align:center;margin-bottom:15px;">
+    <a href="233.html">上一篇</a>    <a href="236.html">下一篇</a>    </div>
+    <!-- <hr class="am-article-divider"/> -->
+      </div>
+</div>
+    <div style="right: 15px;" class="amz-toolbar" id="amz-toolbar">
+    <a href="#top" title="回到顶部" class="am-icon-btn am-icon-arrow-up am-active" id="amz-go-top"></a>
+    </div>
+    <footer class="footer" style="background-color:#303336;">
+     <div class="g-ft" style="padding-top:20px;">
+     <div class="">
+      <div  style="float:left;width:50%;text-align:right;">
+        <ul class="m-bottom-nav" style="margin:0 20px 0 0;">
+          <li>
+                  <a href="../../../Index/index.html" target="_self">首页</a>
+              </li><li>
+                  <a href="http://www.zhangwenxuan.cn/" target="_blank">好基友</a>
+              </li><li>
+                  <a href="http://blog.wozhendehaoaini.cn/" target="_blank">老博客</a>
+              </li><li>
+                  <a href="66.html" target="_self">关于我</a>
+              </li>        </ul>
+      </div>
+      <div  style="float:right;width:50%;text-align:left;">
+        <ul class="m-bottom-nav" style="margin:0 0 0 20px;">
+           		<li>
+			<a href="../../lists/category/feeling.html">
+				<i class="icon-chevron-right"></i>随笔心情			</a>
+		</li>		<li>
+			<a href="../../lists/category/learnsth.html">
+				<i class="icon-chevron-right"></i>学习研究			</a>
+		</li>		<li>
+			<a href="../../lists/category/sizhou.html">
+				<i class="icon-chevron-right"></i>飞控研究			</a>
+		</li>		<li>
+			<a href="../../lists/category/Python.html">
+				<i class="icon-chevron-right"></i>Python			</a>
+		</li>		<li>
+			<a href="../../lists/category/wxmp.html">
+				<i class="icon-chevron-right"></i>微信平台			</a>
+		</li>        </ul>        
+      </div>
+    </div>
+           <p style="clear:both;padding-top:15px;" class="m-cprt">©&nbsp;<a href="../../../../index.html">花开花落</a>&nbsp;京ICP备15006955号-1&nbsp;|&nbsp;Powered by <a href="../../../../index.html">Winke</a></p> 
+    </div>
+    </footer>
+
+<!--[if lt IE 9]>
+<script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
+<script src="/Public/static/amaze/js/polyfill/rem.min.js"></script>
+<script src="/Public/static/amaze/js/polyfill/respond.min.js"></script>
+<script src="/Public/static/amaze/js/amazeui.legacy.js"></script>
+<![endif]-->
+
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script src="../../../../Public/static/amaze/js/jquery.min.js"></script>
+<script src="../../../../Public/static/amaze/js/amazeui.min.js"></script>
+<script type="text/javascript" src="../../../../Public/static/ueditor/third-party/SyntaxHighlighter/shCore.js"></script>
+<script src="../../../../Public/Home/js/blog.js"></script>
+<script type="text/javascript"> SyntaxHighlighter.all(); </script>
+<!--<![endif]-->
+</body>
+</html>

@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+xmlns="http://purl.org/rss/1.0/"
+xmlns:dc="http://purl.org/dc/elements/1.1/">
+<channel rdf:about="https://feelncut.com/feed/rss/2018/08/">
+<title>小王同学 - 2018年8月</title>
+<link>https://feelncut.com/2018/08/</link>
+<description>希望通过自我加工，成为有点用的人</description>
+<items>
+<rdf:Seq>
+<rdf:li resource="https://feelncut.com/2018/08/09/171.html"/>
+<rdf:li resource="https://feelncut.com/2018/08/06/170.html"/>
+</rdf:Seq>
+</items>
+</channel>
+<item rdf:about="https://feelncut.com/2018/08/09/171.html">
+<title>Python 判断数组中含有某元素的个数</title>
+<link>https://feelncut.com/2018/08/09/171.html</link>
+<dc:date>2018-08-09T14:04:27+08:00</dc:date>
+<description>为了测试uuid1方法批量生成uuid时是否会重复，就把生成的uuid放到了一个数组中，之前不知道数组还有`count`方法...
+
+```python
+import uuid
+
+r = []
+
+for i in range(1000):
+ r.append(str(uuid.uuid1()))
+
+for i in r:
+  print(r.count(i))
+```</description>
+</item>
+<item rdf:about="https://feelncut.com/2018/08/06/170.html">
+<title>Python3 中 AES256对称加密解密以及RSA2048签名验签</title>
+<link>https://feelncut.com/2018/08/06/170.html</link>
+<dc:date>2018-08-06T14:03:00+08:00</dc:date>
+<description># ETH相关流程
+
+## ETH地址转换 
+
+调用`get_key`接口传入私钥`name`和`version`可获取私钥公开部分信息。 
+
+将获取私钥公开部分中X与Y合并为一个数组，长度为64字节，经`keccak_256`算法计算hash得到32字节hash，取后20字节，即为以太坊钱包地址。 
+
+```python
+key_bundle = client.get_key('https://wangke-test-k-v.vault.azure.net/', 'x', 'x')
+full_pubkey = key_bundle.key.x + key_bundle.key.y
+import sha3
+k = sha3.keccak_256()
+k.update(full_pubkey)
+print(k.hexdigest())
+print('0x' + k.hexdigest()[24:])
+```
+
+公钥中是否需要加前缀`0x04`需要进一步验证。
+
+## ETH交易签名
+
+### 交易签名流程
+ETH`未签名交易信息`包含了：
+
+- nonce
+- gasPrice
+- gas
+- value
+- to
+- data
+- chainId
+
+交易签名指：将以上未签名交易信息按照以太坊`RLP`规则序列化得到`rawTransaction`，`rawTransaction`再经过`keccak`得到`hash`，对该`hash`使用私钥进行签名，签名结果包含`R,S,V`三个部分。
+
+再以上未签名交易信息中增加`R,S,V`得到`签名交易信息`：
+
+- nonce
+- gasPrice
+- gas
+- value
+- to
+- data
+- chainId
+- r
+- s
+- v
+
+将签名交易信息按照以太坊`RLP`规则序列化得到`rawSignedTransaction`，此`rawSignedTransaction`可使用`web3`接口`sendRawTransaction`直接发送。对此`rawSignedTransaction`进行`keccak`得到交易hash:`txhash`。
+
+### 使用KV签名
+
+根据交易签名流程可知，只需要将`rawTransaction`经过`keccak`得到的`hash`传入服务端，服务端调用KV的`sign`接口对其进行签名。`sign`接口返回的结果只包含`R,S`，根据公钥信息可计算出`V`。服务端返回`R,S,V`，客户端根据`R,S,V`得到`rawSignedTransaction`。
+
+计算`V`的算法如下：
+
+```python
+from coincurve import PublicKey
+
+for v in range(4):
+    print(bytes([v]))
+    s = s_res.result + bytes([v])
+    try:
+        public_key_bytes = PublicKey.from_signature_and_message(s, bytes.fromhex(raw), hasher=None).format(compressed=False)
+        print(public_key_bytes==pk)
+    except:
+        print('error')
+```
+
+### EIP155
+
+根据[EIP155](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-155.md "BIP155")规则：
+- 如果`未签名交易信息`中包含`chainId`，则还应包含`r=0,s=0`，签名得到的`v`需要经过`v = v + CHAIN_ID_OFFSET + 2 * chain_id`变换，`CHAIN_ID_OFFSET`为`35`。此时交易只在对应`chain_id`的链上有效。
+-  如果`未签名交易信息`中不包含`chainId`，签名得到的`v`需要经过`v = v_raw + V_OFFSET`变换，`V_OFFSET`为`27`。此时交易在所有链上有效。（正式链，几个不同的测试链）
+
+# AES256加密解密
+
+使用依赖`pip3 install pycrypto`。
+
+测试代码：
+
+```python
+from Crypto.Cipher import AES
+from Crypto import Random
+import base64
+
+BS = 16
+pad = lambda s: s + (BS - len(s) % BS) * chr(BS - len(s) % BS) 
+unpad = lambda s : s[0:-s[-1]]
+
+# bkey可以是16, 24 或 32 位长度， 其对应 AES-128, AES-196 和 AES-256
+
+bkey = "12345678901234561234567890123456"
+print(bkey)
+raw="test raw data 123 456 abcde";
+raw = pad(raw)
+iv ="0102030405060708";
+print("iv="+iv)
+cipher = AES.new(bkey, AES.MODE_CBC, iv )
+print(len(raw))
+print(raw)
+
+ciphertext= cipher.encrypt(raw)
+print(ciphertext)
+ciphertext_base64=base64.b64encode(ciphertext)
+print(ciphertext_base64)
+
+print('============================')
+
+enc=base64.b64decode(ciphertext_base64)
+cipher = AES.new(bkey, AES.MODE_CBC, iv )
+
+text=cipher.decrypt(enc);
+print(len(text))
+print(text)
+print(text.hex())
+plaintext= unpad(text)
+print("%s" % plaintext.decode())
+```
+
+# RSA2048签名验签
+
+使用依赖`pip3 install pycrypto`。
+
+生成公私钥对：
+
+```bash
+openssl genrsa -out ./myPrivateKey.pem -passout pass:"f00bar" -des3 2048
+openssl rsa -pubout -in ./myPrivateKey.pem -passin pass:"f00bar" -out ./myPublicKey.pem
+```
+
+测试代码：
+
+```python
+from Crypto.PublicKey import RSA
+from Crypto.Hash import SHA
+from Crypto.Signature import PKCS1_v1_5
+from base64 import b64encode, b64decode
+
+def rsa_sign(message):
+  private_key_file = open('./myPrivateKey.pem', 'r')
+  private_key = RSA.importKey(private_key_file.read(), 'f00bar')
+  hash_obj = SHA.new(message)
+ signer = PKCS1_v1_5.new(private_key)
+  d = b64encode(signer.sign(hash_obj))
+  return d
+
+def rsa_verify(message, signature):
+ public_key_file = open('./myPublicKey.pem', 'r')
+  public_key = RSA.importKey(public_key_file.read())
+  sign = b64decode(signature)
+ h = SHA.new(message)
+  verifier = PKCS1_v1_5.new(public_key)
+ return verifier.verify(h, sign)
+
+msg = b'asdasdasdasdasdasd'
+
+s = rsa_sign(msg)
+print(s)
+v = rsa_verify(msg, s)
+print(v)
+v = rsa_verify(msg + b'a', s)
+print(v)
+```
+
+# pkcs8
+
+```bash
+openssl pkcs8 -topk8 -inform PEM -in ClientPrivateKey.pem -passin pass:"f00bar" -outform pem -nocrypt -out ClientPrivateKeypkcs8.pem
+```</description>
+</item>
+</rdf:RDF>

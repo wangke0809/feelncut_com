@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+xmlns="http://purl.org/rss/1.0/"
+xmlns:dc="http://purl.org/dc/elements/1.1/">
+<channel rdf:about="https://feelncut.com/feed/rss/">
+<title>小王同学</title>
+<link>https://feelncut.com/</link>
+<description>希望通过自我加工，成为有点用的人</description>
+<items>
+<rdf:Seq>
+<rdf:li resource="https://feelncut.com/2020/08/24/323.html"/>
+<rdf:li resource="https://feelncut.com/2020/08/24/322.html"/>
+<rdf:li resource="https://feelncut.com/2020/06/06/312.html"/>
+<rdf:li resource="https://feelncut.com/2020/05/20/308.html"/>
+<rdf:li resource="https://feelncut.com/2020/02/02/288.html"/>
+<rdf:li resource="https://feelncut.com/2019/12/09/giaocamerarobot.html"/>
+<rdf:li resource="https://feelncut.com/2019/10/04/267.html"/>
+<rdf:li resource="https://feelncut.com/2018/10/17/228.html"/>
+<rdf:li resource="https://feelncut.com/2018/09/11/188.html"/>
+<rdf:li resource="https://feelncut.com/2018/09/11/184.html"/>
+</rdf:Seq>
+</items>
+</channel>
+<item rdf:about="https://feelncut.com/2020/08/24/323.html">
+<title>ETH 2.0 资源汇总（持续更新）</title>
+<link>https://feelncut.com/2020/08/24/323.html</link>
+<dc:date>2020-08-24T11:06:00+08:00</dc:date>
+<description>## 0 概述
+
+本文整理总结了 ETH 2.0 学习、研究的常用资源，持续更新中。
+
+ETH 2.0 整体介绍：https://hackernoon.com/what-to-expect-when-eths-expecting-80cb4951afcd
+国内社区翻译版本：https://www.odaily.com/post/5135663
+
+![](/images/2020/08/1751595903.png)
+
+目前，ETH 2.0 已经启动了 Phase 0 测试网，可以通过质押 GöETH 成为验证节点。
+
+[...]</description>
+</item>
+<item rdf:about="https://feelncut.com/2020/08/24/322.html">
+<title>ETH 2.0 测试网验证节点质押流程体验</title>
+<link>https://feelncut.com/2020/08/24/322.html</link>
+<dc:date>2020-08-24T10:41:00+08:00</dc:date>
+<description>## 0 概述
+
+本文记录了 ETH 2.0 测试网验证节点质押流程。
+
+[...]</description>
+</item>
+<item rdf:about="https://feelncut.com/2020/06/06/312.html">
+<title>通过 openssl 导出 HTTPS 网站 SSL 证书链</title>
+<link>https://feelncut.com/2020/06/06/312.html</link>
+<dc:date>2020-06-06T13:15:56+08:00</dc:date>
+<description>用 c 写 https 客户端的时候需要自己去验证服务器 ssl 证书，验证的时候需要给定证书链，使用 openssl 可以很方便的导出。
+
+- 输入 openssl 进入交互模式
+- s_client -showcerts -connect www.baidu.com:443
+</description>
+</item>
+<item rdf:about="https://feelncut.com/2020/05/20/308.html">
+<title>如何开发一款区块链浏览器？</title>
+<link>https://feelncut.com/2020/05/20/308.html</link>
+<dc:date>2020-05-20T16:29:00+08:00</dc:date>
+<description>## 摘要
+步入币圈大门后，除了钱包应用之外，用户最先接触的应该还有区块链浏览器。区块链浏览器不同于电脑和手机上浏览网页用的浏览器软件，而是指一个网站可以查询区块链上的具体信息。比如，给定区块高度，可以查询该高度区块的创建时间，包含了多少交易；给定一个地址，可以查询余额，该地址的所有交易记录等。当前以太坊上的数据量级已达亿级，如何进行数据持久化和查询呢？本文以以太坊为例，对区块链浏览器原理及存储细节进行分析总结。
+
+[...]</description>
+</item>
+<item rdf:about="https://feelncut.com/2020/02/02/288.html">
+<title>EOS 提交交易失败分析</title>
+<link>https://feelncut.com/2020/02/02/288.html</link>
+<dc:date>2020-02-02T12:53:00+08:00</dc:date>
+<description>[TOC]
+
+EOS  向节点提交交易时失败，提示 billed CPU time (Y us) is greater than the maximum billable CPU time for the transaction (X us).
+
+本文通过分析源代码来一探这个失败的原因，首先给出结论：
+
+- 当前时间窗口内（24小时）用户**最大** CPU 时间 = 全网总 CPU 时间 * 当前用户质押 EOS 数量 / 所有用户质押 EOS 数量
+
+- 当前时间窗口内用户**可用** CPU 时间 = 当前用户**最大** CPU 时间 - 当前用户已经使用 CPU 时间
+
+- 当前用户**已经使用** CPU 时间是实时变化的：(1 - t / 24) * t 时间之前使用的资源大小，直到距离上次 CPU 资源使用 24 小时后（t = 24）完全恢复
+
+- Get Account 接口看到的不是实时可用的资源使用量，而是上一笔交易之后缓存的资源使用量
+
+- 向 RPC 节点提交交易时 RPC 节点会计算出当前交易 CPU 使用量，这个 CPU 使用量和当前 RPC 节点 CPU 使用情况有关，通过系统计时器计算时间，因此，RPC 节点计算出的交易 CPU 使用量不是最终上链时的交易使用量，最终交易时的 CPU 使用量由打包节点决定。
+
+- 因此，当质押 CPU EOS 数量固定时，向 RPC 节点提交交易时，CPU 资源需要满足 交易使用 CPU 资源的大小 [...]</description>
+</item>
+<item rdf:about="https://feelncut.com/2019/12/09/giaocamerarobot.html">
+<title>小 Giao 之死</title>
+<link>https://feelncut.com/2019/12/09/giaocamerarobot.html</link>
+<dc:date>2019-12-09T22:18:00+08:00</dc:date>
+<description>## 机器人小 Giao 的前生今世
+
+一个突然地想法，想到用个普通的摄像头做个预警机器人🤖，于是折腾了三四天，小 Giao 出生了。
+
+![](/images/2019/12/245685690.png)
+*小 Giao 的头像经过模糊处理，头像来自 Allenzsy 在群里分享的第一个图片！*
+
+小 Giao 威力巨大，为了防止小 Giao 统治人类世界，已经将其一棒子打死，尸体在： https://github.com/wangke0809/GiaoCameraRobot
+
+------------
+
+## 目录
+
+[TOC]
+
+## 需求
+
+需求分析：
+
+- 进入实验室检测：能够通过摄像头实时检测到有人进入实验室 -> Face Detection + Multi-label Classification
+
+- 检测结果通知：能够方便的接受监测结果 -> 使用钉钉群聊机器人
+
+- 轻量级资源占用：工位上除了有个 2015 年办公的老电脑（i7-4790），还有个 GPU 工作站，因为借来的摄像头数据线长度不够，以及考虑到在工作站上跑实验时占用资源多会严重造成系统卡顿，所以决定在办公电脑上跑小 Giao ，所以需要保证运行小 Giao 的时候不能影响正常办公 -> 聚焦关键区域 + 上下帧图像变化量阈值
+
+[...]</description>
+</item>
+<item rdf:about="https://feelncut.com/2019/10/04/267.html">
+<title>《凶宅》和《疯人院》</title>
+<link>https://feelncut.com/2019/10/04/267.html</link>
+<dc:date>2019-10-04T23:34:19+08:00</dc:date>
+<description>最近看了《美国恐怖故事》第一季《凶宅》和第二季《疯人院》，两季剧里都从特别的角度深刻的揭露了人性。
+
+第一季《凶宅》感触最深的是信任和猜忌。心理医生和妻子之间多年的信任因为医生的背叛而出现裂痕，虽然双方都有意去修补裂痕，但是这种裂痕随着凶宅里恶灵作怪而更加深刻。当得知妻子怀孕双胞胎里一的个父亲是医生，另一个的父亲却是他人，医生理所当然的开始猜忌，首先想到的就是妻子聘用的保安。剧里描述的信任危机，和信任危机下的猜忌，让人感触颇深。
+
+第二季《疯人院》，这季剧后半部分，大家都在寻求获得他人的谅解和谅解他人，男主教知道恶魔的身份和疯人院医生变态的实验时去寻找已经被自己搞疯的裘德修女的谅解和指引，裘德修女疯了之后希望得到记者拉娜的谅解并帮助拉娜逃出疯人院，而拉娜和被冤枉的基特出了疯人院后又谅解了造成两人悲剧的裘德修女，付出努力去解救修女，从这个角度看谅解不仅解救了别人，更重要的是让自己获得释怀，也解救了自己。
+
+好在两季结局还算美满，没有给观众过多的遗憾。
+
+信任的裂痕可以靠愧疚带来的坚定得到修补，随着双方的坚持裂痕逐渐消失，当心理医生和妻子都成为鬼魂时，意味着两人向对方坦白了所有的阴暗面，裂痕也不复存在了。
+
+当拉娜和基特谅解了修女时，两人也一定程度上升华了自己，放下了仇恨和痛苦，迎接各自的新生。
+
+《疯人院》一直围绕着神经病展开，《凶宅》中医生的妻子也被医生亲手送进了精神病院，所以这两季剧告诉我们：当你要成为神经病的时候，要学会对自己和自己伤害的人坦白，要获得伤害自己的人坦白，修复信任造成的裂痕；无法修复就要去原谅，原谅他人，原谅自己，才能获得新生。</description>
+</item>
+<item rdf:about="https://feelncut.com/2018/10/17/228.html">
+<title> 以太坊多重签名原理分析</title>
+<link>https://feelncut.com/2018/10/17/228.html</link>
+<dc:date>2018-10-17T01:54:00+08:00</dc:date>
+<description>## 目录
+
+[TOC]
+
+## 0 起源与现状
+
+一般来说一个以太坊地址对应一个私钥，动用这个地址中的资金需要私钥的掌握者发起签名才行。消费这笔资金时，所构造的签名交易被称为“单签名交易”。
+
+而多重签名技术，简单来说，一个以太坊地址对应多个私钥，就是动用一笔资金时需要多个私钥签名才有效。消费这笔资金时，所构造的签名交易被称为“多签名交易”，或者“M-of-N 交易”，对应的比特币地址被称为“多签地址”。
+
+目前，在以太坊中常用的多签钱包有：
+
+- [Mist](https://github.com/ethereum/mist) 以太坊官方维护的钱包，支持多签
+- [Ethereum Wallet](https://www.ethereum.org/) 以太坊官方维护的钱包，支持多签
+- [Parity](https://github.com/paritytech/parity-ethereum) 支持多签
+
+在以太坊中，多签钱包全部都是通过智能合约实现，下面介绍以太坊中的多签实现原理，实例分析。
+
+[...]</description>
+</item>
+<item rdf:about="https://feelncut.com/2018/09/11/188.html">
+<title>OpenCV 初识图像</title>
+<link>https://feelncut.com/2018/09/11/188.html</link>
+<dc:date>2018-09-11T22:30:00+08:00</dc:date>
+<description>[...]</description>
+</item>
+<item rdf:about="https://feelncut.com/2018/09/11/184.html">
+<title>为什么要系统的学习一下Pyhton-OpenCV?</title>
+<link>https://feelncut.com/2018/09/11/184.html</link>
+<dc:date>2018-09-11T14:43:00+08:00</dc:date>
+<description>我的想法：
+
+- 使用C/C++配置太麻烦（但是文档齐全）
+- 快速验证想法
+- 便于与深度学习结合
+- 便于实现各种玩具级小项目
+- 性能若有要求，便于转向C/C++实现
+
+学习思路：
+
+主要参考官网文档：https://docs.opencv.org/3.4.2/
+
+目前最新稳定版为`3.4.2`，其实没有必要纠结学哪个版本，基本函数出入参没啥变化，有变化的具体查一下手册即可，后续准备结合手册和源码学习。</description>
+</item>
+</rdf:RDF>

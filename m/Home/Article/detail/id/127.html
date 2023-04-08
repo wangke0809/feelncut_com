@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+  <meta charset="UTF-8">
+  <title>搭建Tengine+flask+php+mysql环境|Winke's blog</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <link rel="alternate icon" type="image/png" href="../../../../Public/static/amaze/i/favicon.png">
+  <link rel="stylesheet" href="../../../../Public/static/amaze/css/amazeui.min.css"/>
+  <link rel="stylesheet" href="../../../../Public/static/ueditor/third-party/SyntaxHighlighter/shCoreDefault.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../Public/Home/css/blog.css">
+    <!--<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?e9ff349d5b883760c70a4e220c9ac8ca";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>-->
+    <style>
+    .g-hd {
+    background-image: url("../../../../Editor/2016-07-25/57962ebcddb49.png");
+    }
+
+    @media only screen and (min-width: 641px) {
+      .am-offcanvas {
+        display: block;
+        position: static;
+        background: none;
+      }
+
+      .am-offcanvas-bar {
+        position: static;
+        width: auto;
+        background: none;
+        -webkit-transform: translate3d(0, 0, 0);
+        -ms-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+      }
+      .am-offcanvas-bar:after {
+        content: none;
+      }
+
+    }
+    
+    @media only screen and (max-width: 640px) {
+      .am-offcanvas-bar .am-nav>li>a {
+        color:#ccc;
+        border-radius: 0;
+        border-top: 1px solid rgba(0,0,0,.3);
+        box-shadow: inset 0 1px 0 rgba(255,255,255,.05)
+      }
+
+      .am-offcanvas-bar .am-nav>li>a:hover {
+        background: #404040;
+        color: #fff
+      }
+
+      .am-offcanvas-bar .am-nav>li.am-nav-header {
+        color: #777;
+        background: #404040;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,.05);
+        text-shadow: 0 1px 0 rgba(0,0,0,.5);
+        border-top: 1px solid rgba(0,0,0,.3);
+        font-weight: 400;
+        font-size: 75%
+      }
+
+      .am-offcanvas-bar .am-nav>li.am-active>a {
+        background: #1a1a1a;
+        color: #fff;
+        box-shadow: inset 0 1px 3px rgba(0,0,0,.3)
+      }
+
+      .am-offcanvas-bar .am-nav>li+li {
+        margin-top: 0;
+      }
+    }
+
+    .my-head {
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    .my-button {
+      position: fixed;
+      top: 0;
+      right: 0;
+      border-radius: 0;
+    }
+    .my-sidebar {
+      padding-right: 0;
+      border-right: 1px solid #eeeeee;
+    }
+
+    .my-footer {
+      border-top: 1px solid #eeeeee;
+      padding: 10px 0;
+      margin-top: 10px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+<div class="g-hd" style="height:200px;"></div>
+<div class="m-hdimg" style="margin:-53px auto 0;display:block;text-align: center;">
+                <a class="hdimg img" href="../../../../old_index.html" >
+                    <img src="../../../../picture/avater2.jpg" height="96" width="96">
+                </a>
+            </div>
+<header class="am-g my-head">
+  <div class="am-u-sm-12 am-article">
+    <h1 class="am-article-title">搭建Tengine+flask+php+mysql环境</h1>
+    <p class="am-article-meta">王珂&nbsp;于&nbsp;2016-06-10 21:51</p>
+  </div>
+</header>
+<hr class="am-article-divider"/>
+<div class="am-g am-g-fixed">
+  <div class="am-u-md-12">
+    <div class="am-g">
+      <div class="am-u-sm-11 am-u-sm-centered">
+      <? php if($info.['description']!=''){ ?>
+      <blockquote>考研太痛苦，无聊接触点新东西。</blockquote>
+      <? }  ?>
+        <div class="am-cf am-article">
+		<h2 style="margin: 0px; font-size: 26px; padding-top: 10px; font-family: Verdana, Geneva, Arial, Helvetica, sans-serif; white-space: normal; text-align: left; background-color: rgb(255, 255, 255);"><span style="font-family: 宋体, SimSun; font-size: 24px; background-color: rgb(255, 255, 255);">Tengine</span></h2><p style="text-align: left;"><span style="font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;  background-color: rgb(255, 255, 255);">Tengine是由淘宝网发起的Web服务器项目。它在</span><a href="http://nginx.org/" style="margin: 0px; text-decoration: none; font-family: Verdana, Geneva, Arial, Helvetica, sans-serif; white-space: normal; background-color: rgb(255, 255, 255);">Nginx</a><span style="font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;  background-color: rgb(255, 255, 255);">的基础上，针对大访问量网站的需求，添加了很多高级功能和特性。Tengine的性能和稳定性已经在大型的网站如</span><a href="http://www.taobao.com/" style="margin: 0px; text-decoration: none; font-family: Verdana, Geneva, Arial, Helvetica, sans-serif; white-space: normal; background-color: rgb(255, 255, 255);">淘宝网</a><span style="font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;  background-color: rgb(255, 255, 255);">，</span><a href="http://www.tmall.com/" style="margin: 0px; text-decoration: none; font-family: Verdana, Geneva, Arial, Helvetica, sans-serif; white-space: normal; background-color: rgb(255, 255, 255);">天猫商城</a><span style="font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;  background-color: rgb(255, 255, 255);">等得到了很好的检验。它的最终目标是打造一个高效、稳定、安全、易用的Web平台。</span><br style="margin: 0px; font-family: Verdana, Geneva, Arial, Helvetica, sans-serif; white-space: normal; text-align: left; background-color: rgb(255, 255, 255);"/><br style="margin: 0px; font-family: Verdana, Geneva, Arial, Helvetica, sans-serif; white-space: normal; text-align: left; background-color: rgb(255, 255, 255);"/><span style="font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;  background-color: rgb(255, 255, 255);">从2011年12月开始，Tengine成为一个开源项目，Tengine团队在积极地开发和维护着它。Tengine团队的核心成员来自于</span><a href="http://www.taobao.com/" style="margin: 0px; text-decoration: none; font-family: Verdana, Geneva, Arial, Helvetica, sans-serif; white-space: normal; background-color: rgb(255, 255, 255);">淘宝</a><span style="font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;  background-color: rgb(255, 255, 255);">、</span><a href="http://www.sogou.com/" style="margin: 0px; text-decoration: none; font-family: Verdana, Geneva, Arial, Helvetica, sans-serif; white-space: normal; background-color: rgb(255, 255, 255);">搜狗</a><span style="font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;  background-color: rgb(255, 255, 255);">等互联网企业。Tengine是社区合作的成果，我们欢迎大家</span><a href="http://tengine.taobao.org/source_cn.html" style="margin: 0px; text-decoration: none; font-family: Verdana, Geneva, Arial, Helvetica, sans-serif; white-space: normal; background-color: rgb(255, 255, 255);">参与其中</a><span style="font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;  background-color: rgb(255, 255, 255);">，贡献自己的力量。</span></p><p><br style="text-align: left;"/></p><p style="text-align: left;">官网：http://tengine.taobao.org/</p><p style="text-align: left;">首先在/usr/local/src目录下下载源码并解压</p><pre>wget&nbsp;http://tengine.taobao.org/download/tengine-2.1.2.tar.gz
+tar&nbsp;-zxvf&nbsp;tengine-2.1.2.tar.gz</pre><p style="text-align: left;">如果没安装GCC需要安装下，以及以来的openssl pcre</p><pre class="brush:bash;toolbar:false"><br/></pre><p style="text-align: left;">使用默认配置安装 目录/usr/local/nginx</p><pre>./configure
+make
+make&nbsp;install</pre><p style="text-align: left;">tengine安装完毕</p><p>开机启动可以参考网上的启动脚本</p><h2 style="text-align: left;"><span style="font-family: 宋体, SimSun; font-size: 24px;">PHP</span></h2><p style="text-align: left;"><span style="font-family:宋体, SimSun"><span style="font-size: 16px; font-family: arial, helvetica, sans-serif;">为了省事儿</span></span></p><pre class="brush:bash;toolbar:false">yum&nbsp;install&nbsp;php&nbsp;php-fpm</pre><p style="text-align: left;">使用yum安装fpm会自动添加到service，设置开机启动即可</p><pre class="brush:bash;toolbar:false">chkconfig&nbsp;php-fpm&nbsp;on</pre><p style="text-align: left;"><span style="font-family:宋体, SimSun"><span style="font-size: 16px; font-family: arial, helvetica, sans-serif;"><br/></span></span></p><h2 style="text-align: left;"><span style="font-family: arial, helvetica, sans-serif; font-size: 24px;">MYSQL</span></h2><p><span style="font-family: arial, helvetica, sans-serif; font-size: 16px;">使用mariadb分支也可以。为了省事儿</span><span style="font-family: arial, helvetica, sans-serif; font-size: 24px;"><br/></span></p><pre class="brush:bash;toolbar:false">yum&nbsp;install&nbsp;mysql&nbsp;mysql-server</pre><p><br/><span style="font-family: arial, helvetica, sans-serif; font-size: 16px;"></span></p><h2 style="text-align: left;"><span style="font-family:arial, helvetica, sans-serif">uwsgi</span></h2><p style="text-align: left;"><span style="font-family:宋体, SimSun"><span style="font-size: 16px; font-family: arial, helvetica, sans-serif;">使用pip安装uwsgi 最好先安装了libxml2，这样uwsgi支持-x参数解析xml配置文件</span></span></p><p style="text-align: left;">pip安装flask，MysqlDb，最好先写个简单的脚本测试下能不能访问。</p><pre class="brush:bash;toolbar:false">from&nbsp;flask&nbsp;import&nbsp;Flask
+
+app&nbsp;=&nbsp;Flask(__name__)
+app.secret_key&nbsp;=&nbsp;&#39;love&#39;
+
+@app.route(&#39;/&#39;)
+def&nbsp;index():
+	return&nbsp;&quot;I&nbsp;love&nbsp;u&nbsp;so&nbsp;much!!&quot;
+
+if&nbsp;__name__&nbsp;==&nbsp;&#39;__main__&#39;:
+&nbsp;&nbsp;&nbsp;&nbsp;app.run(debug=True,host=&quot;0.0.0.0&quot;,port=5000)</pre><p style="text-align: left;"><br/></p><p style="text-align: left;"><br/></p><p style="text-align: left;">tengine配置文件</p><pre class="brush:bash;toolbar:false">user&nbsp;&nbsp;root;
+worker_processes&nbsp;&nbsp;1;
+
+#error_log&nbsp;&nbsp;logs/error.log;
+#error_log&nbsp;&nbsp;logs/error.log&nbsp;&nbsp;notice;
+#error_log&nbsp;&nbsp;logs/error.log&nbsp;&nbsp;info;
+
+pid&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;logs/nginx.pid;
+
+
+events&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;worker_connections&nbsp;&nbsp;1024;
+}
+
+#&nbsp;load&nbsp;modules&nbsp;compiled&nbsp;as&nbsp;Dynamic&nbsp;Shared&nbsp;Object&nbsp;(DSO)
+#
+#dso&nbsp;{
+#&nbsp;&nbsp;&nbsp;&nbsp;load&nbsp;ngx_http_fastcgi_module.so;
+#&nbsp;&nbsp;&nbsp;&nbsp;load&nbsp;ngx_http_rewrite_module.so;
+#}
+
+http&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;include&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mime.types;
+&nbsp;&nbsp;&nbsp;&nbsp;default_type&nbsp;&nbsp;application/octet-stream;
+
+&nbsp;&nbsp;&nbsp;&nbsp;#log_format&nbsp;&nbsp;main&nbsp;&nbsp;&#39;$remote_addr&nbsp;-&nbsp;$remote_user&nbsp;[$time_local]&nbsp;&quot;$request&quot;&nbsp;&#39;
+&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#39;$status&nbsp;$body_bytes_sent&nbsp;&quot;$http_referer&quot;&nbsp;&#39;
+&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#39;&quot;$http_user_agent&quot;&nbsp;&quot;$http_x_forwarded_for&quot;&#39;;
+
+&nbsp;&nbsp;&nbsp;&nbsp;#access_log&nbsp;&nbsp;logs/access.log&nbsp;&nbsp;main;
+
+&nbsp;&nbsp;&nbsp;&nbsp;sendfile&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;on;
+&nbsp;&nbsp;&nbsp;&nbsp;#tcp_nopush&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;on;
+
+&nbsp;&nbsp;&nbsp;&nbsp;#keepalive_timeout&nbsp;&nbsp;0;
+&nbsp;&nbsp;&nbsp;&nbsp;keepalive_timeout&nbsp;&nbsp;65;
+
+&nbsp;&nbsp;&nbsp;&nbsp;#gzip&nbsp;&nbsp;on;
+
+&nbsp;&nbsp;&nbsp;&nbsp;server&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;listen&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;80;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;server_name&nbsp;&nbsp;localhost;
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#charset&nbsp;koi8-r;
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#access_log&nbsp;&nbsp;logs/host.access.log&nbsp;&nbsp;main;
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;location&nbsp;/&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;root&nbsp;&nbsp;&nbsp;html;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;index&nbsp;&nbsp;index.html&nbsp;index.htm;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;include&nbsp;uwsgi_params;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#uwsgi_pass&nbsp;127.0.0.1:5000;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uwsgi_pass&nbsp;unix:/home/pyweb/mcf.sock;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#error_page&nbsp;&nbsp;404&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/404.html;
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;redirect&nbsp;server&nbsp;error&nbsp;pages&nbsp;to&nbsp;the&nbsp;static&nbsp;page&nbsp;/50x.html
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;error_page&nbsp;&nbsp;&nbsp;500&nbsp;502&nbsp;503&nbsp;504&nbsp;&nbsp;/50x.html;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;location&nbsp;=&nbsp;/50x.html&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;root&nbsp;&nbsp;&nbsp;html;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;proxy&nbsp;the&nbsp;PHP&nbsp;scripts&nbsp;to&nbsp;Apache&nbsp;listening&nbsp;on&nbsp;127.0.0.1:80
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#location&nbsp;~&nbsp;\.php$&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;&nbsp;&nbsp;&nbsp;proxy_pass&nbsp;&nbsp;&nbsp;http://127.0.0.1;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#}
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;pass&nbsp;the&nbsp;PHP&nbsp;scripts&nbsp;to&nbsp;FastCGI&nbsp;server&nbsp;listening&nbsp;on&nbsp;127.0.0.1:9000
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#location&nbsp;~&nbsp;\.php$&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;&nbsp;&nbsp;&nbsp;root&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;html;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;&nbsp;&nbsp;&nbsp;fastcgi_pass&nbsp;&nbsp;&nbsp;127.0.0.1:9000;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;&nbsp;&nbsp;&nbsp;fastcgi_index&nbsp;&nbsp;index.php;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;&nbsp;&nbsp;&nbsp;fastcgi_param&nbsp;&nbsp;SCRIPT_FILENAME&nbsp;&nbsp;/scripts$fastcgi_script_name;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;&nbsp;&nbsp;&nbsp;include&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fastcgi_params;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#}
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;deny&nbsp;access&nbsp;to&nbsp;.htaccess&nbsp;files,&nbsp;if&nbsp;Apache&#39;s&nbsp;document&nbsp;root
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;concurs&nbsp;with&nbsp;nginx&#39;s&nbsp;one
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#location&nbsp;~&nbsp;/\.ht&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;&nbsp;&nbsp;&nbsp;deny&nbsp;&nbsp;all;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#}
+&nbsp;&nbsp;&nbsp;&nbsp;}
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;another&nbsp;virtual&nbsp;host&nbsp;using&nbsp;mix&nbsp;of&nbsp;IP-,&nbsp;name-,&nbsp;and&nbsp;port-based&nbsp;configuration
+&nbsp;&nbsp;&nbsp;&nbsp;#
+&nbsp;&nbsp;&nbsp;&nbsp;server&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;listen&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;8000;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#listen&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;localhost;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;server_name&nbsp;&nbsp;localhost;
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;location&nbsp;/&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;root&nbsp;&nbsp;&nbsp;html;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;index&nbsp;&nbsp;index.php&nbsp;index.html&nbsp;index.htm;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;location&nbsp;~&nbsp;\.php$&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;include&nbsp;fastcgi_params;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fastcgi_pass&nbsp;127.0.0.1:9000;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fastcgi_index&nbsp;index.php;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fastcgi_param&nbsp;SCRIPT_FILENAME&nbsp;/usr/local/nginx/html$fastcgi_script_name;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;}
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;HTTPS&nbsp;server
+&nbsp;&nbsp;&nbsp;&nbsp;#
+&nbsp;&nbsp;&nbsp;&nbsp;#server&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;&nbsp;&nbsp;&nbsp;listen&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;443&nbsp;ssl;
+&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;&nbsp;&nbsp;&nbsp;server_name&nbsp;&nbsp;localhost;
+
+&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;&nbsp;&nbsp;&nbsp;ssl_certificate&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cert.pem;
+&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;&nbsp;&nbsp;&nbsp;ssl_certificate_key&nbsp;&nbsp;cert.key;
+
+&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;&nbsp;&nbsp;&nbsp;ssl_session_cache&nbsp;&nbsp;&nbsp;&nbsp;shared:SSL:1m;
+&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;&nbsp;&nbsp;&nbsp;ssl_session_timeout&nbsp;&nbsp;5m;
+
+&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;&nbsp;&nbsp;&nbsp;ssl_ciphers&nbsp;&nbsp;HIGH:!aNULL:!MD5;
+&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;&nbsp;&nbsp;&nbsp;ssl_prefer_server_ciphers&nbsp;&nbsp;on;
+
+&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;&nbsp;&nbsp;&nbsp;location&nbsp;/&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;root&nbsp;&nbsp;&nbsp;html;
+&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;index&nbsp;&nbsp;index.html&nbsp;index.htm;
+&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;#}
+
+}</pre><p style="text-align: left;"><br/></p><p style="text-align: left;">flask项目的uwsgi配置文件</p><pre class="brush:bash;toolbar:false">[uwsgi]
+#application&#39;s&nbsp;base&nbsp;folder
+base&nbsp;=&nbsp;/home/pyweb
+&nbsp;
+#python&nbsp;module&nbsp;to&nbsp;import
+app&nbsp;=&nbsp;Server
+module&nbsp;=&nbsp;%(app)
+&nbsp;
+#home&nbsp;=&nbsp;%(base)
+#pythonpath&nbsp;=&nbsp;%(base)
+&nbsp;
+#socket&nbsp;file&#39;s&nbsp;location
+socket&nbsp;=&nbsp;/home/pyweb/mcf.sock
+&nbsp;
+#permissions&nbsp;for&nbsp;the&nbsp;socket&nbsp;file
+chmod-socket&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;666
+&nbsp;
+#the&nbsp;variable&nbsp;that&nbsp;holds&nbsp;a&nbsp;flask&nbsp;application&nbsp;inside&nbsp;the&nbsp;module&nbsp;imported&nbsp;at&nbsp;line&nbsp;#6
+callable&nbsp;=&nbsp;app
+&nbsp;
+#location&nbsp;of&nbsp;log&nbsp;files
+logto&nbsp;=&nbsp;/home/pyweb/log.log</pre><p style="text-align: left;"><br/></p><p style="text-align: left;">开机启动uwsgi的方法：</p><p style="text-align: left;">在/etc/rc.d/rc.loacl中添加</p><pre class="brush:bash;toolbar:false">cd&nbsp;/home/pyweb;/usr/bin/uwsgi&nbsp;-d&nbsp;--ini&nbsp;/home/pyweb/mcf.ini&nbsp;#启动uwsgi
+/etc/init.d/nginx&nbsp;start&nbsp;#启动tengine</pre><p style="text-align: left;"><br/></p><p style="text-align: left;">访问http://ip 为flask项目</p><p style="text-align: left;">访问http://ip:5000 为php项目</p><p style="text-align: left;"><br/></p><p style="text-align: left;"><br/></p>        </div>
+      </div>
+    </div>
+    <hr class="am-article-divider"/>
+    <div class="am-center" style="text-align:center;margin-bottom:15px;">
+    <a href="124.html">上一篇</a>    <a href="128.html">下一篇</a>    </div>
+    <!-- <hr class="am-article-divider"/> -->
+      </div>
+</div>
+    <div style="right: 15px;" class="amz-toolbar" id="amz-toolbar">
+    <a href="#top" title="回到顶部" class="am-icon-btn am-icon-arrow-up am-active" id="amz-go-top"></a>
+    </div>
+    <footer class="footer" style="background-color:#303336;">
+     <div class="g-ft" style="padding-top:20px;">
+     <div class="">
+      <div  style="float:left;width:50%;text-align:right;">
+        <ul class="m-bottom-nav" style="margin:0 20px 0 0;">
+          <li>
+                  <a href="../../../Index/index.html" target="_self">首页</a>
+              </li><li>
+                  <a href="http://www.zhangwenxuan.cn/" target="_blank">好基友</a>
+              </li><li>
+                  <a href="http://blog.wozhendehaoaini.cn/" target="_blank">老博客</a>
+              </li><li>
+                  <a href="66.html" target="_self">关于我</a>
+              </li>        </ul>
+      </div>
+      <div  style="float:right;width:50%;text-align:left;">
+        <ul class="m-bottom-nav" style="margin:0 0 0 20px;">
+           		<li>
+			<a href="../../lists/category/feeling.html">
+				<i class="icon-chevron-right"></i>随笔心情			</a>
+		</li>		<li>
+			<a href="../../lists/category/learnsth.html">
+				<i class="icon-chevron-right"></i>学习研究			</a>
+		</li>		<li>
+			<a href="../../lists/category/sizhou.html">
+				<i class="icon-chevron-right"></i>飞控研究			</a>
+		</li>		<li>
+			<a href="../../lists/category/Python.html">
+				<i class="icon-chevron-right"></i>Python			</a>
+		</li>		<li>
+			<a href="../../lists/category/wxmp.html">
+				<i class="icon-chevron-right"></i>微信平台			</a>
+		</li>        </ul>        
+      </div>
+    </div>
+           <p style="clear:both;padding-top:15px;" class="m-cprt">©&nbsp;<a href="../../../../index.html">花开花落</a>&nbsp;京ICP备15006955号-1&nbsp;|&nbsp;Powered by <a href="../../../../index.html">Winke</a></p> 
+    </div>
+    </footer>
+
+<!--[if lt IE 9]>
+<script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
+<script src="/Public/static/amaze/js/polyfill/rem.min.js"></script>
+<script src="/Public/static/amaze/js/polyfill/respond.min.js"></script>
+<script src="/Public/static/amaze/js/amazeui.legacy.js"></script>
+<![endif]-->
+
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script src="../../../../Public/static/amaze/js/jquery.min.js"></script>
+<script src="../../../../Public/static/amaze/js/amazeui.min.js"></script>
+<script type="text/javascript" src="../../../../Public/static/ueditor/third-party/SyntaxHighlighter/shCore.js"></script>
+<script src="../../../../Public/Home/js/blog.js"></script>
+<script type="text/javascript"> SyntaxHighlighter.all(); </script>
+<!--<![endif]-->
+</body>
+</html>

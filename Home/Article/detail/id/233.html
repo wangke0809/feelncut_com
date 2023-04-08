@@ -1,0 +1,246 @@
+<!DOCTYPE HTML>
+<html class="no-js">
+
+<head>
+	  <meta charset="UTF-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="花开花落——Winke's个人博客">
+  <meta name="keywords" content="花开花落——Winke's个人博客,王珂,北方工业大学">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>Java面向过程基础学习笔记|Winke's blog</title>
+  <link rel="stylesheet" href="../../../../Public/static/amaze/css/amazeui.min.css">
+  <link rel="stylesheet" href="../../../../Public/Home/css/blog.css">
+<style>
+	.g-hd {
+    background-image: url("../../../../picture/bg.png");
+	}
+  .pic{
+  width: 28%;
+  /*height: 100px;*/
+  margin:5px;
+  }
+  .mpic{
+    margin: 10px auto;
+  }
+</style>
+
+<link rel="stylesheet" href="../../../../Public/static/ueditor/third-party/SyntaxHighlighter/shCoreDefault.css" type="text/css" />
+<style type="text/css">
+</style>	
+
+
+<!-- 页面header钩子，一般用于加载插件CSS文件和代码 -->
+
+	<!--<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?e9ff349d5b883760c70a4e220c9ac8ca";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>-->
+</head>
+<body>
+	<!-- 头部 -->
+	<div class="g-hd"></div>
+	<!-- /头部 -->
+	
+	<!-- 主体 -->
+	<div class="am-g box">
+<!-- am-show-lg-only -->
+<div class="">  
+  <div class="g-bd bd">
+    <div class="g-sd">
+			<div class="m-hdimg">
+				<a class="hdimg img" href="../../../../old_index.html">
+					<img src="../../../../picture/avater2.jpg" height="96" width="96">
+				</a>
+			</div>
+			<h1 class="m-ttl">
+				<a href="../../../../index.html">花开花落</a>
+			</h1>
+			<p class="m-about">深情不及久伴。</p>
+
+			<ul class="m-nav">
+				
+				<li>
+                            <a href="../../../Index/index.html" target="_self">首页</a>
+                        </li><li>
+                            <a href="http://www.zhangwenxuan.cn/" target="_blank">好基友</a>
+                        </li><li>
+                            <a href="http://blog.wozhendehaoaini.cn/" target="_blank">老博客</a>
+                        </li><li>
+                            <a href="66.html" target="_self">关于我</a>
+                        </li>				
+				<!-- Search 
+				<li class="m-sch">
+					<a id="j-lnksch" href="#">搜索</a>
+					<form id="j-schform" class="form" method="get" action="/search">
+						<input name="q" class="txt" placeholder="输入关键字" type="text">
+					</form>
+				</li>-->
+			</ul>
+			<ul class="m-nav">
+				
+				
+                    		<li>
+			<a href="../../lists/category/feeling.html">
+				<i class="icon-chevron-right"></i>随笔心情			</a>
+		</li>		<li>
+			<a href="../../lists/category/learnsth.html">
+				<i class="icon-chevron-right"></i>学习研究			</a>
+		</li>		<li>
+			<a href="../../lists/category/sizhou.html">
+				<i class="icon-chevron-right"></i>飞控研究			</a>
+		</li>		<li>
+			<a href="../../lists/category/Python.html">
+				<i class="icon-chevron-right"></i>Python			</a>
+		</li>		<li>
+			<a href="../../lists/category/wxmp.html">
+				<i class="icon-chevron-right"></i>微信平台			</a>
+		</li>				
+				<!-- Search 
+				<li class="m-sch">
+					<a id="j-lnksch" href="#">搜索</a>
+					<form id="j-schform" class="form" method="get" action="/search">
+						<input name="q" class="txt" placeholder="输入关键字" type="text">
+					</form>
+				</li>-->
+			</ul>
+		</div>
+
+        <div class="g-mn">
+            <div class="g-mnc box"> 
+                
+                <div class="m-postlst">
+                
+    <header class="jumbotron subhead" id="overview">
+		<div class="container">
+			<h2>Java面向过程基础学习笔记</h2>
+			
+		</div>
+	</header>
+
+                
+    <div class="span9 main-content">
+        <!-- Contents
+        ================================================== -->
+        <section id="contents"><p>按照课程顺序进行记录，笔记漏掉了不少东西，慢慢在补充吧。<br/></p><p><br/></p><p><strong>基本的输入输出</strong></p><pre class="brush:java;toolbar:false">import&nbsp;java.util.Scanner;
+
+Scanner&nbsp;in&nbsp;=&nbsp;new&nbsp;Scanner(System.in);
+int&nbsp;num&nbsp;=&nbsp;in.nextInt();
+
+System.out.println(&quot;hi&quot;);</pre><p><strong>浮点数计算</strong><br/></p><p>10/3与10.0/3或者结果不同，这点类似C语言。<strong><br/></strong></p><p>浮点数计算是有误差的，C语音，Python里面都一样。<br/></p><p>比如1.2-1.1或者1.1+2.2输出非0.1或者3.3。这是由计算机内部浮点运算单元决定的。</p><p><strong>基本数据类型</strong><br/></p><p><img src="../../../../Editor/2017-01-25/5888b5a37717f.png" title="blog131.png"/><strong><br/></strong></p><p><br/></p><p><br/></p><table><tbody valign="top"><tr><td><p>简单类型</p></td><td><p>boolean</p></td><td><p>byte</p></td><td><p>char</p></td><td><p>short</p></td><td><p>Int</p></td><td><p>long</p></td><td><p>float</p></td><td><p>double</p></td><td><p>void</p></td></tr><tr><td><p>二进制位数</p></td><td><p>1</p></td><td><p>8</p></td><td><p>16</p></td><td><p>16</p></td><td><p>32</p></td><td><p>64</p></td><td><p>32</p></td><td><p>64</p></td><td><p>--</p></td></tr><tr><td><p>封装器类</p></td><td><p>Boolean</p></td><td><p>Byte</p></td><td><p>Character</p></td><td><p>Short</p></td><td><p>Integer</p></td><td><p>Long</p></td><td><p>Float</p></td><td><p>Double</p></td><td><p>Void</p></td></tr></tbody></table><p>包裹类型只需要将基本类型首字母大写。</p><p><br/></p><p>对于数值类型的基本类型的取值范围，我们无需强制去记忆，因为它们的值都已经以常量的形式定义在对应的包装类中了。如：</p><p>基本类型byte 二进制位数：Byte.SIZE最小值：Byte.MIN_VALUE最大值：Byte.MAX_VALUE</p><p>基本类型short二进制位数：Short.SIZE最小值：Short.MIN_VALUE最大值：Short.MAX_VALUE</p><p>基本类型char二进制位数：Character.SIZE最小值：Character.MIN_VALUE最大值：Character.MAX_VALUE</p><p>基本类型double 二进制位数：Double.SIZE最小值：Double.MIN_VALUE最大值：Double.MAX_VALUE</p><p>注意：float、double两种类型的最小值与Float.MIN_VALUE、 Double.MIN_VALUE的值并不相同，实际上Float.MIN_VALUE和Double.MIN_VALUE分别指的是 float和double类型所能表示的最小正数。也就是说存在这样一种情况，0到±Float.MIN_VALUE之间的值float类型无法表示，0 到±Double.MIN_VALUE之间的值double类型无法表示。这并没有什么好奇怪的，因为这些范围内的数值超出了它们的精度范围。</p><p><br/></p><p>Float和Double的最小值和最大值都是以科学记数法的形式输出的，结尾的&quot;E+数字&quot;表示E之前的数字要乘以10的多少倍。比如3.14E3就是3.14×1000=3140，3.14E-3就是3.14/1000=0.00314。</p><p><br/></p><p>布尔型只能为true和false，（Python中首字母大写）,Java中不能用1或0代替真假，和C语言，Python不同。</p><p>对于char，中文采取Unicode编码，中文占两个字节。<br/></p><p><br/></p><p>Java基本类型存储在栈中，因此它们的存取速度要快于存储在堆中的对应包装类的实例对象。从Java5.0（1.5）开始，JAVA虚拟机（Java Virtual Machine）可以完成基本类型和它们对应包装类之间的自动转换。因此我们在赋值、参数传递以及数学运算的时候像使用基本类型一样使用它们的包装类，但这并不意味着你可以通过基本类型调用它们的包装类才具有的方法。另外，所有基本类型（包括void）的包装类都使用了final修饰，因此我们无法继承它们扩展新的类，也无法重写它们的任何方法。</p><p><br/></p><p>基本类型的优势：数据存储相对简单，运算效率比较高。</p><p><br/></p><p>包装类的优势：有的容易，比如集合的元素必须是对象类型，满足了java一切皆是对象的思想。</p><p><br/></p><p>常量用final修饰。</p><p><br/></p><p><strong>关系运算符</strong><br/></p><p>Java提供了六个关系运算符：</p><p>== &nbsp;相等</p><p>!= &nbsp;不相等</p><p>&gt; &nbsp; 大于</p><p>&gt;= &nbsp;大于或等于</p><p>&lt; &nbsp; 小于</p><p>&lt;= &nbsp;小于或等于</p><p><br/></p><p>注意其中有两个字符的运算符：==、&gt;=和&lt;=的两个字符必须紧紧连在一起，中间不能插入空格。&lt; p=&quot;&quot;&gt;</p><p><br/></p><p><strong>逻辑运算符</strong></p><p>在java的逻辑运算符中，有这么四类&amp;&amp;（短路与）、&amp;（与）、||（短路或）、|（非短路或）。</p><p>&amp;&amp;和&amp;都表示与，&amp;&amp;表示第一个条件为false时，后面的条件就不执行，&amp;要对所有的条件都进行判断。</p><p>||和|都表示或，||表示第一个条件为true时，后面的条件都不判断；| 对所有的条件进行判断。</p><p>&amp;与|目前我了解的是加入前者已经决定最终逻辑关系，但后边调减书写错误单个&amp;和|运行会报错，而&amp;&amp;和||不会。</p><p><br/></p><p><strong>算数运算</strong></p><p>+ &nbsp;- &nbsp;* &nbsp;/ &nbsp;% &nbsp;++ &nbsp;--</p><p><br/></p><p><strong>位运算</strong></p><p>&amp; | ~ ^ &gt;&gt; &lt;&lt;&gt;&gt;&gt;<!--<--></p><p><br/></p><p><a href="234.html" target="_self" title=""><strong>运算的优先级</strong></a></p><p>最笨的方法，加()</p><p><br/></p><p><strong>基本语法</strong><br/></p><p>if</p><p>if-else</p><p>if-else if</p><p>switch-case 可以是int也可以string</p><p>break,continue<br/></p><p>Java中可以通过标号的形式break或continue代码块</p><p><br/></p><p>do-while<br/></p><p>while</p><p>for</p><p>其中for(int i=1;i++;i<n)中的i作用域为这个for循环< p=""></n)中的i作用域为这个for循环<></p><p><br/></p><p>i++<br/></p><p>++i</p><p>i--</p><p>--i</p><p>同C</p><p><br/></p><p>for-each循环<br/></p><p>for(type element: array)，丢失了下表信息，这点不如php的for-each</p><p><br/></p><p><strong>数组</strong><br/></p><p>int[] nums = new int[10]</p><p>数组对象的内部成员length，代表数组内元素的个数，配合for遍历数组。</p><p><br/></p><p>数组的赋值&nbsp;</p><p>对某个元素赋值arr[i]=x<br/></p><p>对所有 arr[] = {a,b,c,d}。</p><p><br/></p><p>这里注意一下，数组变量是数组的管理者，而非数组的本身。就像sring变量是字符串的管理者，每次修改string是在内存中产生了新的内存地址，并非修改了原有内存地址中的字符串。</p><p>数组必须创建出来后交给数组变量来管理，数组变量之前的赋值是管理权限的赋予，数组变量之间的比较是判断是否管理同一个数组。<br/></p><p><br/></p><p>二位数组<br/></p><p>float[][] nums = new float[5][5];</p><p>int[][] nums = {{100,200,300,400},{500,600,700,800},{900,1000,1100,1200,1300}};</p><p><br/></p><p><br/></p><p><strong>字符类型</strong></p><p>字符也是Java中基础的数据类型之一，Java采用Unicode16表达字符，在所有的机器上，不管CPU、操作系统和本地语言，字符类型是一致和统一的。一个字符的常量是用单引号包围起来的一个字符，如&#39;a&#39;、&#39;*&#39;、&#39;好&#39;。一个汉字也是Unicode的一个字符，所以也是Java的一个字符。</p><p><br/></p><p>单引号引的数据 是char类型的，双引号引的数据 是String类型的。</p><p>单引号只能引一个字符，而双引号可以引0个及其以上。</p><p><br/></p><p><strong>包裹类型</strong></p><p>基本类型也有提到</p><p>可以<br/></p><p>Integer i = 10;</p><p>Integer i = new Integer(10);</p><p><br/></p><p>目前Java版本已经支持自动打包解包。</p><p><br/></p><p><strong>字符串</strong><br/></p><p><br/></p><p>String a = &quot;abc&quot;;</p><p>String b = new String(&quot;abc&quot;);&nbsp;</p><p>实际运用中，我们要避免第二种方式，第二种方式创建了两个String对象。首先，Java虚拟机创建了String对象“abc”。然后，java虚拟机创建一个新的String对象，并把字符串“abc”传入构造函数。这是一次完全没有必要的构造，既影响了性能，也提高了代码阅读难度。</p><p><br/></p><p>字符串变量和数组变量类似，它并不存放字符串，不是字符串的所有者，它是字符串的管理者。</p><p>Java的字符串还是一种特殊的“不可变”对象，所有的字符串操作都是产生一个新的字符串，而不是对原来的字符串的修改。对这一点的理解颇为重要。</p><p><br/></p><p>拼接用+,注意运算顺序（字符串和整数运算）</p><p><br/></p><p>输入字符串</p><p>in.next()空格为分割标志</p><p>in.nextLine（）换行符</p><p><br/></p><p>.length取长度<br/></p><p>.charAt(index)返回index位置的单个字符</p><p>.substring(n)得到n到结束的子字符串<br/></p><p>.substring(x,y)x到y之前的内容</p><p><br/></p><p>寻找字符</p><p>.indexOf(c)得到c字符的位置，返回-1表示不存在。</p><p>.indexOf(n,c)从n开始寻找</p><p>.lastIndexOf()从右边开始找</p><p><br/></p><p>.startsWith(t)</p><p>.endsWith(t)</p><p>.strim()</p><p>.replace(c1,c2)</p><p>.toLowerCase()</p><p>.toUpperCase()</p><p><br/></p><p><strong>函数</strong></p><p>Java的函数必须定义在类的内部，成为类的成员。定义一个函数，要像这样写：</p><p>&lt;返回类型&gt; &lt;方法名称&gt;(&lt;参数表&gt;) {<!--参数表--><!--方法名称--><!--返回类型--></p><p>&nbsp; &nbsp; &lt;方法体&gt;<!--方法体--></p><p>}</p><p>返回类型是这个函数运行结束时要返回给调用者的数据的类型，函数可以返回基本数据类型、对象或者void。返回void表示这个函数不返回任何值。函数名称是一个Java名字，一样要遵循和变量一样的命名规则。参数表是0个或1个或多个参数定义，用逗号’,’分隔。</p><p>在这个阶段，我们要在所有的函数的返回类型前面加上关键字“static”。static表示这个函数属于这个类，而不属于这个类的任何对象，因此我们才可以不制造这个类的对象，而直接从main()函数中调用它。</p><p>当一个函数被调用时，程序就转到这个函数中去运行，函数体里的语句就一条一条地被调用。一旦函数运行结束，就又回到调用它的地方去继续运行。</p><p><br/></p><p>最好做到单一出口，函数参数只传值不传地址。所谓的引用赋值传的是管理者的值。</p><p><br/></p><p>参考</p><p>【1】慕课网浙大翁恺老师的零基础学Java语言</p><p></p><!--=的两个字符必须紧紧连在一起，中间不能插入空格。<--><p></p></section>
+        <hr/>
+        <p>
+				<span  class="pull-left">
+					<span class="author">Winke</span>
+					<span> 发表于 2017-01-25 23:28</span>
+				</span>
+				<span class="pull-right">
+					<a href="232.html">上一篇</a>                    <a href="234.html">下一篇</a>				</span>
+			</p>
+		<hr/>
+            </div>
+ 
+                </div>
+                
+                
+                <!-- Pager -->
+                
+                
+                
+            </div>
+        </div>
+    </div>
+   </div>
+ </div>
+	<!-- /主体 -->
+
+	<!-- 底部 -->
+	
+    <!-- 底部
+    ================================================== -->
+    <footer class="footer">
+       <div class="g-ft">
+		   <p class="m-cprt">©&nbsp;<a href="../../../../index.html">花开花落</a>&nbsp;京ICP备15006955号-1&nbsp;|&nbsp;Powered by <a href="../../../../index.html">Winke</a></p> 
+	   </div>
+    </footer>
+
+    <div style="right: 119.5px;" class="amz-toolbar" id="amz-toolbar">
+    <a href="#top" title="回到顶部" class="am-icon-btn am-icon-arrow-up am-active" id="amz-go-top"></a>
+    </div>
+
+<script type="text/javascript">
+(function(){
+	var ThinkPHP = window.Think = {
+		"ROOT"   : "", //当前网站地址
+		"APP"    : "", //当前项目地址
+		"PUBLIC" : "/Public", //项目公共目录地址
+		"DEEP"   : "/", //PATHINFO分割符
+		"MODEL"  : ["2", "", "html"],
+		"VAR"    : ["m", "c", "a"]
+	}
+})();
+</script>
+<script src="../../../../Public/static/amaze/js/jquery.min.js"></script>
+<script src="../../../../Public/static/amaze/js/amazeui.min.js"></script>
+<script src="../../../../Public/Home/js/blog.js"></script>
+
+<script type="text/javascript" src="../../../../Public/static/ueditor/third-party/SyntaxHighlighter/shCore.js"></script>
+<script type="text/javascript"> SyntaxHighlighter.all(); </script>
+<script type="text/javascript">
+	$(function () { 
+  // Line wrap back 
+  var shLineWrap = function () { 
+    $('.syntaxhighlighter').each(function () { 
+      // Fetch 
+      var $sh = $(this), 
+        $gutter = $sh.find('td.gutter'), 
+        $code = $sh.find('td.code') 
+        ; 
+      // Cycle through lines 
+      $gutter.children('.line').each(function (i) { 
+        // Fetch 
+        var $gutterLine = $(this), 
+          $codeLine = $code.find('.line:nth-child(' + (i + 1) + ')') 
+          ; 
+        //alert($gutterLine); 
+        // Fetch height 
+        var height = $codeLine.height() || 0; 
+        if (!height) { 
+          height = 'auto'; 
+        } 
+        else { 
+          height = height += 'px'; 
+          //alert(height); 
+        } 
+        // Copy height over 
+        $gutterLine.attr('style', 'height: ' + height + ' !important'); // fix by Edi, for JQuery 1.7+ under Firefox 15.0 
+        console.debug($gutterLine.height(), height, $gutterLine.text(), $codeLine); 
+      }); 
+    }); 
+  }; 
+  // Line wrap back when syntax highlighter has done it's stuff 
+  var shLineWrapWhenReady = function () { 
+    if ($('.syntaxhighlighter').length === 0) { 
+      setTimeout(shLineWrapWhenReady, 10); 
+    } 
+    else { 
+      shLineWrap(); 
+    } 
+  }; 
+  // Fire 
+  shLineWrapWhenReady();});
+</script>	
+ <!-- 用于加载js代码 -->
+<!-- 页面footer钩子，一般用于加载插件JS文件和JS代码 -->
+<div class="hidden"><!-- 用于加载统计代码等隐藏元素 -->
+	
+</div>
+
+	<!-- /底部 -->
+</body>
+</html>

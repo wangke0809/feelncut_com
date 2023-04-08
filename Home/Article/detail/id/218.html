@@ -1,0 +1,266 @@
+<!DOCTYPE HTML>
+<html class="no-js">
+
+<head>
+	  <meta charset="UTF-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="花开花落——Winke's个人博客">
+  <meta name="keywords" content="花开花落——Winke's个人博客,王珂,北方工业大学">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>SAE上使用PHP实现防止CC攻击|Winke's blog</title>
+  <link rel="stylesheet" href="../../../../Public/static/amaze/css/amazeui.min.css">
+  <link rel="stylesheet" href="../../../../Public/Home/css/blog.css">
+<style>
+	.g-hd {
+    background-image: url("../../../../picture/bg.png");
+	}
+  .pic{
+  width: 28%;
+  /*height: 100px;*/
+  margin:5px;
+  }
+  .mpic{
+    margin: 10px auto;
+  }
+</style>
+
+<link rel="stylesheet" href="../../../../Public/static/ueditor/third-party/SyntaxHighlighter/shCoreDefault.css" type="text/css" />
+<style type="text/css">
+</style>	
+
+
+<!-- 页面header钩子，一般用于加载插件CSS文件和代码 -->
+
+	<!--<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?e9ff349d5b883760c70a4e220c9ac8ca";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>-->
+</head>
+<body>
+	<!-- 头部 -->
+	<div class="g-hd"></div>
+	<!-- /头部 -->
+	
+	<!-- 主体 -->
+	<div class="am-g box">
+<!-- am-show-lg-only -->
+<div class="">  
+  <div class="g-bd bd">
+    <div class="g-sd">
+			<div class="m-hdimg">
+				<a class="hdimg img" href="../../../../old_index.html">
+					<img src="../../../../picture/avater2.jpg" height="96" width="96">
+				</a>
+			</div>
+			<h1 class="m-ttl">
+				<a href="../../../../index.html">花开花落</a>
+			</h1>
+			<p class="m-about">深情不及久伴。</p>
+
+			<ul class="m-nav">
+				
+				<li>
+                            <a href="../../../Index/index.html" target="_self">首页</a>
+                        </li><li>
+                            <a href="http://www.zhangwenxuan.cn/" target="_blank">好基友</a>
+                        </li><li>
+                            <a href="http://blog.wozhendehaoaini.cn/" target="_blank">老博客</a>
+                        </li><li>
+                            <a href="66.html" target="_self">关于我</a>
+                        </li>				
+				<!-- Search 
+				<li class="m-sch">
+					<a id="j-lnksch" href="#">搜索</a>
+					<form id="j-schform" class="form" method="get" action="/search">
+						<input name="q" class="txt" placeholder="输入关键字" type="text">
+					</form>
+				</li>-->
+			</ul>
+			<ul class="m-nav">
+				
+				
+                    		<li>
+			<a href="../../lists/category/feeling.html">
+				<i class="icon-chevron-right"></i>随笔心情			</a>
+		</li>		<li>
+			<a href="../../lists/category/learnsth.html">
+				<i class="icon-chevron-right"></i>学习研究			</a>
+		</li>		<li>
+			<a href="../../lists/category/sizhou.html">
+				<i class="icon-chevron-right"></i>飞控研究			</a>
+		</li>		<li>
+			<a href="../../lists/category/Python.html">
+				<i class="icon-chevron-right"></i>Python			</a>
+		</li>		<li>
+			<a href="../../lists/category/wxmp.html">
+				<i class="icon-chevron-right"></i>微信平台			</a>
+		</li>				
+				<!-- Search 
+				<li class="m-sch">
+					<a id="j-lnksch" href="#">搜索</a>
+					<form id="j-schform" class="form" method="get" action="/search">
+						<input name="q" class="txt" placeholder="输入关键字" type="text">
+					</form>
+				</li>-->
+			</ul>
+		</div>
+
+        <div class="g-mn">
+            <div class="g-mnc box"> 
+                
+                <div class="m-postlst">
+                
+    <header class="jumbotron subhead" id="overview">
+		<div class="container">
+			<h2>SAE上使用PHP实现防止CC攻击</h2>
+			
+		</div>
+	</header>
+
+                
+    <div class="span9 main-content">
+        <!-- Contents
+        ================================================== -->
+        <section id="contents"><p><strong>CC攻击简介</strong></p><p>CC = Challenge Collapsar，意为“挑战黑洞”，其前身名为Fatboy攻击，是利用不断对网站发送连接请求致使形成拒绝服务的目的。攻击针对论坛等需要查询大量数据库的程序特别有效。</p><p><br/></p><p><strong>开始解决</strong></p><p>其实先百度的，百度PHP防止CC攻击，有参考代码，看了几个，其实没有屁用。因为他们用的SESSION来记录，可是SESSION和客户端COOKIE有关，我攻击的时候还提交COOKIE干嘛？用户难道手动点击去攻击你？显然用这种方式识别客户端不太合适，没办法，只能自己写段代码解决了。</p><p><br/></p><p><strong>解决办法</strong></p><p>直接上代码。这里使用了SAE的Memcache服务来记录数据。</p><pre class="brush:php;toolbar:false">/*fuck&nbsp;cc*/
+$mmc&nbsp;=&nbsp;new&nbsp;\Memcache;
+$ret&nbsp;=&nbsp;$mmc-&gt;connect();
+if&nbsp;($ret&nbsp;)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;$ip&nbsp;=&nbsp;$_SERVER[&quot;REMOTE_ADDR&quot;];//获取请求IP
+&nbsp;&nbsp;&nbsp;&nbsp;$data&nbsp;=&nbsp;$mmc-&gt;get($ip);
+&nbsp;&nbsp;&nbsp;&nbsp;if($data){
+&nbsp;&nbsp;&nbsp;&nbsp;	if(!$data[&#39;access&#39;]){//判断访问权限
+&nbsp;&nbsp;&nbsp;&nbsp;		//&nbsp;echo&nbsp;&quot;WTF!?&quot;;
+&nbsp;&nbsp;&nbsp;&nbsp;		exit();//直接断开连接
+&nbsp;&nbsp;&nbsp;&nbsp;	}
+&nbsp;&nbsp;&nbsp;&nbsp;	$data[&#39;count&#39;]&nbsp;+=&nbsp;1;
+&nbsp;&nbsp;&nbsp;&nbsp;	//下面判断，1s内访问50次的客户端判断为攻击者
+&nbsp;&nbsp;&nbsp;&nbsp;	if($data[&#39;count&#39;]&gt;50&nbsp;&amp;&amp;&nbsp;((time()-$data[&#39;time&#39;])&lt;2)){
+&nbsp;&nbsp;&nbsp;&nbsp;		$data[&#39;access&#39;]&nbsp;=&nbsp;false;
+&nbsp;&nbsp;&nbsp;&nbsp;		$mmc-&gt;set($ip,$data,0,3600);//禁止访问3600s也就是1h
+&nbsp;&nbsp;&nbsp;&nbsp;	}
+&nbsp;&nbsp;&nbsp;&nbsp;	$mmc-&gt;set($ip,$data,0,60);
+&nbsp;&nbsp;&nbsp;&nbsp;}else{//记录该IP第一次访问的时间
+&nbsp;&nbsp;&nbsp;&nbsp;	$data[&#39;count&#39;]&nbsp;=&nbsp;1;
+&nbsp;&nbsp;&nbsp;&nbsp;	$data[&#39;time&#39;]&nbsp;=&nbsp;time();
+&nbsp;&nbsp;&nbsp;&nbsp;	$data[&#39;access&#39;]&nbsp;=&nbsp;true;
+&nbsp;&nbsp;&nbsp;&nbsp;	$mmc-&gt;set($ip,$data,0,60);
+&nbsp;&nbsp;&nbsp;&nbsp;}
+}
+/*end&nbsp;fuck&nbsp;cc*/</pre><p>我这里实现是根据客户端的IP来识别。</p><p>优点是能有效防止单个IP的CC攻击。</p><p>缺点是针对大量内网机器使用同一个公网IP的情况会造成误判，不过可以通过适当的调整判断攻击的门限值来避免这种情况。（调整代码中次数阈值和时间差阈值）</p><p>再者说对于我的小博客来说已经满足我的使用场景了，不需要考虑共用公网IP的情况了。</p><p><br/></p><p>本博客亲测有效！只能防CC，流量攻击当然没用！</p></section>
+        <hr/>
+        <p>
+				<span  class="pull-left">
+					<span class="author">Winke</span>
+					<span> 发表于 2016-07-31 01:29</span>
+				</span>
+				<span class="pull-right">
+					<a href="216.html">上一篇</a>                    <a href="229.html">下一篇</a>				</span>
+			</p>
+		<hr/>
+            </div>
+ 
+                </div>
+                
+                
+                <!-- Pager -->
+                
+                
+                
+            </div>
+        </div>
+    </div>
+   </div>
+ </div>
+	<!-- /主体 -->
+
+	<!-- 底部 -->
+	
+    <!-- 底部
+    ================================================== -->
+    <footer class="footer">
+       <div class="g-ft">
+		   <p class="m-cprt">©&nbsp;<a href="../../../../index.html">花开花落</a>&nbsp;京ICP备15006955号-1&nbsp;|&nbsp;Powered by <a href="../../../../index.html">Winke</a></p> 
+	   </div>
+    </footer>
+
+    <div style="right: 119.5px;" class="amz-toolbar" id="amz-toolbar">
+    <a href="#top" title="回到顶部" class="am-icon-btn am-icon-arrow-up am-active" id="amz-go-top"></a>
+    </div>
+
+<script type="text/javascript">
+(function(){
+	var ThinkPHP = window.Think = {
+		"ROOT"   : "", //当前网站地址
+		"APP"    : "", //当前项目地址
+		"PUBLIC" : "/Public", //项目公共目录地址
+		"DEEP"   : "/", //PATHINFO分割符
+		"MODEL"  : ["2", "", "html"],
+		"VAR"    : ["m", "c", "a"]
+	}
+})();
+</script>
+<script src="../../../../Public/static/amaze/js/jquery.min.js"></script>
+<script src="../../../../Public/static/amaze/js/amazeui.min.js"></script>
+<script src="../../../../Public/Home/js/blog.js"></script>
+
+<script type="text/javascript" src="../../../../Public/static/ueditor/third-party/SyntaxHighlighter/shCore.js"></script>
+<script type="text/javascript"> SyntaxHighlighter.all(); </script>
+<script type="text/javascript">
+	$(function () { 
+  // Line wrap back 
+  var shLineWrap = function () { 
+    $('.syntaxhighlighter').each(function () { 
+      // Fetch 
+      var $sh = $(this), 
+        $gutter = $sh.find('td.gutter'), 
+        $code = $sh.find('td.code') 
+        ; 
+      // Cycle through lines 
+      $gutter.children('.line').each(function (i) { 
+        // Fetch 
+        var $gutterLine = $(this), 
+          $codeLine = $code.find('.line:nth-child(' + (i + 1) + ')') 
+          ; 
+        //alert($gutterLine); 
+        // Fetch height 
+        var height = $codeLine.height() || 0; 
+        if (!height) { 
+          height = 'auto'; 
+        } 
+        else { 
+          height = height += 'px'; 
+          //alert(height); 
+        } 
+        // Copy height over 
+        $gutterLine.attr('style', 'height: ' + height + ' !important'); // fix by Edi, for JQuery 1.7+ under Firefox 15.0 
+        console.debug($gutterLine.height(), height, $gutterLine.text(), $codeLine); 
+      }); 
+    }); 
+  }; 
+  // Line wrap back when syntax highlighter has done it's stuff 
+  var shLineWrapWhenReady = function () { 
+    if ($('.syntaxhighlighter').length === 0) { 
+      setTimeout(shLineWrapWhenReady, 10); 
+    } 
+    else { 
+      shLineWrap(); 
+    } 
+  }; 
+  // Fire 
+  shLineWrapWhenReady();});
+</script>	
+ <!-- 用于加载js代码 -->
+<!-- 页面footer钩子，一般用于加载插件JS文件和JS代码 -->
+<div class="hidden"><!-- 用于加载统计代码等隐藏元素 -->
+	
+</div>
+
+	<!-- /底部 -->
+</body>
+</html>

@@ -1,0 +1,491 @@
+<!DOCTYPE HTML>
+<html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width,user-scalable=no">
+    <title>ETH 2.0 资源汇总（持续更新） - 小王同学</title>
+	<!--[if lt IE 9]>
+    <script type="text/javascript" src="https://feelncut.com/usr/themes/maupassant/javascript/html5shiv.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" href="../../../admin/css/normalize.css">
+    <link rel="stylesheet" href="../../../usr/themes/maupassant/style.css">
+    <meta name="description" content="## 0 概述
+
+本文整理总结了 ETH 2.0 学习、研究的常用资源，持续更新中。
+
+ETH 2.0 整体介绍：https://hackernoon.com/what-to-expect-wh..." />
+<link rel="alternate" type="application/rss+xml" title="ETH 2.0 资源汇总（持续更新） &raquo; 小王同学 &raquo; RSS 2.0" href="../../../feed/2020/08/24/323.html" />
+<link rel="alternate" type="application/rdf+xml" title="ETH 2.0 资源汇总（持续更新） &raquo; 小王同学 &raquo; RSS 1.0" href="../../../feed/rss/2020/08/24/323.html" />
+<link rel="alternate" type="application/atom+xml" title="ETH 2.0 资源汇总（持续更新） &raquo; 小王同学 &raquo; ATOM 1.0" href="../../../feed/atom/2020/08/24/323.html" />
+<script type="text/javascript">
+(function () {
+    window.TypechoComment = {
+        dom : function (id) {
+            return document.getElementById(id);
+        },
+    
+        create : function (tag, attr) {
+            var el = document.createElement(tag);
+        
+            for (var key in attr) {
+                el.setAttribute(key, attr[key]);
+            }
+        
+            return el;
+        },
+
+        reply : function (cid, coid) {
+            var comment = this.dom(cid), parent = comment.parentNode,
+                response = this.dom('respond-post-323'), input = this.dom('comment-parent'),
+                form = 'form' == response.tagName ? response : response.getElementsByTagName('form')[0],
+                textarea = response.getElementsByTagName('textarea')[0];
+
+            if (null == input) {
+                input = this.create('input', {
+                    'type' : 'hidden',
+                    'name' : 'parent',
+                    'id'   : 'comment-parent'
+                });
+
+                form.appendChild(input);
+            }
+
+            input.setAttribute('value', coid);
+
+            if (null == this.dom('comment-form-place-holder')) {
+                var holder = this.create('div', {
+                    'id' : 'comment-form-place-holder'
+                });
+
+                response.parentNode.insertBefore(holder, response);
+            }
+
+            comment.appendChild(response);
+            this.dom('cancel-comment-reply-link').style.display = '';
+
+            if (null != textarea && 'text' == textarea.name) {
+                textarea.focus();
+            }
+
+            return false;
+        },
+
+        cancelReply : function () {
+            var response = this.dom('respond-post-323'),
+            holder = this.dom('comment-form-place-holder'), input = this.dom('comment-parent');
+
+            if (null != input) {
+                input.parentNode.removeChild(input);
+            }
+
+            if (null == holder) {
+                return true;
+            }
+
+            this.dom('cancel-comment-reply-link').style.display = 'none';
+            holder.parentNode.insertBefore(response, holder);
+            return false;
+        }
+    };
+})();
+</script>
+<script type="text/javascript">
+(function () {
+    var event = document.addEventListener ? {
+        add: 'addEventListener',
+        triggers: ['scroll', 'mousemove', 'keyup', 'touchstart'],
+        load: 'DOMContentLoaded'
+    } : {
+        add: 'attachEvent',
+        triggers: ['onfocus', 'onmousemove', 'onkeyup', 'ontouchstart'],
+        load: 'onload'
+    }, added = false;
+
+    document[event.add](event.load, function () {
+        var r = document.getElementById('respond-post-323'),
+            input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = '_';
+        input.value = (function () {
+    var _wUSSOY3 = '43a'//'eg'
++'9'//'s2f'
++//'lBi'
+'20'+''///*'h6F'*/'h6F'
++//'32I'
+'c90'+''///*'Ds'*/'Ds'
++//'ZG'
+'2b'+'c'//'z'
++'31'//'7Y'
++''///*'9OC'*/'9OC'
++//'eu'
+'2'+//'kmv'
+'1b'+'484'//'v'
++'f'//'21'
++//'c33'
+'2'+'d2f'//'pO'
++//'i'
+'60'+'Uw4'//'Uw4'
++'fe'//'G'
++//'c'
+'b5'+'yw'//'yw'
++//'0'
+'0'+'f'//'k'
+, _gzEY = [[27,30],[31,33],[31,32]];
+    
+    for (var i = 0; i < _gzEY.length; i ++) {
+        _wUSSOY3 = _wUSSOY3.substring(0, _gzEY[i][0]) + _wUSSOY3.substring(_gzEY[i][1]);
+    }
+
+    return _wUSSOY3;
+})();
+
+        if (null != r) {
+            var forms = r.getElementsByTagName('form');
+            if (forms.length > 0) {
+                function append() {
+                    if (!added) {
+                        forms[0].appendChild(input);
+                        added = true;
+                    }
+                }
+            
+                for (var i = 0; i < event.triggers.length; i ++) {
+                    var trigger = event.triggers[i];
+                    document[event.add](trigger, append);
+                    window[event.add](trigger, append);
+                }
+            }
+        }
+    });
+})();
+</script><script> var _hmt = _hmt || []; (function() {   var hm = document.createElement("script");   hm.src = "https://hm.baidu.com/hm.js?e9ff349d5b883760c70a4e220c9ac8ca";   var s = document.getElementsByTagName("script")[0];    s.parentNode.insertBefore(hm, s); })(); </script></head>
+<body>
+
+<header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                                    <a id="logo" href="../../../index.html">
+                        小王同学                    </a>
+                        	    <p class="description">希望通过自我加工，成为有点用的人</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class=" current" href="../../../index.html">博客</a>
+															<a href="../../../archives.html" title="归档">归档</a>
+										<a href="../../../tools.html" title="Tools">Tools</a>
+										<a href="../../../about.html" title="关于">关于</a>
+									</nav>
+            </div>
+        </div>
+    </div>
+</header>
+<div id="body">
+    <div class="container">
+        <div class="col-group">
+<div class="col-8" id="main">
+	<div class="res-cons">
+		<article class="post">
+			<header>
+				<h1 class="post-title">ETH 2.0 资源汇总（持续更新）</h1>
+			</header>
+			<date class="post-meta">
+				August 24, 2020			</date>
+			<div class="post-content">
+				<div id="md_content_2" class="md_content" style="min-height: 50px;"><textarea id="append-test" style="display:none;">## 0 概述
+
+本文整理总结了 ETH 2.0 学习、研究的常用资源，持续更新中。
+
+ETH 2.0 整体介绍：https://hackernoon.com/what-to-expect-when-eths-expecting-80cb4951afcd
+国内社区翻译版本：https://www.odaily.com/post/5135663
+
+![](/images/2020/08/1751595903.png)
+
+目前，ETH 2.0 已经启动了 Phase 0 测试网，可以通过质押 GöETH 成为验证节点。
+
+<!--more-->
+
+## 1 官方资源
+
+### Ethereum 2.0 Specifications
+• 说明：ETH 2.0 规范
+• 地址：https://github.com/ethereum/eth2.0-specs
+
+### beacon_chain
+• 说明：官方 ETH 2.0 Beacon 信标链 Python 实现版本，目前似乎已经不再更新
+• 地址：https://github.com/ethereum/beacon_chain
+
+### Trinity
+• 说明：Trinity is a client for the Ethereum protocol including the existing 1.0 chain as well as emerging support for the upcoming Ethereum 2.0 / Serenity spec.（兼容 1.0 且 紧急支持 2.0 的客户端，Python 实现）
+• 项目地址：https://github.com/ethereum/trinity
+• 项目主页：https://trinity.ethereum.org/
+Eth2 Launch Pad for Medalla testnet
+• 说明：官方的 ETH 2.0 Medalla 测试网启动页面
+• 地址：https://medalla.launchpad.ethereum.org/
+
+### Eth2.0-deposit-cli
+• 说明：ETH 2.0 质押工具，Eth2 Launch Pad for Medalla testnet 中需要使用
+• 地址：https://github.com/ethereum/eth2.0-deposit-cli
+
+### Beaconscan 浏览器
+• 说明：官方 Beacon 浏览器
+• 地址：https://beaconscan.com/medalla
+• 质押计算器地址：https://beaconscan.com/medalla/staking-calculator
+ETH 2.0 Clients API
+• 说明：客户端 API 接口
+• 项目地址：https://github.com/ethereum/eth2.0-APIs
+• API 地址：https://ethereum.github.io/eth2.0-APIs
+
+### EthHub
+• 说明：以太坊信息聚合
+• 地址：https://docs.ethhub.io/
+
+## 2 第三方社区资源
+
+### 客户端说明
+• 客户端列表：https://eth.wiki/eth2/clients
+• 资金支持列表：https://docs.ethhub.io/ethereum-roadmap/ethereum-2.0/eth2.0-teams/teams-building-eth2.0/
+
+### Goerli 水龙头
+• 说明：水龙头，需要发送一条包含收币地址的 twitter 进行测试币获取
+• Goerli 项目地址：https://github.com/goerli
+• 地址：https://faucet.goerli.mudit.blog/
+
+### Beaconcha 开源浏览器
+• 说明：Open Source Ethereum 2.0 Beacon Chain Explorer
+• 浏览器地址：https://beaconcha.in/
+• 项目地址：https://github.com/gobitfly/eth2-beaconchain-explorer
+
+### Prysm
+
+• 说明：第三方 prysmaticlabs 实现的 ETH 2.0 信标链，Go 实现
+• 项目主页：https://prylabs.net/
+• 代码地址：https://github.com/prysmaticlabs/prysm
+• 安装说明：https://docs.prylabs.network/docs/install/install-with-script（包含节点要求）
+
+### Nim-beacon-chain
+
+• 说明：第三方 status-im 实现的 ETH 2.0 信标链，Nim 实现
+• 地址：https://github.com/status-im/nim-beacon-chain
+
+### Lighthouse
+
+• 说明：第三方 Sigma Prime 实现的 ETH 2.0 信标链，Rust 实现
+• 地址：https://github.com/sigp/lighthouse
+
+### Teku
+
+• 说明：第三方 PegaSysEng 实现的 ETH 2.0 信标链，Java 11 实现
+• 地址：https://github.com/PegaSysEng/teku
+
+### 官方客户端配置说明
+• 验证节点FAQ：https://medalla.launchpad.ethereum.org/faq
+• teku 说明页面： https://medalla.launchpad.ethereum.org/teku
+• lighthouse 说明页面：https://medalla.launchpad.ethereum.org/lighthouse
+• prysm 说明页面：https://medalla.launchpad.ethereum.org/prysm
+• nimbus 说明页面：https://medalla.launchpad.ethereum.org/nimbus
+
+### Ethereum Sharding Research Compendium
+• 说明：ETH 2.0 分片研究笔记
+• 地址：`https://notes.ethereum.org/@serenity/H1PGqDhpm?type=view`
+
+### eth2stats
+• 说明：监控本地客户端状态，并显示汇总
+• 地址：https://eth2stats.io/medalla-testnet
+
+## 3 第三方公司
+
+### Attestant
+• 说明：专注于质押业务的公司，给用户提供 ETH 2.0 质押服务，以及验证节点监控服务
+• 公司介绍：https://www.attestant.io/posts/introducing-attestant/
+• 官方地址：https://www.attestant.io/
+• 项目地址：https://github.com/attestantio
+• ETH 1.0 质押合约：https://github.com/attestantio/eth2deposits-subgraph-topaz/blob/7a7066f6f72eb739601e3c4a4f3e574d4ec97bef/contracts/deposit_contract.sol
+
+## 4 收益计算
+- 一个表格：https://docs.google.com/spreadsheets/d/15tmPOvOgi3wKxJw7KQJKoUe-uonbYR6HF7u83LR5Mj4/edit#gid=1548910165
+- 开源浏览器：https://github.com/gobitfly/eth2-beaconchain-explorer/blob/9b23fdaf2213eb10b3b3a88707ac7ba377e48248/handlers/calculator.go
+- 计算器 Design：https://www.figma.com/file/I9Jv8pE4ijEzZM3oha33qO/Eth2-0-Calculator-Prototype-(andrej-%40-9bb830d)?node-id=0%3A1
+
+## 5 验证者研究相关
+共识
+• Casper 论文：https://github.com/ethereum/research/tree/master/papers/casper-basics
+• 论文翻译：https://www.jianshu.com/p/6fd6d4f97ddd
+• 确定性小工具文章：https://ethfans.org/posts/the-finality-gadget-by-alex-stokes
+• 验证者详解（提到28 ETH）：https://ethfans.org/posts/two-point-oh-explaining-validators
+• 有效余额：https://ethfans.org/posts/understanding-validator-effective-balance
+• 合理化与确定性：https://ethfans.org/posts/two-point-oh-justification-and-finalization
+• PPT解释共识（推荐）：https://docs.google.com/presentation/d/1fqnjL-2TqXjhHx8k7HRX7eUYnDK83adnlCLLH8Bk054/edit#slide=id.g29703948a2_0_0</textarea></div>			</div>
+		</article>
+		<div id="comments">
+        	<span class="widget-title">已有 2 条评论</span>
+    <ol class="comment-list"><li itemscope itemtype="http://schema.org/UserComments" id="comment-25" class="comment-body comment-parent comment-odd">
+    <div class="comment-author" itemprop="creator" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="image"><img class="avatar" src="https://secure.gravatar.com/avatar/9cd20be9cb8ca27144be4775f83549f2?s=32&amp;r=X&amp;d=" alt="何先生" width="32" height="32" /></span>
+        <cite class="fn" itemprop="name">何先生</cite>
+    </div>
+    <div class="comment-meta">
+        <a href="323.html#comment-25"><time itemprop="commentTime" datetime="2021-01-12T17:39:37+08:00">January 12th, 2021 at 05:39 pm</time></a>
+            </div>
+    <div class="comment-content" itemprop="commentText">
+    <p>请问有没有ETH2.0的api可以调用呢？（以为官方的api关了）</p>    </div>
+    <div class="comment-reply">
+        <a href="323.html%3FreplyTo=25.html#respond-post-323" rel="nofollow" onclick="return TypechoComment.reply('comment-25', 25);">回复</a>    </div>
+        <div class="comment-children" itemprop="discusses">
+        <ol class="comment-list"><li itemscope itemtype="http://schema.org/UserComments" id="comment-26" class="comment-body comment-child comment-level-odd comment-odd comment-by-author">
+    <div class="comment-author" itemprop="creator" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="image"><img class="avatar" src="https://secure.gravatar.com/avatar/adb1ded20ab626050681881cd286374d?s=32&amp;r=X&amp;d=" alt="pizi" width="32" height="32" /></span>
+        <cite class="fn" itemprop="name"><a href="../../../index.html" rel="external nofollow">pizi</a></cite>
+    </div>
+    <div class="comment-meta">
+        <a href="323.html#comment-26"><time itemprop="commentTime" datetime="2021-02-03T11:33:15+08:00">February 3rd, 2021 at 11:33 am</time></a>
+            </div>
+    <div class="comment-content" itemprop="commentText">
+    <p>https://beaconcha.in/api/v1/docs/index.html</p>    </div>
+    <div class="comment-reply">
+        <a href="323.html%3FreplyTo=26.html#respond-post-323" rel="nofollow" onclick="return TypechoComment.reply('comment-26', 26);">回复</a>    </div>
+    </li>
+</ol>    </div>
+    </li>
+</ol>                <div id="respond-post-323" class="respond">
+        <div class="cancel-comment-reply">
+        <a id="cancel-comment-reply-link" href="323.html#respond-post-323" rel="nofollow" onclick="return TypechoComment.cancelReply();">取消回复</a>        </div>
+    	<span id="response" class="widget-title">添加新评论</span>
+    	<form method="post" action="https://feelncut.com/2020/08/24/323.html/comment?parent=25" id="comment-form">
+			<div class="col1">
+			<p>
+                <textarea rows="8" cols="50" name="text" class="textarea"></textarea>
+            </p>
+			</div>
+			<div class="col2">
+                		<p>
+                <label for="author" class="required">称呼</label>
+    			<input type="text" name="author" id="author" class="text" value="" />
+    		</p>
+    		<p>
+                <label for="mail" class="required">邮箱</label>
+    			<input type="email" name="mail" id="mail" class="text" value="" />
+    		</p>
+    		<p>
+                <label for="url">网站</label>
+    			<input type="url" name="url" id="url" class="text" placeholder="可空" value="" />
+    		</p>
+                		<p>
+                <button type="submit" class="submit">提交评论</button>
+            </p>
+			</div>
+			<div class="clear"></div>
+    	</form>
+    </div>
+    </div>	</div>
+</div>
+<div id="secondary">
+	<section class="widget">
+        <form id="search" method="post" action="https://feelncut.com/2020/08/24/">
+            <input type="text" name="s" class="text" placeholder="搜索..." />
+            <button type="submit" class="submit icon-search"></button>
+        </form>
+    </section>
+
+	    <section class="widget">
+		<h3 class="widget-title">最新文章</h3>
+        <ul class="widget-list">
+            <li><a href="323.html">ETH 2.0 资源汇总（持续更新）</a></li><li><a href="322.html">ETH 2.0 测试网验证节点质押流程体验</a></li><li><a href="../../06/06/312.html">通过 openssl 导出 HTTPS 网站 SSL 证书链</a></li><li><a href="../../05/20/308.html">如何开发一款区块链浏览器？</a></li><li><a href="../../02/02/288.html">EOS 提交交易失败分析</a></li><li><a href="../../../2019/12/09/giaocamerarobot.html">小 Giao 之死</a></li><li><a href="../../../2019/10/04/267.html">《凶宅》和《疯人院》</a></li><li><a href="../../../2018/10/17/228.html"> 以太坊多重签名原理分析</a></li><li><a href="../../../2018/09/11/188.html">OpenCV 初识图像</a></li><li><a href="../../../2018/09/11/184.html">为什么要系统的学习一下Pyhton-OpenCV?</a></li>        </ul>
+    </section>
+    
+        <section class="widget">
+		<h3 class="widget-title">最近回复</h3>
+        <ul class="widget-list">
+                            <li><a href="323.html#comment-26">pizi</a>: https://be...</li>
+                    <li><a href="323.html#comment-25">何先生</a>: 请问有没有ETH2....</li>
+                    <li><a href="../../../2018/05/03/145.html#comment-24">pizi</a>: 一个卡就不要限制资源...</li>
+                    <li><a href="../../../about.html#comment-23">pizi</a>: 有特殊技巧的啊，从阿...</li>
+                    <li><a href="../../../about.html#comment-22">一网友</a>: 有钱人新浪数据库很贵吧</li>
+                    <li><a href="../../../2018/05/03/145.html#comment-21">padluo</a>: 请问如何控制到用户使...</li>
+                    <li><a href="../../../about.html#comment-20">小白</a>: 板凳是我的！</li>
+                    <li><a href="../../../2018/02/08/90.html#comment-19">无耻的我</a>: 大佬，能发一份吗，原...</li>
+                    <li><a href="../../../2018/05/03/145.html#comment-18">pizi</a>: 文章里写了的，lxc...</li>
+                    <li><a href="../../../2018/05/03/145.html#comment-17">zzd</a>: lxc config...</li>
+                </ul>
+    </section>
+    
+        <section class="widget">
+		<h3 class="widget-title">分类</h3>
+        <ul class="widget-list">
+            <li><a href="../../../category/feel/index.html">随笔心情</a> (4)</li><li><a href="../../../category/code/index.html">代码片段</a> (17)</li><li><a href="../../../category/ojbk/index.html">折腾着玩</a> (7)</li><li><a href="../../../category/ml/index.html">机器学习</a> (9)</li><li><a href="../../../category/blockChain/index.html">区块链</a> (10)</li><li><a href="../../../category/python-opencv/index.html">Python-OpenCV</a> (2)</li><li><a href="../../../category/video/index.html">视频剪辑</a> (0)</li><li><a href="../../../category/leetcode/index.html">leetcode</a> (1)</li>        </ul>
+	</section>
+    
+        <section class="widget">
+		<h3 class="widget-title">归档</h3>
+        <ul class="widget-list">
+            <li><a href="../index.html">August 2020</a></li><li><a href="../../06/index.html">June 2020</a></li><li><a href="../../05/index.html">May 2020</a></li><li><a href="../../02/index.html">February 2020</a></li><li><a href="../../../2019/12/index.html">December 2019</a></li><li><a href="../../../2019/10/index.html">October 2019</a></li><li><a href="../../../2018/10/index.html">October 2018</a></li><li><a href="../../../2018/09/index.html">September 2018</a></li><li><a href="../../../2018/08/index.html">August 2018</a></li><li><a href="../../../2018/05/index.html">May 2018</a></li><li><a href="../../../2018/04/index.html">April 2018</a></li><li><a href="../../../2018/03/index.html">March 2018</a></li><li><a href="../../../2018/02/index.html">February 2018</a></li><li><a href="../../../2018/01/index.html">January 2018</a></li>        </ul>
+	</section>
+    
+    	<section class="widget">
+		<h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+                            <li class="last"><a href="../../../admin/login.php.html">登录</a></li>
+                        <li><a href="../../../feed/index.html">文章 RSS</a></li>
+            <li><a href="../../../feed/comments/index.html">评论 RSS</a></li>
+            <li><a href="http://www.typecho.org">Typecho</a></li>
+        </ul>
+	</section>
+    </div>		</div>
+    </div>
+</div>
+<footer id="footer">
+	<div class="container">
+		&copy; 2023 <a rel="nofollow" href="../../../index.html">小王同学</a>. 模板由<a href="http://pagecho.com">cho</a>制作.
+	</div>
+</footer>
+<link rel="stylesheet" href="../../../usr/plugins/EditorMD/css/editormd.css" />
+<link rel="stylesheet" href="../../../usr/plugins/EditorMD/css/emojify.min.css" />
+<script type="text/javascript">
+    window.jQuery || document.write(unescape('%3Cscript%20type%3D%22text/javascript%22%20src%3D%22https://feelncut.com/usr/plugins/EditorMD/lib/jquery.min.js%22%3E%3C/script%3E'));
+</script>
+<script src="../../../usr/plugins/EditorMD/lib/marked.min.js"></script>
+<script src="../../../usr/plugins/EditorMD/lib/prettify.min.js"></script>
+<script src="../../../usr/plugins/EditorMD/lib/raphael.min.js"></script>
+<script src="../../../usr/plugins/EditorMD/lib/underscore.min.js"></script>
+<script src="../../../usr/plugins/EditorMD/lib/sequence-diagram.min.js"></script>
+<script src="../../../usr/plugins/EditorMD/lib/flowchart.min.js"></script>
+<script src="../../../usr/plugins/EditorMD/lib/jquery.flowchart.min.js"></script>
+<script src="../../../usr/plugins/EditorMD/js/editormd.min.js"></script>
+<script src="../../../usr/plugins/EditorMD/js/emojify.min.js"></script>
+<script type="text/javascript">
+$(function() {
+    var markdowns = document.getElementsByClassName("md_content");
+    $(markdowns).each(function(){
+        var markdown = $(this).children("#append-test").text();
+        //$('#md_content_'+i).text('');
+        var testEditormdView;
+        testEditormdView = editormd.markdownToHTML($(this).attr("id"), {
+            markdown: markdown,//+ "\r\n" + $("#append-test").text(),
+            toolbarAutoFixed : false,
+            htmlDecode: true,
+            emoji: true,
+            tex: true,
+            toc: true,
+            tocm: true,
+            taskList: true,
+            flowChart: true,
+            sequenceDiagram: true,
+        });
+    });
+    emojify.setConfig({
+        img_dir: 'https:' == document.location.protocol ? "https://staticfile.qnssl.com/emoji-cheat-sheet/1.0.0" : "http://cdn.staticfile.org/emoji-cheat-sheet/1.0.0",
+        blacklist: {
+            'ids': [],
+            'classes': ['no-emojify'],
+            'elements': ['^script$', '^textarea$', '^pre$', '^code$']
+        },
+    });
+    emojify.run();
+});
+</script>
+</body>
+</html>

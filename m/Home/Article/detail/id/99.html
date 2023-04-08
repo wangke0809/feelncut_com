@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+  <meta charset="UTF-8">
+  <title>蓝牙模块操蛋该怎么办？|Winke's blog</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <link rel="alternate icon" type="image/png" href="../../../../Public/static/amaze/i/favicon.png">
+  <link rel="stylesheet" href="../../../../Public/static/amaze/css/amazeui.min.css"/>
+  <link rel="stylesheet" href="../../../../Public/static/ueditor/third-party/SyntaxHighlighter/shCoreDefault.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../Public/Home/css/blog.css">
+    <!--<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?e9ff349d5b883760c70a4e220c9ac8ca";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>-->
+    <style>
+    .g-hd {
+    background-image: url("../../../../Editor/2016-07-25/57962ebcddb49.png");
+    }
+
+    @media only screen and (min-width: 641px) {
+      .am-offcanvas {
+        display: block;
+        position: static;
+        background: none;
+      }
+
+      .am-offcanvas-bar {
+        position: static;
+        width: auto;
+        background: none;
+        -webkit-transform: translate3d(0, 0, 0);
+        -ms-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+      }
+      .am-offcanvas-bar:after {
+        content: none;
+      }
+
+    }
+    
+    @media only screen and (max-width: 640px) {
+      .am-offcanvas-bar .am-nav>li>a {
+        color:#ccc;
+        border-radius: 0;
+        border-top: 1px solid rgba(0,0,0,.3);
+        box-shadow: inset 0 1px 0 rgba(255,255,255,.05)
+      }
+
+      .am-offcanvas-bar .am-nav>li>a:hover {
+        background: #404040;
+        color: #fff
+      }
+
+      .am-offcanvas-bar .am-nav>li.am-nav-header {
+        color: #777;
+        background: #404040;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,.05);
+        text-shadow: 0 1px 0 rgba(0,0,0,.5);
+        border-top: 1px solid rgba(0,0,0,.3);
+        font-weight: 400;
+        font-size: 75%
+      }
+
+      .am-offcanvas-bar .am-nav>li.am-active>a {
+        background: #1a1a1a;
+        color: #fff;
+        box-shadow: inset 0 1px 3px rgba(0,0,0,.3)
+      }
+
+      .am-offcanvas-bar .am-nav>li+li {
+        margin-top: 0;
+      }
+    }
+
+    .my-head {
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    .my-button {
+      position: fixed;
+      top: 0;
+      right: 0;
+      border-radius: 0;
+    }
+    .my-sidebar {
+      padding-right: 0;
+      border-right: 1px solid #eeeeee;
+    }
+
+    .my-footer {
+      border-top: 1px solid #eeeeee;
+      padding: 10px 0;
+      margin-top: 10px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+<div class="g-hd" style="height:200px;"></div>
+<div class="m-hdimg" style="margin:-53px auto 0;display:block;text-align: center;">
+                <a class="hdimg img" href="../../../../old_index.html" >
+                    <img src="../../../../picture/avater2.jpg" height="96" width="96">
+                </a>
+            </div>
+<header class="am-g my-head">
+  <div class="am-u-sm-12 am-article">
+    <h1 class="am-article-title">蓝牙模块操蛋该怎么办？</h1>
+    <p class="am-article-meta">王珂&nbsp;于&nbsp;2015-07-22 00:02</p>
+  </div>
+</header>
+<hr class="am-article-divider"/>
+<div class="am-g am-g-fixed">
+  <div class="am-u-md-12">
+    <div class="am-g">
+      <div class="am-u-sm-11 am-u-sm-centered">
+      <? php if($info.['description']!=''){ ?>
+      <blockquote>很久前准备做小车的时候买了个蓝牙模块，一直没有用过，现在准备竞赛在学习STM32，为了练手就捣弄下这块模块了，HC06蓝牙模块。</blockquote>
+      <? }  ?>
+        <div class="am-cf am-article">
+		<p style="text-align: center;"><span style="font-size: 24px;"><strong>经过</strong></span></p><p><br/></p><p>第一次用模块，这次搞懂了很多事情。</p><p><br/></p><p>蓝牙模块是快一年前舍友买的，也没有DATASHEET，去淘宝查了这个型号的模块，详情里面下载了一些资料。</p><p><strong><br/></strong></p><p>一般这种模块都有AT命令，就是发送一个指定指令能返回一些系统信息。</p><p><br/></p><p>用的STM32开发板是通过串口下载程序的，把串口的两根线引出来直接接蓝牙模块，感觉应该可以调试的。</p><p><br/></p><p>有一个命令为发送AT返回OK，电脑连蓝牙模块发送AT完全没反应。然后就以为开发板的USB串口不能和他连接，其实是可以的！</p><p><br/></p><p>然后开发板串口连接蓝牙，发送AT返回值现实在屏幕上，还是不行。</p><p><br/></p><p>继续测试，手机连接蓝牙，蓝牙通过USB转串口连接电脑，这时候串口调试助手可以正常收发，与手机上的蓝牙串口调试助手可以正常通信。</p><p><br/></p><p>然后测试，手机连接蓝牙，蓝牙连接开发板，手机端能接受但发送的数据开发板收不到，后边测试直接把开发板的RX与TX相连，发现之前通过手机发送的数据都涌出来了，莫非蓝牙串口通信发送数据的时候结束符号\r\n有问题？</p><p><br/></p><p>然后仔细研究USART通信方式和如何判断结束，发现问题在于开发板检测蓝牙发送信息时无法检测到0X0A和0X0D。</p><p><br/></p><p style="text-align: center;"><span style="font-size: 24px;"><strong>总结&amp;解决方案</strong></span></p><p><strong><br/></strong></p><p><strong>通过这次经历，搞清楚了几件事：</strong></p><p><br/></p><p>开发板的USB转串口一样可以外接其他串口，比如蓝牙串口模块，WIFI串口模块，一开始真不知道。</p><p><br/></p><p>蓝牙串口模块相当于一个中转站，手机和蓝牙通过蓝牙协议通信，蓝牙把收到的手机发来的信息通过串口通信的方式发送给开发板；开发板和蓝牙通过串口协议通信，把开发板发送来的信息通过蓝牙协议发送到手机。对于开发者来说就不需要关心蓝牙协议了，只要会串口就OK了，还是很方便的。</p><p><br/></p><p>这块坑爹的蓝牙模块出牌不按套路，发送AT（<span style="color: rgb(0, 176, 240);">手机未连接蓝牙的情况下是AT命令模式</span>）应该返回OK，可是不能用！经过测试只有改蓝牙名的AT命令可以使用！</p><p><br/></p><p><strong>手机-&gt;蓝牙-&gt;开发板通信的解决方案：</strong></p><p><br/></p><p>首先看下正常情况下的代码，如下</p><p><br/></p><p><img src="../../../../Editor/2015-07-22/55afb63326c04.jpg" title="zc.jpg"/></p><p><strong><br/></strong></p><p>红色标记处是判断0X0A与0X0D的过程。但是他不按规矩出牌！那我们也没必要和他认真喽！</p><p><br/></p><p>如下图，通过手动结束符的方式实现正常通信。</p><p><br/></p><p><img src="../../../../Editor/2015-07-22/55afb6a27a86f.jpg" title="xz.jpg"/></p><p><strong><br/></strong></p><p style="text-align: left;">如果最后一个字符是#，那么接收完了。手机发送信息的时候以#结束便可以解决这个问题了！当然，正常数据记得避开#或者如果冲突考虑选择其他结束符号。</p><p style="text-align: left;"><br/></p><p style="text-align: center;"><strong><span style="font-size: 24px;">AND.</span></strong></p><p><strong><span style="font-size: 24px;"><br/></span></strong></p><p>然后写了一个手机通过蓝牙控制开发板几个LED亮灭的程序，假如做成一个弱点控制强电的模块，去控制家里面的台灯或者插座或者神马的开关不就是是智能家具了嘛 - -。不过换做WIFI模块会更好！</p><p><br/></p><p>电信专业还是很有趣的！平常学的知识可能会很无聊，不过总会用上的嘛！</p><p><br/></p><p style="text-align: center;"><strong><span style="font-size: 24px;">END.</span></strong></p><p><strong><span style="font-size: 24px;"><br/></span></strong></p><p><br/></p>        </div>
+      </div>
+    </div>
+    <hr class="am-article-divider"/>
+    <div class="am-center" style="text-align:center;margin-bottom:15px;">
+    <a href="70.html">上一篇</a>    <a href="111.html">下一篇</a>    </div>
+    <!-- <hr class="am-article-divider"/> -->
+      </div>
+</div>
+    <div style="right: 15px;" class="amz-toolbar" id="amz-toolbar">
+    <a href="#top" title="回到顶部" class="am-icon-btn am-icon-arrow-up am-active" id="amz-go-top"></a>
+    </div>
+    <footer class="footer" style="background-color:#303336;">
+     <div class="g-ft" style="padding-top:20px;">
+     <div class="">
+      <div  style="float:left;width:50%;text-align:right;">
+        <ul class="m-bottom-nav" style="margin:0 20px 0 0;">
+          <li>
+                  <a href="../../../Index/index.html" target="_self">首页</a>
+              </li><li>
+                  <a href="http://www.zhangwenxuan.cn/" target="_blank">好基友</a>
+              </li><li>
+                  <a href="http://blog.wozhendehaoaini.cn/" target="_blank">老博客</a>
+              </li><li>
+                  <a href="66.html" target="_self">关于我</a>
+              </li>        </ul>
+      </div>
+      <div  style="float:right;width:50%;text-align:left;">
+        <ul class="m-bottom-nav" style="margin:0 0 0 20px;">
+           		<li>
+			<a href="../../lists/category/feeling.html">
+				<i class="icon-chevron-right"></i>随笔心情			</a>
+		</li>		<li>
+			<a href="../../lists/category/learnsth.html">
+				<i class="icon-chevron-right"></i>学习研究			</a>
+		</li>		<li>
+			<a href="../../lists/category/sizhou.html">
+				<i class="icon-chevron-right"></i>飞控研究			</a>
+		</li>		<li>
+			<a href="../../lists/category/Python.html">
+				<i class="icon-chevron-right"></i>Python			</a>
+		</li>		<li>
+			<a href="../../lists/category/wxmp.html">
+				<i class="icon-chevron-right"></i>微信平台			</a>
+		</li>        </ul>        
+      </div>
+    </div>
+           <p style="clear:both;padding-top:15px;" class="m-cprt">©&nbsp;<a href="../../../../index.html">花开花落</a>&nbsp;京ICP备15006955号-1&nbsp;|&nbsp;Powered by <a href="../../../../index.html">Winke</a></p> 
+    </div>
+    </footer>
+
+<!--[if lt IE 9]>
+<script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
+<script src="/Public/static/amaze/js/polyfill/rem.min.js"></script>
+<script src="/Public/static/amaze/js/polyfill/respond.min.js"></script>
+<script src="/Public/static/amaze/js/amazeui.legacy.js"></script>
+<![endif]-->
+
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script src="../../../../Public/static/amaze/js/jquery.min.js"></script>
+<script src="../../../../Public/static/amaze/js/amazeui.min.js"></script>
+<script type="text/javascript" src="../../../../Public/static/ueditor/third-party/SyntaxHighlighter/shCore.js"></script>
+<script src="../../../../Public/Home/js/blog.js"></script>
+<script type="text/javascript"> SyntaxHighlighter.all(); </script>
+<!--<![endif]-->
+</body>
+</html>

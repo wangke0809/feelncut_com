@@ -1,0 +1,481 @@
+<!DOCTYPE HTML>
+<html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width,user-scalable=no">
+    <title>写给女朋友：理解服务端的工作原理（上） - 小王同学</title>
+	<!--[if lt IE 9]>
+    <script type="text/javascript" src="https://feelncut.com/usr/themes/maupassant/javascript/html5shiv.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" href="../../../admin/css/normalize.css">
+    <link rel="stylesheet" href="../../../usr/themes/maupassant/style.css">
+    <meta name="description" content="[TOC]
+
+### 前言
+
+女票学了一阵前端了，一般来讲，一个牛逼的前端至少会一种服务端语言，一个负责的男票至少给小傻子写一篇服务端入门教程。
+
+本文的主要目的是理解服务端运作的原理，`Coo..." />
+<link rel="alternate" type="application/rss+xml" title="写给女朋友：理解服务端的工作原理（上） &raquo; 小王同学 &raquo; RSS 2.0" href="../../../feed/2018/04/05/110.html" />
+<link rel="alternate" type="application/rdf+xml" title="写给女朋友：理解服务端的工作原理（上） &raquo; 小王同学 &raquo; RSS 1.0" href="../../../feed/rss/2018/04/05/110.html" />
+<link rel="alternate" type="application/atom+xml" title="写给女朋友：理解服务端的工作原理（上） &raquo; 小王同学 &raquo; ATOM 1.0" href="../../../feed/atom/2018/04/05/110.html" />
+<script type="text/javascript">
+(function () {
+    window.TypechoComment = {
+        dom : function (id) {
+            return document.getElementById(id);
+        },
+    
+        create : function (tag, attr) {
+            var el = document.createElement(tag);
+        
+            for (var key in attr) {
+                el.setAttribute(key, attr[key]);
+            }
+        
+            return el;
+        },
+
+        reply : function (cid, coid) {
+            var comment = this.dom(cid), parent = comment.parentNode,
+                response = this.dom('respond-post-110'), input = this.dom('comment-parent'),
+                form = 'form' == response.tagName ? response : response.getElementsByTagName('form')[0],
+                textarea = response.getElementsByTagName('textarea')[0];
+
+            if (null == input) {
+                input = this.create('input', {
+                    'type' : 'hidden',
+                    'name' : 'parent',
+                    'id'   : 'comment-parent'
+                });
+
+                form.appendChild(input);
+            }
+
+            input.setAttribute('value', coid);
+
+            if (null == this.dom('comment-form-place-holder')) {
+                var holder = this.create('div', {
+                    'id' : 'comment-form-place-holder'
+                });
+
+                response.parentNode.insertBefore(holder, response);
+            }
+
+            comment.appendChild(response);
+            this.dom('cancel-comment-reply-link').style.display = '';
+
+            if (null != textarea && 'text' == textarea.name) {
+                textarea.focus();
+            }
+
+            return false;
+        },
+
+        cancelReply : function () {
+            var response = this.dom('respond-post-110'),
+            holder = this.dom('comment-form-place-holder'), input = this.dom('comment-parent');
+
+            if (null != input) {
+                input.parentNode.removeChild(input);
+            }
+
+            if (null == holder) {
+                return true;
+            }
+
+            this.dom('cancel-comment-reply-link').style.display = 'none';
+            holder.parentNode.insertBefore(response, holder);
+            return false;
+        }
+    };
+})();
+</script>
+<script type="text/javascript">
+(function () {
+    var event = document.addEventListener ? {
+        add: 'addEventListener',
+        triggers: ['scroll', 'mousemove', 'keyup', 'touchstart'],
+        load: 'DOMContentLoaded'
+    } : {
+        add: 'attachEvent',
+        triggers: ['onfocus', 'onmousemove', 'onkeyup', 'ontouchstart'],
+        load: 'onload'
+    }, added = false;
+
+    document[event.add](event.load, function () {
+        var r = document.getElementById('respond-post-110'),
+            input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = '_';
+        input.value = (function () {
+    var _CnMZ = //'3y'
+'89'+//'6Z'
+'95b'+//'SF'
+'6'+//'Qm'
+'dcb'+'8d8'//'S'
++//'6c'
+'690'+//'m2V'
+'e'+'982'//'5S'
++'fe'//'8'
++'f6'//'gb'
++'1'//'kJP'
++'f'//'o'
++'a2'//'p3'
++//'nI'
+'nI'+//'94j'
+'128'+//'J'
+'0'+'c'//'ei'
+, _leYNet1 = [[27,29]];
+    
+    for (var i = 0; i < _leYNet1.length; i ++) {
+        _CnMZ = _CnMZ.substring(0, _leYNet1[i][0]) + _CnMZ.substring(_leYNet1[i][1]);
+    }
+
+    return _CnMZ;
+})();
+
+        if (null != r) {
+            var forms = r.getElementsByTagName('form');
+            if (forms.length > 0) {
+                function append() {
+                    if (!added) {
+                        forms[0].appendChild(input);
+                        added = true;
+                    }
+                }
+            
+                for (var i = 0; i < event.triggers.length; i ++) {
+                    var trigger = event.triggers[i];
+                    document[event.add](trigger, append);
+                    window[event.add](trigger, append);
+                }
+            }
+        }
+    });
+})();
+</script><script> var _hmt = _hmt || []; (function() {   var hm = document.createElement("script");   hm.src = "https://hm.baidu.com/hm.js?e9ff349d5b883760c70a4e220c9ac8ca";   var s = document.getElementsByTagName("script")[0];    s.parentNode.insertBefore(hm, s); })(); </script></head>
+<body>
+
+<header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                                    <a id="logo" href="../../../index.html">
+                        小王同学                    </a>
+                        	    <p class="description">希望通过自我加工，成为有点用的人</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class=" current" href="../../../index.html">博客</a>
+															<a href="../../../archives.html" title="归档">归档</a>
+										<a href="../../../tools.html" title="Tools">Tools</a>
+										<a href="../../../about.html" title="关于">关于</a>
+									</nav>
+            </div>
+        </div>
+    </div>
+</header>
+<div id="body">
+    <div class="container">
+        <div class="col-group">
+<div class="col-8" id="main">
+	<div class="res-cons">
+		<article class="post">
+			<header>
+				<h1 class="post-title">写给女朋友：理解服务端的工作原理（上）</h1>
+			</header>
+			<date class="post-meta">
+				April 5, 2018			</date>
+			<div class="post-content">
+				<div id="md_content_2" class="md_content" style="min-height: 50px;"><textarea id="append-test" style="display:none;">[TOC]
+
+### 前言
+
+女票学了一阵前端了，一般来讲，一个牛逼的前端至少会一种服务端语言，一个负责的男票至少给小傻子写一篇服务端入门教程。
+
+本文的主要目的是理解服务端运作的原理，`Cookie`和`Session`的概念，以及如何通过`Token鉴权`。我会从最基础的说起，便于你理解。之所以用`PHP`是因为拍黄片太简单了，理解比较直观，你可以趁机了解以下嘛，之后服务端可以学习以下`express`。
+
+接下来进入正题，以下内容理解即可，不需动手实践，如需了解更多，自行百度啊。
+
+<!--more-->
+
+### 互联网的基础 TCP/IP 协议
+
+简单来说，协议呢就是一种规范，大家都遵守，按照协议的要求去发送/接收数据包就不会出错。TCP协议属于传输层，用于传输数据。IP协议给互联网的每一个联网设备设定了一个地址，这样我给你发信息的时候知道把信息往哪送了。
+
+一般常见问题 TCP/IP协议分几层呀，每层有什么用啊，可以参考百科。
+
+### Socket 网络套接字
+
+Socket你可以理解对TCP/IP协议的一个封装，他通常由操作系统提供相应的Socket API，用于建立数据连接进行数据传输。Socket主要分为两个部分：`服务端`和`客户端`。服务端负责`监听`，监测有没有客户端连接进来，一旦二者确定连接后，就可以相互发送信息了。这里需要注意的时，是`客户端`主动去连接`服务端`，`服务端`不能主动连接`客户端`。客户端如何主动连接服务端呢？就是知道服务端的地址，也就是`IP地址`啦，同时还需要知道另一个参数：`端口`。
+
+### Socket 实验
+
+如下图所示，做了个简单的实验平台。左侧是客户端部分，右侧是服务端部分。
+
+![](/images/2018/04/227276035.png)
+
+实验过程如下：
+
+首先客户端连接服务端，连接后服务端会收到客户端连接信息。
+然后，连接成功后，双方可以双向通信了，客户端发送Hi，服务端发送Hello，双方都可以接收到。
+
+实验结果：
+
+![](/images/2018/04/442393238.png)
+
+### HTTP 协议
+
+上面说了半天你可能就纳闷了，这和Web服务端有啥关系呀。其实不难看出，TCP/IP是Web服务端的通信基础。既然能通信了，咱们是不是搞个标准，这样大家做的不同浏览器可以访问相同的服务端，不同的服务端可以被相同的浏览器解析，只要标准一致，就好说。HTTP横空处世，他就是规定了Web数据怎么传，大家按照规定好的来就行。
+
+直观理解：
+
+还是之前的实验平台，我只开启服务端，端口8080，这次我不用Socket客户端去连接服务端了，而是在**浏览器**里输入`http://127.0.0.1:8080`，**注意`:8080`，我输入了端口号**，猜猜实验平台收到了什么数据？看下图：
+
+![](/images/2018/04/1828834381.png)
+
+我把具体内容粘贴到下面：
+
+```
+客户进入：127.0.0.1:14307
+客户进入：127.0.0.1:14563
+GET / HTTP/1.1
+Host: 127.0.0.1:8080
+Connection: keep-alive
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Accept-Encoding: gzip, deflate, br
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: __uvt=; uvts=6QR1rsXDBappbiwN
+```
+
+没错，这些是浏览器想服务器发送的数据，这个数据是按照一定格式发送的。可以看到，其实浏览器就是个Socket客户端对吧，看到有两个客户端连接了服务端，这里暂不追究为什么是两个客户端。重点就是上面的内容，可以看到，浏览器访问网页的时候主动发送了本地系统属性，接受的编码和语言，以及Cookie。这些就是HTTP协议的一部分，**HTTP协议就是一种规定，我按照规定通过Socket发送内容，可以通过Socket实现HTTP协议的服务端和客户端**。这里注意看`User-Agent`，我是不是可以根据这个判断你是手机还是电脑，判断你用的什么浏览器？一些数据统计平台，也是根据这个信息做统计的。
+
+另外，Socket和HTTP一个明显的区别为：Socket为长连接，就是连接上之后服务端和客户端保持连接状态，双方都可以主动断开；HTTP呢是短连接，浏览器请求一次服务端时，相当于建立的Socket连接，当服务端把数据发送给客户端完成时，服务端主动断开与客户端的连接，一次HTTP请求完成。
+
+### GET 请求
+
+直白来说，GET请求是显式的，因为你可以在URL里面直接看到GET请求的内容，一般格式为`xxx.com/key1?=value1&key2=value2`，没错，是K-V形式，多个K-V之间&符号连接。比如我正在写这篇文章，后台写作地址为：`xxx/write-post.php?cid=110`，cid就是通过GET请求传递的。
+
+GET请求有长度限制，因为一般URL有长度限制，不易过长。
+
+来做个实验，我用个工具进行GET请求，如下图：
+
+![](/images/2018/04/3587211.png)
+
+实验平台收到的数据为：
+
+```
+GET /?key=value HTTP/1.1
+Host: 127.0.0.1:8080
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
+Accept: */*
+Accept-Encoding: gzip, deflate, br
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: __uvt=; uvts=6QR1rsXDBappbiwN
+```
+
+看到`GET /?key=value`了吧。
+
+### POST 请求
+
+POST请求是隐式的，浏览器地址栏里是看不见了，相对Get更为安全一些，所以一般登录用POST，表单也用POST，因为POST可以提交更多的内容。来发个POST试试：
+
+![](/images/2018/04/770381823.png)
+
+接收到的信息：
+
+```
+POST /?key=value HTTP/1.1
+Host: 127.0.0.1:8080
+Connection: keep-alive
+Content-Length: 0
+key1: value1
+Origin: chrome-extension://cdjfedloinmbppobahmonnjigpmlajcd
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36
+Content-Type: text/plain;charset=UTF-8
+Accept: */*
+Accept-Encoding: gzip, deflate, br
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: __uvt=; uvts=6QR1rsXDBappbiwN
+```
+
+注意第五行，这就是和GET的区别。其实这个POST貌似没有那么**正宗**(后来发现是用错了，这里添加的是header字段，不是POST)。更多内容请自行百度。
+
+以上演示都是浏览器请求服务端时HTTP协议的应用，服务端返回数据到浏览器时同理，也遵循HTTP规范。
+
+另外，你用浏览器访问网站的时候，F12搞出来开发者工具，观察Network一栏，也能看到所有的请求，请求的细节，内容。一定要会用哦。
+
+自己查查什么是HTTPS？比如我的博客就用来HTTPS来访问。
+
+### 什么是 DNS
+
+一般访问网站的时候都是输入`网址`，网址其实就是个`域名`，为啥要域名呢，因为你访问一个网站，直接输入`IP`地址记不住啊。比如你访问`feelncut.com`，背后的过程是首先浏览器向`DNS`查询`feelncut.com`对应的`IP`，然后浏览器连接这个IP地址，进行数据通信。`DNS`起到了解析域名到IP地址的作用。拓展，Win或者Ubuntu下`Hosts`文件有什么用？
+
+### Web 默认端口
+
+你访问`baidu.com`的时候为啥没输入端口号呢？因为Web的默认端口是`80`，只要是80端口，就可以省略掉。
+
+</textarea></div>			</div>
+		</article>
+		<div id="comments">
+        	<span class="widget-title">仅有 1 条评论</span>
+    <ol class="comment-list"><li itemscope itemtype="http://schema.org/UserComments" id="comment-5" class="comment-body comment-parent comment-odd">
+    <div class="comment-author" itemprop="creator" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="image"><img class="avatar" src="https://secure.gravatar.com/avatar/e5b0b55f7396973a2ac52e55a92248ef?s=32&amp;r=X&amp;d=" alt="ZHWX" width="32" height="32" /></span>
+        <cite class="fn" itemprop="name"><a href="https://zhangwenxuan.cn" rel="external nofollow">ZHWX</a></cite>
+    </div>
+    <div class="comment-meta">
+        <a href="110.html#comment-5"><time itemprop="commentTime" datetime="2018-04-05T21:18:00+08:00">April 5th, 2018 at 09:18 pm</time></a>
+            </div>
+    <div class="comment-content" itemprop="commentText">
+    <p>可以可以<br>
+http://zhangwenxuan.cn/index.php/archives/101/</p>    </div>
+    <div class="comment-reply">
+        <a href="110.html%3FreplyTo=5.html#respond-post-110" rel="nofollow" onclick="return TypechoComment.reply('comment-5', 5);">回复</a>    </div>
+    </li>
+</ol>                <div id="respond-post-110" class="respond">
+        <div class="cancel-comment-reply">
+        <a id="cancel-comment-reply-link" href="110.html#respond-post-110" rel="nofollow" style="display:none" onclick="return TypechoComment.cancelReply();">取消回复</a>        </div>
+    	<span id="response" class="widget-title">添加新评论</span>
+    	<form method="post" action="https://feelncut.com/2018/04/05/110.html/comment" id="comment-form">
+			<div class="col1">
+			<p>
+                <textarea rows="8" cols="50" name="text" class="textarea"></textarea>
+            </p>
+			</div>
+			<div class="col2">
+                		<p>
+                <label for="author" class="required">称呼</label>
+    			<input type="text" name="author" id="author" class="text" value="" />
+    		</p>
+    		<p>
+                <label for="mail" class="required">邮箱</label>
+    			<input type="email" name="mail" id="mail" class="text" value="" />
+    		</p>
+    		<p>
+                <label for="url">网站</label>
+    			<input type="url" name="url" id="url" class="text" placeholder="可空" value="" />
+    		</p>
+                		<p>
+                <button type="submit" class="submit">提交评论</button>
+            </p>
+			</div>
+			<div class="clear"></div>
+    	</form>
+    </div>
+    </div>	</div>
+</div>
+<div id="secondary">
+	<section class="widget">
+        <form id="search" method="post" action="https://feelncut.com/2018/04/05/">
+            <input type="text" name="s" class="text" placeholder="搜索..." />
+            <button type="submit" class="submit icon-search"></button>
+        </form>
+    </section>
+
+	    <section class="widget">
+		<h3 class="widget-title">最新文章</h3>
+        <ul class="widget-list">
+            <li><a href="../../../2020/08/24/323.html">ETH 2.0 资源汇总（持续更新）</a></li><li><a href="../../../2020/08/24/322.html">ETH 2.0 测试网验证节点质押流程体验</a></li><li><a href="../../../2020/06/06/312.html">通过 openssl 导出 HTTPS 网站 SSL 证书链</a></li><li><a href="../../../2020/05/20/308.html">如何开发一款区块链浏览器？</a></li><li><a href="../../../2020/02/02/288.html">EOS 提交交易失败分析</a></li><li><a href="../../../2019/12/09/giaocamerarobot.html">小 Giao 之死</a></li><li><a href="../../../2019/10/04/267.html">《凶宅》和《疯人院》</a></li><li><a href="../../10/17/228.html"> 以太坊多重签名原理分析</a></li><li><a href="../../09/11/188.html">OpenCV 初识图像</a></li><li><a href="../../09/11/184.html">为什么要系统的学习一下Pyhton-OpenCV?</a></li>        </ul>
+    </section>
+    
+        <section class="widget">
+		<h3 class="widget-title">最近回复</h3>
+        <ul class="widget-list">
+                            <li><a href="../../../2020/08/24/323.html#comment-26">pizi</a>: https://be...</li>
+                    <li><a href="../../../2020/08/24/323.html#comment-25">何先生</a>: 请问有没有ETH2....</li>
+                    <li><a href="../../05/03/145.html#comment-24">pizi</a>: 一个卡就不要限制资源...</li>
+                    <li><a href="../../../about.html#comment-23">pizi</a>: 有特殊技巧的啊，从阿...</li>
+                    <li><a href="../../../about.html#comment-22">一网友</a>: 有钱人新浪数据库很贵吧</li>
+                    <li><a href="../../05/03/145.html#comment-21">padluo</a>: 请问如何控制到用户使...</li>
+                    <li><a href="../../../about.html#comment-20">小白</a>: 板凳是我的！</li>
+                    <li><a href="../../02/08/90.html#comment-19">无耻的我</a>: 大佬，能发一份吗，原...</li>
+                    <li><a href="../../05/03/145.html#comment-18">pizi</a>: 文章里写了的，lxc...</li>
+                    <li><a href="../../05/03/145.html#comment-17">zzd</a>: lxc config...</li>
+                </ul>
+    </section>
+    
+        <section class="widget">
+		<h3 class="widget-title">分类</h3>
+        <ul class="widget-list">
+            <li><a href="../../../category/feel/index.html">随笔心情</a> (4)</li><li><a href="../../../category/code/index.html">代码片段</a> (17)</li><li><a href="../../../category/ojbk/index.html">折腾着玩</a> (7)</li><li><a href="../../../category/ml/index.html">机器学习</a> (9)</li><li><a href="../../../category/blockChain/index.html">区块链</a> (10)</li><li><a href="../../../category/python-opencv/index.html">Python-OpenCV</a> (2)</li><li><a href="../../../category/video/index.html">视频剪辑</a> (0)</li><li><a href="../../../category/leetcode/index.html">leetcode</a> (1)</li>        </ul>
+	</section>
+    
+        <section class="widget">
+		<h3 class="widget-title">归档</h3>
+        <ul class="widget-list">
+            <li><a href="../../../2020/08/index.html">August 2020</a></li><li><a href="../../../2020/06/index.html">June 2020</a></li><li><a href="../../../2020/05/index.html">May 2020</a></li><li><a href="../../../2020/02/index.html">February 2020</a></li><li><a href="../../../2019/12/index.html">December 2019</a></li><li><a href="../../../2019/10/index.html">October 2019</a></li><li><a href="../../10/index.html">October 2018</a></li><li><a href="../../09/index.html">September 2018</a></li><li><a href="../../08/index.html">August 2018</a></li><li><a href="../../05/index.html">May 2018</a></li><li><a href="../index.html">April 2018</a></li><li><a href="../../03/index.html">March 2018</a></li><li><a href="../../02/index.html">February 2018</a></li><li><a href="../../01/index.html">January 2018</a></li>        </ul>
+	</section>
+    
+    	<section class="widget">
+		<h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+                            <li class="last"><a href="../../../admin/login.php.html">登录</a></li>
+                        <li><a href="../../../feed/index.html">文章 RSS</a></li>
+            <li><a href="../../../feed/comments/index.html">评论 RSS</a></li>
+            <li><a href="http://www.typecho.org">Typecho</a></li>
+        </ul>
+	</section>
+    </div>		</div>
+    </div>
+</div>
+<footer id="footer">
+	<div class="container">
+		&copy; 2023 <a rel="nofollow" href="../../../index.html">小王同学</a>. 模板由<a href="http://pagecho.com">cho</a>制作.
+	</div>
+</footer>
+<link rel="stylesheet" href="../../../usr/plugins/EditorMD/css/editormd.css" />
+<link rel="stylesheet" href="../../../usr/plugins/EditorMD/css/emojify.min.css" />
+<script type="text/javascript">
+    window.jQuery || document.write(unescape('%3Cscript%20type%3D%22text/javascript%22%20src%3D%22https://feelncut.com/usr/plugins/EditorMD/lib/jquery.min.js%22%3E%3C/script%3E'));
+</script>
+<script src="../../../usr/plugins/EditorMD/lib/marked.min.js"></script>
+<script src="../../../usr/plugins/EditorMD/lib/prettify.min.js"></script>
+<script src="../../../usr/plugins/EditorMD/lib/raphael.min.js"></script>
+<script src="../../../usr/plugins/EditorMD/lib/underscore.min.js"></script>
+<script src="../../../usr/plugins/EditorMD/lib/sequence-diagram.min.js"></script>
+<script src="../../../usr/plugins/EditorMD/lib/flowchart.min.js"></script>
+<script src="../../../usr/plugins/EditorMD/lib/jquery.flowchart.min.js"></script>
+<script src="../../../usr/plugins/EditorMD/js/editormd.min.js"></script>
+<script src="../../../usr/plugins/EditorMD/js/emojify.min.js"></script>
+<script type="text/javascript">
+$(function() {
+    var markdowns = document.getElementsByClassName("md_content");
+    $(markdowns).each(function(){
+        var markdown = $(this).children("#append-test").text();
+        //$('#md_content_'+i).text('');
+        var testEditormdView;
+        testEditormdView = editormd.markdownToHTML($(this).attr("id"), {
+            markdown: markdown,//+ "\r\n" + $("#append-test").text(),
+            toolbarAutoFixed : false,
+            htmlDecode: true,
+            emoji: true,
+            tex: true,
+            toc: true,
+            tocm: true,
+            taskList: true,
+            flowChart: true,
+            sequenceDiagram: true,
+        });
+    });
+    emojify.setConfig({
+        img_dir: 'https:' == document.location.protocol ? "https://staticfile.qnssl.com/emoji-cheat-sheet/1.0.0" : "http://cdn.staticfile.org/emoji-cheat-sheet/1.0.0",
+        blacklist: {
+            'ids': [],
+            'classes': ['no-emojify'],
+            'elements': ['^script$', '^textarea$', '^pre$', '^code$']
+        },
+    });
+    emojify.run();
+});
+</script>
+</body>
+</html>

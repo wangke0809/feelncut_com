@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+  <meta charset="UTF-8">
+  <title>验证码识别初体验|Winke's blog</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <link rel="alternate icon" type="image/png" href="../../../../Public/static/amaze/i/favicon.png">
+  <link rel="stylesheet" href="../../../../Public/static/amaze/css/amazeui.min.css"/>
+  <link rel="stylesheet" href="../../../../Public/static/ueditor/third-party/SyntaxHighlighter/shCoreDefault.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../Public/Home/css/blog.css">
+    <!--<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?e9ff349d5b883760c70a4e220c9ac8ca";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>-->
+    <style>
+    .g-hd {
+    background-image: url("../../../../Editor/2016-07-25/57962ebcddb49.png");
+    }
+
+    @media only screen and (min-width: 641px) {
+      .am-offcanvas {
+        display: block;
+        position: static;
+        background: none;
+      }
+
+      .am-offcanvas-bar {
+        position: static;
+        width: auto;
+        background: none;
+        -webkit-transform: translate3d(0, 0, 0);
+        -ms-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+      }
+      .am-offcanvas-bar:after {
+        content: none;
+      }
+
+    }
+    
+    @media only screen and (max-width: 640px) {
+      .am-offcanvas-bar .am-nav>li>a {
+        color:#ccc;
+        border-radius: 0;
+        border-top: 1px solid rgba(0,0,0,.3);
+        box-shadow: inset 0 1px 0 rgba(255,255,255,.05)
+      }
+
+      .am-offcanvas-bar .am-nav>li>a:hover {
+        background: #404040;
+        color: #fff
+      }
+
+      .am-offcanvas-bar .am-nav>li.am-nav-header {
+        color: #777;
+        background: #404040;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,.05);
+        text-shadow: 0 1px 0 rgba(0,0,0,.5);
+        border-top: 1px solid rgba(0,0,0,.3);
+        font-weight: 400;
+        font-size: 75%
+      }
+
+      .am-offcanvas-bar .am-nav>li.am-active>a {
+        background: #1a1a1a;
+        color: #fff;
+        box-shadow: inset 0 1px 3px rgba(0,0,0,.3)
+      }
+
+      .am-offcanvas-bar .am-nav>li+li {
+        margin-top: 0;
+      }
+    }
+
+    .my-head {
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    .my-button {
+      position: fixed;
+      top: 0;
+      right: 0;
+      border-radius: 0;
+    }
+    .my-sidebar {
+      padding-right: 0;
+      border-right: 1px solid #eeeeee;
+    }
+
+    .my-footer {
+      border-top: 1px solid #eeeeee;
+      padding: 10px 0;
+      margin-top: 10px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+<div class="g-hd" style="height:200px;"></div>
+<div class="m-hdimg" style="margin:-53px auto 0;display:block;text-align: center;">
+                <a class="hdimg img" href="../../../../old_index.html" >
+                    <img src="../../../../picture/avater2.jpg" height="96" width="96">
+                </a>
+            </div>
+<header class="am-g my-head">
+  <div class="am-u-sm-12 am-article">
+    <h1 class="am-article-title">验证码识别初体验</h1>
+    <p class="am-article-meta">王珂&nbsp;于&nbsp;2016-07-30 01:19</p>
+  </div>
+</header>
+<hr class="am-article-divider"/>
+<div class="am-g am-g-fixed">
+  <div class="am-u-md-12">
+    <div class="am-g">
+      <div class="am-u-sm-11 am-u-sm-centered">
+      <? php if($info.['description']!=''){ ?>
+      <blockquote>起因是宿舍联通网验证服务器炸了，只能打开他的自主服务页面，无法登录，无法上网，无聊就想识别他的验证码玩...识别出来能干嘛？你懂得！不过通过这次折腾，倒是给了我复习考研的动力。</blockquote>
+      <? }  ?>
+        <div class="am-cf am-article">
+		<p style="white-space: normal;">折腾的过程中遇到了很多坑，时间原因就不细说了，这里把最后的最优方法分享出来，代码会直接贴我最后写的一个类里面的部分代码。下面开始正文。</p><p style="white-space: normal;"><br/></p><p style="white-space: normal;">做之前先百度查了资料做些准备工作。</p><p style="white-space: normal;">python图像处理用PIL库，我win10 64bit + python2.7.1 pip 和 官网 下载都无法安装，后来用pillow代替了。&nbsp;</p><p style="white-space: normal;"><br/></p><p style="white-space: normal;"><strong>识别的一般步骤是</strong>&nbsp;</p><p style="white-space: normal;">1.去除背景噪音，二值化图像</p><p style="white-space: normal;">2.分割字符，调整位置</p><p style="white-space: normal;">3.制作字库样本&nbsp;</p><p style="white-space: normal;">4.匹配样本&nbsp;</p><p style="white-space: normal;"><strong>最后再来一个</strong>&nbsp;</p><p style="white-space: normal;">5.验证正确率</p><p style="white-space: normal;">这是一个评测的重要指标</p><p style="white-space: normal;"><br/></p><p style="white-space: normal;">它的验证码比较简单，也比较适合这次折腾，毕竟初体验就适合入门级的难度。验证码长下面这样。</p><p style="white-space: normal;"><br/></p><p style="white-space: normal; text-align: center;"><img src="../../../../Editor/2016-07-30/579b86c1e3b5b.jpg" title="0000.jpg"/></p><p style="white-space: normal; text-align: center;"><strong>第一步 图像预处理</strong></p><p style="white-space: normal;">预处理呢就是二值化处理，第一次识别正确率只有百分之30左右，后来的解决方案是先图像增强，突出验证码字符和背景的区别度，然后进行二值化，最后去除噪点。</p><p style="white-space: normal;"><br/></p><p style="white-space: normal;">这里二值化有好几种方法，这里不详细介绍了。去除噪点也分单个或多个，原理是判断噪声像素点临近的八个像素点是否相同，算法比较简单，网上也有参考代码。</p><p style="white-space: normal;">二值化后图像如下：</p><p style="white-space: normal; text-align: center;"><img src="../../../../Editor/2016-07-30/579b888d1f66d.gif" title="0001.gif"/></p><p style="white-space: normal;">去除噪点后：</p><p style="white-space: normal; text-align: center;"><img src="../../../../Editor/2016-07-30/579b88dbecdcb.gif" title="0001.gif"/></p><p style="white-space: normal;">可以看到效果很棒。这里经过了多次调节，调节了增强效果倍数和去噪次数。</p><pre class="brush:python;toolbar:false">#二值化代码
+img&nbsp;=&nbsp;Image.open(dir+f)&nbsp;#&nbsp;读入图片
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;img&nbsp;=&nbsp;img.convert(&quot;RGBA&quot;)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;img&nbsp;=&nbsp;ImageEnhance.Sharpness(img).enhance(2.5)#图像增强，之前没增强，效果很差
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pixdata&nbsp;=&nbsp;img.load()
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#二值化
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;y&nbsp;in&nbsp;xrange(img.size[1]):
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;x&nbsp;in&nbsp;xrange(img.size[0]):
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;pixdata[x,&nbsp;y][0]&nbsp;&lt;&nbsp;90:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pixdata[x,&nbsp;y]&nbsp;=&nbsp;(0,&nbsp;0,&nbsp;0,&nbsp;255)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;y&nbsp;in&nbsp;xrange(img.size[1]):
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;x&nbsp;in&nbsp;xrange(img.size[0]):
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;pixdata[x,&nbsp;y][1]&nbsp;&lt;&nbsp;136:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pixdata[x,&nbsp;y]&nbsp;=&nbsp;(0,&nbsp;0,&nbsp;0,&nbsp;255)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;y&nbsp;in&nbsp;xrange(img.size[1]):
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;x&nbsp;in&nbsp;xrange(img.size[0]):
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;pixdata[x,&nbsp;y][2]&nbsp;&gt;&nbsp;0:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pixdata[x,&nbsp;y]&nbsp;=&nbsp;(255,&nbsp;255,&nbsp;255,&nbsp;255)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;img.save(path+f,&nbsp;&quot;GIF&quot;)</pre><pre class="brush:python;toolbar:false">#该函数也可以改成RGB判断的,具体看需求如何&nbsp;&nbsp;
+def&nbsp;getPixel(image,x,y,G,N):&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;L&nbsp;=&nbsp;image.getpixel((x,y))&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;L&nbsp;&gt;&nbsp;G:&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;L&nbsp;=&nbsp;True&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;else:&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;L&nbsp;=&nbsp;False&nbsp;&nbsp;
+&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;nearDots&nbsp;=&nbsp;0&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;print&nbsp;image.getpixel((x&nbsp;+&nbsp;1,y&nbsp;+&nbsp;1))
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;L&nbsp;==&nbsp;(image.getpixel((x&nbsp;-&nbsp;1,y&nbsp;-&nbsp;1))&nbsp;&gt;&nbsp;G):&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;nearDots&nbsp;+=&nbsp;1&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;L&nbsp;==&nbsp;(image.getpixel((x&nbsp;-&nbsp;1,y))&nbsp;&gt;&nbsp;G):&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;nearDots&nbsp;+=&nbsp;1&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;L&nbsp;==&nbsp;(image.getpixel((x&nbsp;-&nbsp;1,y&nbsp;+&nbsp;1))&nbsp;&gt;&nbsp;G):&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;nearDots&nbsp;+=&nbsp;1&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;L&nbsp;==&nbsp;(image.getpixel((x,y&nbsp;-&nbsp;1))&nbsp;&gt;&nbsp;G):&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;nearDots&nbsp;+=&nbsp;1&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;L&nbsp;==&nbsp;(image.getpixel((x,y&nbsp;+&nbsp;1))&nbsp;&gt;&nbsp;G):&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;nearDots&nbsp;+=&nbsp;1&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;L&nbsp;==&nbsp;(image.getpixel((x&nbsp;+&nbsp;1,y&nbsp;-&nbsp;1))&nbsp;&gt;&nbsp;G):&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;nearDots&nbsp;+=&nbsp;1&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;L&nbsp;==&nbsp;(image.getpixel((x&nbsp;+&nbsp;1,y))&nbsp;&gt;&nbsp;G):&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;nearDots&nbsp;+=&nbsp;1&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;L&nbsp;==&nbsp;(image.getpixel((x&nbsp;+&nbsp;1,y&nbsp;+&nbsp;1))&nbsp;&gt;&nbsp;G):&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;nearDots&nbsp;+=&nbsp;1&nbsp;&nbsp;
+&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;nearDots&nbsp;&lt;&nbsp;N:&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;image.getpixel((x,y-1))&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;else:&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;None&nbsp;&nbsp;
+&nbsp;&nbsp;
+#&nbsp;降噪&nbsp;&nbsp;&nbsp;
+#&nbsp;根据一个点A的RGB值，与周围的8个点的RBG值比较，设定一个值N（0&nbsp;&lt;N&nbsp;&lt;8），当A的RGB值与周围8个点的RGB相等数小于N时，此点为噪点&nbsp;&nbsp;&nbsp;
+#&nbsp;G:&nbsp;Integer&nbsp;图像二值化阀值&nbsp;&nbsp;&nbsp;
+#&nbsp;N:&nbsp;Integer&nbsp;降噪率&nbsp;0&nbsp;&lt;N&nbsp;&lt;8&nbsp;&nbsp;&nbsp;
+#&nbsp;Z:&nbsp;Integer&nbsp;降噪次数&nbsp;&nbsp;&nbsp;
+#&nbsp;输出&nbsp;&nbsp;&nbsp;
+#&nbsp;&nbsp;0：降噪成功&nbsp;&nbsp;&nbsp;
+#&nbsp;&nbsp;1：降噪失败&nbsp;&nbsp;&nbsp;
+def&nbsp;clearNoise(image,G,N,Z):&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;draw&nbsp;=&nbsp;ImageDraw.Draw(image)&nbsp;&nbsp;
+&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;i&nbsp;in&nbsp;xrange(0,Z):&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;x&nbsp;in&nbsp;xrange(1,image.size[0]&nbsp;-&nbsp;1):&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;y&nbsp;in&nbsp;xrange(1,image.size[1]&nbsp;-&nbsp;1):&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;color&nbsp;=&nbsp;getPixel(image,x,y,G,N)&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;color&nbsp;!=&nbsp;None:&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;draw.point((x,y),color)</pre><p style="white-space: normal; text-align: center;"><strong>第二步 分割字符</strong></p><p style="white-space: normal;">分割也有多种算法，常见的有投影法，直方图法等。这里我用的是投影法。这次比较简单，也不需要旋转。最开始是等距分割的，后来发现每个字符的宽度不同，很明显等距分割不可取，所以后来的算法是先等距分割，然后再边缘分割。效果如下。<strong><br/></strong></p><p style="white-space: normal;">等距切割后：</p><p style="white-space: normal; text-align: center;"><img src="../../../../Editor/2016-07-30/579b8af3c2535.jpg" title="dengju.jpg"/></p><p style="white-space: normal;">投影切割后：</p><p style="white-space: normal; text-align: center;"><img src="../../../../Editor/2016-07-30/579b8b133c9f5.jpg" title="touying.jpg"/></p><p style="white-space: normal;">我分割的时候是先下了100个验证码，然后通过脚本二值化，分割。</p><pre class="brush:python;toolbar:false">#等距分割，根据验证码的实际情况设置坐标
+def&nbsp;__division(self,img):
+	font=[]
+	nume&nbsp;=&nbsp;0
+	for&nbsp;i&nbsp;in&nbsp;range(4):
+		x&nbsp;=&nbsp;4&nbsp;+&nbsp;i*16&nbsp;&nbsp;
+		y&nbsp;=&nbsp;8
+		temp&nbsp;=&nbsp;img.crop((x,&nbsp;y,&nbsp;x+16,&nbsp;y+18))
+		#&nbsp;temp.save(&quot;./temp/%d.gif&quot;&nbsp;%&nbsp;nume)
+		temp&nbsp;=&nbsp;self.__division_2(temp)#投影分割
+		temp.save(&quot;./temp/%d.gif&quot;&nbsp;%&nbsp;nume)
+		nume=nume+1
+		font.append(temp)
+	return&nbsp;font</pre><p style="white-space: normal;"><strong><br/></strong></p><pre class="brush:python;toolbar:false">#投影分割
+def&nbsp;__division_2(self,img):
+	x_range&nbsp;=&nbsp;[]
+	y_range&nbsp;=&nbsp;[]
+	x_o,y_o,x_e,y_e=&nbsp;0,0,0,0
+	#&nbsp;print&nbsp;img.size
+	#扫描提取x的起始和终止坐标
+	for&nbsp;y&nbsp;in&nbsp;xrange(img.size[1]):
+		for&nbsp;x&nbsp;in&nbsp;xrange(img.size[0]):
+			#&nbsp;print&nbsp;img.getpixel((x,y))
+			if&nbsp;img.getpixel((x,y))==1:
+				x_range.append(x)
+	x_range.sort()
+	#&nbsp;print&nbsp;x_range
+	x_o,x_e&nbsp;=&nbsp;x_range[0],x_range[len(x_range)-1]
+	#扫描提取y的起始和终止坐标
+	for&nbsp;x&nbsp;in&nbsp;xrange(img.size[0]):
+		for&nbsp;y&nbsp;in&nbsp;xrange(img.size[1]):
+			if&nbsp;img.getpixel((x,y))==1:
+				y_range.append(y)
+
+	y_range.sort()
+	y_o,y_e&nbsp;=&nbsp;y_range[0],y_range[len(y_range)-1]
+	#&nbsp;print&nbsp;(x_o,y_o,x_e+1,y_e+1)
+	return&nbsp;img.crop((x_o,y_o,x_e+1,y_e+1))</pre><p style="white-space: normal; text-align: center;"><strong>第三步 制作字库</strong></p><p style="white-space: normal;">这一步要费点事了，把0~9和a~z人工识别出来。这里发现为了防止混淆，验证码里没有o 0 l。本来就做了一个库，后来又做了一个，识别率增高很多。（第二个字库可以先根据第一个识别，然后再修改提高人工识别效率）</p><p style="white-space: normal; text-align: center;"><img src="../../../../Editor/2016-07-30/579b8cb1d701c.jpg" title="mod.jpg"/></p><p style="white-space: normal; text-align: center;"><strong>第四步 匹配</strong></p><p style="white-space: normal;">匹配算法也不少，这里采用的是逐点对比，相当于求最小汉明距离。可以把字库提取成特征字符，也可以每次读取磁盘文件，不过明显前者速度更快。</p><pre class="brush:python;toolbar:false">#识别算法
+def&nbsp;__recognize(self):
+	temp&nbsp;=&nbsp;self.__binary(self.img)
+	font&nbsp;=&nbsp;self.__division(temp)
+	fontMods&nbsp;=&nbsp;[]
+	#添加字库
+	for&nbsp;imgfile&nbsp;in&nbsp;os.listdir(&quot;./num&quot;):
+		if&nbsp;imgfile.endswith(&quot;.gif&quot;):
+			fontMods.append((str(imgfile.split(&quot;.&quot;)[0]),&nbsp;Image.open(&quot;./num/&quot;+imgfile)))
+	for&nbsp;imgfile&nbsp;in&nbsp;os.listdir(&quot;./num2&quot;):
+		if&nbsp;imgfile.endswith(&quot;.gif&quot;):
+			fontMods.append((str(imgfile.split(&quot;.&quot;)[0]),&nbsp;Image.open(&quot;./num2/&quot;+imgfile)))
+	result=&quot;&quot;
+	#比较像素点
+	for&nbsp;index&nbsp;in&nbsp;font:
+		target&nbsp;=&nbsp;index
+		points&nbsp;=&nbsp;[]
+		for&nbsp;mod&nbsp;in&nbsp;fontMods:
+			same&nbsp;=&nbsp;0
+			if&nbsp;mod[1].size&nbsp;==&nbsp;target.size:
+				for&nbsp;x&nbsp;in&nbsp;xrange(mod[1].size[0]):
+					for&nbsp;y&nbsp;in&nbsp;xrange(mod[1].size[1]):
+						if&nbsp;target.getpixel((x,&nbsp;y))&nbsp;==&nbsp;mod[1].getpixel((x,&nbsp;y)):
+							same&nbsp;+=&nbsp;1
+			#&nbsp;print&nbsp;same
+			points.append((same,mod[0]))
+		points.sort()
+		result&nbsp;+=&nbsp;points[len(points)-1][1]
+	return&nbsp;result</pre><p style="white-space: normal; text-align: center;"><strong>第五步 验证</strong></p><p style="white-space: normal;">先验证了之前下载的验证码，人工判断下，正确率达到了百分之百。</p><p style="white-space: normal; text-align: center;"><img src="../../../../Editor/2016-07-30/579b8e3734c9e.jpg" title="res.jpg"/></p><p style="white-space: normal;">后来又写了一个脚本，直接用验证码服务器去判断对错，识别了1000次，验证通过983次，正确率还是很不错的。</p><pre class="brush:python;toolbar:false">success&nbsp;=&nbsp;0
+for&nbsp;i&nbsp;in&nbsp;range(1000):
+	try:
+		res,vcode&nbsp;=&nbsp;test()
+		print&nbsp;&quot;%d:%s:%s&quot;%(i,str(res),vcode)
+		if&nbsp;res:
+			success+=1
+	except&nbsp;Exception,&nbsp;e:
+		print&nbsp;&quot;time&nbsp;out&quot;
+		time.sleep(5)
+
+print&nbsp;success</pre><p style="white-space: normal; text-align: center;"><strong>第六步 总结</strong></p><p style="white-space: normal;">通过这次折腾，学到很多知识。感觉有点像写实验小结...查资料的时候也有很多收获，不过<span style="color: rgb(0, 176, 240);">最关键的是联系到了实际，联系到现在所学的东西。线性代数，高数，概率论，通信原理，信息论，数字信号处理等所学知识都有体现。边缘检测（这里没用）需要求梯度，方向导数，噪声就是二位随机变量，服从高斯分部，匹配的时候比较像素点其实就是求码间距离，就是汉明距离等等</span>。写匹配算法的时候查到神经网络算法，简单看了下，真是太神奇了。</p><p style="white-space: normal;"><br/></p><p style="white-space: normal;">通过联系实际，培养自己的学习兴趣，这样也给复习考研带来了很多动力！</p>        </div>
+      </div>
+    </div>
+    <hr class="am-article-divider"/>
+    <div class="am-center" style="text-align:center;margin-bottom:15px;">
+    <a href="129.html">上一篇</a>    <a href="218.html">下一篇</a>    </div>
+    <!-- <hr class="am-article-divider"/> -->
+      </div>
+</div>
+    <div style="right: 15px;" class="amz-toolbar" id="amz-toolbar">
+    <a href="#top" title="回到顶部" class="am-icon-btn am-icon-arrow-up am-active" id="amz-go-top"></a>
+    </div>
+    <footer class="footer" style="background-color:#303336;">
+     <div class="g-ft" style="padding-top:20px;">
+     <div class="">
+      <div  style="float:left;width:50%;text-align:right;">
+        <ul class="m-bottom-nav" style="margin:0 20px 0 0;">
+          <li>
+                  <a href="../../../Index/index.html" target="_self">首页</a>
+              </li><li>
+                  <a href="http://www.zhangwenxuan.cn/" target="_blank">好基友</a>
+              </li><li>
+                  <a href="http://blog.wozhendehaoaini.cn/" target="_blank">老博客</a>
+              </li><li>
+                  <a href="66.html" target="_self">关于我</a>
+              </li>        </ul>
+      </div>
+      <div  style="float:right;width:50%;text-align:left;">
+        <ul class="m-bottom-nav" style="margin:0 0 0 20px;">
+           		<li>
+			<a href="../../lists/category/feeling.html">
+				<i class="icon-chevron-right"></i>随笔心情			</a>
+		</li>		<li>
+			<a href="../../lists/category/learnsth.html">
+				<i class="icon-chevron-right"></i>学习研究			</a>
+		</li>		<li>
+			<a href="../../lists/category/sizhou.html">
+				<i class="icon-chevron-right"></i>飞控研究			</a>
+		</li>		<li>
+			<a href="../../lists/category/Python.html">
+				<i class="icon-chevron-right"></i>Python			</a>
+		</li>		<li>
+			<a href="../../lists/category/wxmp.html">
+				<i class="icon-chevron-right"></i>微信平台			</a>
+		</li>        </ul>        
+      </div>
+    </div>
+           <p style="clear:both;padding-top:15px;" class="m-cprt">©&nbsp;<a href="../../../../index.html">花开花落</a>&nbsp;京ICP备15006955号-1&nbsp;|&nbsp;Powered by <a href="../../../../index.html">Winke</a></p> 
+    </div>
+    </footer>
+
+<!--[if lt IE 9]>
+<script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
+<script src="/Public/static/amaze/js/polyfill/rem.min.js"></script>
+<script src="/Public/static/amaze/js/polyfill/respond.min.js"></script>
+<script src="/Public/static/amaze/js/amazeui.legacy.js"></script>
+<![endif]-->
+
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script src="../../../../Public/static/amaze/js/jquery.min.js"></script>
+<script src="../../../../Public/static/amaze/js/amazeui.min.js"></script>
+<script type="text/javascript" src="../../../../Public/static/ueditor/third-party/SyntaxHighlighter/shCore.js"></script>
+<script src="../../../../Public/Home/js/blog.js"></script>
+<script type="text/javascript"> SyntaxHighlighter.all(); </script>
+<!--<![endif]-->
+</body>
+</html>

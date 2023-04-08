@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"
+xmlns:thr="http://purl.org/syndication/thread/1.0"
+xml:lang="zh-CN"
+xml:base="https://feelncut.com/2018/05/"
+>
+<title type="text">小王同学 - 2018年5月</title>
+<subtitle type="text">希望通过自我加工，成为有点用的人</subtitle>
+<updated>2018-05-14T15:19:07+08:00</updated>
+<generator uri="http://typecho.org/" version="1.1/17.12.14">Typecho</generator>
+<link rel="alternate" type="text/html" href="https://feelncut.com/2018/05/" />
+<id>https://feelncut.com/feed/atom/2018/05/</id>
+<link rel="self" type="application/atom+xml" href="https://feelncut.com/feed/atom/2018/05/" />
+<entry>
+<title type="html"><![CDATA[Python 进程池和线程池的简单使用]]></title>
+<link rel="alternate" type="text/html" href="https://feelncut.com/2018/05/14/150.html" />
+<id>https://feelncut.com/2018/05/14/150.html</id>
+<updated>2018-05-14T15:19:07+08:00</updated>
+<published>2018-05-14T15:19:07+08:00</published>
+<author>
+    <name>pizi</name>
+    <uri>https://feelncut.com</uri>
+</author>
+<summary type="html"><![CDATA[- 并不是池子越大越好，综合CPU核数与任务资源占用类型考虑。
+- map 与 map_async 的区别是map后直接运行线程/进程，运行结束后再执行之后语句（阻塞），async呢不阻塞，遇到...]]></summary>
+<content type="html" xml:base="https://feelncut.com/2018/05/14/150.html" xml:lang="zh-CN"><![CDATA[
+<div id="md_content_1" class="md_content" style="min-height: 50px;"><textarea id="append-test" style="display:none;">
+- 并不是池子越大越好，综合CPU核数与任务资源占用类型考虑。
+- map 与 map_async 的区别是map后直接运行线程/进程，运行结束后再执行之后语句（阻塞），async呢不阻塞，遇到wait()才阻塞。测试用例来自[Stack Overflow](https://stackoverflow.com/questions/35908987/python-multiprocessing-map-vs-map-async "Stack Overflow")见下：
+
+```python
+from multiprocessing import Pool
+import time
+
+def f(x):
+    print x*x
+
+if __name__ == '__main__':
+    pool = Pool(processes=4)
+    pool.map(f, range(10))
+    r  = pool.map_async(f, range(10))
+    # DO STUFF
+    print 'HERE'
+    print 'MORE'
+    r.wait()
+    print 'DONE'
+```
+</textarea></div><p class="more"><a href="https://feelncut.com/2018/05/14/150.html" title="Python 进程池和线程池的简单使用">[...]</a></p>
+]]></content>
+<link rel="replies" type="text/html" href="https://feelncut.com/2018/05/14/150.html#comments" thr:count="0" />
+<link rel="replies" type="application/atom+xml" href="https://feelncut.com/feed/atom/2018/05/14/150.html" thr:count="0"/>
+</entry>
+<entry>
+<title type="html"><![CDATA[搭建多人共用的GPU服务器]]></title>
+<link rel="alternate" type="text/html" href="https://feelncut.com/2018/05/03/145.html" />
+<id>https://feelncut.com/2018/05/03/145.html</id>
+<updated>2018-05-03T17:12:00+08:00</updated>
+<published>2018-05-03T17:12:00+08:00</published>
+<author>
+    <name>pizi</name>
+    <uri>https://feelncut.com</uri>
+</author>
+<summary type="html"><![CDATA[[TOC]
+
+#### 背景
+
+目前实验室GPU使用情况是：大部分同学的配有单台1080/TITAN Xp。后来购入了两台4卡的机器，老师的意思是希望可以作为服务器使用，能够多人同时使用，互不影...]]></summary>
+<content type="html" xml:base="https://feelncut.com/2018/05/03/145.html" xml:lang="zh-CN"><![CDATA[
+<div id="md_content_3" class="md_content" style="min-height: 50px;"><textarea id="append-test" style="display:none;">[TOC]
+
+#### 背景
+
+目前实验室GPU使用情况是：大部分同学的配有单台1080/TITAN Xp。后来购入了两台4卡的机器，老师的意思是希望可以作为服务器使用，能够多人同时使用，互不影响。于是便开始了本次折腾，记录采坑经历。
+
+通过本文，多卡读者可以实现分配每块GPU给特定同学使用，也可以多人共用多块GPU。单卡读者可以实现多人共用一块GPU。
+
+</textarea></div><p class="more"><a href="https://feelncut.com/2018/05/03/145.html" title="搭建多人共用的GPU服务器">[...]</a></p>
+]]></content>
+<link rel="replies" type="text/html" href="https://feelncut.com/2018/05/03/145.html#comments" thr:count="12" />
+<link rel="replies" type="application/atom+xml" href="https://feelncut.com/feed/atom/2018/05/03/145.html" thr:count="12"/>
+</entry>
+</feed>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+xmlns="http://purl.org/rss/1.0/"
+xmlns:dc="http://purl.org/dc/elements/1.1/">
+<channel rdf:about="https://feelncut.com/feed/rss/2018/10/">
+<title>小王同学 - 2018年10月</title>
+<link>https://feelncut.com/2018/10/</link>
+<description>希望通过自我加工，成为有点用的人</description>
+<items>
+<rdf:Seq>
+<rdf:li resource="https://feelncut.com/2018/10/17/228.html"/>
+</rdf:Seq>
+</items>
+</channel>
+<item rdf:about="https://feelncut.com/2018/10/17/228.html">
+<title> 以太坊多重签名原理分析</title>
+<link>https://feelncut.com/2018/10/17/228.html</link>
+<dc:date>2018-10-17T01:54:00+08:00</dc:date>
+<description>## 目录
+
+[TOC]
+
+## 0 起源与现状
+
+一般来说一个以太坊地址对应一个私钥，动用这个地址中的资金需要私钥的掌握者发起签名才行。消费这笔资金时，所构造的签名交易被称为“单签名交易”。
+
+而多重签名技术，简单来说，一个以太坊地址对应多个私钥，就是动用一笔资金时需要多个私钥签名才有效。消费这笔资金时，所构造的签名交易被称为“多签名交易”，或者“M-of-N 交易”，对应的比特币地址被称为“多签地址”。
+
+目前，在以太坊中常用的多签钱包有：
+
+- [Mist](https://github.com/ethereum/mist) 以太坊官方维护的钱包，支持多签
+- [Ethereum Wallet](https://www.ethereum.org/) 以太坊官方维护的钱包，支持多签
+- [Parity](https://github.com/paritytech/parity-ethereum) 支持多签
+
+在以太坊中，多签钱包全部都是通过智能合约实现，下面介绍以太坊中的多签实现原理，实例分析。
+
+[...]</description>
+</item>
+</rdf:RDF>

@@ -1,0 +1,265 @@
+<!DOCTYPE HTML>
+<html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width,user-scalable=no">
+    <title>小王同学</title>
+	<!--[if lt IE 9]>
+    <script type="text/javascript" src="https://feelncut.com/usr/themes/maupassant/javascript/html5shiv.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" href="../../admin/css/normalize.css">
+    <link rel="stylesheet" href="../../usr/themes/maupassant/style.css">
+    <meta name="description" content="希望通过自我加工，成为有点用的人" />
+<link rel="alternate" type="application/rss+xml" title="小王同学 &raquo; RSS 2.0" href="../../feed/index.html" />
+<link rel="alternate" type="application/rdf+xml" title="小王同学 &raquo; RSS 1.0" href="../../feed/rss/index.html" />
+<link rel="alternate" type="application/atom+xml" title="小王同学 &raquo; ATOM 1.0" href="../../feed/atom/index.html" />
+<script> var _hmt = _hmt || []; (function() {   var hm = document.createElement("script");   hm.src = "https://hm.baidu.com/hm.js?e9ff349d5b883760c70a4e220c9ac8ca";   var s = document.getElementsByTagName("script")[0];    s.parentNode.insertBefore(hm, s); })(); </script></head>
+<body>
+
+<header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                                    <h1>
+                        <a id="logo" href="../../index.html">
+                            小王同学                        </a>
+                    </h1>
+                        	    <p class="description">希望通过自我加工，成为有点用的人</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current " href="../../index.html">博客</a>
+															<a href="../../archives.html" title="归档">归档</a>
+										<a href="../../tools.html" title="Tools">Tools</a>
+										<a href="../../about.html" title="关于">关于</a>
+									</nav>
+            </div>
+        </div>
+    </div>
+</header>
+<div id="body">
+    <div class="container">
+        <div class="col-group">
+<div class="col-8" id="main">
+	<div class="res-cons">
+					<article class="post">
+				<header>
+					<h2 class="post-title">
+						<a href="../../2018/01/11/53.html">Ubuntu 16.04下Shadowsocks服务器端简单安装使用</a>
+					</h2>
+				</header>
+				<date class="post-meta">
+					January 11, 2018				</date>
+				<div class="post-content">
+					<div id="md_content_1" class="md_content" style="min-height: 50px;"><textarea id="append-test" style="display:none;">>因为学校的上网帐号只能允许两台终端同时在线，我和女票一人占了一个终端，在远程连接宿舍PC的时候，为了避免~~挨打~~女票掉线，每次都是手动在在线管理页面将自己实验室PC下线，然后再在宿舍PC上登录上网帐号，或者准备用实验室PC上网时手动下线宿舍PC，再在实验室PC登录。这样以来一边SSH操作宿舍PC，一编实验室PC查资料来回切换网络很是不方便，所以通过`Shadowsocks`来快速搭建一个网络共享平台，简单高效的解决了这个问题。
+
+确保已经安装了pip，并最好更新到最新版本，我比较喜欢用python3：
+```bash
+sudo apt-get install python3-pip
+sudo pip3 install --upgrade pip
+sudo pip3 install shadowsocks
+# 到这里已经完成了ss的安装，下一步进行配置，我比较喜欢用json配置文件进行配置
+sudo nano /etc/ss.json
+```
+我的配置文件如下：
+```json
+{
+    "server":"::",
+    "server_port":8388,
+    "local_port":1080,
+    "password":"password",
+    "timeout":600,
+    "method":"aes-256-cfb"
+}
+```
+然后启动ss：
+```bash
+sudo ssserver -c /etc/ss.json -d start
+```
+
+当然，还有各种优化ss连接和数据传输速度的方法，我这里不需要，所以就不再进行配置。
+
+通过这种简单的方式完美的解决了一个操蛋的问题:smile:。</textarea></div>				</div>
+			</article>
+					<article class="post">
+				<header>
+					<h2 class="post-title">
+						<a href="../../2018/01/10/52.html">Python3使用内置CSV模块读写CSV格式文件</a>
+					</h2>
+				</header>
+				<date class="post-meta">
+					January 10, 2018				</date>
+				<div class="post-content">
+					<div id="md_content_2" class="md_content" style="min-height: 50px;"><textarea id="append-test" style="display:none;">```python
+import csv
+
+# open的时候可以指定编码
+csv_reader = csv.reader(open('1.csv'))
+csv_writer = csv.writer(open('2.csv','w'))
+for row in csv_reader:
+    print(row)
+    # ['公告编号', '公告内容', ...]
+    csv_writer.writerow(row)
+# 还有writerows方法
+# csv_writer.writerows(rows)
+```</textarea></div>				</div>
+			</article>
+					<article class="post">
+				<header>
+					<h2 class="post-title">
+						<a href="../../2018/01/09/50.html">Ubuntu 16.04下安装Jupyter Notebook并开启远程访问</a>
+					</h2>
+				</header>
+				<date class="post-meta">
+					January 9, 2018				</date>
+				<div class="post-content">
+					<div id="md_content_3" class="md_content" style="min-height: 50px;"><textarea id="append-test" style="display:none;">> 因为电脑在宿舍，所以开一个Jupyter Notebook远程访问还是比较方便测试程序的。
+
+</textarea></div><p class="more"><a href="../../2018/01/09/50.html" title="Ubuntu 16.04下安装Jupyter Notebook并开启远程访问">- 阅读剩余部分 -</a></p>				</div>
+			</article>
+					<article class="post">
+				<header>
+					<h2 class="post-title">
+						<a href="../../2018/01/09/Mxnet.html">Ubuntu 16.04下安装MXNet 1.0 GPU版</a>
+					</h2>
+				</header>
+				<date class="post-meta">
+					January 9, 2018				</date>
+				<div class="post-content">
+					<div id="md_content_4" class="md_content" style="min-height: 50px;"><textarea id="append-test" style="display:none;">虚拟环境已经在[安装TensorFlow](https://feelncut.com/2018/01/09/TensorFlow.html)的过程中安装好了，在改虚拟环境的基础上进行安装MXNet1.0 版本。
+主要参考官方安装指南：
+> https://mxnet.apache.org/install/index.html
+
+</textarea></div><p class="more"><a href="../../2018/01/09/Mxnet.html" title="Ubuntu 16.04下安装MXNet 1.0 GPU版">- 阅读剩余部分 -</a></p>				</div>
+			</article>
+					<article class="post">
+				<header>
+					<h2 class="post-title">
+						<a href="../../2018/01/09/TensorFlow.html">Ubuntu 16.04下安装TensorFlow最新GPU版</a>
+					</h2>
+				</header>
+				<date class="post-meta">
+					January 9, 2018				</date>
+				<div class="post-content">
+					<div id="md_content_5" class="md_content" style="min-height: 50px;"><textarea id="append-test" style="display:none;">
+在安装TensorFlow GPU版本之前，需要安装好CUDA 8.0 + cuDNN 6.0，安装过程见[这里](/2018/01/09/46.html)。其他版本的CUDA与cuDNN也可以参考这个安装步骤。
+
+>**补充：由于TF更新很快，本教程只适用于依赖CUDA 8.0 + cuDNN 6.0的TF版本，不过我按照同样的方法成功安装了CUDA 9.0 + cuDNN 7.0 和 TensorFlow 1.6版本，`注意环境变量添加的时候目录改成CUDA-9.0`。**
+
+本次安装主要按照官网的安装指南进行安装，通过`virtualenv`安装了Python3.5 GPU版本，官网安装指南：
+> https://www.tensorflow.org/install/install_linux#InstallingVirtualenv
+
+</textarea></div><p class="more"><a href="../../2018/01/09/TensorFlow.html" title="Ubuntu 16.04下安装TensorFlow最新GPU版">- 阅读剩余部分 -</a></p>				</div>
+			</article>
+				<ol class="page-navigator"><li class="prev"><a href="../8/index.html">&laquo; Previous</a></li><li><a href="../1/index.html">1</a></li><li><a href="../2/index.html">2</a></li><li><a href="../3/index.html">3</a></li><li><a href="../4/index.html">4</a></li><li><a href="../5/index.html">5</a></li><li><a href="../6/index.html">6</a></li><li><a href="../7/index.html">7</a></li><li><a href="../8/index.html">8</a></li><li class="current"><a href="index.html">9</a></li><li><a href="../10/index.html">10</a></li><li class="next"><a href="../10/index.html">Next &raquo;</a></li></ol>	</div>
+</div>
+<div id="secondary">
+	<section class="widget">
+        <form id="search" method="post" action="index.html">
+            <input type="text" name="s" class="text" placeholder="搜索..." />
+            <button type="submit" class="submit icon-search"></button>
+        </form>
+    </section>
+
+	    <section class="widget">
+		<h3 class="widget-title">最新文章</h3>
+        <ul class="widget-list">
+            <li><a href="../../2020/08/24/323.html">ETH 2.0 资源汇总（持续更新）</a></li><li><a href="../../2020/08/24/322.html">ETH 2.0 测试网验证节点质押流程体验</a></li><li><a href="../../2020/06/06/312.html">通过 openssl 导出 HTTPS 网站 SSL 证书链</a></li><li><a href="../../2020/05/20/308.html">如何开发一款区块链浏览器？</a></li><li><a href="../../2020/02/02/288.html">EOS 提交交易失败分析</a></li><li><a href="../../2019/12/09/giaocamerarobot.html">小 Giao 之死</a></li><li><a href="../../2019/10/04/267.html">《凶宅》和《疯人院》</a></li><li><a href="../../2018/10/17/228.html"> 以太坊多重签名原理分析</a></li><li><a href="../../2018/09/11/188.html">OpenCV 初识图像</a></li><li><a href="../../2018/09/11/184.html">为什么要系统的学习一下Pyhton-OpenCV?</a></li>        </ul>
+    </section>
+    
+        <section class="widget">
+		<h3 class="widget-title">最近回复</h3>
+        <ul class="widget-list">
+                            <li><a href="../../2020/08/24/323.html#comment-26">pizi</a>: https://be...</li>
+                    <li><a href="../../2020/08/24/323.html#comment-25">何先生</a>: 请问有没有ETH2....</li>
+                    <li><a href="../../2018/05/03/145.html#comment-24">pizi</a>: 一个卡就不要限制资源...</li>
+                    <li><a href="../../about.html#comment-23">pizi</a>: 有特殊技巧的啊，从阿...</li>
+                    <li><a href="../../about.html#comment-22">一网友</a>: 有钱人新浪数据库很贵吧</li>
+                    <li><a href="../../2018/05/03/145.html#comment-21">padluo</a>: 请问如何控制到用户使...</li>
+                    <li><a href="../../about.html#comment-20">小白</a>: 板凳是我的！</li>
+                    <li><a href="../../2018/02/08/90.html#comment-19">无耻的我</a>: 大佬，能发一份吗，原...</li>
+                    <li><a href="../../2018/05/03/145.html#comment-18">pizi</a>: 文章里写了的，lxc...</li>
+                    <li><a href="../../2018/05/03/145.html#comment-17">zzd</a>: lxc config...</li>
+                </ul>
+    </section>
+    
+        <section class="widget">
+		<h3 class="widget-title">分类</h3>
+        <ul class="widget-list">
+            <li><a href="../../category/feel/index.html">随笔心情</a> (4)</li><li><a href="../../category/code/index.html">代码片段</a> (17)</li><li><a href="../../category/ojbk/index.html">折腾着玩</a> (7)</li><li><a href="../../category/ml/index.html">机器学习</a> (9)</li><li><a href="../../category/blockChain/index.html">区块链</a> (10)</li><li><a href="../../category/python-opencv/index.html">Python-OpenCV</a> (2)</li><li><a href="../../category/video/index.html">视频剪辑</a> (0)</li><li><a href="../../category/leetcode/index.html">leetcode</a> (1)</li>        </ul>
+	</section>
+    
+        <section class="widget">
+		<h3 class="widget-title">归档</h3>
+        <ul class="widget-list">
+            <li><a href="../../2020/08/index.html">August 2020</a></li><li><a href="../../2020/06/index.html">June 2020</a></li><li><a href="../../2020/05/index.html">May 2020</a></li><li><a href="../../2020/02/index.html">February 2020</a></li><li><a href="../../2019/12/index.html">December 2019</a></li><li><a href="../../2019/10/index.html">October 2019</a></li><li><a href="../../2018/10/index.html">October 2018</a></li><li><a href="../../2018/09/index.html">September 2018</a></li><li><a href="../../2018/08/index.html">August 2018</a></li><li><a href="../../2018/05/index.html">May 2018</a></li><li><a href="../../2018/04/index.html">April 2018</a></li><li><a href="../../2018/03/index.html">March 2018</a></li><li><a href="../../2018/02/index.html">February 2018</a></li><li><a href="../../2018/01/index.html">January 2018</a></li>        </ul>
+	</section>
+    
+    	<section class="widget">
+		<h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+                            <li class="last"><a href="../../admin/login.php.html">登录</a></li>
+                        <li><a href="../../feed/index.html">文章 RSS</a></li>
+            <li><a href="../../feed/comments/index.html">评论 RSS</a></li>
+            <li><a href="http://www.typecho.org">Typecho</a></li>
+        </ul>
+	</section>
+    </div>		</div>
+    </div>
+</div>
+<footer id="footer">
+	<div class="container">
+		&copy; 2023 <a rel="nofollow" href="../../index.html">小王同学</a>. 模板由<a href="http://pagecho.com">cho</a>制作.
+	</div>
+</footer>
+<link rel="stylesheet" href="../../usr/plugins/EditorMD/css/editormd.css" />
+<link rel="stylesheet" href="../../usr/plugins/EditorMD/css/emojify.min.css" />
+<script type="text/javascript">
+    window.jQuery || document.write(unescape('%3Cscript%20type%3D%22text/javascript%22%20src%3D%22https://feelncut.com/usr/plugins/EditorMD/lib/jquery.min.js%22%3E%3C/script%3E'));
+</script>
+<script src="../../usr/plugins/EditorMD/lib/marked.min.js"></script>
+<script src="../../usr/plugins/EditorMD/lib/prettify.min.js"></script>
+<script src="../../usr/plugins/EditorMD/lib/raphael.min.js"></script>
+<script src="../../usr/plugins/EditorMD/lib/underscore.min.js"></script>
+<script src="../../usr/plugins/EditorMD/lib/sequence-diagram.min.js"></script>
+<script src="../../usr/plugins/EditorMD/lib/flowchart.min.js"></script>
+<script src="../../usr/plugins/EditorMD/lib/jquery.flowchart.min.js"></script>
+<script src="../../usr/plugins/EditorMD/js/editormd.min.js"></script>
+<script src="../../usr/plugins/EditorMD/js/emojify.min.js"></script>
+<script type="text/javascript">
+$(function() {
+    var markdowns = document.getElementsByClassName("md_content");
+    $(markdowns).each(function(){
+        var markdown = $(this).children("#append-test").text();
+        //$('#md_content_'+i).text('');
+        var testEditormdView;
+        testEditormdView = editormd.markdownToHTML($(this).attr("id"), {
+            markdown: markdown,//+ "\r\n" + $("#append-test").text(),
+            toolbarAutoFixed : false,
+            htmlDecode: true,
+            emoji: true,
+            tex: true,
+            toc: true,
+            tocm: true,
+            taskList: true,
+            flowChart: true,
+            sequenceDiagram: true,
+        });
+    });
+    emojify.setConfig({
+        img_dir: 'https:' == document.location.protocol ? "https://staticfile.qnssl.com/emoji-cheat-sheet/1.0.0" : "http://cdn.staticfile.org/emoji-cheat-sheet/1.0.0",
+        blacklist: {
+            'ids': [],
+            'classes': ['no-emojify'],
+            'elements': ['^script$', '^textarea$', '^pre$', '^code$']
+        },
+    });
+    emojify.run();
+});
+</script>
+</body>
+</html>

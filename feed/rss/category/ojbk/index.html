@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+xmlns="http://purl.org/rss/1.0/"
+xmlns:dc="http://purl.org/dc/elements/1.1/">
+<channel rdf:about="https://feelncut.com/feed/rss/category/ojbk/">
+<title>小王同学 - 折腾着玩</title>
+<link>https://feelncut.com/category/ojbk/</link>
+<description></description>
+<items>
+<rdf:Seq>
+<rdf:li resource="https://feelncut.com/2020/05/20/308.html"/>
+<rdf:li resource="https://feelncut.com/2019/12/09/giaocamerarobot.html"/>
+<rdf:li resource="https://feelncut.com/2018/05/03/145.html"/>
+<rdf:li resource="https://feelncut.com/2018/04/05/119.html"/>
+<rdf:li resource="https://feelncut.com/2018/04/05/110.html"/>
+<rdf:li resource="https://feelncut.com/2018/02/08/90.html"/>
+<rdf:li resource="https://feelncut.com/2018/01/09/44.html"/>
+</rdf:Seq>
+</items>
+</channel>
+<item rdf:about="https://feelncut.com/2020/05/20/308.html">
+<title>如何开发一款区块链浏览器？</title>
+<link>https://feelncut.com/2020/05/20/308.html</link>
+<dc:date>2020-05-20T16:29:00+08:00</dc:date>
+<description>## 摘要
+步入币圈大门后，除了钱包应用之外，用户最先接触的应该还有区块链浏览器。区块链浏览器不同于电脑和手机上浏览网页用的浏览器软件，而是指一个网站可以查询区块链上的具体信息。比如，给定区块高度，可以查询该高度区块的创建时间，包含了多少交易；给定一个地址，可以查询余额，该地址的所有交易记录等。当前以太坊上的数据量级已达亿级，如何进行数据持久化和查询呢？本文以以太坊为例，对区块链浏览器原理及存储细节进行分析总结。
+
+[...]</description>
+</item>
+<item rdf:about="https://feelncut.com/2019/12/09/giaocamerarobot.html">
+<title>小 Giao 之死</title>
+<link>https://feelncut.com/2019/12/09/giaocamerarobot.html</link>
+<dc:date>2019-12-09T22:18:00+08:00</dc:date>
+<description>## 机器人小 Giao 的前生今世
+
+一个突然地想法，想到用个普通的摄像头做个预警机器人🤖，于是折腾了三四天，小 Giao 出生了。
+
+![](/images/2019/12/245685690.png)
+*小 Giao 的头像经过模糊处理，头像来自 Allenzsy 在群里分享的第一个图片！*
+
+小 Giao 威力巨大，为了防止小 Giao 统治人类世界，已经将其一棒子打死，尸体在： https://github.com/wangke0809/GiaoCameraRobot
+
+------------
+
+## 目录
+
+[TOC]
+
+## 需求
+
+需求分析：
+
+- 进入实验室检测：能够通过摄像头实时检测到有人进入实验室 -> Face Detection + Multi-label Classification
+
+- 检测结果通知：能够方便的接受监测结果 -> 使用钉钉群聊机器人
+
+- 轻量级资源占用：工位上除了有个 2015 年办公的老电脑（i7-4790），还有个 GPU 工作站，因为借来的摄像头数据线长度不够，以及考虑到在工作站上跑实验时占用资源多会严重造成系统卡顿，所以决定在办公电脑上跑小 Giao ，所以需要保证运行小 Giao 的时候不能影响正常办公 -> 聚焦关键区域 + 上下帧图像变化量阈值
+
+[...]</description>
+</item>
+<item rdf:about="https://feelncut.com/2018/05/03/145.html">
+<title>搭建多人共用的GPU服务器</title>
+<link>https://feelncut.com/2018/05/03/145.html</link>
+<dc:date>2018-05-03T17:12:00+08:00</dc:date>
+<description>[TOC]
+
+#### 背景
+
+目前实验室GPU使用情况是：大部分同学的配有单台1080/TITAN Xp。后来购入了两台4卡的机器，老师的意思是希望可以作为服务器使用，能够多人同时使用，互不影响。于是便开始了本次折腾，记录采坑经历。
+
+通过本文，多卡读者可以实现分配每块GPU给特定同学使用，也可以多人共用多块GPU。单卡读者可以实现多人共用一块GPU。
+
+[...]</description>
+</item>
+<item rdf:about="https://feelncut.com/2018/04/05/119.html">
+<title>写给女朋友：理解服务端的工作原理（下）</title>
+<link>https://feelncut.com/2018/04/05/119.html</link>
+<dc:date>2018-04-05T03:28:00+08:00</dc:date>
+<description>[TOC]
+
+下面真的进入正题了，上一篇扯了一些杂七杂八应该知道的东西，鉴于篇幅考虑，我还是分开吧。本文主要介绍`拍黄片`，主要演示`Cookie`，`Session`和`Token`鉴权。
+
+这一部分最好可以动手做一下，学点PHP，掌握一门服务端语言。
+
+[...]</description>
+</item>
+<item rdf:about="https://feelncut.com/2018/04/05/110.html">
+<title>写给女朋友：理解服务端的工作原理（上）</title>
+<link>https://feelncut.com/2018/04/05/110.html</link>
+<dc:date>2018-04-05T02:04:00+08:00</dc:date>
+<description>[TOC]
+
+### 前言
+
+女票学了一阵前端了，一般来讲，一个牛逼的前端至少会一种服务端语言，一个负责的男票至少给小傻子写一篇服务端入门教程。
+
+本文的主要目的是理解服务端运作的原理，`Cookie`和`Session`的概念，以及如何通过`Token鉴权`。我会从最基础的说起，便于你理解。之所以用`PHP`是因为拍黄片太简单了，理解比较直观，你可以趁机了解以下嘛，之后服务端可以学习以下`express`。
+
+接下来进入正题，以下内容理解即可，不需动手实践，如需了解更多，自行百度啊。
+
+[...]</description>
+</item>
+<item rdf:about="https://feelncut.com/2018/02/08/90.html">
+<title>Typecho 隐藏内容插件</title>
+<link>https://feelncut.com/2018/02/08/90.html</link>
+<dc:date>2018-02-08T14:47:00+08:00</dc:date>
+<description>临近放假，无心学习，写个Typecho插件玩玩，这个插件实现了隐藏文章指定内容的功能。
+
+[...]</description>
+</item>
+<item rdf:about="https://feelncut.com/2018/01/09/44.html">
+<title>为了吃鸡，我配了台式机</title>
+<link>https://feelncut.com/2018/01/09/44.html</link>
+<dc:date>2018-01-09T12:50:00+08:00</dc:date>
+<description>> 男人不曾长大，只是玩具变了
+
+其实我感觉这句话挺搞笑的，但是说的不对。无论男人女人，都是玩具变了，但是玩具改变的根本原因是年纪变了，即长大了。
+
+为了流畅的~~深度学习~~吃鸡，我配了一台台式机，选择自己组装台式机的原因有二：
+ - 自己动手折腾多好玩
+ - 某东和某猫上的组装机不敢买
+
+首先在某东和某猫上看到商家组装好的台式机，相同配置，自己组装要贵出￥2000左右，不免心中有些担心，干脆自己组装一个好了，器件全去官方旗舰店买，至少心里有点底儿。
+
+组装的配置主要还是参考了某东和某猫上的组装台式机，当然，也结合了自己的支付宝余额和蚂蚁花呗额度:joy:。不过还好，赶上了双11，经过近一个月对价钱波动的观察，双11到手还是便宜了不少钱。本次组装的配置如下：
+
+| 组件/套  |  价钱/￥ |
+| ------------ | ------------ |
+| Intel i5 7500 CPU + ASUSPRIME B250M-PLUS 主板 | 1599  |
+| Colorful iGame1060 6G 烈焰战神U-6GD5 Top 显卡 | 1999 |
+| CoolerMaster 450W 战斧三代 电源 + 剑客K282C 机箱 | 439 |
+| 威刚/8G/2400/游戏威龙/DDR4 内存条 | 652 |
+| WD/GREEN/120G/M.2/2280 固态硬盘 | 340 |
+| 合计 | 5029 |
+
+因为双11，所以大部分是购买的套餐，以获得更大的优惠。今天来看价格，CPU + 主板仍然是￥2000，不过内存和SSD便宜了50左右。
+
+除了主机，也买了一些比较垃圾的配件，比如我的超级炫彩7.1声道耳机，绿色冥光机械键盘，1800R曲面屏...
+
+朋友买了某东的组装整机，第二天就无法开机，不过好在上门换个主板，i7 7700K + Z270H Gaming + 华硕1060 6G + 128 SSD + 威刚/8G/2800MHz 5500左右...相同价钱我这配置可差了一个小等级了，据他描述，现在一切使用良好。
+
+在回到我的主机上，一边百度边看说明书，插上各种线之后，还没开机，机箱前面板被我单手拎着掉了，机箱砸在了地上，大概就是腰部到地面的高度吧。机箱不透明那一侧的角被摔的压进去了，好在费了九牛二虎之力把螺丝拧开了。
+
+可能运气比较好吧，第一次开机没反应，重新插拔内存条就直接开机了，也算是一次点亮吧。然后:smirk:我熟练的装上Win10 + Steam + PUBG...
+
+用鲁大师简单跑了一下分，28万多分，吃鸡比笔记本流畅多了:smile:
+
+总之，这算是一次比较不错的装机体验。</description>
+</item>
+</rdf:RDF>

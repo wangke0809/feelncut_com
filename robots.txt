@@ -1,0 +1,32 @@
+User-agent: *
+Disallow: 
+User-agent: Baiduspider
+Disallow: 
+User-agent: Sosospider
+Disallow: /
+User-agent: sogou spider
+Disallow: /
+User-agent: YodaoBot
+Disallow: /
+User-agent: Googlebot
+Disallow: 
+User-agent: Bingbot
+Disallow: 
+User-agent: googlebot-image
+Disallow: 
+User-agent: googlebot-mobile
+Disallow: 
+User-agent: yahoo-mmcrawler
+Disallow: /
+User-agent: yahoo-blogs/v3.9
+Disallow: 
+User-agent: psbot
+Disallow: /
+Disallow: /bin/
+User-agent: SemrushBot
+Disallow: /
+User-agent: SemrushBot-SA
+Disallow: /
+User-agent: MJ12bot
+Disallow: /
+Sitemap: https://feelncut.com/sitemap

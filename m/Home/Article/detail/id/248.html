@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+  <meta charset="UTF-8">
+  <title>C++的一些知识点记录|Winke's blog</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <link rel="alternate icon" type="image/png" href="../../../../Public/static/amaze/i/favicon.png">
+  <link rel="stylesheet" href="../../../../Public/static/amaze/css/amazeui.min.css"/>
+  <link rel="stylesheet" href="../../../../Public/static/ueditor/third-party/SyntaxHighlighter/shCoreDefault.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../Public/Home/css/blog.css">
+    <!--<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?e9ff349d5b883760c70a4e220c9ac8ca";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>-->
+    <style>
+    .g-hd {
+    background-image: url("../../../../Editor/2016-07-25/57962ebcddb49.png");
+    }
+
+    @media only screen and (min-width: 641px) {
+      .am-offcanvas {
+        display: block;
+        position: static;
+        background: none;
+      }
+
+      .am-offcanvas-bar {
+        position: static;
+        width: auto;
+        background: none;
+        -webkit-transform: translate3d(0, 0, 0);
+        -ms-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+      }
+      .am-offcanvas-bar:after {
+        content: none;
+      }
+
+    }
+    
+    @media only screen and (max-width: 640px) {
+      .am-offcanvas-bar .am-nav>li>a {
+        color:#ccc;
+        border-radius: 0;
+        border-top: 1px solid rgba(0,0,0,.3);
+        box-shadow: inset 0 1px 0 rgba(255,255,255,.05)
+      }
+
+      .am-offcanvas-bar .am-nav>li>a:hover {
+        background: #404040;
+        color: #fff
+      }
+
+      .am-offcanvas-bar .am-nav>li.am-nav-header {
+        color: #777;
+        background: #404040;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,.05);
+        text-shadow: 0 1px 0 rgba(0,0,0,.5);
+        border-top: 1px solid rgba(0,0,0,.3);
+        font-weight: 400;
+        font-size: 75%
+      }
+
+      .am-offcanvas-bar .am-nav>li.am-active>a {
+        background: #1a1a1a;
+        color: #fff;
+        box-shadow: inset 0 1px 3px rgba(0,0,0,.3)
+      }
+
+      .am-offcanvas-bar .am-nav>li+li {
+        margin-top: 0;
+      }
+    }
+
+    .my-head {
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    .my-button {
+      position: fixed;
+      top: 0;
+      right: 0;
+      border-radius: 0;
+    }
+    .my-sidebar {
+      padding-right: 0;
+      border-right: 1px solid #eeeeee;
+    }
+
+    .my-footer {
+      border-top: 1px solid #eeeeee;
+      padding: 10px 0;
+      margin-top: 10px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+<div class="g-hd" style="height:200px;"></div>
+<div class="m-hdimg" style="margin:-53px auto 0;display:block;text-align: center;">
+                <a class="hdimg img" href="../../../../old_index.html" >
+                    <img src="../../../../picture/avater2.jpg" height="96" width="96">
+                </a>
+            </div>
+<header class="am-g my-head">
+  <div class="am-u-sm-12 am-article">
+    <h1 class="am-article-title">C++的一些知识点记录</h1>
+    <p class="am-article-meta">王珂&nbsp;于&nbsp;2017-04-04 00:29</p>
+  </div>
+</header>
+<hr class="am-article-divider"/>
+<div class="am-g am-g-fixed">
+  <div class="am-u-md-12">
+    <div class="am-g">
+      <div class="am-u-sm-11 am-u-sm-centered">
+      <? php if($info.['description']!=''){ ?>
+      <blockquote>北工大那边的项目，嵌入式编程用C++搞，之前基本上没用过C++,记录一下用到的知识点。</blockquote>
+      <? }  ?>
+        <div class="am-cf am-article">
+		<p>C++中的const<br/></p><p>对于变量来说，const就是声明常量，一旦初始化后不能被改变。</p><p>在类里面的用法见下：</p><pre class="brush:cpp;toolbar:false">#include&nbsp;
+
+using&nbsp;namespace&nbsp;std;
+
+class&nbsp;A&nbsp;{
+private:
+&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;a;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+public:
+&nbsp;&nbsp;&nbsp;&nbsp;A()&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a&nbsp;=&nbsp;0;
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;void&nbsp;setA(int&nbsp;x)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a&nbsp;=&nbsp;x;
+&nbsp;&nbsp;&nbsp;&nbsp;}
+
+&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;getA()&nbsp;const&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;a;
+&nbsp;&nbsp;&nbsp;&nbsp;}
+
+};
+
+class&nbsp;B&nbsp;{
+private:
+&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;b;
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;*a;
+public:
+&nbsp;&nbsp;&nbsp;&nbsp;B(int&nbsp;x)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;b&nbsp;=&nbsp;x;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a&nbsp;=&nbsp;NULL;
+&nbsp;&nbsp;&nbsp;&nbsp;}
+
+&nbsp;&nbsp;&nbsp;&nbsp;void&nbsp;setB(int&nbsp;x)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;b&nbsp;=&nbsp;x;
+&nbsp;&nbsp;&nbsp;&nbsp;}
+
+&nbsp;&nbsp;&nbsp;&nbsp;const&nbsp;int&nbsp;getB()&nbsp;const{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;b;
+&nbsp;&nbsp;&nbsp;&nbsp;}
+
+&nbsp;&nbsp;&nbsp;&nbsp;void&nbsp;setA(A&nbsp;*&nbsp;aa){
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a&nbsp;=&nbsp;aa;
+&nbsp;&nbsp;&nbsp;&nbsp;}
+
+&nbsp;&nbsp;&nbsp;&nbsp;/**
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;1&nbsp;若前面不加const,则得到a后可以调用a-&gt;setA()
+&nbsp;&nbsp;&nbsp;&nbsp;*/
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;*getA()&nbsp;const&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;a;
+&nbsp;&nbsp;&nbsp;&nbsp;}
+
+&nbsp;&nbsp;&nbsp;&nbsp;/**
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;2&nbsp;若前面加const,则得到a后不可以调用a-&gt;setA()
+&nbsp;&nbsp;&nbsp;&nbsp;*/
+&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;const&nbsp;A&nbsp;*getA()&nbsp;const&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;a;
+&nbsp;&nbsp;&nbsp;&nbsp;//}
+};
+
+class&nbsp;C&nbsp;{
+private:
+&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;c;
+&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;c++&nbsp;11&nbsp;中可以这样赋初值
+&nbsp;&nbsp;&nbsp;&nbsp;//int&nbsp;c&nbsp;=&nbsp;0;
+public:
+&nbsp;&nbsp;&nbsp;&nbsp;C()&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;c&nbsp;=&nbsp;0;
+&nbsp;&nbsp;&nbsp;&nbsp;}
+
+&nbsp;&nbsp;&nbsp;&nbsp;void&nbsp;setC(int&nbsp;c)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this-&gt;c&nbsp;=&nbsp;c;
+&nbsp;&nbsp;&nbsp;&nbsp;}
+
+&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;getC()&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;c;
+&nbsp;&nbsp;&nbsp;&nbsp;}
+
+&nbsp;&nbsp;&nbsp;&nbsp;/*
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;基本数据类型一般前面不加const&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;自己定义的类根据使用情况决定
+&nbsp;&nbsp;&nbsp;&nbsp;*/
+&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;getC()&nbsp;const&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;c;
+&nbsp;&nbsp;&nbsp;&nbsp;}
+
+&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;以下不能进行重载
+&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;const&nbsp;int&nbsp;getC()&nbsp;const&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;c;
+&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;}
+};
+
+int&nbsp;main()&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;B&nbsp;b(250);
+&nbsp;&nbsp;&nbsp;&nbsp;b.setB(1234);
+&nbsp;&nbsp;&nbsp;&nbsp;/*
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;虽然&nbsp;getB()&nbsp;前面加了const&nbsp;但是这里依然可以用int&nbsp;i&nbsp;而不是const&nbsp;int&nbsp;i;
+&nbsp;&nbsp;&nbsp;&nbsp;*/
+&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;i&nbsp;=&nbsp;b.getB();
+&nbsp;&nbsp;&nbsp;&nbsp;i++;
+&nbsp;&nbsp;&nbsp;&nbsp;cout&nbsp;&lt;&lt;&nbsp;i&nbsp;&lt;&lt;&nbsp;endl;
+&nbsp;&nbsp;&nbsp;&nbsp;b.setA(new&nbsp;A);
+&nbsp;&nbsp;&nbsp;&nbsp;/*
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;1&nbsp;B类不加const,可以setA()
+&nbsp;&nbsp;&nbsp;&nbsp;*/
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;*a&nbsp;=&nbsp;b.getA();
+&nbsp;&nbsp;&nbsp;&nbsp;/*
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;2&nbsp;B类加const,不可以setA()
+&nbsp;&nbsp;&nbsp;&nbsp;*/
+&nbsp;&nbsp;&nbsp;&nbsp;//const&nbsp;A&nbsp;*a&nbsp;=&nbsp;b.getA();
+&nbsp;&nbsp;&nbsp;&nbsp;coutgetA()setA(250);
+&nbsp;&nbsp;&nbsp;&nbsp;coutgetA()&lt;&lt;endl;
+&nbsp;&nbsp;&nbsp;&nbsp;C&nbsp;c;
+&nbsp;&nbsp;&nbsp;&nbsp;cout&lt;&lt;c.getC()&lt;&lt;endl;
+&nbsp;&nbsp;&nbsp;&nbsp;/*
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;c&nbsp;非&nbsp;const&nbsp;所以可以&nbsp;set
+&nbsp;&nbsp;&nbsp;&nbsp;*/
+&nbsp;&nbsp;&nbsp;&nbsp;c.setC(1);
+&nbsp;&nbsp;&nbsp;&nbsp;cout&lt;&lt;c.getC()&lt;&lt;endl;
+&nbsp;&nbsp;&nbsp;&nbsp;const&nbsp;C&nbsp;cc;
+&nbsp;&nbsp;&nbsp;&nbsp;//无法&nbsp;set&nbsp;编译会出错
+&nbsp;&nbsp;&nbsp;&nbsp;//cc.setC(2);
+&nbsp;&nbsp;&nbsp;&nbsp;//不过可以&nbsp;get
+&nbsp;&nbsp;&nbsp;&nbsp;cout&lt;&lt;cc.getC()&lt;&lt;endl;
+}</pre><p>SUM：</p><p>面向对象程序设计中，为了体现封装性，通常不允许直接修改类对象的数据成员。若要修改类对象，应调用公有成员函数来完成。为了保证const对象的常量性，编译器须区分不安全与安全的成员函数（即区分试图修改类对象与不修改类对象的函数）。</p><p>例如：const对象不能调用set方法。</p><p>1. const成员函数可以访问非const对象的非const数据成员、const数据成员，也可以访问const对象内的所有数据成员；</p><p>2. 非const成员函数可以访问非const对象的非const数据成员、const数据成员，但不可以访问const对象的任意数据成员；</p><p>3. 作为一种良好的编程风格，在声明一个成员函数时，若该成员函数并不对数据成员进行修改操作，应尽可能将该成员函数声明为const 成员函数。</p><hr/><p>char * 的遍历</p><p>对于char * 来说，如果</p><pre class="brush:cpp;toolbar:false">char&nbsp;x[]&nbsp;=&nbsp;{0x01,0x02};
+
+char&nbsp;*p&nbsp;&nbsp;=&nbsp;x;</pre><p>此时无法以 &#39;\0&#39; 为结尾判断，一般的做法是另加一个变量记录长度。</p><hr/><p>对象数组的遍历</p><p>对于无须进行增删的对象数组用基本数组实现，对于需要增删的考虑用vector</p><pre class="brush:cpp;toolbar:false">base&nbsp;*datas[]&nbsp;=
+{
+&nbsp;&nbsp;&nbsp;new&nbsp;base(1),
+&nbsp;&nbsp;&nbsp;new&nbsp;base(2),
+&nbsp;&nbsp;&nbsp;new&nbsp;base(3,new&nbsp;ibase(1))
+};
+
+
+for&nbsp;(int&nbsp;i&nbsp;=&nbsp;0;&nbsp;idisplay();
+&nbsp;&nbsp;&nbsp;&nbsp;}</pre><p>vector中用.size()获得数组长度。</p><hr/><p>对象的赋值，比较 和 类中vector的初始化</p><p>本科C++是选修，用的课本是谭浩强的《C++面向对象的程序设计》，很多点没讲到，不太清楚的只能自己动手测试了。</p><pre class="brush:cpp;toolbar:false">#include&nbsp;#include&nbsp;using&nbsp;namespace&nbsp;std;
+
+class&nbsp;A&nbsp;{
+private:
+	int&nbsp;a;
+	vector&nbsp;v;
+	//vector&nbsp;*v;
+public:
+	A(int&nbsp;x)&nbsp;{
+		//沒有初始化v
+		a&nbsp;=&nbsp;x;
+		//v&nbsp;=&nbsp;new&nbsp;vector;
+	}
+	void&nbsp;setA(int&nbsp;x)&nbsp;{
+		a&nbsp;=&nbsp;x;
+	}
+
+	int&nbsp;getA()&nbsp;const&nbsp;{
+		return&nbsp;a;
+	}
+
+	void&nbsp;setV(int&nbsp;x)&nbsp;{
+		v.push_back(x);
+	}
+
+	int&nbsp;getVi(int&nbsp;i)&nbsp;const&nbsp;{
+		return&nbsp;v[i];
+	}
+
+	vector&nbsp;getV()&nbsp;const&nbsp;{
+		return&nbsp;v;
+	}
+
+	void&nbsp;displayV()&nbsp;{
+		cout&nbsp;&lt;&lt;&nbsp;&amp;v&nbsp;&lt;&lt;&nbsp;endl;
+	}
+
+	void&nbsp;displayA()&nbsp;{
+		cout&nbsp;&lt;&lt;&nbsp;this&nbsp;&lt;&lt;&nbsp;endl;
+	}
+};
+
+int&nbsp;main()&nbsp;{
+	A&nbsp;a1(2);
+	A&nbsp;a2(2);
+	cout&nbsp;&lt;&lt;&nbsp;a1.getA()&nbsp;&lt;&lt;&nbsp;endl;
+	cout&nbsp;&lt;&lt;&nbsp;a2.getA()&nbsp;~A&quot;&nbsp;&lt;&lt;&nbsp;endl;
+	}
+	void&nbsp;setA(int&nbsp;x)&nbsp;{
+		a&nbsp;=&nbsp;x;
+	}
+
+	int&nbsp;getA()&nbsp;const&nbsp;{
+		return&nbsp;a;
+	}
+
+	void&nbsp;displayA()&nbsp;{
+		cout&nbsp;&lt;&lt;&nbsp;a&nbsp;&lt;&lt;&nbsp;endl;
+	}
+
+	void&nbsp;displayThis()&nbsp;{
+		cout&nbsp;&lt;&lt;&nbsp;this&nbsp;displayA();
+	cout&nbsp;&lt;&lt;&nbsp;&quot;hi~&quot;&nbsp;&lt;&lt;&nbsp;endl;
+	/*
+	*&nbsp;1.&nbsp;若通过&nbsp;static&nbsp;声明变量，这时候程序结束，会自动析构
+	*&nbsp;&nbsp;&nbsp;&nbsp;此时若free(b)&nbsp;程序结束会析构
+	*&nbsp;&nbsp;&nbsp;&nbsp;若&nbsp;free(b)&nbsp;free(b)&nbsp;只会析构一次
+	*&nbsp;&nbsp;&nbsp;&nbsp;若&nbsp;free(b)&nbsp;delete(b)&nbsp;会析构两次
+	*&nbsp;&nbsp;&nbsp;&nbsp;若&nbsp;delete(b)&nbsp;会析构两次
+	*&nbsp;&nbsp;&nbsp;&nbsp;若&nbsp;delete(b)&nbsp;delete(b)&nbsp;会析构三次
+	*&nbsp;&nbsp;&nbsp;&nbsp;说明此时free&nbsp;和&nbsp;delete&nbsp;并不会清空该指针所指内存，该内存只能由系统管理
+	*&nbsp;2.&nbsp;若是通过new&nbsp;声明&nbsp;,&nbsp;程序结束必须&nbsp;delete(b)&nbsp;才会析构，不会自动析构
+	*&nbsp;&nbsp;&nbsp;&nbsp;此时若&nbsp;free(b)&nbsp;不会析构
+	*&nbsp;&nbsp;&nbsp;&nbsp;若&nbsp;free(b)&nbsp;delete(b)&nbsp;free后该内存地址消息，delete会触发析构函数，但是里面的数据不再是1，是内存中的随机数
+	*&nbsp;&nbsp;&nbsp;&nbsp;同理&nbsp;delete&nbsp;两次同上
+	*/
+	return&nbsp;0;
+}</pre><p>SUM：</p><p>free对应的是malloc；delete对应的是new；free用来释放malloc出来动态内存，delete用来释放new出来的动态内存空间。没用指针的由系统自动管理，但是可以通过delete触发析构函数，free不会触发。</p><p>1. 数组的时候int *p=(int*)malloc(10*sizeof(int)) 释放的时候 free(p)即可；这是因为编译器对malloc做了一些特殊的处理，以保证可以正确释放内存。而当int *p=new int[10]释放的时候应为delete []p，注意[]的作用说明释放的是一个数组的内存，如果delete p则只是释放的p[0]，其余9个int的内存没有释放；这是因为当指明为[]的时候，编译器实际上是做了一个循环来释放这个数组的所有内存。</p><p>2. 在类和对象的时候会有很大区别。在使用malloc和free来处理动态内存的时候，仅仅是释放了这个对象所占的内存，而不会调用这个对象的析构函数；使用new和delete就可以既释放对象的内存的同时，调用这个对象的析构函数。</p><p><span style="color: rgb(255, 0, 0);">重点</span></p><p><span style="color: rgb(0, 0, 0);">delete(b) 后 一定要 b = NULL，否则 b 就成了一个野指针！delete知识把b所指地址清楚了，b所指的地址不变，若程序后边通过b!=NULL 判断再次delete(b)，鬼知道清空了谁家的数据 = =。一定要避免这种情况。</span><br/></p><p><span style="color: rgb(0, 0, 0);"></span></p><hr/><p>函数返回引用<span style="color: rgb(0, 0, 0);"></span><br/></p><pre class="brush:cpp;toolbar:false">A&nbsp;&amp;&nbsp;fun()&nbsp;{
+	static&nbsp;A&nbsp;a(1);
+	a.displayThis();
+	return&nbsp;a;
+}
+
+int&nbsp;main()&nbsp;{
+	A&nbsp;a&nbsp;=&nbsp;fun();
+	a.displayThis();
+	return&nbsp;0;
+}
+
+输出：
+
+1-&gt;A
+0x40d030
+0x61ff2c
+1-&gt;~A
+1-&gt;~A
+
+A&nbsp;&amp;&nbsp;fun()&nbsp;{
+	static&nbsp;A&nbsp;a(1);
+	a.displayThis();
+	return&nbsp;a;
+}
+
+int&nbsp;main()&nbsp;{
+	A&nbsp;&amp;a&nbsp;=&nbsp;fun();
+	a.displayThis();
+	return&nbsp;0;
+}
+
+输出：
+
+1-&gt;A
+0x40d030
+0x40d030
+1-&gt;~A</pre><p><span style="color: rgb(0, 0, 0);">在类中：</span></p><pre class="brush:cpp;toolbar:false">class&nbsp;B&nbsp;{
+private:
+	A&nbsp;a;
+public:
+	B()&nbsp;{
+		A&nbsp;b(1);
+		a&nbsp;=&nbsp;b;
+		cout&nbsp;&lt;&lt;&nbsp;&quot;B&quot;&nbsp;&lt;&lt;&nbsp;endl;
+	}
+	~B()&nbsp;{
+		cout&nbsp;&lt;&lt;&nbsp;&quot;~B&quot;&nbsp;&lt;&lt;&nbsp;endl;
+	}
+
+	void&nbsp;display()&nbsp;{
+		cout&nbsp;&lt;&lt;&nbsp;this&nbsp;&lt;&lt;&nbsp;endl;
+	}
+
+	A&nbsp;&amp;&nbsp;getA()&nbsp;{
+		return&nbsp;a;
+	}
+};
+
+int&nbsp;main()&nbsp;{
+	B&nbsp;b;
+	b.display();
+	b.getA().displayThis();
+	A&nbsp;a1&nbsp;=&nbsp;b.getA();
+	a1.displayThis();
+	A&nbsp;&amp;a2&nbsp;=&nbsp;b.getA();
+	a2.displayThis();
+	cout&nbsp;&lt;&lt;&nbsp;&amp;b&nbsp;&lt;&lt;&nbsp;&quot;-&quot;&nbsp;&lt;&lt;&nbsp;&amp;a1&nbsp;&lt;&lt;&nbsp;&quot;-&quot;&nbsp;&lt;&lt;&nbsp;&amp;a2&nbsp;&lt;&lt;&nbsp;endl;
+	if&nbsp;(&amp;a1&nbsp;==&nbsp;&amp;a2)
+		cout&nbsp;&lt;&lt;&nbsp;&quot;eq&quot;&nbsp;&lt;&lt;&nbsp;endl;
+	else
+		cout&nbsp;&lt;&lt;&nbsp;&quot;neq&quot;&nbsp;&lt;&lt;&nbsp;endl;
+	A&nbsp;&amp;a3&nbsp;=&nbsp;b.getA();
+	if&nbsp;(&amp;a2&nbsp;==&nbsp;&amp;a3)
+		cout&nbsp;~A</pre><p><span style="color: rgb(0, 0, 0);"></span>这下我TM可凌乱了，我要传地址的话用引用和指针都可以啊？我到底该选哪个？不如JAVA全部传值，基本数据类型传值，对象传对象指针的值，没得选。<br/></p><p>正在这时，冥冥之中，我想到了，引用“从一而终“。</p><pre class="brush:cpp;toolbar:false">B&nbsp;b2;
+A&nbsp;&amp;a4&nbsp;=&nbsp;b2.getA();
+a4.displayThis();
+a4&nbsp;=&nbsp;a2;
+a2.displayThis();
+a4.displayThis();
+
+输出：
+
+0x62ff08
+0x62ff10
+0x62ff08</pre><hr/><p>以二进制读取文件</p><pre class="brush:cpp;toolbar:false">#include&nbsp;#include&nbsp;using&nbsp;namespace&nbsp;std;
+
+int&nbsp;main()&nbsp;{
+	ifstream&nbsp;file(
+			&quot;D:\\BJUT\\kelaile\\oss\\esc\\DEV10637\\1_9b17de9442084533afcaeb6c74f797fa.txt&quot;,
+			ios::binary);
+	file.seekg(0,&nbsp;std::ios::end);
+	int&nbsp;length&nbsp;=&nbsp;file.tellg();
+	file.seekg(0,&nbsp;std::ios::beg);
+	char&nbsp;*chs&nbsp;=&nbsp;new&nbsp;char[length];
+	file.read(chs,&nbsp;length);
+	return&nbsp;0;
+}</pre><p>官网参考：http://www.cplusplus.com/reference/istream/istream/read/</p><hr/><p>vector 的 push_pack 会调用类的构造和析构函数，主要带指针式，复制类的时候再进行一次该指针内存的COPY，调试了一下午发现了这个地方，内存泄漏调试工具：valgrind</p>        </div>
+      </div>
+    </div>
+    <hr class="am-article-divider"/>
+    <div class="am-center" style="text-align:center;margin-bottom:15px;">
+    <a href="247.html">上一篇</a>    <a href="249.html">下一篇</a>    </div>
+    <!-- <hr class="am-article-divider"/> -->
+      </div>
+</div>
+    <div style="right: 15px;" class="amz-toolbar" id="amz-toolbar">
+    <a href="#top" title="回到顶部" class="am-icon-btn am-icon-arrow-up am-active" id="amz-go-top"></a>
+    </div>
+    <footer class="footer" style="background-color:#303336;">
+     <div class="g-ft" style="padding-top:20px;">
+     <div class="">
+      <div  style="float:left;width:50%;text-align:right;">
+        <ul class="m-bottom-nav" style="margin:0 20px 0 0;">
+          <li>
+                  <a href="../../../Index/index.html" target="_self">首页</a>
+              </li><li>
+                  <a href="http://www.zhangwenxuan.cn/" target="_blank">好基友</a>
+              </li><li>
+                  <a href="http://blog.wozhendehaoaini.cn/" target="_blank">老博客</a>
+              </li><li>
+                  <a href="66.html" target="_self">关于我</a>
+              </li>        </ul>
+      </div>
+      <div  style="float:right;width:50%;text-align:left;">
+        <ul class="m-bottom-nav" style="margin:0 0 0 20px;">
+           		<li>
+			<a href="../../lists/category/feeling.html">
+				<i class="icon-chevron-right"></i>随笔心情			</a>
+		</li>		<li>
+			<a href="../../lists/category/learnsth.html">
+				<i class="icon-chevron-right"></i>学习研究			</a>
+		</li>		<li>
+			<a href="../../lists/category/sizhou.html">
+				<i class="icon-chevron-right"></i>飞控研究			</a>
+		</li>		<li>
+			<a href="../../lists/category/Python.html">
+				<i class="icon-chevron-right"></i>Python			</a>
+		</li>		<li>
+			<a href="../../lists/category/wxmp.html">
+				<i class="icon-chevron-right"></i>微信平台			</a>
+		</li>        </ul>        
+      </div>
+    </div>
+           <p style="clear:both;padding-top:15px;" class="m-cprt">©&nbsp;<a href="../../../../index.html">花开花落</a>&nbsp;京ICP备15006955号-1&nbsp;|&nbsp;Powered by <a href="../../../../index.html">Winke</a></p> 
+    </div>
+    </footer>
+
+<!--[if lt IE 9]>
+<script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
+<script src="/Public/static/amaze/js/polyfill/rem.min.js"></script>
+<script src="/Public/static/amaze/js/polyfill/respond.min.js"></script>
+<script src="/Public/static/amaze/js/amazeui.legacy.js"></script>
+<![endif]-->
+
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script src="../../../../Public/static/amaze/js/jquery.min.js"></script>
+<script src="../../../../Public/static/amaze/js/amazeui.min.js"></script>
+<script type="text/javascript" src="../../../../Public/static/ueditor/third-party/SyntaxHighlighter/shCore.js"></script>
+<script src="../../../../Public/Home/js/blog.js"></script>
+<script type="text/javascript"> SyntaxHighlighter.all(); </script>
+<!--<![endif]-->
+</body>
+</html>

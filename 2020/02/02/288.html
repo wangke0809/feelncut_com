@@ -1,0 +1,733 @@
+<!DOCTYPE HTML>
+<html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width,user-scalable=no">
+    <title>EOS 提交交易失败分析 - 小王同学</title>
+	<!--[if lt IE 9]>
+    <script type="text/javascript" src="https://feelncut.com/usr/themes/maupassant/javascript/html5shiv.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" href="../../../admin/css/normalize.css">
+    <link rel="stylesheet" href="../../../usr/themes/maupassant/style.css">
+    <meta name="description" content="[TOC]
+
+EOS  向节点提交交易时失败，提示 billed CPU time (Y us) is greater than the maximum billable CPU time fo..." />
+<link rel="alternate" type="application/rss+xml" title="EOS 提交交易失败分析 &raquo; 小王同学 &raquo; RSS 2.0" href="../../../feed/2020/02/02/288.html" />
+<link rel="alternate" type="application/rdf+xml" title="EOS 提交交易失败分析 &raquo; 小王同学 &raquo; RSS 1.0" href="../../../feed/rss/2020/02/02/288.html" />
+<link rel="alternate" type="application/atom+xml" title="EOS 提交交易失败分析 &raquo; 小王同学 &raquo; ATOM 1.0" href="../../../feed/atom/2020/02/02/288.html" />
+<script type="text/javascript">
+(function () {
+    window.TypechoComment = {
+        dom : function (id) {
+            return document.getElementById(id);
+        },
+    
+        create : function (tag, attr) {
+            var el = document.createElement(tag);
+        
+            for (var key in attr) {
+                el.setAttribute(key, attr[key]);
+            }
+        
+            return el;
+        },
+
+        reply : function (cid, coid) {
+            var comment = this.dom(cid), parent = comment.parentNode,
+                response = this.dom('respond-post-288'), input = this.dom('comment-parent'),
+                form = 'form' == response.tagName ? response : response.getElementsByTagName('form')[0],
+                textarea = response.getElementsByTagName('textarea')[0];
+
+            if (null == input) {
+                input = this.create('input', {
+                    'type' : 'hidden',
+                    'name' : 'parent',
+                    'id'   : 'comment-parent'
+                });
+
+                form.appendChild(input);
+            }
+
+            input.setAttribute('value', coid);
+
+            if (null == this.dom('comment-form-place-holder')) {
+                var holder = this.create('div', {
+                    'id' : 'comment-form-place-holder'
+                });
+
+                response.parentNode.insertBefore(holder, response);
+            }
+
+            comment.appendChild(response);
+            this.dom('cancel-comment-reply-link').style.display = '';
+
+            if (null != textarea && 'text' == textarea.name) {
+                textarea.focus();
+            }
+
+            return false;
+        },
+
+        cancelReply : function () {
+            var response = this.dom('respond-post-288'),
+            holder = this.dom('comment-form-place-holder'), input = this.dom('comment-parent');
+
+            if (null != input) {
+                input.parentNode.removeChild(input);
+            }
+
+            if (null == holder) {
+                return true;
+            }
+
+            this.dom('cancel-comment-reply-link').style.display = 'none';
+            holder.parentNode.insertBefore(response, holder);
+            return false;
+        }
+    };
+})();
+</script>
+<script type="text/javascript">
+(function () {
+    var event = document.addEventListener ? {
+        add: 'addEventListener',
+        triggers: ['scroll', 'mousemove', 'keyup', 'touchstart'],
+        load: 'DOMContentLoaded'
+    } : {
+        add: 'attachEvent',
+        triggers: ['onfocus', 'onmousemove', 'onkeyup', 'ontouchstart'],
+        load: 'onload'
+    }, added = false;
+
+    document[event.add](event.load, function () {
+        var r = document.getElementById('respond-post-288'),
+            input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = '_';
+        input.value = (function () {
+    var _t1k = 'd0'//'k9R'
++'j'//'j'
++'03b'//'ro'
++'ec6'//'Xx'
++//'lRV'
+'1'+'cff'//'AMP'
++'ebe'//'4cU'
++/* 'zcF'//'zcF' */''+//'QX'
+'209'+//'W'
+'W'+'3c'//'RHv'
++'g2'//'g2'
++//'vJ'
+'9c'+//'J'
+'b'+''///*'u'*/'u'
++//'T'
+'0'+//'K'
+'225'+//'2aE'
+'011'+'8e'//'iFA'
+, _Fo80g5q = [[2,3],[18,19],[20,22]];
+    
+    for (var i = 0; i < _Fo80g5q.length; i ++) {
+        _t1k = _t1k.substring(0, _Fo80g5q[i][0]) + _t1k.substring(_Fo80g5q[i][1]);
+    }
+
+    return _t1k;
+})();
+
+        if (null != r) {
+            var forms = r.getElementsByTagName('form');
+            if (forms.length > 0) {
+                function append() {
+                    if (!added) {
+                        forms[0].appendChild(input);
+                        added = true;
+                    }
+                }
+            
+                for (var i = 0; i < event.triggers.length; i ++) {
+                    var trigger = event.triggers[i];
+                    document[event.add](trigger, append);
+                    window[event.add](trigger, append);
+                }
+            }
+        }
+    });
+})();
+</script><script> var _hmt = _hmt || []; (function() {   var hm = document.createElement("script");   hm.src = "https://hm.baidu.com/hm.js?e9ff349d5b883760c70a4e220c9ac8ca";   var s = document.getElementsByTagName("script")[0];    s.parentNode.insertBefore(hm, s); })(); </script></head>
+<body>
+
+<header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                                    <a id="logo" href="../../../index.html">
+                        小王同学                    </a>
+                        	    <p class="description">希望通过自我加工，成为有点用的人</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class=" current" href="../../../index.html">博客</a>
+															<a href="../../../archives.html" title="归档">归档</a>
+										<a href="../../../tools.html" title="Tools">Tools</a>
+										<a href="../../../about.html" title="关于">关于</a>
+									</nav>
+            </div>
+        </div>
+    </div>
+</header>
+<div id="body">
+    <div class="container">
+        <div class="col-group">
+<div class="col-8" id="main">
+	<div class="res-cons">
+		<article class="post">
+			<header>
+				<h1 class="post-title">EOS 提交交易失败分析</h1>
+			</header>
+			<date class="post-meta">
+				February 2, 2020			</date>
+			<div class="post-content">
+				<div id="md_content_2" class="md_content" style="min-height: 50px;"><textarea id="append-test" style="display:none;">[TOC]
+
+EOS  向节点提交交易时失败，提示 billed CPU time (Y us) is greater than the maximum billable CPU time for the transaction (X us).
+
+本文通过分析源代码来一探这个失败的原因，首先给出结论：
+
+- 当前时间窗口内（24小时）用户**最大** CPU 时间 = 全网总 CPU 时间 * 当前用户质押 EOS 数量 / 所有用户质押 EOS 数量
+
+- 当前时间窗口内用户**可用** CPU 时间 = 当前用户**最大** CPU 时间 - 当前用户已经使用 CPU 时间
+
+- 当前用户**已经使用** CPU 时间是实时变化的：(1 - t / 24) * t 时间之前使用的资源大小，直到距离上次 CPU 资源使用 24 小时后（t = 24）完全恢复
+
+- Get Account 接口看到的不是实时可用的资源使用量，而是上一笔交易之后缓存的资源使用量
+
+- 向 RPC 节点提交交易时 RPC 节点会计算出当前交易 CPU 使用量，这个 CPU 使用量和当前 RPC 节点 CPU 使用情况有关，通过系统计时器计算时间，因此，RPC 节点计算出的交易 CPU 使用量不是最终上链时的交易使用量，最终交易时的 CPU 使用量由打包节点决定。
+
+- 因此，当质押 CPU EOS 数量固定时，向 RPC 节点提交交易时，CPU 资源需要满足 交易使用 CPU 资源的大小 < 账户可用 CPU 资源大小，因此提交交易能否成功有两方面原因：
+  - RPC 节点 CPU 状态，决定了交易使用 CPU 资源的大小
+  - 全网可用 CPU 资源，决定了账户可用 CPU 资源大小
+- 所以
+  - 可以把交易提交到更快（CPU 空闲 / 服务器配置高）的 RPC 节点
+  - 等待全网可用 CPU 资源增多，账户分配的可用 CPU 增多（错峰）
+  - 增大 CPU 资源 EOS 质押比例，获得更多的 CPU 使用权重（质押更多 EOS 在 CPU 资源上）
+
+看完结论如果想继续看实现，请看下文，不过，我，懒，简单贴几段代码...
+
+<!--more-->
+
+## 错误报出的位置
+函数：validate_cpu_usage_to_bill
+
+https://github.com/EOSIO/eos/blob/e19afc8072219282a7c3fc20e47aa80cb70299e4/libraries/chain/transaction_context.cpp
+
+```cpp
+void transaction_context::validate_cpu_usage_to_bill( int64_t billed_us, bool check_minimum )const {
+  if (!control.skip_trx_checks()) {
+    if( check_minimum ) {
+      const auto& cfg = control.get_global_properties().configuration;
+      EOS_ASSERT( billed_us >= cfg.min_transaction_cpu_usage, transaction_exception,
+                 "cannot bill CPU time less than the minimum of ${min_billable} us",
+                 ("min_billable", cfg.min_transaction_cpu_usage)("billed_cpu_time_us", billed_us)
+                );
+    }
+
+    if( billing_timer_exception_code == block_cpu_usage_exceeded::code_value ) {
+      EOS_ASSERT( billed_us <= objective_duration_limit.count(),
+                 block_cpu_usage_exceeded,
+                 "billed CPU time (${billed} us) is greater than the billable CPU time left in the block (${billable} us)",
+                 ("billed", billed_us)("billable", objective_duration_limit.count())
+                );
+    } else {
+      if (cpu_limit_due_to_greylist) {
+        EOS_ASSERT( billed_us <= objective_duration_limit.count(),
+                   greylist_cpu_usage_exceeded,
+                   "billed CPU time (${billed} us) is greater than the maximum greylisted billable CPU time for the transaction (${billable} us)",
+                   ("billed", billed_us)("billable", objective_duration_limit.count())
+                  );
+      } else {
+        // 这里抛出的错误
+        EOS_ASSERT( billed_us <= objective_duration_limit.count(),
+                   tx_cpu_usage_exceeded,
+                   "billed CPU time (${billed} us) is greater than the maximum billable CPU time for the transaction (${billable} us)",
+                   ("billed", billed_us)("billable", objective_duration_limit.count())
+                  );
+      }
+    }
+  }
+}
+```
+从函数中可以发现，错误在与 `billed_us <= objective_duration_limit.count()` 条件没有满足。其中 `billed_us` 指交易所需要的 CPU 时间，objective_duration_limit.count() 指一个上限，后文介绍上限是多少。
+
+## 运行交易所需要的时间
+从 transaction_context init 到 finalize
+
+看中文注释：
+```cpp
+void transaction_context::finalize() {
+  EOS_ASSERT( is_initialized, transaction_exception, "must first initialize" );
+
+  if( is_input ) {
+    auto& am = control.get_mutable_authorization_manager();
+    for( const auto& act : trx.actions ) {
+      for( const auto& auth : act.authorization ) {
+        am.update_permission_usage( am.get_permission(auth) );
+      }
+    }
+  }
+
+  auto& rl = control.get_mutable_resource_limits_manager();
+  for( auto a : validate_ram_usage ) {
+    rl.verify_account_ram_usage( a );
+  }
+
+  // Calculate the new highest network usage and CPU time that all of the billed accounts can afford to be billed
+  int64_t account_net_limit = 0;
+  int64_t account_cpu_limit = 0;
+  bool greylisted_net = false, greylisted_cpu = false;
+  std::tie( account_net_limit, account_cpu_limit, greylisted_net, greylisted_cpu) = max_bandwidth_billed_accounts_can_pay();
+  net_limit_due_to_greylist |= greylisted_net;
+  cpu_limit_due_to_greylist |= greylisted_cpu;
+
+  // Possibly lower net_limit to what the billed accounts can pay
+  if( static_cast<uint64_t>(account_net_limit) <= net_limit ) {
+    // NOTE: net_limit may possibly not be objective anymore due to net greylisting, but it should still be no greater than the truly objective net_limit
+    net_limit = static_cast<uint64_t>(account_net_limit);
+    net_limit_due_to_block = false;
+  }
+
+  // Possibly lower objective_duration_limit to what the billed accounts can pay
+  if( account_cpu_limit <= objective_duration_limit.count() ) {
+    // NOTE: objective_duration_limit may possibly not be objective anymore due to cpu greylisting, but it should still be no greater than the truly objective objective_duration_limit
+    objective_duration_limit = fc::microseconds(account_cpu_limit);
+    billing_timer_exception_code = tx_cpu_usage_exceeded::code_value;
+  }
+
+  net_usage = ((net_usage + 7)/8)*8; // Round up to nearest multiple of word size (8 bytes)
+
+  eager_net_limit = net_limit;
+  check_net_usage();
+
+  auto now = fc::time_point::now();
+  trace->elapsed = now - start;
+
+  // 交易结束后获取当前时间，然后计算 now 到 交易开始时的时间，保存到 billed_cpu_time_us
+  // 具体可以跟进这个函数看
+  update_billed_cpu_time( now );
+
+  // 调用时间资源验证函数
+  validate_cpu_usage_to_bill( billed_cpu_time_us );
+
+  rl.add_transaction_usage( bill_to_accounts, static_cast<uint64_t>(billed_cpu_time_us), net_usage,
+                           block_timestamp_type(control.pending_block_time()).slot ); // Should never fail
+}
+```
+update_billed_cpu_time 如下：
+
+```cpp
+uint32_t transaction_context::update_billed_cpu_time( fc::time_point now ) {
+  if( explicit_billed_cpu_time ) return static_cast<uint32_t>(billed_cpu_time_us);
+
+  const auto& cfg = control.get_global_properties().configuration;
+  // 当前时间减去 pseudo_start
+  billed_cpu_time_us = std::max( (now - pseudo_start).count(), static_cast<int64_t>(cfg.min_transaction_cpu_usage) );
+
+  return static_cast<uint32_t>(billed_cpu_time_us);
+}
+
+void transaction_context::pause_billing_timer() {
+  if( explicit_billed_cpu_time || pseudo_start == fc::time_point() ) return; // either irrelevant or already paused
+
+  auto now = fc::time_point::now();
+  billed_time = now - pseudo_start;
+  deadline_exception_code = deadline_exception::code_value; // Other timeout exceptions cannot be thrown while billable timer is paused.
+  // 时间赋值
+  pseudo_start = fc::time_point();
+  transaction_timer.stop();
+}
+```
+时间相关操作在另一个仓库 fc 里：https://github.com/EOSIO/fc/blob/e95a03eed1796a3054e02e67f1171f8c9fdb57e5/src/time.cpp
+
+同时要注意 void transaction_context::finalize() 函数里的 `objective_duration_limit`
+
+```cpp
+// Possibly lower objective_duration_limit to what the billed accounts can pay
+if( account_cpu_limit <= objective_duration_limit.count() ) {
+// NOTE: objective_duration_limit may possibly not be objective anymore due to cpu greylisting, but it should still be no greater than the truly objective objective_duration_limit
+// 如果用户的可用 cpu 时间小于 objective_duration_limit
+// objective_duration_limit 赋值为 account_cpu_limit 用户可用的时间
+objective_duration_limit = fc::microseconds(account_cpu_limit);
+billing_timer_exception_code = tx_cpu_usage_exceeded::code_value;
+```
+从上面可以看出，交易的运行时间为交易执行开始到结束时间之差，那么问题来了，如果服务器 CPU 空闲，在交易执行时没有其他任务打断，该交易执行时间会比较短；当 CPU 繁忙的，频繁的上下文切换会导致交易执行时间增加。交易也因提交到 RPC 所在服务器的配置，服务器 CPU 情况而定。
+
+那最终以哪个为准呢？以打包该交易的节点所计算出的时间为准，打包该交易时会把交易 CPU 用时放在交易中，然后广播给其他超级节点。
+
+## 交易可用时间上限
+```cpp
+
+// 下面函数 init 函数中用到了
+uint64_t resource_limits_manager::get_block_cpu_limit() const {
+   const auto& state = _db.get<resource_limits_state_object>();
+   const auto& config = _db.get<resource_limits_config_object>();
+   // cpu_limit_parameters 可以发现是从配置中获取的
+   // cpu_limit_parameters 设定来自：https://github.com/EOSIO/eos/blob/a2317d380de2ca4b8753673ee42fdfd6fb1b4819/libraries/chain/include/eosio/chain/resource_limits_private.hpp
+   // 可以发现 max 指的是 default_max_block_cpu_usage https://github.com/EOSIO/eos/blob/e19afc8072219282a7c3fc20e47aa80cb70299e4/libraries/chain/include/eosio/chain/config.hpp
+   // config.hpp 中
+   // const static uint32_t   default_max_block_cpu_usage                 = 200'000; /// max block 
+   // pending_cpu_usage 指队列中的时间
+   return config.cpu_limit_parameters.max - state.pending_cpu_usage;
+}
+
+void transaction_context::init(uint64_t initial_net_usage)
+{
+  EOS_ASSERT( !is_initialized, transaction_exception, "cannot initialize twice" );
+  const static int64_t large_number_no_overflow = std::numeric_limits<int64_t>::max()/2;
+
+  const auto& cfg = control.get_global_properties().configuration;
+  auto& rl = control.get_mutable_resource_limits_manager();
+
+  net_limit = rl.get_block_net_limit();
+
+  // get_block_cpu_limit 首先获得一个可用时间
+  objective_duration_limit = fc::microseconds( rl.get_block_cpu_limit() );
+  _deadline = start + objective_duration_limit;
+
+  // Possibly lower net_limit to the maximum net usage a transaction is allowed to be billed
+  if( cfg.max_transaction_net_usage <= net_limit ) {
+    net_limit = cfg.max_transaction_net_usage;
+    net_limit_due_to_block = false;
+  }
+
+  // 和配置单个交易最大可用 CPU 时间比较
+  // Possibly lower objective_duration_limit to the maximum cpu usage a transaction is allowed to be billed
+  if( cfg.max_transaction_cpu_usage <= objective_duration_limit.count() ) {
+    objective_duration_limit = fc::microseconds(cfg.max_transaction_cpu_usage);
+    billing_timer_exception_code = tx_cpu_usage_exceeded::code_value;
+    _deadline = start + objective_duration_limit;
+  }
+
+  // Possibly lower net_limit to optional limit set in the transaction header
+  uint64_t trx_specified_net_usage_limit = static_cast<uint64_t>(trx.max_net_usage_words.value) * 8;
+  if( trx_specified_net_usage_limit > 0 && trx_specified_net_usage_limit <= net_limit ) {
+    net_limit = trx_specified_net_usage_limit;
+    net_limit_due_to_block = false;
+  }
+  
+  // 和交易头比较
+  // Possibly lower objective_duration_limit to optional limit set in transaction header
+  if( trx.max_cpu_usage_ms > 0 ) {
+    auto trx_specified_cpu_usage_limit = fc::milliseconds(trx.max_cpu_usage_ms);
+    if( trx_specified_cpu_usage_limit <= objective_duration_limit ) {
+      objective_duration_limit = trx_specified_cpu_usage_limit;
+      billing_timer_exception_code = tx_cpu_usage_exceeded::code_value;
+      _deadline = start + objective_duration_limit;
+    }
+  }
+
+  initial_objective_duration_limit = objective_duration_limit;
+
+  if( billed_cpu_time_us > 0 ) // could also call on explicit_billed_cpu_time but it would be redundant
+    validate_cpu_usage_to_bill( billed_cpu_time_us, false ); // Fail early if the amount to be billed is too high
+
+  // Record accounts to be billed for network and CPU usage
+  if( control.is_builtin_activated(builtin_protocol_feature_t::only_bill_first_authorizer) ) {
+    bill_to_accounts.insert( trx.first_authorizer() );
+  } else {
+    for( const auto& act : trx.actions ) {
+      for( const auto& auth : act.authorization ) {
+        bill_to_accounts.insert( auth.actor );
+      }
+    }
+  }
+  validate_ram_usage.reserve( bill_to_accounts.size() );
+
+  // Update usage values of accounts to reflect new time
+  rl.update_account_usage( bill_to_accounts, block_timestamp_type(control.pending_block_time()).slot );
+
+  // Calculate the highest network usage and CPU time that all of the billed accounts can afford to be billed
+  int64_t account_net_limit = 0;
+  int64_t account_cpu_limit = 0;
+  bool greylisted_net = false, greylisted_cpu = false;
+  std::tie( account_net_limit, account_cpu_limit, greylisted_net, greylisted_cpu) = max_bandwidth_billed_accounts_can_pay();
+  net_limit_due_to_greylist |= greylisted_net;
+  cpu_limit_due_to_greylist |= greylisted_cpu;
+
+  eager_net_limit = net_limit;
+
+  // Possible lower eager_net_limit to what the billed accounts can pay plus some (objective) leeway
+  auto new_eager_net_limit = std::min( eager_net_limit, static_cast<uint64_t>(account_net_limit + cfg.net_usage_leeway) );
+  if( new_eager_net_limit < eager_net_limit ) {
+    eager_net_limit = new_eager_net_limit;
+    net_limit_due_to_block = false;
+  }
+
+  // Possibly limit deadline if the duration accounts can be billed for (+ a subjective leeway) does not exceed current delta
+  if( (fc::microseconds(account_cpu_limit) + leeway) <= (_deadline - start) ) {
+    _deadline = start + fc::microseconds(account_cpu_limit) + leeway;
+    billing_timer_exception_code = leeway_deadline_exception::code_value;
+  }
+
+  billing_timer_duration_limit = _deadline - start;
+
+  // Check if deadline is limited by caller-set deadline (only change deadline if billed_cpu_time_us is not set)
+  if( explicit_billed_cpu_time || deadline < _deadline ) {
+    _deadline = deadline;
+    deadline_exception_code = deadline_exception::code_value;
+  } else {
+    deadline_exception_code = billing_timer_exception_code;
+  }
+
+  eager_net_limit = (eager_net_limit/8)*8; // Round down to nearest multiple of word size (8 bytes) so check_net_usage can be efficient
+
+  if( initial_net_usage > 0 )
+    add_net_usage( initial_net_usage );  // Fail early if current net usage is already greater than the calculated limit
+
+  checktime(); // Fail early if deadline has already been exceeded
+
+  if(control.skip_trx_checks())
+    transaction_timer.start(fc::time_point::maximum());
+  else
+    transaction_timer.start(_deadline);
+
+  is_initialized = true;
+}
+```
+
+还记得 交易运行时间章节，验证交易 CPU 使用时间之前还判断了 objective_duration_limit 与 account_cpu_limit。因此可以发现，objective_duration_limit 是个上限，和 block cpu limit 又关系，和 单个交易的 cpu limit 又关系，和交易头的配置又关系，和用户可用的 cpu limit 又关系。对于用户而言，正常能改变的只有质押换来的 CPU 时间。
+
+## 用户可用 CPU 时间
+
+那，account_cpu_limit 怎么计算的？
+
+直接看代码吧：
+
+```cpp
+int64_t account_cpu_limit = large_number_no_overflow;
+auto [cpu_limit, cpu_was_greylisted] = rl.get_account_cpu_limit(a, greylist_limit);
+if( cpu_limit >= 0 ) {
+   // 获取用户 cpu limit
+   account_cpu_limit = std::min( account_cpu_limit, cpu_limit );
+   greylisted_cpu |= cpu_was_greylisted;
+}
+
+std::pair<int64_t, bool> resource_limits_manager::get_account_cpu_limit( const account_name& name, uint32_t greylist_limit ) const {
+   auto [arl, greylisted] = get_account_cpu_limit_ex(name, greylist_limit);
+   return {arl.available, greylisted};
+}
+
+std::pair<account_resource_limit, bool> resource_limits_manager::get_account_cpu_limit_ex( const account_name& name, uint32_t greylist_limit ) const {
+
+   const auto& state = _db.get<resource_limits_state_object>();
+   const auto& usage = _db.get<resource_usage_object, by_owner>(name);
+   const auto& config = _db.get<resource_limits_config_object>();
+
+   int64_t cpu_weight, x, y;
+   get_account_limits( name, x, y, cpu_weight );
+
+   if( cpu_weight < 0 || state.total_cpu_weight == 0 ) {
+      return {{ -1, -1, -1 }, false};
+   }
+
+   account_resource_limit arl;
+
+   uint128_t window_size = config.account_cpu_usage_average_window;
+   uint64_t  greylisted_virtual_cpu_limit = config.cpu_limit_parameters.max * greylist_limit;
+
+   bool greylisted = false;
+   uint128_t virtual_cpu_capacity_in_window = window_size;
+   if( greylisted_virtual_cpu_limit < state.virtual_cpu_limit ) {
+      virtual_cpu_capacity_in_window *= greylisted_virtual_cpu_limit;
+      greylisted = true;
+   } else {
+      virtual_cpu_capacity_in_window *= state.virtual_cpu_limit;
+   }
+
+   uint128_t user_weight     = (uint128_t)cpu_weight;
+   uint128_t all_user_weight = (uint128_t)state.total_cpu_weight;
+
+   // 重点是这里
+   // 窗口内可用时间 * 质押 EOS 获得的权重 / 所有质押权重
+   // window_size 24小时
+   // rate_limiting_precision 1000*1000 都可以从头文件中查到
+   auto max_user_use_in_window = (virtual_cpu_capacity_in_window * user_weight) / all_user_weight;
+   // 已经用过的 cpu
+   auto cpu_used_in_window  = impl::integer_divide_ceil((uint128_t)usage.cpu_usage.value_ex * window_size, (uint128_t)config::rate_limiting_precision);
+
+   if( max_user_use_in_window <= cpu_used_in_window )
+      arl.available = 0;
+   else
+      // 可用的就是 最大 cpu 时间 减去 已经用过的 cpu 时间
+      arl.available = impl::downgrade_cast<int64_t>(max_user_use_in_window - cpu_used_in_window);
+
+   arl.used = impl::downgrade_cast<int64_t>(cpu_used_in_window);
+   arl.max = impl::downgrade_cast<int64_t>(max_user_use_in_window);
+   return {arl, greylisted};
+}
+```
+
+所以，当前时间窗口内（24小时）用户**最大** CPU 时间 = 全网总 CPU 时间 * 当前用户质押 EOS 数量 / 所有用户质押 EOS 数量
+
+ 当前时间窗口内用户**可用** CPU 时间 = 当前用户**最大** CPU 时间 - 当前用户已经使用 CPU 时间
+
+当前用户**已经使用** CPU 时间是实时变化的：(1 - t / 24) * t 时间之前使用的资源大小，直到距离上次 CPU 资源使用 24 小时后（t = 24）完全恢复
+
+## 总结
+- 当前时间窗口内（24小时）用户**最大** CPU 时间 = 全网总 CPU 时间 * 当前用户质押 EOS 数量 / 所有用户质押 EOS 数量
+
+- 当前时间窗口内用户**可用** CPU 时间 = 当前用户**最大** CPU 时间 - 当前用户已经使用 CPU 时间
+
+- 当前用户**已经使用** CPU 时间是实时变化的：(1 - t / 24) * t 时间之前使用的资源大小，直到距离上次 CPU 资源使用 24 小时后（t = 24）完全恢复
+
+- Get Account 接口看到的不是实时可用的资源使用量，而是上一笔交易之后缓存的资源使用量
+
+- 向 RPC 节点提交交易时 RPC 节点会计算出当前交易 CPU 使用量，这个 CPU 使用量和当前 RPC 节点 CPU 使用情况有关，通过系统计时器计算时间，因此，RPC 节点计算出的交易 CPU 使用量不是最终上链时的交易使用量，最终交易时的 CPU 使用量由打包节点决定。
+
+- 因此，当质押 CPU EOS 数量固定时，向 RPC 节点提交交易时，CPU 资源需要满足 交易使用 CPU 资源的大小 < 账户可用 CPU 资源大小，因此提交交易能否成功有两方面原因：
+  - RPC 节点 CPU 状态，决定了交易使用 CPU 资源的大小
+  - 全网可用 CPU 资源，决定了账户可用 CPU 资源大小
+- 所以
+  - 可以把交易提交到更快（CPU 空闲 / 服务器配置高）的 RPC 节点
+  - 等待全网可用 CPU 资源增多，账户分配的可用 CPU 增多（错峰）
+  - 增大 CPU 资源 EOS 质押比例，获得更多的 CPU 使用权重（质押更多 EOS 在 CPU 资源上）</textarea></div>			</div>
+		</article>
+		<div id="comments">
+                <div id="respond-post-288" class="respond">
+        <div class="cancel-comment-reply">
+        <a id="cancel-comment-reply-link" href="288.html#respond-post-288" rel="nofollow" style="display:none" onclick="return TypechoComment.cancelReply();">取消回复</a>        </div>
+    	<span id="response" class="widget-title">添加新评论</span>
+    	<form method="post" action="https://feelncut.com/2020/02/02/288.html/comment" id="comment-form">
+			<div class="col1">
+			<p>
+                <textarea rows="8" cols="50" name="text" class="textarea"></textarea>
+            </p>
+			</div>
+			<div class="col2">
+                		<p>
+                <label for="author" class="required">称呼</label>
+    			<input type="text" name="author" id="author" class="text" value="" />
+    		</p>
+    		<p>
+                <label for="mail" class="required">邮箱</label>
+    			<input type="email" name="mail" id="mail" class="text" value="" />
+    		</p>
+    		<p>
+                <label for="url">网站</label>
+    			<input type="url" name="url" id="url" class="text" placeholder="可空" value="" />
+    		</p>
+                		<p>
+                <button type="submit" class="submit">提交评论</button>
+            </p>
+			</div>
+			<div class="clear"></div>
+    	</form>
+    </div>
+    </div>	</div>
+</div>
+<div id="secondary">
+	<section class="widget">
+        <form id="search" method="post" action="https://feelncut.com/2020/02/02/">
+            <input type="text" name="s" class="text" placeholder="搜索..." />
+            <button type="submit" class="submit icon-search"></button>
+        </form>
+    </section>
+
+	    <section class="widget">
+		<h3 class="widget-title">最新文章</h3>
+        <ul class="widget-list">
+            <li><a href="../../08/24/323.html">ETH 2.0 资源汇总（持续更新）</a></li><li><a href="../../08/24/322.html">ETH 2.0 测试网验证节点质押流程体验</a></li><li><a href="../../06/06/312.html">通过 openssl 导出 HTTPS 网站 SSL 证书链</a></li><li><a href="../../05/20/308.html">如何开发一款区块链浏览器？</a></li><li><a href="288.html">EOS 提交交易失败分析</a></li><li><a href="../../../2019/12/09/giaocamerarobot.html">小 Giao 之死</a></li><li><a href="../../../2019/10/04/267.html">《凶宅》和《疯人院》</a></li><li><a href="../../../2018/10/17/228.html"> 以太坊多重签名原理分析</a></li><li><a href="../../../2018/09/11/188.html">OpenCV 初识图像</a></li><li><a href="../../../2018/09/11/184.html">为什么要系统的学习一下Pyhton-OpenCV?</a></li>        </ul>
+    </section>
+    
+        <section class="widget">
+		<h3 class="widget-title">最近回复</h3>
+        <ul class="widget-list">
+                            <li><a href="../../08/24/323.html#comment-26">pizi</a>: https://be...</li>
+                    <li><a href="../../08/24/323.html#comment-25">何先生</a>: 请问有没有ETH2....</li>
+                    <li><a href="../../../2018/05/03/145.html#comment-24">pizi</a>: 一个卡就不要限制资源...</li>
+                    <li><a href="../../../about.html#comment-23">pizi</a>: 有特殊技巧的啊，从阿...</li>
+                    <li><a href="../../../about.html#comment-22">一网友</a>: 有钱人新浪数据库很贵吧</li>
+                    <li><a href="../../../2018/05/03/145.html#comment-21">padluo</a>: 请问如何控制到用户使...</li>
+                    <li><a href="../../../about.html#comment-20">小白</a>: 板凳是我的！</li>
+                    <li><a href="../../../2018/02/08/90.html#comment-19">无耻的我</a>: 大佬，能发一份吗，原...</li>
+                    <li><a href="../../../2018/05/03/145.html#comment-18">pizi</a>: 文章里写了的，lxc...</li>
+                    <li><a href="../../../2018/05/03/145.html#comment-17">zzd</a>: lxc config...</li>
+                </ul>
+    </section>
+    
+        <section class="widget">
+		<h3 class="widget-title">分类</h3>
+        <ul class="widget-list">
+            <li><a href="../../../category/feel/index.html">随笔心情</a> (4)</li><li><a href="../../../category/code/index.html">代码片段</a> (17)</li><li><a href="../../../category/ojbk/index.html">折腾着玩</a> (7)</li><li><a href="../../../category/ml/index.html">机器学习</a> (9)</li><li><a href="../../../category/blockChain/index.html">区块链</a> (10)</li><li><a href="../../../category/python-opencv/index.html">Python-OpenCV</a> (2)</li><li><a href="../../../category/video/index.html">视频剪辑</a> (0)</li><li><a href="../../../category/leetcode/index.html">leetcode</a> (1)</li>        </ul>
+	</section>
+    
+        <section class="widget">
+		<h3 class="widget-title">归档</h3>
+        <ul class="widget-list">
+            <li><a href="../../08/index.html">August 2020</a></li><li><a href="../../06/index.html">June 2020</a></li><li><a href="../../05/index.html">May 2020</a></li><li><a href="../index.html">February 2020</a></li><li><a href="../../../2019/12/index.html">December 2019</a></li><li><a href="../../../2019/10/index.html">October 2019</a></li><li><a href="../../../2018/10/index.html">October 2018</a></li><li><a href="../../../2018/09/index.html">September 2018</a></li><li><a href="../../../2018/08/index.html">August 2018</a></li><li><a href="../../../2018/05/index.html">May 2018</a></li><li><a href="../../../2018/04/index.html">April 2018</a></li><li><a href="../../../2018/03/index.html">March 2018</a></li><li><a href="../../../2018/02/index.html">February 2018</a></li><li><a href="../../../2018/01/index.html">January 2018</a></li>        </ul>
+	</section>
+    
+    	<section class="widget">
+		<h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+                            <li class="last"><a href="../../../admin/login.php.html">登录</a></li>
+                        <li><a href="../../../feed/index.html">文章 RSS</a></li>
+            <li><a href="../../../feed/comments/index.html">评论 RSS</a></li>
+            <li><a href="http://www.typecho.org">Typecho</a></li>
+        </ul>
+	</section>
+    </div>		</div>
+    </div>
+</div>
+<footer id="footer">
+	<div class="container">
+		&copy; 2023 <a rel="nofollow" href="../../../index.html">小王同学</a>. 模板由<a href="http://pagecho.com">cho</a>制作.
+	</div>
+</footer>
+<link rel="stylesheet" href="../../../usr/plugins/EditorMD/css/editormd.css" />
+<link rel="stylesheet" href="../../../usr/plugins/EditorMD/css/emojify.min.css" />
+<script type="text/javascript">
+    window.jQuery || document.write(unescape('%3Cscript%20type%3D%22text/javascript%22%20src%3D%22https://feelncut.com/usr/plugins/EditorMD/lib/jquery.min.js%22%3E%3C/script%3E'));
+</script>
+<script src="../../../usr/plugins/EditorMD/lib/marked.min.js"></script>
+<script src="../../../usr/plugins/EditorMD/lib/prettify.min.js"></script>
+<script src="../../../usr/plugins/EditorMD/lib/raphael.min.js"></script>
+<script src="../../../usr/plugins/EditorMD/lib/underscore.min.js"></script>
+<script src="../../../usr/plugins/EditorMD/lib/sequence-diagram.min.js"></script>
+<script src="../../../usr/plugins/EditorMD/lib/flowchart.min.js"></script>
+<script src="../../../usr/plugins/EditorMD/lib/jquery.flowchart.min.js"></script>
+<script src="../../../usr/plugins/EditorMD/js/editormd.min.js"></script>
+<script src="../../../usr/plugins/EditorMD/js/emojify.min.js"></script>
+<script type="text/javascript">
+$(function() {
+    var markdowns = document.getElementsByClassName("md_content");
+    $(markdowns).each(function(){
+        var markdown = $(this).children("#append-test").text();
+        //$('#md_content_'+i).text('');
+        var testEditormdView;
+        testEditormdView = editormd.markdownToHTML($(this).attr("id"), {
+            markdown: markdown,//+ "\r\n" + $("#append-test").text(),
+            toolbarAutoFixed : false,
+            htmlDecode: true,
+            emoji: true,
+            tex: true,
+            toc: true,
+            tocm: true,
+            taskList: true,
+            flowChart: true,
+            sequenceDiagram: true,
+        });
+    });
+    emojify.setConfig({
+        img_dir: 'https:' == document.location.protocol ? "https://staticfile.qnssl.com/emoji-cheat-sheet/1.0.0" : "http://cdn.staticfile.org/emoji-cheat-sheet/1.0.0",
+        blacklist: {
+            'ids': [],
+            'classes': ['no-emojify'],
+            'elements': ['^script$', '^textarea$', '^pre$', '^code$']
+        },
+    });
+    emojify.run();
+});
+</script>
+</body>
+</html>

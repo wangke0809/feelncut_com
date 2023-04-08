@@ -1,0 +1,511 @@
+<!DOCTYPE HTML>
+<html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width,user-scalable=no">
+    <title>Ubuntu 16.04下安装NVIDIA驱动程序 + CUDA 8.0 + cuDNN 6.0 - 小王同学</title>
+	<!--[if lt IE 9]>
+    <script type="text/javascript" src="https://feelncut.com/usr/themes/maupassant/javascript/html5shiv.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" href="../../../admin/css/normalize.css">
+    <link rel="stylesheet" href="../../../usr/themes/maupassant/style.css">
+    <meta name="description" content="&gt; 吃鸡总有吃腻的那天，看着屏幕前倒在我枪口下的队友，我毅然决然的决定在自己的[PC机](https://feelncut.com/2018/01/09/44.html)上装个Ubuntu，开始..." />
+<link rel="alternate" type="application/rss+xml" title="Ubuntu 16.04下安装NVIDIA驱动程序 + CUDA 8.0 + cuDNN 6.0 &raquo; 小王同学 &raquo; RSS 2.0" href="../../../feed/2018/01/09/46.html" />
+<link rel="alternate" type="application/rdf+xml" title="Ubuntu 16.04下安装NVIDIA驱动程序 + CUDA 8.0 + cuDNN 6.0 &raquo; 小王同学 &raquo; RSS 1.0" href="../../../feed/rss/2018/01/09/46.html" />
+<link rel="alternate" type="application/atom+xml" title="Ubuntu 16.04下安装NVIDIA驱动程序 + CUDA 8.0 + cuDNN 6.0 &raquo; 小王同学 &raquo; ATOM 1.0" href="../../../feed/atom/2018/01/09/46.html" />
+<script type="text/javascript">
+(function () {
+    window.TypechoComment = {
+        dom : function (id) {
+            return document.getElementById(id);
+        },
+    
+        create : function (tag, attr) {
+            var el = document.createElement(tag);
+        
+            for (var key in attr) {
+                el.setAttribute(key, attr[key]);
+            }
+        
+            return el;
+        },
+
+        reply : function (cid, coid) {
+            var comment = this.dom(cid), parent = comment.parentNode,
+                response = this.dom('respond-post-46'), input = this.dom('comment-parent'),
+                form = 'form' == response.tagName ? response : response.getElementsByTagName('form')[0],
+                textarea = response.getElementsByTagName('textarea')[0];
+
+            if (null == input) {
+                input = this.create('input', {
+                    'type' : 'hidden',
+                    'name' : 'parent',
+                    'id'   : 'comment-parent'
+                });
+
+                form.appendChild(input);
+            }
+
+            input.setAttribute('value', coid);
+
+            if (null == this.dom('comment-form-place-holder')) {
+                var holder = this.create('div', {
+                    'id' : 'comment-form-place-holder'
+                });
+
+                response.parentNode.insertBefore(holder, response);
+            }
+
+            comment.appendChild(response);
+            this.dom('cancel-comment-reply-link').style.display = '';
+
+            if (null != textarea && 'text' == textarea.name) {
+                textarea.focus();
+            }
+
+            return false;
+        },
+
+        cancelReply : function () {
+            var response = this.dom('respond-post-46'),
+            holder = this.dom('comment-form-place-holder'), input = this.dom('comment-parent');
+
+            if (null != input) {
+                input.parentNode.removeChild(input);
+            }
+
+            if (null == holder) {
+                return true;
+            }
+
+            this.dom('cancel-comment-reply-link').style.display = 'none';
+            holder.parentNode.insertBefore(response, holder);
+            return false;
+        }
+    };
+})();
+</script>
+<script type="text/javascript">
+(function () {
+    var event = document.addEventListener ? {
+        add: 'addEventListener',
+        triggers: ['scroll', 'mousemove', 'keyup', 'touchstart'],
+        load: 'DOMContentLoaded'
+    } : {
+        add: 'attachEvent',
+        triggers: ['onfocus', 'onmousemove', 'onkeyup', 'ontouchstart'],
+        load: 'onload'
+    }, added = false;
+
+    document[event.add](event.load, function () {
+        var r = document.getElementById('respond-post-46'),
+            input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = '_';
+        input.value = (function () {
+    var _xETM9l = 'bc6'//'Nw3'
++//'Udl'
+'9d'+//'C'
+'6'+/* 'pEz'//'pEz' */''+'v'//'v'
++'a'//'YoE'
++'ad'//'3h'
++//'z'
+'54'+//'cH'
+'b1'+'547'//'hnV'
++'1'//'PLq'
++//'x'
+'d'+//'tAg'
+'4c'+''///*'7'*/'7'
++'d'//'CeF'
++/* 'aFb'//'aFb' */''+'c4'//'t'
++'9PQ'//'9PQ'
++//'keX'
+'e07'+'fd8'//'E'
++//'QFS'
+'b'+''///*'Flx'*/'Flx'
++//'mAz'
+'b'+//'PJ'
+'a', _92ARKBB = [[6,7],[23,26]];
+    
+    for (var i = 0; i < _92ARKBB.length; i ++) {
+        _xETM9l = _xETM9l.substring(0, _92ARKBB[i][0]) + _xETM9l.substring(_92ARKBB[i][1]);
+    }
+
+    return _xETM9l;
+})();
+
+        if (null != r) {
+            var forms = r.getElementsByTagName('form');
+            if (forms.length > 0) {
+                function append() {
+                    if (!added) {
+                        forms[0].appendChild(input);
+                        added = true;
+                    }
+                }
+            
+                for (var i = 0; i < event.triggers.length; i ++) {
+                    var trigger = event.triggers[i];
+                    document[event.add](trigger, append);
+                    window[event.add](trigger, append);
+                }
+            }
+        }
+    });
+})();
+</script><script> var _hmt = _hmt || []; (function() {   var hm = document.createElement("script");   hm.src = "https://hm.baidu.com/hm.js?e9ff349d5b883760c70a4e220c9ac8ca";   var s = document.getElementsByTagName("script")[0];    s.parentNode.insertBefore(hm, s); })(); </script></head>
+<body>
+
+<header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                                    <a id="logo" href="../../../index.html">
+                        小王同学                    </a>
+                        	    <p class="description">希望通过自我加工，成为有点用的人</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class=" current" href="../../../index.html">博客</a>
+															<a href="../../../archives.html" title="归档">归档</a>
+										<a href="../../../tools.html" title="Tools">Tools</a>
+										<a href="../../../about.html" title="关于">关于</a>
+									</nav>
+            </div>
+        </div>
+    </div>
+</header>
+<div id="body">
+    <div class="container">
+        <div class="col-group">
+<div class="col-8" id="main">
+	<div class="res-cons">
+		<article class="post">
+			<header>
+				<h1 class="post-title">Ubuntu 16.04下安装NVIDIA驱动程序 + CUDA 8.0 + cuDNN 6.0</h1>
+			</header>
+			<date class="post-meta">
+				January 9, 2018			</date>
+			<div class="post-content">
+				<div id="md_content_2" class="md_content" style="min-height: 50px;"><textarea id="append-test" style="display:none;">> 吃鸡总有吃腻的那天，看着屏幕前倒在我枪口下的队友，我毅然决然的决定在自己的[PC机](https://feelncut.com/2018/01/09/44.html)上装个Ubuntu，开始步入深度调参这条不归路...
+
+#### **安装其他版本的CUDA与cuDNN步骤一样！！**
+
+原本PC上只有一块M.2的固态硬盘，为了搭建深度学习环境，搞了一块500G的古董机械硬盘，首先分出来100G在Win下用~~装GTAV~~，剩下不到400G用来装Ubuntu。
+
+我看着手中的U盘微微一笑:smirk:，熟练的把他插进了机箱上的USB口。如题目所讲，我装了一个`Ubuntu16.04 LTS`，台式机硬件配置见[这里](https://feelncut.com/2018/01/09/44.html)。
+
+<!--more-->
+
+[TOC]
+
+# 安装NVIDIA驱动程序
+刚装完系统会发现屏幕的分辨率不对，这是因为独显驱动的问题，首先在官网找到自己显卡对应的驱动，官网
+> http://www.nvidia.com/Download/index.aspx?lang=cn
+
+我下载的是`NVIDIA-Linux-x86_64-384.111.run`,我的Ubuntu用户名为`pizi`，在`/home/pizi/`下创建了`driver`目录，之后用到的安装包全放在这里，路径里最好**不要有中文名**。
+
+我的安装过程很暴力：
+```bash
+cd /home/pizi/driver
+sudo chmod 777 NVIDIA-Linux-x86_64-384.111.run
+```
+然后`CTRL+ALT+F1`登录控制台，输入账户和密码，之后：
+```bash
+sudo service lightdm stop
+```
+在这里因为用到`sudo`，所以会提示输入密码，如果看到乱码不要慌张，默默的输入密码然后回车就是了，后面如果出现也一样。接着：
+```bash
+sudo init 3
+cd /home/pizi/driver
+# 进入安装程序
+sudo ./NVIDIA-Linux-x86_64-384.111.run
+```
+安装第一部会提示协议条款，`accept`即可；之后按照提示进行安装，中间会提示警告`32-bit`文件无法安装，忽略即可，接着下一步；接下来根据提示一步一步安装即可...（我记得有一步提示有个什么文件用不用安装，都装了呗）
+安装完成后，重启：
+```bash
+sudo reboot
+```
+重启后会发现分辨率已经自动改正好了，在命令行输入：
+```bash
+nvidia-smi
+```
+提示：
+![](/images/2018/01/1682529089.png)
+恭喜，显卡驱动装好了。
+> 可以`sudo ./NVIDIA-Linux-x86_64-384.111.run --uninstall`进行卸载
+
+在PC上装了SSH-Service，在实验室可以远程继续装环境了，以下过程全在**远程SSH**（本地应该也没问题）下完成。
+
+# 安装CUDA 8.0
+为什么装`CUDA8.0`？应为这个版本即支持`TensorFlow`，又可以用`MXNet`，还可以用`Matlab`和`caffe`等。
+在这里找下载地址，需要注册一个帐号：
+> https://developer.nvidia.com/cuda-release-candidate-download 
+
+我下载了`cuda_8.0.61_375.26_linux.run`，并把它放到了`/home/pizi/driver`。接下来开始安装：
+```bash
+cd /home/pizi/driver
+sudo chmod 777 cuda_8.0.61_375.26_linux.run
+sudo ./cuda_8.0.61_375.26_linux.run
+```
+会提示安装协议，`accept`即可：
+```bash
+Do you accept the previously read EULA?
+accept/decline/quit: accept
+```
+提示是否安装显卡驱动，因为第一步已经装过了，所以这里`n`：
+```bash
+Install NVIDIA Accelerated Graphics Driver for Linux-x86_64 375.26?
+(y)es/(n)o/(q)uit: n
+```
+然后选择安装目录，默认就好（直接回车）：
+```bash
+Enter Toolkit Location
+ [ default is /usr/local/cuda-8.0 ]:
+``` 
+接着是否创建链接，`y`创建即可：
+```bash
+Do you want to install a symbolic link at /usr/local/cuda?
+(y)es/(n)o/(q)uit: y
+```
+接下来提示是否安装Sample，程序示例，以及保存位置，最好进行安装，一会测试是否安装成功用，保存位置默认即可：
+```bash
+Install the CUDA 8.0 Samples?
+(y)es/(n)o/(q)uit: y
+Enter CUDA Samples Location
+ [ default is /home/pizi ]: 
+```
+其实到现在`CUDA 8.0`已经安装好了，它的提示中有一段：
+```bash
+Please make sure that
+ -   PATH includes /usr/local/cuda-8.0/bin
+ -   LD_LIBRARY_PATH includes /usr/local/cuda-8.0/lib64, or, add /usr/local/cuda-8.0/lib64 to /etc/ld.so.conf and run ldconfig as root
+To uninstall the CUDA Toolkit, run the uninstall script in /usr/local/cuda-8.0/bin
+```
+倒着看，首先说可以在`/usr/local/cuda-8.0/bin`运行卸载程序，看了一下，里面有`perl`脚本`uninstall_cuda_8.0.pl`用来卸载，就算之前没有安装Sample页面关系，里面有`cuda-install-samples-8.0.sh`脚本可以安装，目录如下图：
+![](/images/2018/01/195122532.png)
+然后又提示需要添加环境变量和设置，这样操作（我感觉`nano`比较好用，也可以用vim/vi/gedit）：
+```bash
+sudo nano /etc/profile
+# 在最后加入
+export PATH=/usr/local/cuda-8.0/bin:$PATH
+export LD_LIBRARY_PATH=/usr/local/cuda-8.0/lib64:$LD_LIBRARY_PATH
+# ctrl + x 保存
+source /etc/profile
+sudo nano /etc/ld.so.conf cat 
+# 在最后加入
+/usr/local/cuda-8.0/lib64
+# ctrl + x 保存
+sudo ldconfig
+```
+大功告成，输入`ldconfig -v|grep cuda`，如果看到：
+```bash
+libicudata.so.55 -> libicudata.so.55.1
+ libcuda.so.1 -> libcuda.so.384.111
+  libcudart.so.8.0 -> libcudart.so.8.0.61
+```
+就算设置好动态链接库了。接下来为编译Sample安装必须的开发工具：
+```bash
+sudo apt-get update
+sudo apt-get install build-essential
+sudo apt-get install freeglut3-dev build-essential libx11-dev libxmu-dev libxi-dev libgl1-mesa-glx libglu1-mesa libglu1-mesa-dev
+```
+安装完成后你可以选择编译全部Samples（速度慢）：
+```bash
+cd /usr/local/cuda-8.0/NVIDIA_CUDA-8.0_Samples
+# 多线程编译
+sudo make -j8
+```
+编译完成后在`NVIDIA_CUDA-8.0_Samples/bin/x86_64/linux/release`目录里可以看到变好的二进制文件，可以随便选择一个运行测试，比如`./deviceQuery`，当然，在可以`NVIDIA_CUDA-8.0_Samples`目录里进入`1_Utilities/deviceQuery`进行`make`，在输出二进制目录里运行编译好的程序。
+
+**如果安装过程中提示`toolkit installation failed using unsupported compiler`。这是因为GCC版本不合适所导致的。试试`sudo ./cuda_8.0.61_375.26_linux.run -override`。**
+
+# 安装cuDNN 6.0
+其实CUDA和cuDNN都是编译好的二进制文件，把他们放到自己的系统目录，设置好环境变量就可以使用了，对于cuDNN，选择6.0是因为`TensorFlow`官方的推荐，`MXNet`也可以使用。在下面地址下载：
+> https://developer.nvidia.com/cudnn
+
+我下载了`cudnn-8.0-linux-x64-v6.0.tgz`，依然放入了`home/pizi/driver`,接下来进行安装：
+```bash
+tar -xvf cudnn-8.0-linux-x64-v5.1.tgz
+# 解压到了cuda文件夹
+cd cuda
+sudo cp ./include/cudnn.h /usr/local/cuda-8.0/include
+sudo cp -a ./lib64/libcudnn* /usr/local/cuda-8.0/lib64
+```
+至此，全部安装完成:tada:。
+
+# 后记
+
+- `sudo apt upgrade`后发现无法找到显卡驱动，`nvidia-smi`无法显示，不要慌张，重新安装一下显卡驱动就行了，其他环境不用动。
+- 如需安装其他版本CUDA与cuDNN，下载相应的安装包即可，安装步骤和上述步骤基本一致，可参考上述步骤。
+
+# 补充：分开安装CUDN与cuDNN
+
+看完文章后你会发现CUDNN与cuDNN都是编译好的二进制文件及头文件，完全可以分开放，分开放的好处是可以自由的组合不同版本的CUDNN与cuDNN，比如我再搭建GPU容器那篇文章里，在共享文件夹里放了不同版本的CUDA与cuDNN，每个容器可以自由选择，只需要在`/etc/profile`于`ldconfig`中配置相应的路径即可。
+
+比如`/etc/profile`：
+
+```
+# CUDN配置
+export PATH=$PATH:/A-pool/cuda/cuda-9.0/bin:/A-pool/cuda/cuda-9.0/include
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/A-pool/cuda/cuda-9.0/lib64
+export CUDA_HOME=/A-pool/cuda/cuda-9.0
+# cuDNN配置
+export PATH=$PATH:/A-pool/cudnn/cuda-9.0-cudnn-7.0/include
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/A-pool/cudnn/cuda-9.0-cudnn-7.0/lib6
+```
+
+`/etc/ld.so.conf `:
+
+```
+/A-pool/cuda/cuda-9.0/lib64
+/A-pool/cudnn/cuda-9.0-cudnn-7.0/lib64
+```
+
+# 参考
+[1] http://blog.csdn.net/u012581999/article/details/52433609
+[2] http://blog.csdn.net/Suodislie/article/details/70228138</textarea></div>			</div>
+		</article>
+		<div id="comments">
+                <div id="respond-post-46" class="respond">
+        <div class="cancel-comment-reply">
+        <a id="cancel-comment-reply-link" href="46.html#respond-post-46" rel="nofollow" style="display:none" onclick="return TypechoComment.cancelReply();">取消回复</a>        </div>
+    	<span id="response" class="widget-title">添加新评论</span>
+    	<form method="post" action="https://feelncut.com/2018/01/09/46.html/comment" id="comment-form">
+			<div class="col1">
+			<p>
+                <textarea rows="8" cols="50" name="text" class="textarea"></textarea>
+            </p>
+			</div>
+			<div class="col2">
+                		<p>
+                <label for="author" class="required">称呼</label>
+    			<input type="text" name="author" id="author" class="text" value="" />
+    		</p>
+    		<p>
+                <label for="mail" class="required">邮箱</label>
+    			<input type="email" name="mail" id="mail" class="text" value="" />
+    		</p>
+    		<p>
+                <label for="url">网站</label>
+    			<input type="url" name="url" id="url" class="text" placeholder="可空" value="" />
+    		</p>
+                		<p>
+                <button type="submit" class="submit">提交评论</button>
+            </p>
+			</div>
+			<div class="clear"></div>
+    	</form>
+    </div>
+    </div>	</div>
+</div>
+<div id="secondary">
+	<section class="widget">
+        <form id="search" method="post" action="https://feelncut.com/2018/01/09/">
+            <input type="text" name="s" class="text" placeholder="搜索..." />
+            <button type="submit" class="submit icon-search"></button>
+        </form>
+    </section>
+
+	    <section class="widget">
+		<h3 class="widget-title">最新文章</h3>
+        <ul class="widget-list">
+            <li><a href="../../../2020/08/24/323.html">ETH 2.0 资源汇总（持续更新）</a></li><li><a href="../../../2020/08/24/322.html">ETH 2.0 测试网验证节点质押流程体验</a></li><li><a href="../../../2020/06/06/312.html">通过 openssl 导出 HTTPS 网站 SSL 证书链</a></li><li><a href="../../../2020/05/20/308.html">如何开发一款区块链浏览器？</a></li><li><a href="../../../2020/02/02/288.html">EOS 提交交易失败分析</a></li><li><a href="../../../2019/12/09/giaocamerarobot.html">小 Giao 之死</a></li><li><a href="../../../2019/10/04/267.html">《凶宅》和《疯人院》</a></li><li><a href="../../10/17/228.html"> 以太坊多重签名原理分析</a></li><li><a href="../../09/11/188.html">OpenCV 初识图像</a></li><li><a href="../../09/11/184.html">为什么要系统的学习一下Pyhton-OpenCV?</a></li>        </ul>
+    </section>
+    
+        <section class="widget">
+		<h3 class="widget-title">最近回复</h3>
+        <ul class="widget-list">
+                            <li><a href="../../../2020/08/24/323.html#comment-26">pizi</a>: https://be...</li>
+                    <li><a href="../../../2020/08/24/323.html#comment-25">何先生</a>: 请问有没有ETH2....</li>
+                    <li><a href="../../05/03/145.html#comment-24">pizi</a>: 一个卡就不要限制资源...</li>
+                    <li><a href="../../../about.html#comment-23">pizi</a>: 有特殊技巧的啊，从阿...</li>
+                    <li><a href="../../../about.html#comment-22">一网友</a>: 有钱人新浪数据库很贵吧</li>
+                    <li><a href="../../05/03/145.html#comment-21">padluo</a>: 请问如何控制到用户使...</li>
+                    <li><a href="../../../about.html#comment-20">小白</a>: 板凳是我的！</li>
+                    <li><a href="../../02/08/90.html#comment-19">无耻的我</a>: 大佬，能发一份吗，原...</li>
+                    <li><a href="../../05/03/145.html#comment-18">pizi</a>: 文章里写了的，lxc...</li>
+                    <li><a href="../../05/03/145.html#comment-17">zzd</a>: lxc config...</li>
+                </ul>
+    </section>
+    
+        <section class="widget">
+		<h3 class="widget-title">分类</h3>
+        <ul class="widget-list">
+            <li><a href="../../../category/feel/index.html">随笔心情</a> (4)</li><li><a href="../../../category/code/index.html">代码片段</a> (17)</li><li><a href="../../../category/ojbk/index.html">折腾着玩</a> (7)</li><li><a href="../../../category/ml/index.html">机器学习</a> (9)</li><li><a href="../../../category/blockChain/index.html">区块链</a> (10)</li><li><a href="../../../category/python-opencv/index.html">Python-OpenCV</a> (2)</li><li><a href="../../../category/video/index.html">视频剪辑</a> (0)</li><li><a href="../../../category/leetcode/index.html">leetcode</a> (1)</li>        </ul>
+	</section>
+    
+        <section class="widget">
+		<h3 class="widget-title">归档</h3>
+        <ul class="widget-list">
+            <li><a href="../../../2020/08/index.html">August 2020</a></li><li><a href="../../../2020/06/index.html">June 2020</a></li><li><a href="../../../2020/05/index.html">May 2020</a></li><li><a href="../../../2020/02/index.html">February 2020</a></li><li><a href="../../../2019/12/index.html">December 2019</a></li><li><a href="../../../2019/10/index.html">October 2019</a></li><li><a href="../../10/index.html">October 2018</a></li><li><a href="../../09/index.html">September 2018</a></li><li><a href="../../08/index.html">August 2018</a></li><li><a href="../../05/index.html">May 2018</a></li><li><a href="../../04/index.html">April 2018</a></li><li><a href="../../03/index.html">March 2018</a></li><li><a href="../../02/index.html">February 2018</a></li><li><a href="../index.html">January 2018</a></li>        </ul>
+	</section>
+    
+    	<section class="widget">
+		<h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+                            <li class="last"><a href="../../../admin/login.php.html">登录</a></li>
+                        <li><a href="../../../feed/index.html">文章 RSS</a></li>
+            <li><a href="../../../feed/comments/index.html">评论 RSS</a></li>
+            <li><a href="http://www.typecho.org">Typecho</a></li>
+        </ul>
+	</section>
+    </div>		</div>
+    </div>
+</div>
+<footer id="footer">
+	<div class="container">
+		&copy; 2023 <a rel="nofollow" href="../../../index.html">小王同学</a>. 模板由<a href="http://pagecho.com">cho</a>制作.
+	</div>
+</footer>
+<link rel="stylesheet" href="../../../usr/plugins/EditorMD/css/editormd.css" />
+<link rel="stylesheet" href="../../../usr/plugins/EditorMD/css/emojify.min.css" />
+<script type="text/javascript">
+    window.jQuery || document.write(unescape('%3Cscript%20type%3D%22text/javascript%22%20src%3D%22https://feelncut.com/usr/plugins/EditorMD/lib/jquery.min.js%22%3E%3C/script%3E'));
+</script>
+<script src="../../../usr/plugins/EditorMD/lib/marked.min.js"></script>
+<script src="../../../usr/plugins/EditorMD/lib/prettify.min.js"></script>
+<script src="../../../usr/plugins/EditorMD/lib/raphael.min.js"></script>
+<script src="../../../usr/plugins/EditorMD/lib/underscore.min.js"></script>
+<script src="../../../usr/plugins/EditorMD/lib/sequence-diagram.min.js"></script>
+<script src="../../../usr/plugins/EditorMD/lib/flowchart.min.js"></script>
+<script src="../../../usr/plugins/EditorMD/lib/jquery.flowchart.min.js"></script>
+<script src="../../../usr/plugins/EditorMD/js/editormd.min.js"></script>
+<script src="../../../usr/plugins/EditorMD/js/emojify.min.js"></script>
+<script type="text/javascript">
+$(function() {
+    var markdowns = document.getElementsByClassName("md_content");
+    $(markdowns).each(function(){
+        var markdown = $(this).children("#append-test").text();
+        //$('#md_content_'+i).text('');
+        var testEditormdView;
+        testEditormdView = editormd.markdownToHTML($(this).attr("id"), {
+            markdown: markdown,//+ "\r\n" + $("#append-test").text(),
+            toolbarAutoFixed : false,
+            htmlDecode: true,
+            emoji: true,
+            tex: true,
+            toc: true,
+            tocm: true,
+            taskList: true,
+            flowChart: true,
+            sequenceDiagram: true,
+        });
+    });
+    emojify.setConfig({
+        img_dir: 'https:' == document.location.protocol ? "https://staticfile.qnssl.com/emoji-cheat-sheet/1.0.0" : "http://cdn.staticfile.org/emoji-cheat-sheet/1.0.0",
+        blacklist: {
+            'ids': [],
+            'classes': ['no-emojify'],
+            'elements': ['^script$', '^textarea$', '^pre$', '^code$']
+        },
+    });
+    emojify.run();
+});
+</script>
+</body>
+</html>

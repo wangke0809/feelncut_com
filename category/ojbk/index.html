@@ -1,0 +1,262 @@
+<!DOCTYPE HTML>
+<html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width,user-scalable=no">
+    <title>分类 折腾着玩 下的文章 - 小王同学</title>
+	<!--[if lt IE 9]>
+    <script type="text/javascript" src="https://feelncut.com/usr/themes/maupassant/javascript/html5shiv.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" href="../../admin/css/normalize.css">
+    <link rel="stylesheet" href="../../usr/themes/maupassant/style.css">
+    <meta name="keywords" content="折腾着玩" />
+<link rel="alternate" type="application/rss+xml" title="折腾着玩 &raquo; 小王同学 &raquo; RSS 2.0" href="../../feed/category/ojbk/index.html" />
+<link rel="alternate" type="application/rdf+xml" title="折腾着玩 &raquo; 小王同学 &raquo; RSS 1.0" href="../../feed/rss/category/ojbk/index.html" />
+<link rel="alternate" type="application/atom+xml" title="折腾着玩 &raquo; 小王同学 &raquo; ATOM 1.0" href="../../feed/atom/category/ojbk/index.html" />
+<script> var _hmt = _hmt || []; (function() {   var hm = document.createElement("script");   hm.src = "https://hm.baidu.com/hm.js?e9ff349d5b883760c70a4e220c9ac8ca";   var s = document.getElementsByTagName("script")[0];    s.parentNode.insertBefore(hm, s); })(); </script></head>
+<body>
+
+<header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                                    <a id="logo" href="../../index.html">
+                        小王同学                    </a>
+                        	    <p class="description">希望通过自我加工，成为有点用的人</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class=" " href="../../index.html">博客</a>
+															<a href="../../archives.html" title="归档">归档</a>
+										<a href="../../tools.html" title="Tools">Tools</a>
+										<a href="../../about.html" title="关于">关于</a>
+									</nav>
+            </div>
+        </div>
+    </div>
+</header>
+<div id="body">
+    <div class="container">
+        <div class="col-group">
+<div class="col-8" id="main">
+	<div class="res-cons">
+        <h3 class="archive-title">分类 折腾着玩 下的文章		</h3>
+            	            <article class="post">
+    			<header>
+				<h2 class="post-title">
+					<a href="../../2020/05/20/308.html">如何开发一款区块链浏览器？</a>
+				</h2>
+			</header>
+			<date class="post-meta">
+				May 20, 2020			</date>
+                <div class="post-content">
+        		<div id="md_content_1" class="md_content" style="min-height: 50px;"><textarea id="append-test" style="display:none;">## 摘要
+步入币圈大门后，除了钱包应用之外，用户最先接触的应该还有区块链浏览器。区块链浏览器不同于电脑和手机上浏览网页用的浏览器软件，而是指一个网站可以查询区块链上的具体信息。比如，给定区块高度，可以查询该高度区块的创建时间，包含了多少交易；给定一个地址，可以查询余额，该地址的所有交易记录等。当前以太坊上的数据量级已达亿级，如何进行数据持久化和查询呢？本文以以太坊为例，对区块链浏览器原理及存储细节进行分析总结。
+
+</textarea></div><p class="more"><a href="../../2020/05/20/308.html" title="如何开发一款区块链浏览器？">- 阅读剩余部分 -</a></p>                </div>
+    		</article>
+		            <article class="post">
+    			<header>
+				<h2 class="post-title">
+					<a href="../../2019/12/09/giaocamerarobot.html">小 Giao 之死</a>
+				</h2>
+			</header>
+			<date class="post-meta">
+				December 9, 2019			</date>
+                <div class="post-content">
+        		<div id="md_content_2" class="md_content" style="min-height: 50px;"><textarea id="append-test" style="display:none;">## 机器人小 Giao 的前生今世
+
+一个突然地想法，想到用个普通的摄像头做个预警机器人🤖，于是折腾了三四天，小 Giao 出生了。
+
+![](/images/2019/12/245685690.png)
+*小 Giao 的头像经过模糊处理，头像来自 Allenzsy 在群里分享的第一个图片！*
+
+小 Giao 威力巨大，为了防止小 Giao 统治人类世界，已经将其一棒子打死，尸体在： https://github.com/wangke0809/GiaoCameraRobot
+
+------------
+
+## 目录
+
+[TOC]
+
+## 需求
+
+需求分析：
+
+- 进入实验室检测：能够通过摄像头实时检测到有人进入实验室 -> Face Detection + Multi-label Classification
+
+- 检测结果通知：能够方便的接受监测结果 -> 使用钉钉群聊机器人
+
+- 轻量级资源占用：工位上除了有个 2015 年办公的老电脑（i7-4790），还有个 GPU 工作站，因为借来的摄像头数据线长度不够，以及考虑到在工作站上跑实验时占用资源多会严重造成系统卡顿，所以决定在办公电脑上跑小 Giao ，所以需要保证运行小 Giao 的时候不能影响正常办公 -> 聚焦关键区域 + 上下帧图像变化量阈值
+
+</textarea></div><p class="more"><a href="../../2019/12/09/giaocamerarobot.html" title="小 Giao 之死">- 阅读剩余部分 -</a></p>                </div>
+    		</article>
+		            <article class="post">
+    			<header>
+				<h2 class="post-title">
+					<a href="../../2018/05/03/145.html">搭建多人共用的GPU服务器</a>
+				</h2>
+			</header>
+			<date class="post-meta">
+				May 3, 2018			</date>
+                <div class="post-content">
+        		<div id="md_content_3" class="md_content" style="min-height: 50px;"><textarea id="append-test" style="display:none;">[TOC]
+
+#### 背景
+
+目前实验室GPU使用情况是：大部分同学的配有单台1080/TITAN Xp。后来购入了两台4卡的机器，老师的意思是希望可以作为服务器使用，能够多人同时使用，互不影响。于是便开始了本次折腾，记录采坑经历。
+
+通过本文，多卡读者可以实现分配每块GPU给特定同学使用，也可以多人共用多块GPU。单卡读者可以实现多人共用一块GPU。
+
+</textarea></div><p class="more"><a href="../../2018/05/03/145.html" title="搭建多人共用的GPU服务器">- 阅读剩余部分 -</a></p>                </div>
+    		</article>
+		            <article class="post">
+    			<header>
+				<h2 class="post-title">
+					<a href="../../2018/04/05/119.html">写给女朋友：理解服务端的工作原理（下）</a>
+				</h2>
+			</header>
+			<date class="post-meta">
+				April 5, 2018			</date>
+                <div class="post-content">
+        		<div id="md_content_4" class="md_content" style="min-height: 50px;"><textarea id="append-test" style="display:none;">[TOC]
+
+下面真的进入正题了，上一篇扯了一些杂七杂八应该知道的东西，鉴于篇幅考虑，我还是分开吧。本文主要介绍`拍黄片`，主要演示`Cookie`，`Session`和`Token`鉴权。
+
+这一部分最好可以动手做一下，学点PHP，掌握一门服务端语言。
+
+</textarea></div><p class="more"><a href="../../2018/04/05/119.html" title="写给女朋友：理解服务端的工作原理（下）">- 阅读剩余部分 -</a></p>                </div>
+    		</article>
+		            <article class="post">
+    			<header>
+				<h2 class="post-title">
+					<a href="../../2018/04/05/110.html">写给女朋友：理解服务端的工作原理（上）</a>
+				</h2>
+			</header>
+			<date class="post-meta">
+				April 5, 2018			</date>
+                <div class="post-content">
+        		<div id="md_content_5" class="md_content" style="min-height: 50px;"><textarea id="append-test" style="display:none;">[TOC]
+
+### 前言
+
+女票学了一阵前端了，一般来讲，一个牛逼的前端至少会一种服务端语言，一个负责的男票至少给小傻子写一篇服务端入门教程。
+
+本文的主要目的是理解服务端运作的原理，`Cookie`和`Session`的概念，以及如何通过`Token鉴权`。我会从最基础的说起，便于你理解。之所以用`PHP`是因为拍黄片太简单了，理解比较直观，你可以趁机了解以下嘛，之后服务端可以学习以下`express`。
+
+接下来进入正题，以下内容理解即可，不需动手实践，如需了解更多，自行百度啊。
+
+</textarea></div><p class="more"><a href="../../2018/04/05/110.html" title="写给女朋友：理解服务端的工作原理（上）">- 阅读剩余部分 -</a></p>                </div>
+    		</article>
+		                <ol class="page-navigator"><li class="current"><a href="1/index.html">1</a></li><li><a href="2/index.html">2</a></li><li class="next"><a href="2/index.html">后一页 &raquo;</a></li></ol>	</div>
+</div>
+<div id="secondary">
+	<section class="widget">
+        <form id="search" method="post" action="index.html">
+            <input type="text" name="s" class="text" placeholder="搜索..." />
+            <button type="submit" class="submit icon-search"></button>
+        </form>
+    </section>
+
+	    <section class="widget">
+		<h3 class="widget-title">最新文章</h3>
+        <ul class="widget-list">
+            <li><a href="../../2020/08/24/323.html">ETH 2.0 资源汇总（持续更新）</a></li><li><a href="../../2020/08/24/322.html">ETH 2.0 测试网验证节点质押流程体验</a></li><li><a href="../../2020/06/06/312.html">通过 openssl 导出 HTTPS 网站 SSL 证书链</a></li><li><a href="../../2020/05/20/308.html">如何开发一款区块链浏览器？</a></li><li><a href="../../2020/02/02/288.html">EOS 提交交易失败分析</a></li><li><a href="../../2019/12/09/giaocamerarobot.html">小 Giao 之死</a></li><li><a href="../../2019/10/04/267.html">《凶宅》和《疯人院》</a></li><li><a href="../../2018/10/17/228.html"> 以太坊多重签名原理分析</a></li><li><a href="../../2018/09/11/188.html">OpenCV 初识图像</a></li><li><a href="../../2018/09/11/184.html">为什么要系统的学习一下Pyhton-OpenCV?</a></li>        </ul>
+    </section>
+    
+        <section class="widget">
+		<h3 class="widget-title">最近回复</h3>
+        <ul class="widget-list">
+                            <li><a href="../../2020/08/24/323.html#comment-26">pizi</a>: https://be...</li>
+                    <li><a href="../../2020/08/24/323.html#comment-25">何先生</a>: 请问有没有ETH2....</li>
+                    <li><a href="../../2018/05/03/145.html#comment-24">pizi</a>: 一个卡就不要限制资源...</li>
+                    <li><a href="../../about.html#comment-23">pizi</a>: 有特殊技巧的啊，从阿...</li>
+                    <li><a href="../../about.html#comment-22">一网友</a>: 有钱人新浪数据库很贵吧</li>
+                    <li><a href="../../2018/05/03/145.html#comment-21">padluo</a>: 请问如何控制到用户使...</li>
+                    <li><a href="../../about.html#comment-20">小白</a>: 板凳是我的！</li>
+                    <li><a href="../../2018/02/08/90.html#comment-19">无耻的我</a>: 大佬，能发一份吗，原...</li>
+                    <li><a href="../../2018/05/03/145.html#comment-18">pizi</a>: 文章里写了的，lxc...</li>
+                    <li><a href="../../2018/05/03/145.html#comment-17">zzd</a>: lxc config...</li>
+                </ul>
+    </section>
+    
+        <section class="widget">
+		<h3 class="widget-title">分类</h3>
+        <ul class="widget-list">
+            <li><a href="../feel/index.html">随笔心情</a> (4)</li><li><a href="../code/index.html">代码片段</a> (17)</li><li><a href="index.html">折腾着玩</a> (7)</li><li><a href="../ml/index.html">机器学习</a> (9)</li><li><a href="../blockChain/index.html">区块链</a> (10)</li><li><a href="../python-opencv/index.html">Python-OpenCV</a> (2)</li><li><a href="../video/index.html">视频剪辑</a> (0)</li><li><a href="../leetcode/index.html">leetcode</a> (1)</li>        </ul>
+	</section>
+    
+        <section class="widget">
+		<h3 class="widget-title">归档</h3>
+        <ul class="widget-list">
+            <li><a href="../../2020/08/index.html">August 2020</a></li><li><a href="../../2020/06/index.html">June 2020</a></li><li><a href="../../2020/05/index.html">May 2020</a></li><li><a href="../../2020/02/index.html">February 2020</a></li><li><a href="../../2019/12/index.html">December 2019</a></li><li><a href="../../2019/10/index.html">October 2019</a></li><li><a href="../../2018/10/index.html">October 2018</a></li><li><a href="../../2018/09/index.html">September 2018</a></li><li><a href="../../2018/08/index.html">August 2018</a></li><li><a href="../../2018/05/index.html">May 2018</a></li><li><a href="../../2018/04/index.html">April 2018</a></li><li><a href="../../2018/03/index.html">March 2018</a></li><li><a href="../../2018/02/index.html">February 2018</a></li><li><a href="../../2018/01/index.html">January 2018</a></li>        </ul>
+	</section>
+    
+    	<section class="widget">
+		<h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+                            <li class="last"><a href="../../admin/login.php.html">登录</a></li>
+                        <li><a href="../../feed/index.html">文章 RSS</a></li>
+            <li><a href="../../feed/comments/index.html">评论 RSS</a></li>
+            <li><a href="http://www.typecho.org">Typecho</a></li>
+        </ul>
+	</section>
+    </div>		</div>
+    </div>
+</div>
+<footer id="footer">
+	<div class="container">
+		&copy; 2023 <a rel="nofollow" href="../../index.html">小王同学</a>. 模板由<a href="http://pagecho.com">cho</a>制作.
+	</div>
+</footer>
+<link rel="stylesheet" href="../../usr/plugins/EditorMD/css/editormd.css" />
+<link rel="stylesheet" href="../../usr/plugins/EditorMD/css/emojify.min.css" />
+<script type="text/javascript">
+    window.jQuery || document.write(unescape('%3Cscript%20type%3D%22text/javascript%22%20src%3D%22https://feelncut.com/usr/plugins/EditorMD/lib/jquery.min.js%22%3E%3C/script%3E'));
+</script>
+<script src="../../usr/plugins/EditorMD/lib/marked.min.js"></script>
+<script src="../../usr/plugins/EditorMD/lib/prettify.min.js"></script>
+<script src="../../usr/plugins/EditorMD/lib/raphael.min.js"></script>
+<script src="../../usr/plugins/EditorMD/lib/underscore.min.js"></script>
+<script src="../../usr/plugins/EditorMD/lib/sequence-diagram.min.js"></script>
+<script src="../../usr/plugins/EditorMD/lib/flowchart.min.js"></script>
+<script src="../../usr/plugins/EditorMD/lib/jquery.flowchart.min.js"></script>
+<script src="../../usr/plugins/EditorMD/js/editormd.min.js"></script>
+<script src="../../usr/plugins/EditorMD/js/emojify.min.js"></script>
+<script type="text/javascript">
+$(function() {
+    var markdowns = document.getElementsByClassName("md_content");
+    $(markdowns).each(function(){
+        var markdown = $(this).children("#append-test").text();
+        //$('#md_content_'+i).text('');
+        var testEditormdView;
+        testEditormdView = editormd.markdownToHTML($(this).attr("id"), {
+            markdown: markdown,//+ "\r\n" + $("#append-test").text(),
+            toolbarAutoFixed : false,
+            htmlDecode: true,
+            emoji: true,
+            tex: true,
+            toc: true,
+            tocm: true,
+            taskList: true,
+            flowChart: true,
+            sequenceDiagram: true,
+        });
+    });
+    emojify.setConfig({
+        img_dir: 'https:' == document.location.protocol ? "https://staticfile.qnssl.com/emoji-cheat-sheet/1.0.0" : "http://cdn.staticfile.org/emoji-cheat-sheet/1.0.0",
+        blacklist: {
+            'ids': [],
+            'classes': ['no-emojify'],
+            'elements': ['^script$', '^textarea$', '^pre$', '^code$']
+        },
+    });
+    emojify.run();
+});
+</script>
+</body>
+</html>

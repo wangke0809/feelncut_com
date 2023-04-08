@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+  <meta charset="UTF-8">
+  <title>Python中的排列和组合|Winke's blog</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <link rel="alternate icon" type="image/png" href="../../../../Public/static/amaze/i/favicon.png">
+  <link rel="stylesheet" href="../../../../Public/static/amaze/css/amazeui.min.css"/>
+  <link rel="stylesheet" href="../../../../Public/static/ueditor/third-party/SyntaxHighlighter/shCoreDefault.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../Public/Home/css/blog.css">
+    <!--<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?e9ff349d5b883760c70a4e220c9ac8ca";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>-->
+    <style>
+    .g-hd {
+    background-image: url("../../../../Editor/2016-07-25/57962ebcddb49.png");
+    }
+
+    @media only screen and (min-width: 641px) {
+      .am-offcanvas {
+        display: block;
+        position: static;
+        background: none;
+      }
+
+      .am-offcanvas-bar {
+        position: static;
+        width: auto;
+        background: none;
+        -webkit-transform: translate3d(0, 0, 0);
+        -ms-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+      }
+      .am-offcanvas-bar:after {
+        content: none;
+      }
+
+    }
+    
+    @media only screen and (max-width: 640px) {
+      .am-offcanvas-bar .am-nav>li>a {
+        color:#ccc;
+        border-radius: 0;
+        border-top: 1px solid rgba(0,0,0,.3);
+        box-shadow: inset 0 1px 0 rgba(255,255,255,.05)
+      }
+
+      .am-offcanvas-bar .am-nav>li>a:hover {
+        background: #404040;
+        color: #fff
+      }
+
+      .am-offcanvas-bar .am-nav>li.am-nav-header {
+        color: #777;
+        background: #404040;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,.05);
+        text-shadow: 0 1px 0 rgba(0,0,0,.5);
+        border-top: 1px solid rgba(0,0,0,.3);
+        font-weight: 400;
+        font-size: 75%
+      }
+
+      .am-offcanvas-bar .am-nav>li.am-active>a {
+        background: #1a1a1a;
+        color: #fff;
+        box-shadow: inset 0 1px 3px rgba(0,0,0,.3)
+      }
+
+      .am-offcanvas-bar .am-nav>li+li {
+        margin-top: 0;
+      }
+    }
+
+    .my-head {
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    .my-button {
+      position: fixed;
+      top: 0;
+      right: 0;
+      border-radius: 0;
+    }
+    .my-sidebar {
+      padding-right: 0;
+      border-right: 1px solid #eeeeee;
+    }
+
+    .my-footer {
+      border-top: 1px solid #eeeeee;
+      padding: 10px 0;
+      margin-top: 10px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+<div class="g-hd" style="height:200px;"></div>
+<div class="m-hdimg" style="margin:-53px auto 0;display:block;text-align: center;">
+                <a class="hdimg img" href="../../../../old_index.html" >
+                    <img src="../../../../picture/avater2.jpg" height="96" width="96">
+                </a>
+            </div>
+<header class="am-g my-head">
+  <div class="am-u-sm-12 am-article">
+    <h1 class="am-article-title">Python中的排列和组合</h1>
+    <p class="am-article-meta">王珂&nbsp;于&nbsp;2017-02-01 19:28</p>
+  </div>
+</header>
+<hr class="am-article-divider"/>
+<div class="am-g am-g-fixed">
+  <div class="am-u-md-12">
+    <div class="am-g">
+      <div class="am-u-sm-11 am-u-sm-centered">
+      <? php if($info.['description']!=''){ ?>
+      <blockquote>或许之后会用到，记录一下。</blockquote>
+      <? }  ?>
+        <div class="am-cf am-article">
+		<p>今天写一个判断是否为循环素数的题，题干如下</p><hr/><p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; outline: none; color: rgb(102, 102, 102); font-family: Arial, &quot;Hiragino Sans GB&quot;, SimSun, 宋体, serif; font-size: 12px; background-color: rgb(255, 255, 255); white-space: normal;"><strong>题目内容：</strong></p><p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; outline: none; color: rgb(102, 102, 102); font-family: Arial, &quot;Hiragino Sans GB&quot;, SimSun, 宋体, serif; font-size: 12px; background-color: rgb(255, 255, 255); white-space: normal;">数字197可以被称为循环素数，因为197的三个数位循环移位后的数字：197,971,719均为素数。100以内这样的数字包括13个，2,3,5,7,11,13,17,31,37,71,73,79,97。要求<span style="word-wrap: break-word; white-space: pre-wrap; font-family: Arial, &quot;Hiragino Sans GB&quot;, SimSun, 宋体, Georgia, serif;">任意正整数n以内</span>一共有多少个这样的循环素数。</p><p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; outline: none; color: rgb(102, 102, 102); font-family: Arial, &quot;Hiragino Sans GB&quot;, SimSun, 宋体, serif; font-size: 12px; background-color: rgb(255, 255, 255); white-space: normal;"><br/></p><p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; outline: none; color: rgb(102, 102, 102); font-family: Arial, &quot;Hiragino Sans GB&quot;, SimSun, 宋体, serif; font-size: 12px; background-color: rgb(255, 255, 255); white-space: normal;"><strong>输入格式:</strong><br/></p><p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; outline: none; color: rgb(102, 102, 102); font-family: Arial, &quot;Hiragino Sans GB&quot;, SimSun, 宋体, serif; font-size: 12px; background-color: rgb(255, 255, 255); white-space: normal;">一个正整数n。</p><p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; outline: none; color: rgb(102, 102, 102); font-family: Arial, &quot;Hiragino Sans GB&quot;, SimSun, 宋体, serif; font-size: 12px; background-color: rgb(255, 255, 255); white-space: normal;"><br/></p><p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; outline: none; color: rgb(102, 102, 102); font-family: Arial, &quot;Hiragino Sans GB&quot;, SimSun, 宋体, serif; font-size: 12px; background-color: rgb(255, 255, 255); white-space: normal;"><strong>输出格式：</strong><br/></p><p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; outline: none; color: rgb(102, 102, 102); font-family: Arial, &quot;Hiragino Sans GB&quot;, SimSun, 宋体, serif; font-size: 12px; background-color: rgb(255, 255, 255); white-space: normal;">n以内循环素数的数目。</p><p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; outline: none; color: rgb(102, 102, 102); font-family: Arial, &quot;Hiragino Sans GB&quot;, SimSun, 宋体, serif; font-size: 12px; background-color: rgb(255, 255, 255); white-space: normal;"><br/></p><p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; outline: none; color: rgb(102, 102, 102); font-family: Arial, &quot;Hiragino Sans GB&quot;, SimSun, 宋体, serif; font-size: 12px; background-color: rgb(255, 255, 255); white-space: normal;"><strong>输入样例：</strong><br/></p><p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; outline: none; color: rgb(102, 102, 102); font-family: Arial, &quot;Hiragino Sans GB&quot;, SimSun, 宋体, serif; font-size: 12px; background-color: rgb(255, 255, 255); white-space: normal;">100</p><p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; outline: none; color: rgb(102, 102, 102); font-family: Arial, &quot;Hiragino Sans GB&quot;, SimSun, 宋体, serif; font-size: 12px; background-color: rgb(255, 255, 255); white-space: normal;"><br/></p><p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; outline: none; color: rgb(102, 102, 102); font-family: Arial, &quot;Hiragino Sans GB&quot;, SimSun, 宋体, serif; font-size: 12px; background-color: rgb(255, 255, 255); white-space: normal;"><strong>输出样例：</strong><br/></p><p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; outline: none; color: rgb(102, 102, 102); font-family: Arial, &quot;Hiragino Sans GB&quot;, SimSun, 宋体, serif; font-size: 12px; background-color: rgb(255, 255, 255); white-space: normal;">13</p><hr/><p>其中需要拆分一个整数各位并进行重新组合，不过这里的组合只是循环移位就可以了。本题目我的实现代码如下</p><pre class="brush:python;toolbar:false">#python&nbsp;2.7可用，3.0+需要更改input&nbsp;和&nbsp;print()
+import&nbsp;math
+
+def&nbsp;split(num):
+&nbsp;&nbsp;&nbsp;&nbsp;data&nbsp;=&nbsp;[]
+&nbsp;&nbsp;&nbsp;&nbsp;while&nbsp;num&nbsp;!=&nbsp;0:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data.append(num&nbsp;%&nbsp;10)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;num&nbsp;//=&nbsp;10
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;data
+
+def&nbsp;combine(data):
+&nbsp;&nbsp;&nbsp;&nbsp;return_data&nbsp;=&nbsp;[]
+&nbsp;&nbsp;&nbsp;&nbsp;lens&nbsp;=&nbsp;len(data)
+&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;i&nbsp;in&nbsp;range(lens):
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sum&nbsp;=&nbsp;0
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;j&nbsp;in&nbsp;range(lens):
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;index&nbsp;=&nbsp;i+j
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;index&nbsp;&gt;=&nbsp;lens:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;index&nbsp;-=lens
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sum&nbsp;+=&nbsp;data[index]*10**j
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return_data.append(sum)
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;return_data
+
+
+def&nbsp;isPrime(n):&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;n&nbsp;&lt;=&nbsp;1:&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;False
+&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;i&nbsp;in&nbsp;range(2,&nbsp;int(math.sqrt(n))&nbsp;+&nbsp;1):&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;n&nbsp;%&nbsp;i&nbsp;==&nbsp;0:&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;False
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;True
+
+
+def&nbsp;isCirclePrime(n):
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;isPrime(n):
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;i&nbsp;in&nbsp;combine(split(n)):
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;not&nbsp;isPrime(i):
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;False
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;True
+&nbsp;&nbsp;&nbsp;&nbsp;else:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;False
+
+n&nbsp;=&nbsp;int(raw_input())
+
+count&nbsp;=&nbsp;0
+
+for&nbsp;i&nbsp;in&nbsp;range(1,n):
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;isCirclePrime(i):
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;count&nbsp;+=1
+
+print&nbsp;count</pre><p>在慕课上提交代码，提示第二个例子通过（14ms），第一个提示超时，百度了下题目，发现之前的时间限制是2000ms，而这次是500ms，目测是时间限制的问题，于是乎，试了两次第一个例子的输入值，第一次试的1000000，输出55依然超时，第二次测试100000，输出43直接通过啦，真尴尬。</p><p><br/></p><p>做这个题的时候联想到了一个问题，如何组合排列n个字符？</p><p><br/></p><p>本来想动手写算法，但转念一想，万能的python说不定已经实现了呢？</p><p><br/></p><p>百度之</p><pre class="brush:python;toolbar:false">import&nbsp;itertools
+
+lists&nbsp;=&nbsp;[&#39;a&#39;,&#39;b&#39;,&#39;c&#39;,&#39;d&#39;]
+
+for&nbsp;i&nbsp;in&nbsp;range(1,len(lists)+1):
+&nbsp;&nbsp;&nbsp;&nbsp;print&nbsp;(list(itertools.permutations(lists,i)))#排列，和顺序有关
+&nbsp;&nbsp;&nbsp;&nbsp;print&nbsp;(list(itertools.combinations(lists,i)))#组合，和顺序无关
+
+输出：
+
+[(&#39;a&#39;,),&nbsp;(&#39;b&#39;,),&nbsp;(&#39;c&#39;,),&nbsp;(&#39;d&#39;,)]
+[(&#39;a&#39;,),&nbsp;(&#39;b&#39;,),&nbsp;(&#39;c&#39;,),&nbsp;(&#39;d&#39;,)]
+
+[(&#39;a&#39;,&nbsp;&#39;b&#39;),&nbsp;(&#39;a&#39;,&nbsp;&#39;c&#39;),&nbsp;(&#39;a&#39;,&nbsp;&#39;d&#39;),&nbsp;(&#39;b&#39;,&nbsp;&#39;a&#39;),&nbsp;(&#39;b&#39;,&nbsp;&#39;c&#39;),&nbsp;(&#39;b&#39;,&nbsp;&#39;d&#39;),&nbsp;(&#39;c&#39;,&nbsp;&#39;a&#39;),&nbsp;(&#39;c&#39;,&nbsp;&#39;b&#39;),&nbsp;(&#39;c&#39;,&nbsp;&#39;d&#39;),&nbsp;(&#39;d&#39;,&nbsp;&#39;a&#39;),&nbsp;(&#39;d&#39;,&nbsp;&#39;b&#39;),&nbsp;(&#39;d&#39;,&nbsp;&#39;c&#39;)]
+[(&#39;a&#39;,&nbsp;&#39;b&#39;),&nbsp;(&#39;a&#39;,&nbsp;&#39;c&#39;),&nbsp;(&#39;a&#39;,&nbsp;&#39;d&#39;),&nbsp;(&#39;b&#39;,&nbsp;&#39;c&#39;),&nbsp;(&#39;b&#39;,&nbsp;&#39;d&#39;),&nbsp;(&#39;c&#39;,&nbsp;&#39;d&#39;)]
+
+[(&#39;a&#39;,&nbsp;&#39;b&#39;,&nbsp;&#39;c&#39;),&nbsp;(&#39;a&#39;,&nbsp;&#39;b&#39;,&nbsp;&#39;d&#39;),&nbsp;(&#39;a&#39;,&nbsp;&#39;c&#39;,&nbsp;&#39;b&#39;),&nbsp;(&#39;a&#39;,&nbsp;&#39;c&#39;,&nbsp;&#39;d&#39;),&nbsp;(&#39;a&#39;,&nbsp;&#39;d&#39;,&nbsp;&#39;b&#39;),&nbsp;(&#39;a&#39;,&nbsp;&#39;d&#39;,&nbsp;&#39;c&#39;),&nbsp;(&#39;b&#39;,&nbsp;&#39;a&#39;,&nbsp;&#39;c&#39;),&nbsp;(&#39;b&#39;,&nbsp;&#39;a&#39;,&nbsp;&#39;d&#39;),&nbsp;(&#39;b&#39;,&nbsp;&#39;c&#39;,&nbsp;&#39;a&#39;),&nbsp;(&#39;b&#39;,&nbsp;&#39;c&#39;,&nbsp;&#39;d&#39;),&nbsp;(&#39;b&#39;,&nbsp;&#39;d&#39;,&nbsp;&#39;a&#39;),&nbsp;(&#39;b&#39;,&nbsp;&#39;d&#39;,&nbsp;&#39;c&#39;),&nbsp;(&#39;c&#39;,&nbsp;&#39;a&#39;,&nbsp;&#39;b&#39;),&nbsp;(&#39;c&#39;,&nbsp;&#39;a&#39;,&nbsp;&#39;d&#39;),&nbsp;(&#39;c&#39;,&nbsp;&#39;b&#39;,&nbsp;&#39;a&#39;),&nbsp;(&#39;c&#39;,&nbsp;&#39;b&#39;,&nbsp;&#39;d&#39;),&nbsp;(&#39;c&#39;,&nbsp;&#39;d&#39;,&nbsp;&#39;a&#39;),&nbsp;(&#39;c&#39;,&nbsp;&#39;d&#39;,&nbsp;&#39;b&#39;),&nbsp;(&#39;d&#39;,&nbsp;&#39;a&#39;,&nbsp;&#39;b&#39;),&nbsp;(&#39;d&#39;,&nbsp;&#39;a&#39;,&nbsp;&#39;c&#39;),&nbsp;(&#39;d&#39;,&nbsp;&#39;b&#39;,&nbsp;&#39;a&#39;),&nbsp;(&#39;d&#39;,&nbsp;&#39;b&#39;,&nbsp;&#39;c&#39;),&nbsp;(&#39;d&#39;,&nbsp;&#39;c&#39;,&nbsp;&#39;a&#39;),&nbsp;(&#39;d&#39;,&nbsp;&#39;c&#39;,&nbsp;&#39;b&#39;)]
+[(&#39;a&#39;,&nbsp;&#39;b&#39;,&nbsp;&#39;c&#39;),&nbsp;(&#39;a&#39;,&nbsp;&#39;b&#39;,&nbsp;&#39;d&#39;),&nbsp;(&#39;a&#39;,&nbsp;&#39;c&#39;,&nbsp;&#39;d&#39;),&nbsp;(&#39;b&#39;,&nbsp;&#39;c&#39;,&nbsp;&#39;d&#39;)]
+
+[(&#39;a&#39;,&nbsp;&#39;b&#39;,&nbsp;&#39;c&#39;,&nbsp;&#39;d&#39;),&nbsp;(&#39;a&#39;,&nbsp;&#39;b&#39;,&nbsp;&#39;d&#39;,&nbsp;&#39;c&#39;),&nbsp;(&#39;a&#39;,&nbsp;&#39;c&#39;,&nbsp;&#39;b&#39;,&nbsp;&#39;d&#39;),&nbsp;(&#39;a&#39;,&nbsp;&#39;c&#39;,&nbsp;&#39;d&#39;,&nbsp;&#39;b&#39;),&nbsp;(&#39;a&#39;,&nbsp;&#39;d&#39;,&nbsp;&#39;b&#39;,&nbsp;&#39;c&#39;),&nbsp;(&#39;a&#39;,&nbsp;&#39;d&#39;,&nbsp;&#39;c&#39;,&nbsp;&#39;b&#39;),&nbsp;(&#39;b&#39;,&nbsp;&#39;a&#39;,&nbsp;&#39;c&#39;,&nbsp;&#39;d&#39;),&nbsp;(&#39;b&#39;,&nbsp;&#39;a&#39;,&nbsp;&#39;d&#39;,&nbsp;&#39;c&#39;),&nbsp;(&#39;b&#39;,&nbsp;&#39;c&#39;,&nbsp;&#39;a&#39;,&nbsp;&#39;d&#39;),&nbsp;(&#39;b&#39;,&nbsp;&#39;c&#39;,&nbsp;&#39;d&#39;,&nbsp;&#39;a&#39;),&nbsp;(&#39;b&#39;,&nbsp;&#39;d&#39;,&nbsp;&#39;a&#39;,&nbsp;&#39;c&#39;),&nbsp;(&#39;b&#39;,&nbsp;&#39;d&#39;,&nbsp;&#39;c&#39;,&nbsp;&#39;a&#39;),&nbsp;(&#39;c&#39;,&nbsp;&#39;a&#39;,&nbsp;&#39;b&#39;,&nbsp;&#39;d&#39;),&nbsp;(&#39;c&#39;,&nbsp;&#39;a&#39;,&nbsp;&#39;d&#39;,&nbsp;&#39;b&#39;),&nbsp;(&#39;c&#39;,&nbsp;&#39;b&#39;,&nbsp;&#39;a&#39;,&nbsp;&#39;d&#39;),&nbsp;(&#39;c&#39;,&nbsp;&#39;b&#39;,&nbsp;&#39;d&#39;,&nbsp;&#39;a&#39;),&nbsp;(&#39;c&#39;,&nbsp;&#39;d&#39;,&nbsp;&#39;a&#39;,&nbsp;&#39;b&#39;),&nbsp;(&#39;c&#39;,&nbsp;&#39;d&#39;,&nbsp;&#39;b&#39;,&nbsp;&#39;a&#39;),&nbsp;(&#39;d&#39;,&nbsp;&#39;a&#39;,&nbsp;&#39;b&#39;,&nbsp;&#39;c&#39;),&nbsp;(&#39;d&#39;,&nbsp;&#39;a&#39;,&nbsp;&#39;c&#39;,&nbsp;&#39;b&#39;),&nbsp;(&#39;d&#39;,&nbsp;&#39;b&#39;,&nbsp;&#39;a&#39;,&nbsp;&#39;c&#39;),&nbsp;(&#39;d&#39;,&nbsp;&#39;b&#39;,&nbsp;&#39;c&#39;,&nbsp;&#39;a&#39;),&nbsp;(&#39;d&#39;,&nbsp;&#39;c&#39;,&nbsp;&#39;a&#39;,&nbsp;&#39;b&#39;),&nbsp;(&#39;d&#39;,&nbsp;&#39;c&#39;,&nbsp;&#39;b&#39;,&nbsp;&#39;a&#39;)]
+[(&#39;a&#39;,&nbsp;&#39;b&#39;,&nbsp;&#39;c&#39;,&nbsp;&#39;d&#39;)]</pre><p><br/></p><p>或许之后会用到，记录一下。</p><p><br/></p>        </div>
+      </div>
+    </div>
+    <hr class="am-article-divider"/>
+    <div class="am-center" style="text-align:center;margin-bottom:15px;">
+    <a href="125.html">上一篇</a>    <a href="251.html">下一篇</a>    </div>
+    <!-- <hr class="am-article-divider"/> -->
+      </div>
+</div>
+    <div style="right: 15px;" class="amz-toolbar" id="amz-toolbar">
+    <a href="#top" title="回到顶部" class="am-icon-btn am-icon-arrow-up am-active" id="amz-go-top"></a>
+    </div>
+    <footer class="footer" style="background-color:#303336;">
+     <div class="g-ft" style="padding-top:20px;">
+     <div class="">
+      <div  style="float:left;width:50%;text-align:right;">
+        <ul class="m-bottom-nav" style="margin:0 20px 0 0;">
+          <li>
+                  <a href="../../../Index/index.html" target="_self">首页</a>
+              </li><li>
+                  <a href="http://www.zhangwenxuan.cn/" target="_blank">好基友</a>
+              </li><li>
+                  <a href="http://blog.wozhendehaoaini.cn/" target="_blank">老博客</a>
+              </li><li>
+                  <a href="66.html" target="_self">关于我</a>
+              </li>        </ul>
+      </div>
+      <div  style="float:right;width:50%;text-align:left;">
+        <ul class="m-bottom-nav" style="margin:0 0 0 20px;">
+           		<li>
+			<a href="../../lists/category/feeling.html">
+				<i class="icon-chevron-right"></i>随笔心情			</a>
+		</li>		<li>
+			<a href="../../lists/category/learnsth.html">
+				<i class="icon-chevron-right"></i>学习研究			</a>
+		</li>		<li>
+			<a href="../../lists/category/sizhou.html">
+				<i class="icon-chevron-right"></i>飞控研究			</a>
+		</li>		<li>
+			<a href="../../lists/category/Python.html">
+				<i class="icon-chevron-right"></i>Python			</a>
+		</li>		<li>
+			<a href="../../lists/category/wxmp.html">
+				<i class="icon-chevron-right"></i>微信平台			</a>
+		</li>        </ul>        
+      </div>
+    </div>
+           <p style="clear:both;padding-top:15px;" class="m-cprt">©&nbsp;<a href="../../../../index.html">花开花落</a>&nbsp;京ICP备15006955号-1&nbsp;|&nbsp;Powered by <a href="../../../../index.html">Winke</a></p> 
+    </div>
+    </footer>
+
+<!--[if lt IE 9]>
+<script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
+<script src="/Public/static/amaze/js/polyfill/rem.min.js"></script>
+<script src="/Public/static/amaze/js/polyfill/respond.min.js"></script>
+<script src="/Public/static/amaze/js/amazeui.legacy.js"></script>
+<![endif]-->
+
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script src="../../../../Public/static/amaze/js/jquery.min.js"></script>
+<script src="../../../../Public/static/amaze/js/amazeui.min.js"></script>
+<script type="text/javascript" src="../../../../Public/static/ueditor/third-party/SyntaxHighlighter/shCore.js"></script>
+<script src="../../../../Public/Home/js/blog.js"></script>
+<script type="text/javascript"> SyntaxHighlighter.all(); </script>
+<!--<![endif]-->
+</body>
+</html>

@@ -1,0 +1,427 @@
+<!DOCTYPE HTML>
+<html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width,user-scalable=no">
+    <title>小王同学</title>
+	<!--[if lt IE 9]>
+    <script type="text/javascript" src="https://feelncut.com/usr/themes/maupassant/javascript/html5shiv.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" href="../../admin/css/normalize.css">
+    <link rel="stylesheet" href="../../usr/themes/maupassant/style.css">
+    <meta name="description" content="希望通过自我加工，成为有点用的人" />
+<link rel="alternate" type="application/rss+xml" title="小王同学 &raquo; RSS 2.0" href="../../feed/index.html" />
+<link rel="alternate" type="application/rdf+xml" title="小王同学 &raquo; RSS 1.0" href="../../feed/rss/index.html" />
+<link rel="alternate" type="application/atom+xml" title="小王同学 &raquo; ATOM 1.0" href="../../feed/atom/index.html" />
+<script> var _hmt = _hmt || []; (function() {   var hm = document.createElement("script");   hm.src = "https://hm.baidu.com/hm.js?e9ff349d5b883760c70a4e220c9ac8ca";   var s = document.getElementsByTagName("script")[0];    s.parentNode.insertBefore(hm, s); })(); </script></head>
+<body>
+
+<header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                                    <h1>
+                        <a id="logo" href="../../index.html">
+                            小王同学                        </a>
+                    </h1>
+                        	    <p class="description">希望通过自我加工，成为有点用的人</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current " href="../../index.html">博客</a>
+															<a href="../../archives.html" title="归档">归档</a>
+										<a href="../../tools.html" title="Tools">Tools</a>
+										<a href="../../about.html" title="关于">关于</a>
+									</nav>
+            </div>
+        </div>
+    </div>
+</header>
+<div id="body">
+    <div class="container">
+        <div class="col-group">
+<div class="col-8" id="main">
+	<div class="res-cons">
+					<article class="post">
+				<header>
+					<h2 class="post-title">
+						<a href="../../2018/09/11/182.html">使用Python与OpenCV为图像增加高斯噪声，雾霾等降质因素</a>
+					</h2>
+				</header>
+				<date class="post-meta">
+					September 11, 2018				</date>
+				<div class="post-content">
+					<div id="md_content_1" class="md_content" style="min-height: 50px;"><textarea id="append-test" style="display:none;">使用Python与OpenCV为图像增加高斯噪声，雾霾，低照度，高斯模糊，JPG压缩失真降质因素。
+环境要求：Python3.5+, opencv-python3.4+
+
+</textarea></div><p class="more"><a href="../../2018/09/11/182.html" title="使用Python与OpenCV为图像增加高斯噪声，雾霾等降质因素">- 阅读剩余部分 -</a></p>				</div>
+			</article>
+					<article class="post">
+				<header>
+					<h2 class="post-title">
+						<a href="../../2018/09/05/181.html">Python3串口操作及字节与无符号整数之间的转换</a>
+					</h2>
+				</header>
+				<date class="post-meta">
+					September 5, 2018				</date>
+				<div class="post-content">
+					<div id="md_content_2" class="md_content" style="min-height: 50px;"><textarea id="append-test" style="display:none;">学校的某项目，嵌入式用C语言完成，移位操作，各种拼接，不同位数的整数相互装换，都很方便。为了测试功能，用Python写了个简单的上位机，整理下在Python中如何操作串口与字节。
+
+
+------------
+
+做区块链浏览器解析script时发现，对于一个字节数组data：
+`type(data[0])`为`int`，而`type(data[0:1])`为`bytes`。
+
+------------
+
+
+</textarea></div><p class="more"><a href="../../2018/09/05/181.html" title="Python3串口操作及字节与无符号整数之间的转换">- 阅读剩余部分 -</a></p>				</div>
+			</article>
+					<article class="post">
+				<header>
+					<h2 class="post-title">
+						<a href="../../2018/08/09/171.html">Python 判断数组中含有某元素的个数</a>
+					</h2>
+				</header>
+				<date class="post-meta">
+					August 9, 2018				</date>
+				<div class="post-content">
+					<div id="md_content_3" class="md_content" style="min-height: 50px;"><textarea id="append-test" style="display:none;">为了测试uuid1方法批量生成uuid时是否会重复，就把生成的uuid放到了一个数组中，之前不知道数组还有`count`方法...
+
+```python
+import uuid
+
+r = []
+
+for i in range(1000):
+ r.append(str(uuid.uuid1()))
+
+for i in r:
+  print(r.count(i))
+```</textarea></div>				</div>
+			</article>
+					<article class="post">
+				<header>
+					<h2 class="post-title">
+						<a href="../../2018/08/06/170.html">Python3 中 AES256对称加密解密以及RSA2048签名验签</a>
+					</h2>
+				</header>
+				<date class="post-meta">
+					August 6, 2018				</date>
+				<div class="post-content">
+					<div id="md_content_4" class="md_content" style="min-height: 50px;"><textarea id="append-test" style="display:none;"># ETH相关流程
+
+## ETH地址转换 
+
+调用`get_key`接口传入私钥`name`和`version`可获取私钥公开部分信息。 
+
+将获取私钥公开部分中X与Y合并为一个数组，长度为64字节，经`keccak_256`算法计算hash得到32字节hash，取后20字节，即为以太坊钱包地址。 
+
+```python
+key_bundle = client.get_key('https://wangke-test-k-v.vault.azure.net/', 'x', 'x')
+full_pubkey = key_bundle.key.x + key_bundle.key.y
+import sha3
+k = sha3.keccak_256()
+k.update(full_pubkey)
+print(k.hexdigest())
+print('0x' + k.hexdigest()[24:])
+```
+
+公钥中是否需要加前缀`0x04`需要进一步验证。
+
+## ETH交易签名
+
+### 交易签名流程
+ETH`未签名交易信息`包含了：
+
+- nonce
+- gasPrice
+- gas
+- value
+- to
+- data
+- chainId
+
+交易签名指：将以上未签名交易信息按照以太坊`RLP`规则序列化得到`rawTransaction`，`rawTransaction`再经过`keccak`得到`hash`，对该`hash`使用私钥进行签名，签名结果包含`R,S,V`三个部分。
+
+再以上未签名交易信息中增加`R,S,V`得到`签名交易信息`：
+
+- nonce
+- gasPrice
+- gas
+- value
+- to
+- data
+- chainId
+- r
+- s
+- v
+
+将签名交易信息按照以太坊`RLP`规则序列化得到`rawSignedTransaction`，此`rawSignedTransaction`可使用`web3`接口`sendRawTransaction`直接发送。对此`rawSignedTransaction`进行`keccak`得到交易hash:`txhash`。
+
+### 使用KV签名
+
+根据交易签名流程可知，只需要将`rawTransaction`经过`keccak`得到的`hash`传入服务端，服务端调用KV的`sign`接口对其进行签名。`sign`接口返回的结果只包含`R,S`，根据公钥信息可计算出`V`。服务端返回`R,S,V`，客户端根据`R,S,V`得到`rawSignedTransaction`。
+
+计算`V`的算法如下：
+
+```python
+from coincurve import PublicKey
+
+for v in range(4):
+    print(bytes([v]))
+    s = s_res.result + bytes([v])
+    try:
+        public_key_bytes = PublicKey.from_signature_and_message(s, bytes.fromhex(raw), hasher=None).format(compressed=False)
+        print(public_key_bytes==pk)
+    except:
+        print('error')
+```
+
+### EIP155
+
+根据[EIP155](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-155.md "BIP155")规则：
+- 如果`未签名交易信息`中包含`chainId`，则还应包含`r=0,s=0`，签名得到的`v`需要经过`v = v + CHAIN_ID_OFFSET + 2 * chain_id`变换，`CHAIN_ID_OFFSET`为`35`。此时交易只在对应`chain_id`的链上有效。
+-  如果`未签名交易信息`中不包含`chainId`，签名得到的`v`需要经过`v = v_raw + V_OFFSET`变换，`V_OFFSET`为`27`。此时交易在所有链上有效。（正式链，几个不同的测试链）
+
+# AES256加密解密
+
+使用依赖`pip3 install pycrypto`。
+
+测试代码：
+
+```python
+from Crypto.Cipher import AES
+from Crypto import Random
+import base64
+
+BS = 16
+pad = lambda s: s + (BS - len(s) % BS) * chr(BS - len(s) % BS) 
+unpad = lambda s : s[0:-s[-1]]
+
+# bkey可以是16, 24 或 32 位长度， 其对应 AES-128, AES-196 和 AES-256
+
+bkey = "12345678901234561234567890123456"
+print(bkey)
+raw="test raw data 123 456 abcde";
+raw = pad(raw)
+iv ="0102030405060708";
+print("iv="+iv)
+cipher = AES.new(bkey, AES.MODE_CBC, iv )
+print(len(raw))
+print(raw)
+
+ciphertext= cipher.encrypt(raw)
+print(ciphertext)
+ciphertext_base64=base64.b64encode(ciphertext)
+print(ciphertext_base64)
+
+print('============================')
+
+enc=base64.b64decode(ciphertext_base64)
+cipher = AES.new(bkey, AES.MODE_CBC, iv )
+
+text=cipher.decrypt(enc);
+print(len(text))
+print(text)
+print(text.hex())
+plaintext= unpad(text)
+print("%s" % plaintext.decode())
+```
+
+# RSA2048签名验签
+
+使用依赖`pip3 install pycrypto`。
+
+生成公私钥对：
+
+```bash
+openssl genrsa -out ./myPrivateKey.pem -passout pass:"f00bar" -des3 2048
+openssl rsa -pubout -in ./myPrivateKey.pem -passin pass:"f00bar" -out ./myPublicKey.pem
+```
+
+测试代码：
+
+```python
+from Crypto.PublicKey import RSA
+from Crypto.Hash import SHA
+from Crypto.Signature import PKCS1_v1_5
+from base64 import b64encode, b64decode
+
+def rsa_sign(message):
+  private_key_file = open('./myPrivateKey.pem', 'r')
+  private_key = RSA.importKey(private_key_file.read(), 'f00bar')
+  hash_obj = SHA.new(message)
+ signer = PKCS1_v1_5.new(private_key)
+  d = b64encode(signer.sign(hash_obj))
+  return d
+
+def rsa_verify(message, signature):
+ public_key_file = open('./myPublicKey.pem', 'r')
+  public_key = RSA.importKey(public_key_file.read())
+  sign = b64decode(signature)
+ h = SHA.new(message)
+  verifier = PKCS1_v1_5.new(public_key)
+ return verifier.verify(h, sign)
+
+msg = b'asdasdasdasdasdasd'
+
+s = rsa_sign(msg)
+print(s)
+v = rsa_verify(msg, s)
+print(v)
+v = rsa_verify(msg + b'a', s)
+print(v)
+```
+
+# pkcs8
+
+```bash
+openssl pkcs8 -topk8 -inform PEM -in ClientPrivateKey.pem -passin pass:"f00bar" -outform pem -nocrypt -out ClientPrivateKeypkcs8.pem
+```</textarea></div>				</div>
+			</article>
+					<article class="post">
+				<header>
+					<h2 class="post-title">
+						<a href="../../2018/05/14/150.html">Python 进程池和线程池的简单使用</a>
+					</h2>
+				</header>
+				<date class="post-meta">
+					May 14, 2018				</date>
+				<div class="post-content">
+					<div id="md_content_5" class="md_content" style="min-height: 50px;"><textarea id="append-test" style="display:none;">
+- 并不是池子越大越好，综合CPU核数与任务资源占用类型考虑。
+- map 与 map_async 的区别是map后直接运行线程/进程，运行结束后再执行之后语句（阻塞），async呢不阻塞，遇到wait()才阻塞。测试用例来自[Stack Overflow](https://stackoverflow.com/questions/35908987/python-multiprocessing-map-vs-map-async "Stack Overflow")见下：
+
+```python
+from multiprocessing import Pool
+import time
+
+def f(x):
+    print x*x
+
+if __name__ == '__main__':
+    pool = Pool(processes=4)
+    pool.map(f, range(10))
+    r  = pool.map_async(f, range(10))
+    # DO STUFF
+    print 'HERE'
+    print 'MORE'
+    r.wait()
+    print 'DONE'
+```
+</textarea></div><p class="more"><a href="../../2018/05/14/150.html" title="Python 进程池和线程池的简单使用">- 阅读剩余部分 -</a></p>				</div>
+			</article>
+				<ol class="page-navigator"><li class="prev"><a href="../2/index.html">&laquo; Previous</a></li><li><a href="../1/index.html">1</a></li><li><a href="../2/index.html">2</a></li><li class="current"><a href="index.html">3</a></li><li><a href="../4/index.html">4</a></li><li><a href="../5/index.html">5</a></li><li><a href="../6/index.html">6</a></li><li><a href="../7/index.html">7</a></li><li><a href="../8/index.html">8</a></li><li><a href="../9/index.html">9</a></li><li><a href="../10/index.html">10</a></li><li class="next"><a href="../4/index.html">Next &raquo;</a></li></ol>	</div>
+</div>
+<div id="secondary">
+	<section class="widget">
+        <form id="search" method="post" action="index.html">
+            <input type="text" name="s" class="text" placeholder="搜索..." />
+            <button type="submit" class="submit icon-search"></button>
+        </form>
+    </section>
+
+	    <section class="widget">
+		<h3 class="widget-title">最新文章</h3>
+        <ul class="widget-list">
+            <li><a href="../../2020/08/24/323.html">ETH 2.0 资源汇总（持续更新）</a></li><li><a href="../../2020/08/24/322.html">ETH 2.0 测试网验证节点质押流程体验</a></li><li><a href="../../2020/06/06/312.html">通过 openssl 导出 HTTPS 网站 SSL 证书链</a></li><li><a href="../../2020/05/20/308.html">如何开发一款区块链浏览器？</a></li><li><a href="../../2020/02/02/288.html">EOS 提交交易失败分析</a></li><li><a href="../../2019/12/09/giaocamerarobot.html">小 Giao 之死</a></li><li><a href="../../2019/10/04/267.html">《凶宅》和《疯人院》</a></li><li><a href="../../2018/10/17/228.html"> 以太坊多重签名原理分析</a></li><li><a href="../../2018/09/11/188.html">OpenCV 初识图像</a></li><li><a href="../../2018/09/11/184.html">为什么要系统的学习一下Pyhton-OpenCV?</a></li>        </ul>
+    </section>
+    
+        <section class="widget">
+		<h3 class="widget-title">最近回复</h3>
+        <ul class="widget-list">
+                            <li><a href="../../2020/08/24/323.html#comment-26">pizi</a>: https://be...</li>
+                    <li><a href="../../2020/08/24/323.html#comment-25">何先生</a>: 请问有没有ETH2....</li>
+                    <li><a href="../../2018/05/03/145.html#comment-24">pizi</a>: 一个卡就不要限制资源...</li>
+                    <li><a href="../../about.html#comment-23">pizi</a>: 有特殊技巧的啊，从阿...</li>
+                    <li><a href="../../about.html#comment-22">一网友</a>: 有钱人新浪数据库很贵吧</li>
+                    <li><a href="../../2018/05/03/145.html#comment-21">padluo</a>: 请问如何控制到用户使...</li>
+                    <li><a href="../../about.html#comment-20">小白</a>: 板凳是我的！</li>
+                    <li><a href="../../2018/02/08/90.html#comment-19">无耻的我</a>: 大佬，能发一份吗，原...</li>
+                    <li><a href="../../2018/05/03/145.html#comment-18">pizi</a>: 文章里写了的，lxc...</li>
+                    <li><a href="../../2018/05/03/145.html#comment-17">zzd</a>: lxc config...</li>
+                </ul>
+    </section>
+    
+        <section class="widget">
+		<h3 class="widget-title">分类</h3>
+        <ul class="widget-list">
+            <li><a href="../../category/feel/index.html">随笔心情</a> (4)</li><li><a href="../../category/code/index.html">代码片段</a> (17)</li><li><a href="../../category/ojbk/index.html">折腾着玩</a> (7)</li><li><a href="../../category/ml/index.html">机器学习</a> (9)</li><li><a href="../../category/blockChain/index.html">区块链</a> (10)</li><li><a href="../../category/python-opencv/index.html">Python-OpenCV</a> (2)</li><li><a href="../../category/video/index.html">视频剪辑</a> (0)</li><li><a href="../../category/leetcode/index.html">leetcode</a> (1)</li>        </ul>
+	</section>
+    
+        <section class="widget">
+		<h3 class="widget-title">归档</h3>
+        <ul class="widget-list">
+            <li><a href="../../2020/08/index.html">August 2020</a></li><li><a href="../../2020/06/index.html">June 2020</a></li><li><a href="../../2020/05/index.html">May 2020</a></li><li><a href="../../2020/02/index.html">February 2020</a></li><li><a href="../../2019/12/index.html">December 2019</a></li><li><a href="../../2019/10/index.html">October 2019</a></li><li><a href="../../2018/10/index.html">October 2018</a></li><li><a href="../../2018/09/index.html">September 2018</a></li><li><a href="../../2018/08/index.html">August 2018</a></li><li><a href="../../2018/05/index.html">May 2018</a></li><li><a href="../../2018/04/index.html">April 2018</a></li><li><a href="../../2018/03/index.html">March 2018</a></li><li><a href="../../2018/02/index.html">February 2018</a></li><li><a href="../../2018/01/index.html">January 2018</a></li>        </ul>
+	</section>
+    
+    	<section class="widget">
+		<h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+                            <li class="last"><a href="../../admin/login.php.html">登录</a></li>
+                        <li><a href="../../feed/index.html">文章 RSS</a></li>
+            <li><a href="../../feed/comments/index.html">评论 RSS</a></li>
+            <li><a href="http://www.typecho.org">Typecho</a></li>
+        </ul>
+	</section>
+    </div>		</div>
+    </div>
+</div>
+<footer id="footer">
+	<div class="container">
+		&copy; 2023 <a rel="nofollow" href="../../index.html">小王同学</a>. 模板由<a href="http://pagecho.com">cho</a>制作.
+	</div>
+</footer>
+<link rel="stylesheet" href="../../usr/plugins/EditorMD/css/editormd.css" />
+<link rel="stylesheet" href="../../usr/plugins/EditorMD/css/emojify.min.css" />
+<script type="text/javascript">
+    window.jQuery || document.write(unescape('%3Cscript%20type%3D%22text/javascript%22%20src%3D%22https://feelncut.com/usr/plugins/EditorMD/lib/jquery.min.js%22%3E%3C/script%3E'));
+</script>
+<script src="../../usr/plugins/EditorMD/lib/marked.min.js"></script>
+<script src="../../usr/plugins/EditorMD/lib/prettify.min.js"></script>
+<script src="../../usr/plugins/EditorMD/lib/raphael.min.js"></script>
+<script src="../../usr/plugins/EditorMD/lib/underscore.min.js"></script>
+<script src="../../usr/plugins/EditorMD/lib/sequence-diagram.min.js"></script>
+<script src="../../usr/plugins/EditorMD/lib/flowchart.min.js"></script>
+<script src="../../usr/plugins/EditorMD/lib/jquery.flowchart.min.js"></script>
+<script src="../../usr/plugins/EditorMD/js/editormd.min.js"></script>
+<script src="../../usr/plugins/EditorMD/js/emojify.min.js"></script>
+<script type="text/javascript">
+$(function() {
+    var markdowns = document.getElementsByClassName("md_content");
+    $(markdowns).each(function(){
+        var markdown = $(this).children("#append-test").text();
+        //$('#md_content_'+i).text('');
+        var testEditormdView;
+        testEditormdView = editormd.markdownToHTML($(this).attr("id"), {
+            markdown: markdown,//+ "\r\n" + $("#append-test").text(),
+            toolbarAutoFixed : false,
+            htmlDecode: true,
+            emoji: true,
+            tex: true,
+            toc: true,
+            tocm: true,
+            taskList: true,
+            flowChart: true,
+            sequenceDiagram: true,
+        });
+    });
+    emojify.setConfig({
+        img_dir: 'https:' == document.location.protocol ? "https://staticfile.qnssl.com/emoji-cheat-sheet/1.0.0" : "http://cdn.staticfile.org/emoji-cheat-sheet/1.0.0",
+        blacklist: {
+            'ids': [],
+            'classes': ['no-emojify'],
+            'elements': ['^script$', '^textarea$', '^pre$', '^code$']
+        },
+    });
+    emojify.run();
+});
+</script>
+</body>
+</html>

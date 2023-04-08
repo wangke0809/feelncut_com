@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+xmlns="http://purl.org/rss/1.0/"
+xmlns:dc="http://purl.org/dc/elements/1.1/">
+<channel rdf:about="https://feelncut.com/feed/rss/2020/02/">
+<title>小王同学 - 2020年2月</title>
+<link>https://feelncut.com/2020/02/</link>
+<description>希望通过自我加工，成为有点用的人</description>
+<items>
+<rdf:Seq>
+<rdf:li resource="https://feelncut.com/2020/02/02/288.html"/>
+</rdf:Seq>
+</items>
+</channel>
+<item rdf:about="https://feelncut.com/2020/02/02/288.html">
+<title>EOS 提交交易失败分析</title>
+<link>https://feelncut.com/2020/02/02/288.html</link>
+<dc:date>2020-02-02T12:53:00+08:00</dc:date>
+<description>[TOC]
+
+EOS  向节点提交交易时失败，提示 billed CPU time (Y us) is greater than the maximum billable CPU time for the transaction (X us).
+
+本文通过分析源代码来一探这个失败的原因，首先给出结论：
+
+- 当前时间窗口内（24小时）用户**最大** CPU 时间 = 全网总 CPU 时间 * 当前用户质押 EOS 数量 / 所有用户质押 EOS 数量
+
+- 当前时间窗口内用户**可用** CPU 时间 = 当前用户**最大** CPU 时间 - 当前用户已经使用 CPU 时间
+
+- 当前用户**已经使用** CPU 时间是实时变化的：(1 - t / 24) * t 时间之前使用的资源大小，直到距离上次 CPU 资源使用 24 小时后（t = 24）完全恢复
+
+- Get Account 接口看到的不是实时可用的资源使用量，而是上一笔交易之后缓存的资源使用量
+
+- 向 RPC 节点提交交易时 RPC 节点会计算出当前交易 CPU 使用量，这个 CPU 使用量和当前 RPC 节点 CPU 使用情况有关，通过系统计时器计算时间，因此，RPC 节点计算出的交易 CPU 使用量不是最终上链时的交易使用量，最终交易时的 CPU 使用量由打包节点决定。
+
+- 因此，当质押 CPU EOS 数量固定时，向 RPC 节点提交交易时，CPU 资源需要满足 交易使用 CPU 资源的大小 [...]</description>
+</item>
+</rdf:RDF>

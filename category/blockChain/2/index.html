@@ -1,0 +1,679 @@
+<!DOCTYPE HTML>
+<html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width,user-scalable=no">
+    <title>分类 区块链 下的文章 - 小王同学</title>
+	<!--[if lt IE 9]>
+    <script type="text/javascript" src="https://feelncut.com/usr/themes/maupassant/javascript/html5shiv.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" href="../../../admin/css/normalize.css">
+    <link rel="stylesheet" href="../../../usr/themes/maupassant/style.css">
+    <meta name="description" content="区块链技术" />
+<meta name="keywords" content="区块链" />
+<link rel="alternate" type="application/rss+xml" title="区块链 &raquo; 小王同学 &raquo; RSS 2.0" href="../../../feed/category/blockChain/index.html" />
+<link rel="alternate" type="application/rdf+xml" title="区块链 &raquo; 小王同学 &raquo; RSS 1.0" href="../../../feed/rss/category/blockChain/index.html" />
+<link rel="alternate" type="application/atom+xml" title="区块链 &raquo; 小王同学 &raquo; ATOM 1.0" href="../../../feed/atom/category/blockChain/index.html" />
+<script> var _hmt = _hmt || []; (function() {   var hm = document.createElement("script");   hm.src = "https://hm.baidu.com/hm.js?e9ff349d5b883760c70a4e220c9ac8ca";   var s = document.getElementsByTagName("script")[0];    s.parentNode.insertBefore(hm, s); })(); </script></head>
+<body>
+
+<header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                                    <a id="logo" href="../../../index.html">
+                        小王同学                    </a>
+                        	    <p class="description">希望通过自我加工，成为有点用的人</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class=" " href="../../../index.html">博客</a>
+															<a href="../../../archives.html" title="归档">归档</a>
+										<a href="../../../tools.html" title="Tools">Tools</a>
+										<a href="../../../about.html" title="关于">关于</a>
+									</nav>
+            </div>
+        </div>
+    </div>
+</header>
+<div id="body">
+    <div class="container">
+        <div class="col-group">
+<div class="col-8" id="main">
+	<div class="res-cons">
+        <h3 class="archive-title">分类 区块链 下的文章		</h3>
+            	            <article class="post">
+    			<header>
+				<h2 class="post-title">
+					<a href="../../../2018/08/06/170.html">Python3 中 AES256对称加密解密以及RSA2048签名验签</a>
+				</h2>
+			</header>
+			<date class="post-meta">
+				August 6, 2018			</date>
+                <div class="post-content">
+        		<div id="md_content_1" class="md_content" style="min-height: 50px;"><textarea id="append-test" style="display:none;"># ETH相关流程
+
+## ETH地址转换 
+
+调用`get_key`接口传入私钥`name`和`version`可获取私钥公开部分信息。 
+
+将获取私钥公开部分中X与Y合并为一个数组，长度为64字节，经`keccak_256`算法计算hash得到32字节hash，取后20字节，即为以太坊钱包地址。 
+
+```python
+key_bundle = client.get_key('https://wangke-test-k-v.vault.azure.net/', 'x', 'x')
+full_pubkey = key_bundle.key.x + key_bundle.key.y
+import sha3
+k = sha3.keccak_256()
+k.update(full_pubkey)
+print(k.hexdigest())
+print('0x' + k.hexdigest()[24:])
+```
+
+公钥中是否需要加前缀`0x04`需要进一步验证。
+
+## ETH交易签名
+
+### 交易签名流程
+ETH`未签名交易信息`包含了：
+
+- nonce
+- gasPrice
+- gas
+- value
+- to
+- data
+- chainId
+
+交易签名指：将以上未签名交易信息按照以太坊`RLP`规则序列化得到`rawTransaction`，`rawTransaction`再经过`keccak`得到`hash`，对该`hash`使用私钥进行签名，签名结果包含`R,S,V`三个部分。
+
+再以上未签名交易信息中增加`R,S,V`得到`签名交易信息`：
+
+- nonce
+- gasPrice
+- gas
+- value
+- to
+- data
+- chainId
+- r
+- s
+- v
+
+将签名交易信息按照以太坊`RLP`规则序列化得到`rawSignedTransaction`，此`rawSignedTransaction`可使用`web3`接口`sendRawTransaction`直接发送。对此`rawSignedTransaction`进行`keccak`得到交易hash:`txhash`。
+
+### 使用KV签名
+
+根据交易签名流程可知，只需要将`rawTransaction`经过`keccak`得到的`hash`传入服务端，服务端调用KV的`sign`接口对其进行签名。`sign`接口返回的结果只包含`R,S`，根据公钥信息可计算出`V`。服务端返回`R,S,V`，客户端根据`R,S,V`得到`rawSignedTransaction`。
+
+计算`V`的算法如下：
+
+```python
+from coincurve import PublicKey
+
+for v in range(4):
+    print(bytes([v]))
+    s = s_res.result + bytes([v])
+    try:
+        public_key_bytes = PublicKey.from_signature_and_message(s, bytes.fromhex(raw), hasher=None).format(compressed=False)
+        print(public_key_bytes==pk)
+    except:
+        print('error')
+```
+
+### EIP155
+
+根据[EIP155](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-155.md "BIP155")规则：
+- 如果`未签名交易信息`中包含`chainId`，则还应包含`r=0,s=0`，签名得到的`v`需要经过`v = v + CHAIN_ID_OFFSET + 2 * chain_id`变换，`CHAIN_ID_OFFSET`为`35`。此时交易只在对应`chain_id`的链上有效。
+-  如果`未签名交易信息`中不包含`chainId`，签名得到的`v`需要经过`v = v_raw + V_OFFSET`变换，`V_OFFSET`为`27`。此时交易在所有链上有效。（正式链，几个不同的测试链）
+
+# AES256加密解密
+
+使用依赖`pip3 install pycrypto`。
+
+测试代码：
+
+```python
+from Crypto.Cipher import AES
+from Crypto import Random
+import base64
+
+BS = 16
+pad = lambda s: s + (BS - len(s) % BS) * chr(BS - len(s) % BS) 
+unpad = lambda s : s[0:-s[-1]]
+
+# bkey可以是16, 24 或 32 位长度， 其对应 AES-128, AES-196 和 AES-256
+
+bkey = "12345678901234561234567890123456"
+print(bkey)
+raw="test raw data 123 456 abcde";
+raw = pad(raw)
+iv ="0102030405060708";
+print("iv="+iv)
+cipher = AES.new(bkey, AES.MODE_CBC, iv )
+print(len(raw))
+print(raw)
+
+ciphertext= cipher.encrypt(raw)
+print(ciphertext)
+ciphertext_base64=base64.b64encode(ciphertext)
+print(ciphertext_base64)
+
+print('============================')
+
+enc=base64.b64decode(ciphertext_base64)
+cipher = AES.new(bkey, AES.MODE_CBC, iv )
+
+text=cipher.decrypt(enc);
+print(len(text))
+print(text)
+print(text.hex())
+plaintext= unpad(text)
+print("%s" % plaintext.decode())
+```
+
+# RSA2048签名验签
+
+使用依赖`pip3 install pycrypto`。
+
+生成公私钥对：
+
+```bash
+openssl genrsa -out ./myPrivateKey.pem -passout pass:"f00bar" -des3 2048
+openssl rsa -pubout -in ./myPrivateKey.pem -passin pass:"f00bar" -out ./myPublicKey.pem
+```
+
+测试代码：
+
+```python
+from Crypto.PublicKey import RSA
+from Crypto.Hash import SHA
+from Crypto.Signature import PKCS1_v1_5
+from base64 import b64encode, b64decode
+
+def rsa_sign(message):
+  private_key_file = open('./myPrivateKey.pem', 'r')
+  private_key = RSA.importKey(private_key_file.read(), 'f00bar')
+  hash_obj = SHA.new(message)
+ signer = PKCS1_v1_5.new(private_key)
+  d = b64encode(signer.sign(hash_obj))
+  return d
+
+def rsa_verify(message, signature):
+ public_key_file = open('./myPublicKey.pem', 'r')
+  public_key = RSA.importKey(public_key_file.read())
+  sign = b64decode(signature)
+ h = SHA.new(message)
+  verifier = PKCS1_v1_5.new(public_key)
+ return verifier.verify(h, sign)
+
+msg = b'asdasdasdasdasdasd'
+
+s = rsa_sign(msg)
+print(s)
+v = rsa_verify(msg, s)
+print(v)
+v = rsa_verify(msg + b'a', s)
+print(v)
+```
+
+# pkcs8
+
+```bash
+openssl pkcs8 -topk8 -inform PEM -in ClientPrivateKey.pem -passin pass:"f00bar" -outform pem -nocrypt -out ClientPrivateKeypkcs8.pem
+```</textarea></div>                </div>
+    		</article>
+		            <article class="post">
+    			<header>
+				<h2 class="post-title">
+					<a href="../../../2018/03/06/104.html">投票私链交付文档</a>
+				</h2>
+			</header>
+			<date class="post-meta">
+				March 6, 2018			</date>
+                <div class="post-content">
+        		<div id="md_content_2" class="md_content" style="min-height: 50px;"><textarea id="append-test" style="display:none;"><!--hidden:start:123321123-->
+[TOC]
+
+### 环境要求
+
+开发环境：
+Ubuntu 16.04
+Python 3.5+
+PM2
+
+创世区块分配钱包地址为：`0x4a244BF6834f7569A726DB8ec0D3B24D31ce52c3`
+私钥为：`0x4a115bf4ec4e27fce40db37c974d526953e50cc5c1edbffef3f724062fcb01c7`
+
+### 环境安装
+
+#### 安装PM2
+
+PM2用于管理Geth和Web API后台进程。
+**参考安装方式**：通过 nvm 安装 NodeJS
+
+```
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.32.1/install.sh | bash
+source ~/.bashrc
+nvm install v6.9.1
+npm install -g pm2
+```
+
+#### 安装Python环境
+
+安装Web API 必须环境：
+
+安装时注意python应使用python3，如果系统带有python2.7和python3.5，下面命令应使用`python3`。
+
+```
+# python 包管理器pip
+sudo apt-get python3-pip
+sudo pip install --upgrade pip
+# python web framework
+sudo pip install flask
+# python web server
+sudo pip install gunicorn
+# install web3.py
+sudo apt-get install libssl-dev libffi-dev autoconf automake libtool
+git clone git@github.com:ethereum/web3.py.git
+cd web3.py
+pip install -r requirements-dev.txt
+pip install -e .[tester]
+# install pyethereum
+sudo apt-get install libssl-dev build-essential automake pkg-config libtool libffi-dev libgmp-dev libyaml-cpp-dev
+git clone https://github.com/ethereum/pyethereum/
+cd pyethereum
+python setup.py install
+```
+
+### 部署节点
+
+#### 部署主节点
+```
+cd vote_master
+# start block chain
+pm2 start geth.sh
+# start web api
+pm2 start web.sh
+# show pm2 list
+pm2 list
+# show nodeInfo
+./geth attach http://127.0.0.1:8545
+# 控制台内输入
+admin.nodeInfo
+```
+保存nodeInfo中的enode：
+
+```
+"enode://7c2222797bc4579e5675d75a4ed6803606f7ea925ffd83ce58712e21488c5a30c107758ac69098e791f4589a23663cfb8484d0f56663e06f4d1b9517f3b685f0@[::]:30101"
+```
+注意：`[::]`替换为`ip`
+
+更多pm2命令参考：http://pm2.keymetrics.io/docs/usage/quick-start/
+
+#### 部署挖矿节点
+
+```
+cd vote_miner
+#  初始化挖矿节点
+bash init.sh
+```
+在`data`目录下新建`static-nodes.json`，保存一下内容，注意替换`ip`：
+```
+["enode://7c2222797bc4579e5675d75a4ed6803606f7ea925ffd83ce58712e21488c5a30c107758ac69098e791f4589a23663cfb8484d0f56663e06f4d1b9517f3b685f0@ip:30101"]
+```
+```
+# 启动节点
+pm2 start miner.sh
+```
+至此，环境部署完毕。
+
+### 智能合约
+
+`smart contracts`下`token contract`为代币智能合约源代码，`abu.js`和`votes.js`为合约部署文件。部署智能合约参考推荐在控制台中部署。
+
+
+
+<!--hidden:end--></textarea></div>                </div>
+    		</article>
+		            <article class="post">
+    			<header>
+				<h2 class="post-title">
+					<a href="../../../2018/03/05/103.html">Geth控制台的进阶使用</a>
+				</h2>
+			</header>
+			<date class="post-meta">
+				March 5, 2018			</date>
+                <div class="post-content">
+        		<div id="md_content_3" class="md_content" style="min-height: 50px;"><textarea id="append-test" style="display:none;">[TOC]
+
+#### 两个参数
+
+```
+// js加载路径，默认当前目录
+--jspath loadScript 
+// 要执行的js命令
+--exec value
+```
+
+启动Geth时加上`--jspath script --exec "loadScript('help.js')"`
+
+#### 查看所有钱包账户余额
+
+上面两个参数加载help.js到控制台，我们可以在help.js中写一些辅助函数帮助我们提升效率。
+
+```
+function checkAllBalances() { 
+  var i =0; 
+  eth.accounts.forEach( function(e){
+    console.log("  eth.accounts["+i+"]: " +  e + " \tbalance: " + web3.fromWei(eth.getBalance(e), "ether") + " ether"); 
+    i++; 
+  })
+};
+```
+
+注意： eth.accounts为当前控制台里新建的所有钱包，不是值整个区块链上的钱包地址。
+
+#### 仅在有交易时挖矿
+
+<!--hidden:start:asdasdasd-->
+```
+function minerWhenTransaction() {
+
+    function checkWork() {
+        if (eth.getBlock("pending").transactions.length > 0) {
+            if (eth.mining) return;
+            console.log("== Pending transactions! Mining...==");
+            miner.start(1);
+        } else {
+            miner.stop();  // This param means nothing
+            console.log("== No transactions! Mining stopped.==");
+        }
+    }
+
+    eth.filter("latest", function(err, block) { checkWork(); });
+    eth.filter("pending", function(err, block) { checkWork(); });
+
+    checkWork();
+
+}
+```
+<!--hidden:end-->
+
+#### 查看代币余额
+
+```
+...
+```
+
+当然你还可以实现其他更多辅助功能。</textarea></div>                </div>
+    		</article>
+		            <article class="post">
+    			<header>
+				<h2 class="post-title">
+					<a href="../../../2018/03/05/102.html">以太坊搭建POW私链及注意事项</a>
+				</h2>
+			</header>
+			<date class="post-meta">
+				March 5, 2018			</date>
+                <div class="post-content">
+        		<div id="md_content_4" class="md_content" style="min-height: 50px;"><textarea id="append-test" style="display:none;">[TOC]
+
+主要参考：https://github.com/ethereum/go-ethereum/wiki/Private-network
+
+### 初始化创世区块
+
+json文件：
+```
+{
+    "config": {
+        "chainId": 15,
+        "homesteadBlock": 0,
+        "eip155Block": 0,
+        "eip158Block": 0
+    },
+    "difficulty": "200000000",
+    "gasLimit": "2100000",
+    "alloc": {
+        "7df9a875a174b3bc565e6424a0050ebc1b2d1d82": { "balance": "300000" },
+        "f41c74c9ae680c1aa78f42e5647a62f353b7bdde": { "balance": "400000" }
+    }
+}
+```
+chainId最好和主网测试网区别开，difficulty是挖矿难度，可以改小一点，alloc是创世区块预先分配的ETH，确保你知道密钥，否则之后无法使用该钱包。
+
+初始化命令：
+```
+geth --datadir=data init genesis.json
+```
+`-datadir`指定区块存储地址。
+
+### 启动节点
+
+命令：
+```
+geth --identity "myname"  --rpc  --rpccorsdomain "*" --datadir data/ --port "30303"  --rpcapi "db,eth,net,web3,personal,admin,miner"  --networkid 15 console
+```
+`networkid`最好和`chainId`一致，否则无法使用`MetaMask`。
+`--rpc`表示开启json rpc服务，`--rpcapi`表示允许rpc使用哪些API
+更多参数参见：https://github.com/ethereum/go-ethereum/wiki/Command-Line-Options
+
+遇到关闭节点后，区块不保存的现象，加上：`--gcmode=archive`即可。
+
+### 使用控制台
+
+通过`console`命令进入控制台后，可能会用到一下命令：
+
+```
+// 创建账号：
+personal.newAccount('123456')
+// 查询账户：
+eth.accounts
+// 账户赋值给变量：
+u1 =eth.accounts[0]
+u2 =eth.accounts[1]
+// 查询账户余额：
+eth.getBalance(u1)
+// 显示当前区块：
+eth.blockNumber
+// 开始挖矿（默认第一个账户得到挖矿收益）：
+miner.start()
+// 手动指定挖矿收益账户
+miner.setEtherbase('0x067D19026e1C15a1b641a191D188542A98f2060e');
+// 设定gasPrice
+miner.setGasPrice(0x123456);
+// 停止挖矿：
+miner.stop()
+// 解锁账户（获得账户使用权）：
+personal.unlockAccount(user1, "123456")
+// user1转账3以太币给user2：
+eth.sendTransaction({from: u1, to: u2, value: web3.toWei(1,"ether")})
+// 查看交易
+eth.getTransaction(txhash)
+// 查看交易凭证
+eth.getTransactionReceipt(txhash)
+// 查看txpool
+txpool
+// 查看nodeInfo
+admin.nodeInfo
+// 查看已连接节点
+admin.peers
+```
+更多命令参见：https://github.com/ethereum/go-ethereum/wiki/Management-APIs
+
+注意，u1发送转账后必须经过挖矿u2才可以收到ETH。
+
+### 连接节点
+
+A节点通过`admin.nodeInfo`查看节点信息。其中包含了：
+```
+enode: "enode://44826a5d6a55f88a18298bca4773fca5749cdc3a5c9f308aa7d810e9b31123f3e7c5fba0b1d70aac5308426f47df2a128a6747040a3815cc7dd7167d03be320d@[::]:30303"
+```
+B节点连接A节点有两种方式：
+1.B节点datadir目录下新建`static-nodes.json`，内容：
+```
+["enode://44826a5d6a55f88a18298bca4773fca5749cdc3a5c9f308aa7d810e9b31123f3e7c5fba0b1d70aac5308426f47df2a128a6747040a3815cc7dd7167d03be320d@ip:30303"]
+```
+2.B节点控制台下：
+```
+admin.addPeer("enode://44826a5d6a55f88a18298bca4773fca5749cdc3a5c9f308aa7d810e9b31123f3e7c5fba0b1d70aac5308426f47df2a128a6747040a3815cc7dd7167d03be320d@ip:30303")
+```
+
+注意：如果向A节点提交了交易，B节点txpool未收到交易，只需要在A节点开启一下矿工，待B收到txpool之后关闭A节点矿工即可。</textarea></div>                </div>
+    		</article>
+		            <article class="post">
+    			<header>
+				<h2 class="post-title">
+					<a href="../../../2018/03/05/101.html">以太坊Geth的四种安装方法</a>
+				</h2>
+			</header>
+			<date class="post-meta">
+				March 5, 2018			</date>
+                <div class="post-content">
+        		<div id="md_content_5" class="md_content" style="min-height: 50px;"><textarea id="append-test" style="display:none;">[TOC]
+
+详细可参考：https://github.com/ethereum/go-ethereum/wiki/Building-Ethereum
+
+安装最简单方便的方法为`二进制安装`，其次`PPA安装`。
+
+### 二进制安装
+
+官方提供了编译好的二进制安装包，直接下载即可使用。Linux下可以将`Geth`所在目录添加到环境变量，或者直接`sudo mv Geth /usr/bin`。
+
+下载地址：https://geth.ethereum.org/downloads/
+
+### Ubuntu下通过PPA安装
+
+```
+sudo apt-get install software-properties-common
+sudo add-apt-repository -y ppa:ethereum/ethereum
+sudo apt-get update
+sudo apt-get install ethereum
+```
+
+### 源代码安装
+
+通过golang编译源代码：
+
+```
+sudo apt-get install -y build-essential golang
+cd go-ethereum
+make geth
+```
+编译完成后在目录`build/bin/geth`下可以看到编译好的Geth。
+
+### 通过docker安装
+
+Geth不像Hyperledger安装这么麻烦，不建议docker安装，如有需要，参考：https://github.com/ethereum/go-ethereum/wiki/Running-in-Docker</textarea></div>                </div>
+    		</article>
+		                <ol class="page-navigator"><li class="prev"><a href="../1/index.html">&laquo; 前一页</a></li><li><a href="../1/index.html">1</a></li><li class="current"><a href="index.html">2</a></li><li><a href="../3/index.html">3</a></li><li class="next"><a href="../3/index.html">后一页 &raquo;</a></li></ol>	</div>
+</div>
+<div id="secondary">
+	<section class="widget">
+        <form id="search" method="post" action="index.html">
+            <input type="text" name="s" class="text" placeholder="搜索..." />
+            <button type="submit" class="submit icon-search"></button>
+        </form>
+    </section>
+
+	    <section class="widget">
+		<h3 class="widget-title">最新文章</h3>
+        <ul class="widget-list">
+            <li><a href="../../../2020/08/24/323.html">ETH 2.0 资源汇总（持续更新）</a></li><li><a href="../../../2020/08/24/322.html">ETH 2.0 测试网验证节点质押流程体验</a></li><li><a href="../../../2020/06/06/312.html">通过 openssl 导出 HTTPS 网站 SSL 证书链</a></li><li><a href="../../../2020/05/20/308.html">如何开发一款区块链浏览器？</a></li><li><a href="../../../2020/02/02/288.html">EOS 提交交易失败分析</a></li><li><a href="../../../2019/12/09/giaocamerarobot.html">小 Giao 之死</a></li><li><a href="../../../2019/10/04/267.html">《凶宅》和《疯人院》</a></li><li><a href="../../../2018/10/17/228.html"> 以太坊多重签名原理分析</a></li><li><a href="../../../2018/09/11/188.html">OpenCV 初识图像</a></li><li><a href="../../../2018/09/11/184.html">为什么要系统的学习一下Pyhton-OpenCV?</a></li>        </ul>
+    </section>
+    
+        <section class="widget">
+		<h3 class="widget-title">最近回复</h3>
+        <ul class="widget-list">
+                            <li><a href="../../../2020/08/24/323.html#comment-26">pizi</a>: https://be...</li>
+                    <li><a href="../../../2020/08/24/323.html#comment-25">何先生</a>: 请问有没有ETH2....</li>
+                    <li><a href="../../../2018/05/03/145.html#comment-24">pizi</a>: 一个卡就不要限制资源...</li>
+                    <li><a href="../../../about.html#comment-23">pizi</a>: 有特殊技巧的啊，从阿...</li>
+                    <li><a href="../../../about.html#comment-22">一网友</a>: 有钱人新浪数据库很贵吧</li>
+                    <li><a href="../../../2018/05/03/145.html#comment-21">padluo</a>: 请问如何控制到用户使...</li>
+                    <li><a href="../../../about.html#comment-20">小白</a>: 板凳是我的！</li>
+                    <li><a href="../../../2018/02/08/90.html#comment-19">无耻的我</a>: 大佬，能发一份吗，原...</li>
+                    <li><a href="../../../2018/05/03/145.html#comment-18">pizi</a>: 文章里写了的，lxc...</li>
+                    <li><a href="../../../2018/05/03/145.html#comment-17">zzd</a>: lxc config...</li>
+                </ul>
+    </section>
+    
+        <section class="widget">
+		<h3 class="widget-title">分类</h3>
+        <ul class="widget-list">
+            <li><a href="../../feel/index.html">随笔心情</a> (4)</li><li><a href="../../code/index.html">代码片段</a> (17)</li><li><a href="../../ojbk/index.html">折腾着玩</a> (7)</li><li><a href="../../ml/index.html">机器学习</a> (9)</li><li><a href="../index.html">区块链</a> (10)</li><li><a href="../../python-opencv/index.html">Python-OpenCV</a> (2)</li><li><a href="../../video/index.html">视频剪辑</a> (0)</li><li><a href="../../leetcode/index.html">leetcode</a> (1)</li>        </ul>
+	</section>
+    
+        <section class="widget">
+		<h3 class="widget-title">归档</h3>
+        <ul class="widget-list">
+            <li><a href="../../../2020/08/index.html">August 2020</a></li><li><a href="../../../2020/06/index.html">June 2020</a></li><li><a href="../../../2020/05/index.html">May 2020</a></li><li><a href="../../../2020/02/index.html">February 2020</a></li><li><a href="../../../2019/12/index.html">December 2019</a></li><li><a href="../../../2019/10/index.html">October 2019</a></li><li><a href="../../../2018/10/index.html">October 2018</a></li><li><a href="../../../2018/09/index.html">September 2018</a></li><li><a href="../../../2018/08/index.html">August 2018</a></li><li><a href="../../../2018/05/index.html">May 2018</a></li><li><a href="../../../2018/04/index.html">April 2018</a></li><li><a href="../../../2018/03/index.html">March 2018</a></li><li><a href="../../../2018/02/index.html">February 2018</a></li><li><a href="../../../2018/01/index.html">January 2018</a></li>        </ul>
+	</section>
+    
+    	<section class="widget">
+		<h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+                            <li class="last"><a href="../../../admin/login.php.html">登录</a></li>
+                        <li><a href="../../../feed/index.html">文章 RSS</a></li>
+            <li><a href="../../../feed/comments/index.html">评论 RSS</a></li>
+            <li><a href="http://www.typecho.org">Typecho</a></li>
+        </ul>
+	</section>
+    </div>		</div>
+    </div>
+</div>
+<footer id="footer">
+	<div class="container">
+		&copy; 2023 <a rel="nofollow" href="../../../index.html">小王同学</a>. 模板由<a href="http://pagecho.com">cho</a>制作.
+	</div>
+</footer>
+<link rel="stylesheet" href="../../../usr/plugins/EditorMD/css/editormd.css" />
+<link rel="stylesheet" href="../../../usr/plugins/EditorMD/css/emojify.min.css" />
+<script type="text/javascript">
+    window.jQuery || document.write(unescape('%3Cscript%20type%3D%22text/javascript%22%20src%3D%22https://feelncut.com/usr/plugins/EditorMD/lib/jquery.min.js%22%3E%3C/script%3E'));
+</script>
+<script src="../../../usr/plugins/EditorMD/lib/marked.min.js"></script>
+<script src="../../../usr/plugins/EditorMD/lib/prettify.min.js"></script>
+<script src="../../../usr/plugins/EditorMD/lib/raphael.min.js"></script>
+<script src="../../../usr/plugins/EditorMD/lib/underscore.min.js"></script>
+<script src="../../../usr/plugins/EditorMD/lib/sequence-diagram.min.js"></script>
+<script src="../../../usr/plugins/EditorMD/lib/flowchart.min.js"></script>
+<script src="../../../usr/plugins/EditorMD/lib/jquery.flowchart.min.js"></script>
+<script src="../../../usr/plugins/EditorMD/js/editormd.min.js"></script>
+<script src="../../../usr/plugins/EditorMD/js/emojify.min.js"></script>
+<script type="text/javascript">
+$(function() {
+    var markdowns = document.getElementsByClassName("md_content");
+    $(markdowns).each(function(){
+        var markdown = $(this).children("#append-test").text();
+        //$('#md_content_'+i).text('');
+        var testEditormdView;
+        testEditormdView = editormd.markdownToHTML($(this).attr("id"), {
+            markdown: markdown,//+ "\r\n" + $("#append-test").text(),
+            toolbarAutoFixed : false,
+            htmlDecode: true,
+            emoji: true,
+            tex: true,
+            toc: true,
+            tocm: true,
+            taskList: true,
+            flowChart: true,
+            sequenceDiagram: true,
+        });
+    });
+    emojify.setConfig({
+        img_dir: 'https:' == document.location.protocol ? "https://staticfile.qnssl.com/emoji-cheat-sheet/1.0.0" : "http://cdn.staticfile.org/emoji-cheat-sheet/1.0.0",
+        blacklist: {
+            'ids': [],
+            'classes': ['no-emojify'],
+            'elements': ['^script$', '^textarea$', '^pre$', '^code$']
+        },
+    });
+    emojify.run();
+});
+</script>
+</body>
+</html>

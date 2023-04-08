@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+  <meta charset="UTF-8">
+  <title>记蓝墨云班课APP逆向及利用|Winke's blog</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <link rel="alternate icon" type="image/png" href="../../../../Public/static/amaze/i/favicon.png">
+  <link rel="stylesheet" href="../../../../Public/static/amaze/css/amazeui.min.css"/>
+  <link rel="stylesheet" href="../../../../Public/static/ueditor/third-party/SyntaxHighlighter/shCoreDefault.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../Public/Home/css/blog.css">
+    <!--<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?e9ff349d5b883760c70a4e220c9ac8ca";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>-->
+    <style>
+    .g-hd {
+    background-image: url("../../../../Editor/2016-07-25/57962ebcddb49.png");
+    }
+
+    @media only screen and (min-width: 641px) {
+      .am-offcanvas {
+        display: block;
+        position: static;
+        background: none;
+      }
+
+      .am-offcanvas-bar {
+        position: static;
+        width: auto;
+        background: none;
+        -webkit-transform: translate3d(0, 0, 0);
+        -ms-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+      }
+      .am-offcanvas-bar:after {
+        content: none;
+      }
+
+    }
+    
+    @media only screen and (max-width: 640px) {
+      .am-offcanvas-bar .am-nav>li>a {
+        color:#ccc;
+        border-radius: 0;
+        border-top: 1px solid rgba(0,0,0,.3);
+        box-shadow: inset 0 1px 0 rgba(255,255,255,.05)
+      }
+
+      .am-offcanvas-bar .am-nav>li>a:hover {
+        background: #404040;
+        color: #fff
+      }
+
+      .am-offcanvas-bar .am-nav>li.am-nav-header {
+        color: #777;
+        background: #404040;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,.05);
+        text-shadow: 0 1px 0 rgba(0,0,0,.5);
+        border-top: 1px solid rgba(0,0,0,.3);
+        font-weight: 400;
+        font-size: 75%
+      }
+
+      .am-offcanvas-bar .am-nav>li.am-active>a {
+        background: #1a1a1a;
+        color: #fff;
+        box-shadow: inset 0 1px 3px rgba(0,0,0,.3)
+      }
+
+      .am-offcanvas-bar .am-nav>li+li {
+        margin-top: 0;
+      }
+    }
+
+    .my-head {
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    .my-button {
+      position: fixed;
+      top: 0;
+      right: 0;
+      border-radius: 0;
+    }
+    .my-sidebar {
+      padding-right: 0;
+      border-right: 1px solid #eeeeee;
+    }
+
+    .my-footer {
+      border-top: 1px solid #eeeeee;
+      padding: 10px 0;
+      margin-top: 10px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+<div class="g-hd" style="height:200px;"></div>
+<div class="m-hdimg" style="margin:-53px auto 0;display:block;text-align: center;">
+                <a class="hdimg img" href="../../../../old_index.html" >
+                    <img src="../../../../picture/avater2.jpg" height="96" width="96">
+                </a>
+            </div>
+<header class="am-g my-head">
+  <div class="am-u-sm-12 am-article">
+    <h1 class="am-article-title">记蓝墨云班课APP逆向及利用</h1>
+    <p class="am-article-meta">王珂&nbsp;于&nbsp;2016-04-11 20:21</p>
+  </div>
+</header>
+<hr class="am-article-divider"/>
+<div class="am-g am-g-fixed">
+  <div class="am-u-md-12">
+    <div class="am-g">
+      <div class="am-u-sm-11 am-u-sm-centered">
+      <? php if($info.['description']!=''){ ?>
+      <blockquote>这学期一节课老师用蓝墨云班课签到，和平时成绩挂钩，课堂上老师只开10s左右，画个九宫格为签到密码，没有想签到作弊，就是想研究研究，哈哈。</blockquote>
+      <? }  ?>
+        <div class="am-cf am-article">
+		<p style="text-align: center;"><strong>概述</strong></p><p><strong><br/></strong></p><p style="text-align: left;">这个APP可以查看课程列表，课程成员列表，签到，前端记录，实时群聊的等。<br/></p><p style="text-align: left;">逆向分析后提取API可以用来自动签到，软件即时聊天用的环信SDK,也可以做个聊天机器人在群里BB...</p><p style="text-align: left;"><br/></p><p style="text-align: center;"><strong>第一部 抓包</strong></p><p><br/></p><p style="text-align: left;">抓包工具使用小提琴，也就是fiddler，去官网下载的，最新的为V4。设置中开启远程连接。<strong><br/></strong></p><p style="text-align: left;">宿舍是联通网，宿舍路由器只提供转发，手机联网后和电脑不一定在一个网段，所以只能开热点了。热点工具用的猎豹WIFI。</p><p style="text-align: left;"><br/></p><p style="text-align: left;">不知道为什么，ios连不上电脑的热点，只好把之前的安卓机找出来用了。</p><p style="text-align: left;"><br/></p><p style="text-align: left;">手机连上热点，代理设置为自动，填写上代理信息，打开个网页测试下电脑能否抓取数据包。</p><p style="text-align: left;"><strong><br/></strong></p><p style="text-align: left;">环境搞好后就开始抓包了，抓包还是比较简单的，从登录，刷新课程列表，成员列表，签到等，比较简单。下面简单分析几个典型的API。</p><p style="text-align: left;"><br/></p><p style="text-align: left;">所有API都是post方式请求</p><p style="text-align: left;"><br/></p><p style="text-align: left;">登录</p><pre class="brush:bash;toolbar:false">POST&nbsp;http://api.mosoteach.cn/mssvc/index.php/passport/login&nbsp;HTTP/1.1
+Connection:&nbsp;close
+Accept-Encoding:&nbsp;gzip;q=0.7,*;q=0.7
+Content-Type:&nbsp;application/x-www-form-urlencoded;&nbsp;charset=UTF-8
+Content-Length:&nbsp;450
+User-Agent:&nbsp;Dalvik/2.1.0&nbsp;(Linux;&nbsp;U;&nbsp;Android&nbsp;5.0.2;&nbsp;MI&nbsp;2SC&nbsp;MIUI/5.9.24)
+Host:&nbsp;api.mosoteach.cn
+
+account_name=登录帐号&amp;user_pwd=登录密码&amp;device_code=设备码&amp;public_key=公匙&amp;device_pn_code=pn码&amp;device_type=ANDROID&amp;app_version_number=42&amp;app_version_name=1.9.0&amp;app_id=MTANDROID&amp;dpr=2.0
+
+前面参数牵涉到个人信息，就文字表示了，后面是设备类型，APP版本，版本号，id,dpr参数。
+注意这个时候的请求头。</pre><p style="text-align: left;">返回</p><pre class="brush:bash;toolbar:false">HTTP/1.1&nbsp;200&nbsp;OK
+Date:&nbsp;Sat,&nbsp;09&nbsp;Apr&nbsp;2016&nbsp;13:29:13&nbsp;GMT
+Server:&nbsp;Apache/2.4.7&nbsp;(Ubuntu)
+X-Powered-By:&nbsp;PHP/5.5.9-1ubuntu4.14
+Vary:&nbsp;Accept-Encoding
+Content-Length:&nbsp;656
+Connection:&nbsp;close
+Content-Type:&nbsp;application/json;&nbsp;charset=utf-8
+
+{&quot;user&quot;:{&quot;user_id&quot;:&quot;5F7673****************31&quot;,&quot;account_name&quot;:&quot;*********&quot;,&quot;avatar_url&quot;:&quot;http:***********e8919fd195112591-0.jpg@!s200x200?v=1457567915&quot;,&quot;nick_name&quot;:&quot;********&quot;,&quot;student_no&quot;:&quot;*********&quot;,&quot;delete_flag&quot;:&quot;N&quot;,&quot;access_id&quot;:&quot;*****&quot;,&quot;access_secret&quot;:&quot;*****&quot;,&quot;full_name&quot;:&quot;**&quot;,&quot;em_pwd&quot;:&quot;****-u&quot;,&quot;student_score&quot;:&quot;34&quot;,&quot;teacher_score&quot;:&quot;0&quot;,&quot;student_level&quot;:&quot;2&quot;,&quot;phone_number&quot;:&quot;&quot;,&quot;phone_number_flag&quot;:&quot;N&quot;,&quot;email_flag&quot;:&quot;Y&quot;,&quot;last_sec_update_time&quot;:&quot;2016-03-26&nbsp;03:54:09&quot;,&quot;last_sec_update_ts_s&quot;:&quot;1458935649&quot;},&quot;result_code&quot;:0,&quot;result_msg&quot;:&quot;OK&quot;}
+返回的是json，信息很明显，注意一下access_id，access_secret，last_sec_update_ts_s，后面要用到。</pre><p style="text-align: left;">再看一下检查签到是否开启的</p><pre class="brush:bash;toolbar:false">POST&nbsp;http://api.mosoteach.cn/mssvc/index.php/checkin/current_open&nbsp;HTTP/1.1
+Connection:&nbsp;close
+Accept-Encoding:&nbsp;gzip;q=0.7,*;q=0.7
+User-Agent:&nbsp;Dalvik/2.1.0&nbsp;(Linux;&nbsp;U;&nbsp;Android&nbsp;5.0.2;&nbsp;MI&nbsp;2SC&nbsp;Build/LRX22G)
+Date:&nbsp;Sat,&nbsp;09&nbsp;Apr&nbsp;2016&nbsp;13:54:31&nbsp;GMT+00:00
+X-mssvc-signature:&nbsp;d43b1d213eabd84045265f02f60dde460fdc602f
+X-mssvc-access-id:&nbsp;****************
+X-teach-version:&nbsp;1.9.0
+X-mssvc-sec-ts:&nbsp;1458935649
+Content-Type:&nbsp;application/x-www-form-urlencoded;&nbsp;charset=UTF-8
+Content-Length:&nbsp;52
+Host:&nbsp;api.mosoteach.cn
+
+clazz_course_id=C7******-6F9D-4EA2-****************
+
+注意下头部信息，和登陆时的头部不一样</pre><p style="text-align: left;">返回</p><pre class="brush:bash;toolbar:false">HTTP/1.1&nbsp;200&nbsp;OK
+Date:&nbsp;Sat,&nbsp;09&nbsp;Apr&nbsp;2016&nbsp;13:54:30&nbsp;GMT
+Server:&nbsp;Apache/2.4.9&nbsp;(Ubuntu)
+X-Powered-By:&nbsp;PHP/5.5.22-1+deb.sury.org~precise+1
+Connection:&nbsp;close
+Vary:&nbsp;Accept-Encoding
+Content-Length:&nbsp;94
+Content-Type:&nbsp;application/json;&nbsp;charset=utf-8
+
+{&quot;id&quot;:&quot;52372&quot;,&quot;checkin_type&quot;:&quot;POINT_9&quot;,&quot;points&quot;:&quot;0-3-6-7-8&quot;,&quot;result_code&quot;:0,&quot;result_msg&quot;:&quot;OK&quot;}
+返回JSON，要签到的课程id，签到方式，一键前端或者九宫格，以及九宫格手势，0~8&nbsp;代表3*3的九宫格数据。</pre><p style="text-align: left;">POST信息中没有用户信息，看到请求头也应该直接就能清楚了，头部包涵用户验证信息，</p><pre class="brush:bash;toolbar:false">X-mssvc-signature&nbsp;&nbsp;，&nbsp;&nbsp;X-mssvc-access-id&nbsp;，X-mssvc-sec-ts</pre><p style="text-align: left;">登录的时候返回access-id 和 last_sec_update_sec_s ，对比后和X-mssvc-access-id ，X-mssvc-sec-ts一样。所以 签名 是客户端生成用来检验请求合法的标志了。算法只能在APP里面看了。</p><p style="text-align: left;"><br/></p><p style="text-align: left;">补充一句，抓包的时候发现即时通信是用的环信SDK，所以根据接口可以做个聊天机器人了...或者做个主教助手，导入题库，帮老师回答问题什么的。</p><p style="text-align: left;"><br/></p><p style="text-align: center;"><strong>第二部 逆向APP</strong></p><p style="text-align: left;"><br/></p><p style="text-align: left;">软件没有加固...真可悲...</p><p style="text-align: left;"><br/></p><p style="text-align: left;">apk包中提取.class，使用d2j-dex2jar反编译，生成一个jar。</p><p style="text-align: left;"><br/></p><p style="text-align: left;">使用jd-gui阅读反编译的代码。</p><p style="text-align: left;"><br/></p><p style="text-align: left;">阅读代码方法有很多种，这里我直接搜索字符串X-mssvc-signature，直接定位到了一个封装请求头的函数。</p><pre class="brush:java;toolbar:false">&nbsp;&nbsp;private&nbsp;ArrayList&nbsp;ak(String&nbsp;paramString)
+&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;v.bk&nbsp;localbk&nbsp;=&nbsp;MTApp.b().c();
+&nbsp;&nbsp;&nbsp;&nbsp;ArrayList&nbsp;localArrayList&nbsp;=&nbsp;new&nbsp;ArrayList();
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(localbk&nbsp;==&nbsp;null)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;aa.k.c(&quot;MTClient&quot;,&nbsp;&quot;Signature&nbsp;User&nbsp;==&nbsp;null)&quot;);
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;do
+&nbsp;&nbsp;&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;localArrayList;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;str&nbsp;=&nbsp;aa.c.a(new&nbsp;Date());
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;localArrayList.add(new&nbsp;BasicNameValuePair(&quot;User-Agent&quot;,&nbsp;r()));
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;localArrayList.add(new&nbsp;BasicNameValuePair(&quot;Date&quot;,&nbsp;str));
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;localArrayList.add(new&nbsp;BasicNameValuePair(&quot;X-mssvc-signature&quot;,&nbsp;b(paramString,&nbsp;localbk.a,&nbsp;str,&nbsp;localbk.h)));
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;localArrayList.add(new&nbsp;BasicNameValuePair(&quot;X-mssvc-access-id&quot;,&nbsp;localbk.g));
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;localArrayList.add(new&nbsp;BasicNameValuePair(&quot;X-teach-version&quot;,&nbsp;&quot;1.9.0&quot;));
+&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;while&nbsp;(TextUtils.isEmpty(localbk.p));
+&nbsp;&nbsp;&nbsp;&nbsp;localArrayList.add(new&nbsp;BasicNameValuePair(&quot;X-mssvc-sec-ts&quot;,&nbsp;localbk.p));
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;localArrayList;
+&nbsp;&nbsp;}</pre><p style="text-align: left;">可以看出signature由b函数生成，4个参数。</p><p style="text-align: left;">paramString为ak函数参数</p><p style="text-align: left;">localbk.a loaclbk.h为本类的变量。</p><p style="text-align: left;">str为aa.c.a生成，aa.c.a的参数为当前日期。</p><p style="text-align: left;">在文件头看到了localbk.a loaclbk.h声明，下面有赋值</p><pre class="brush:java;toolbar:false">this.a&nbsp;=&nbsp;localJSONObject.getString(&quot;user_id&quot;);
+this.h&nbsp;=&nbsp;localJSONObject.optString(&quot;access_secret&quot;);</pre><p style="text-align: left;">接下来看str的生成函数aa.c.a</p><pre class="brush:java;toolbar:false">&nbsp;&nbsp;public&nbsp;static&nbsp;String&nbsp;a(Date&nbsp;paramDate)
+&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(paramDate&nbsp;==&nbsp;null)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;null;
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(g&nbsp;==&nbsp;null)
+&nbsp;&nbsp;&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;g&nbsp;=&nbsp;new&nbsp;SimpleDateFormat(&quot;EEE,&nbsp;dd&nbsp;MMM&nbsp;yyyy&nbsp;HH:mm:ss&nbsp;z&quot;,&nbsp;Locale.US);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;g.setTimeZone(TimeZone.getTimeZone(&quot;GMT&quot;));
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;g.format(paramDate);
+&nbsp;&nbsp;}</pre><p style="text-align: left;">可见就是格式化了一下当前时间</p><p style="text-align: left;">下面看ak的参数是什么。</p><p style="text-align: left;">ak是个私有函数，所以肯定在本类或者子类调用到了，阅读代码后在本类中找到调用</p><pre class="brush:java;toolbar:false">&nbsp;ak(&quot;http://api.mosoteach.cn/mssvc/index.php/ccfile/get_file_url&quot;)</pre><p style="text-align: left;">看出就是请求API的地址。</p><p style="text-align: left;"><br/></p><p style="text-align: left;">文件头部也声明了所有API的地址</p><p style="text-align: left;">分析到这可以发现，不用抓包直接逆向就OK了...</p><p style="text-align: left;"><br/></p><p style="text-align: left;">下面看生成signature的b函数</p><pre class="brush:java;toolbar:false">&nbsp;&nbsp;private&nbsp;String&nbsp;b(String&nbsp;paramString1,&nbsp;String&nbsp;paramString2,&nbsp;String&nbsp;paramString3,&nbsp;String&nbsp;paramString4)
+&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;aa.c.a(paramString4,&nbsp;String.format(&quot;%s|%s|%s&quot;,&nbsp;new&nbsp;Object[]&nbsp;{&nbsp;paramString1,&nbsp;paramString2,&nbsp;paramString3&nbsp;}));
+&nbsp;&nbsp;}</pre><p style="text-align: left;">将前三个字符串参数格式化，和第四个参数 作为aa.c.a函数的参数，此处aa.c.a和上面不是同一个函数，参数不同。</p><pre class="brush:java;toolbar:false">public&nbsp;static&nbsp;String&nbsp;a(String&nbsp;paramString1,&nbsp;String&nbsp;paramString2)
+&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;((TextUtils.isEmpty(paramString1))&nbsp;||&nbsp;(TextUtils.isEmpty(paramString2)))&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;null;
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;try
+&nbsp;&nbsp;&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SecretKeySpec&nbsp;localSecretKeySpec&nbsp;=&nbsp;new&nbsp;SecretKeySpec(paramString1.getBytes(),&nbsp;&quot;HmacSHA1&quot;);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mac&nbsp;localMac&nbsp;=&nbsp;Mac.getInstance(&quot;HmacSHA1&quot;);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;localMac.init(localSecretKeySpec);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;localMac.update(paramString2.getBytes());
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;str&nbsp;=&nbsp;b(localMac.doFinal());
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;str;
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;catch&nbsp;(NoSuchAlgorithmException&nbsp;localNoSuchAlgorithmException)
+&nbsp;&nbsp;&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;localNoSuchAlgorithmException.printStackTrace();
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;null;
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;catch&nbsp;(InvalidKeyException&nbsp;localInvalidKeyException)
+&nbsp;&nbsp;&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;localInvalidKeyException.printStackTrace();
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;null;
+&nbsp;&nbsp;}</pre><p style="text-align: left;">可以看出该函数对参数进行了hmacsha1加密。</p><p style="text-align: left;"><br/></p><p style="text-align: left;">OK分析到这就可以调用他们的API了。</p><p style="text-align: left;"><br/></p><p style="text-align: left;">整理下java函数，新建一个java文件，编译运行，和之前数据对比，发现里面有个坑...不过简单测试后就解决了。</p><p style="text-align: left;"><br/></p><p style="text-align: center;"><strong>第三部 python实现</strong></p><p><strong><br/></strong></p><p>没用过JAVA，以及JAVA web，php抓取不好用（主要是用过python抓取后...），所以准备用python写个服务端，配合客户端使用。<strong><br/></strong></p><p><br/></p><p>python中进行hmacsha1加密...结果不一样。所以只能调用java的输出了。是时候学点java了！</p><p><br/></p><p>首先想到的是os.popen(cmd),读取返回信息就OK了，简单方便。不过做之前先百度下，看看有没有解决方案，搜索到一个框架，python调用java,jPype。好像内部通过JVM虚拟机实现，太麻烦，果断放弃。</p><p><br/></p><p>用os.popen(cmd)在win10上测试没用题，在阿里云服务器上（centos环境）测试也没问题。</p><pre class="brush:python;toolbar:false">def&nbsp;__get_date_and_signature(self,api_url,user_id,access_secret):
+	cmd&nbsp;=&nbsp;&#39;java&nbsp;lanmo&nbsp;&quot;%s&quot;&nbsp;&quot;%s&quot;&nbsp;&quot;%s&quot;&#39;%(api_url,user_id,access_secret)
+	res&nbsp;=&nbsp;os.popen(cmd).readlines()
+	return&nbsp;res[1],res[0][:-1]</pre><p style="text-align: center;"><img src="../../../../Editor/2016-04-11/570b94f0dbdcf.png" title="lanmo.png"/></p><p><br/></p><p style="text-align: center;"><strong>第四部 利用</strong></p><p><strong><br/></strong></p><p>为了用着方便，所以有必要做个客户端，这几天正在看Vue手册，和之前使用过flask。</p><p><br/></p><p>所以服务端用python写，使用flask框架。<strong><br/></strong></p><p>客户端用APICloud，生成安卓和IOS客户端，客户端web用Vue+Frozen UI</p><p><br/></p><p>功能：自动检测并签到...</p><p><br/></p><p style="text-align: center;"><img src="../../../../Editor/2016-04-11/570b960406213.jpg" title="91941076979882670.jpg" width="500" height="893" border="0" hspace="0" vspace="0" style="width: 500px; height: 893px;"/></p><p><br/></p><p>以后要是快迟到了，再也不跑着去上课了......</p><p><br/></p>        </div>
+      </div>
+    </div>
+    <hr class="am-article-divider"/>
+    <div class="am-center" style="text-align:center;margin-bottom:15px;">
+    <a href="116.html">上一篇</a>    <a href="118.html">下一篇</a>    </div>
+    <!-- <hr class="am-article-divider"/> -->
+      </div>
+</div>
+    <div style="right: 15px;" class="amz-toolbar" id="amz-toolbar">
+    <a href="#top" title="回到顶部" class="am-icon-btn am-icon-arrow-up am-active" id="amz-go-top"></a>
+    </div>
+    <footer class="footer" style="background-color:#303336;">
+     <div class="g-ft" style="padding-top:20px;">
+     <div class="">
+      <div  style="float:left;width:50%;text-align:right;">
+        <ul class="m-bottom-nav" style="margin:0 20px 0 0;">
+          <li>
+                  <a href="../../../Index/index.html" target="_self">首页</a>
+              </li><li>
+                  <a href="http://www.zhangwenxuan.cn/" target="_blank">好基友</a>
+              </li><li>
+                  <a href="http://blog.wozhendehaoaini.cn/" target="_blank">老博客</a>
+              </li><li>
+                  <a href="66.html" target="_self">关于我</a>
+              </li>        </ul>
+      </div>
+      <div  style="float:right;width:50%;text-align:left;">
+        <ul class="m-bottom-nav" style="margin:0 0 0 20px;">
+           		<li>
+			<a href="../../lists/category/feeling.html">
+				<i class="icon-chevron-right"></i>随笔心情			</a>
+		</li>		<li>
+			<a href="../../lists/category/learnsth.html">
+				<i class="icon-chevron-right"></i>学习研究			</a>
+		</li>		<li>
+			<a href="../../lists/category/sizhou.html">
+				<i class="icon-chevron-right"></i>飞控研究			</a>
+		</li>		<li>
+			<a href="../../lists/category/Python.html">
+				<i class="icon-chevron-right"></i>Python			</a>
+		</li>		<li>
+			<a href="../../lists/category/wxmp.html">
+				<i class="icon-chevron-right"></i>微信平台			</a>
+		</li>        </ul>        
+      </div>
+    </div>
+           <p style="clear:both;padding-top:15px;" class="m-cprt">©&nbsp;<a href="../../../../index.html">花开花落</a>&nbsp;京ICP备15006955号-1&nbsp;|&nbsp;Powered by <a href="../../../../index.html">Winke</a></p> 
+    </div>
+    </footer>
+
+<!--[if lt IE 9]>
+<script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
+<script src="/Public/static/amaze/js/polyfill/rem.min.js"></script>
+<script src="/Public/static/amaze/js/polyfill/respond.min.js"></script>
+<script src="/Public/static/amaze/js/amazeui.legacy.js"></script>
+<![endif]-->
+
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script src="../../../../Public/static/amaze/js/jquery.min.js"></script>
+<script src="../../../../Public/static/amaze/js/amazeui.min.js"></script>
+<script type="text/javascript" src="../../../../Public/static/ueditor/third-party/SyntaxHighlighter/shCore.js"></script>
+<script src="../../../../Public/Home/js/blog.js"></script>
+<script type="text/javascript"> SyntaxHighlighter.all(); </script>
+<!--<![endif]-->
+</body>
+</html>

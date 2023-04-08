@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+xmlns="http://purl.org/rss/1.0/"
+xmlns:dc="http://purl.org/dc/elements/1.1/">
+<channel rdf:about="https://feelncut.com/feed/rss/2018/01/">
+<title>小王同学 - 2018年1月</title>
+<link>https://feelncut.com/2018/01/</link>
+<description>希望通过自我加工，成为有点用的人</description>
+<items>
+<rdf:Seq>
+<rdf:li resource="https://feelncut.com/2018/01/25/88.html"/>
+<rdf:li resource="https://feelncut.com/2018/01/24/87.html"/>
+<rdf:li resource="https://feelncut.com/2018/01/23/62.html"/>
+<rdf:li resource="https://feelncut.com/2018/01/22/61.html"/>
+<rdf:li resource="https://feelncut.com/2018/01/22/60.html"/>
+<rdf:li resource="https://feelncut.com/2018/01/22/59.html"/>
+<rdf:li resource="https://feelncut.com/2018/01/16/54.html"/>
+<rdf:li resource="https://feelncut.com/2018/01/11/53.html"/>
+<rdf:li resource="https://feelncut.com/2018/01/10/52.html"/>
+<rdf:li resource="https://feelncut.com/2018/01/09/50.html"/>
+</rdf:Seq>
+</items>
+</channel>
+<item rdf:about="https://feelncut.com/2018/01/25/88.html">
+<title>Ubuntu下快速安装配置 ssh</title>
+<link>https://feelncut.com/2018/01/25/88.html</link>
+<dc:date>2018-01-25T20:30:00+08:00</dc:date>
+<description>[TOC]
+### 安装
+通过`sudo apt-get install openssh-server`安装ssh服务端。
+
+### 配置
+配置文件路径`/etc/ssh/sshd_config`，可以修改连接端口等
+
+### 启动
+修改后需要`service sshd restart`。ssh以服务的形式管理，当然可以`service sshd start/stop/restart`。
+
+### 免密码登录
+![](/images/2018/01/1536740574.png)
+图片来源：https://www.jianshu.com/p/d40a85df1a43
+
+如图所示，需要用到`ssh-keygen`命令生成公私匙，并且需要把公式放到认证文件中`cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys`</description>
+</item>
+<item rdf:about="https://feelncut.com/2018/01/24/87.html">
+<title>Ubuntu16.04 下安装并配置 VNC 远程访问服务</title>
+<link>https://feelncut.com/2018/01/24/87.html</link>
+<dc:date>2018-01-24T15:43:00+08:00</dc:date>
+<description>> 在实验室一直通过ssh使用宿舍PC，今天感觉用Jupyter NoteBook写代码其实并没有PyCharm那么方便，所以想通过VNC在GUI界面下开心的写代码。
+
+和往常一样，`sudo apt-get install vnc4server`一顿操作后看log说font目录怎样怎样，没有办法正常加载。
+
+于是这次换个VNC服务端试一试，安装主要参考：[这里](http://blog.csdn.net/songbaiyao/article/details/72858087 "这里")。
+
+自己也记录一下，方便下次安装。
+
+[...]</description>
+</item>
+<item rdf:about="https://feelncut.com/2018/01/23/62.html">
+<title>kaggle房价预测：使用Python综合探索数据</title>
+<link>https://feelncut.com/2018/01/23/62.html</link>
+<dc:date>2018-01-23T18:30:00+08:00</dc:date>
+<description>> 学习[COMPREHENSIVE DATA EXPLORATION WITH PYTHON](https://www.kaggle.com/pmarcelino/comprehensive-data-exploration-with-python "COMPREHENSIVE DATA EXPLORATION WITH PYTHON")笔记
+
+**'The most difficult thing in life is to know yourself'**
+
+[...]</description>
+</item>
+<item rdf:about="https://feelncut.com/2018/01/22/61.html">
+<title>Python数据处理常用工具包安装</title>
+<link>https://feelncut.com/2018/01/22/61.html</link>
+<dc:date>2018-01-22T19:13:00+08:00</dc:date>
+<description>```bash
+pip install numpy
+# jupyter 依赖很多，包括numpy
+pip install jupyter
+
+pip install matplotlib
+# seaborn依赖scipy numpy
+pip install seaborn
+
+pip install scikit-learn
+pip install pandas
+pip install scipy
+
+pip install opencv-python
+pip install scikit-image
+```</description>
+</item>
+<item rdf:about="https://feelncut.com/2018/01/22/60.html">
+<title>Editor.md语法demo</title>
+<link>https://feelncut.com/2018/01/22/60.html</link>
+<dc:date>2018-01-22T16:46:00+08:00</dc:date>
+<description>> 官网打开太慢，转存便于速查
+
+[...]</description>
+</item>
+<item rdf:about="https://feelncut.com/2018/01/22/59.html">
+<title>Ubuntu下Python设置pip使用国内源站</title>
+<link>https://feelncut.com/2018/01/22/59.html</link>
+<dc:date>2018-01-22T16:29:49+08:00</dc:date>
+<description>在用户目录下建立`.pip/pip.conf`文件
+```bash
+cd ~/ && mkdir .pip
+cd .pip && nano pip.conf
+```
+写入以下配置并保存即可
+```bash
+[global]
+index-url = https://pypi.douban.com/simple/
+```
+当然，还可以选择使用清华，阿里等源站
+```
+清华：https://pypi.tuna.tsinghua.edu.cn/simple
+阿里: https://mirrors.aliyun.com/pypi/simple
+```
+![](/images/2018/01/4041592246.png)</description>
+</item>
+<item rdf:about="https://feelncut.com/2018/01/16/54.html">
+<title>Python glob的用法</title>
+<link>https://feelncut.com/2018/01/16/54.html</link>
+<dc:date>2018-01-16T10:03:00+08:00</dc:date>
+<description>glob — Unix style pathname pattern expansion
+
+[...]</description>
+</item>
+<item rdf:about="https://feelncut.com/2018/01/11/53.html">
+<title>Ubuntu 16.04下Shadowsocks服务器端简单安装使用</title>
+<link>https://feelncut.com/2018/01/11/53.html</link>
+<dc:date>2018-01-11T15:28:00+08:00</dc:date>
+<description>>因为学校的上网帐号只能允许两台终端同时在线，我和女票一人占了一个终端，在远程连接宿舍PC的时候，为了避免~~挨打~~女票掉线，每次都是手动在在线管理页面将自己实验室PC下线，然后再在宿舍PC上登录上网帐号，或者准备用实验室PC上网时手动下线宿舍PC，再在实验室PC登录。这样以来一边SSH操作宿舍PC，一编实验室PC查资料来回切换网络很是不方便，所以通过`Shadowsocks`来快速搭建一个网络共享平台，简单高效的解决了这个问题。
+
+确保已经安装了pip，并最好更新到最新版本，我比较喜欢用python3：
+```bash
+sudo apt-get install python3-pip
+sudo pip3 install --upgrade pip
+sudo pip3 install shadowsocks
+# 到这里已经完成了ss的安装，下一步进行配置，我比较喜欢用json配置文件进行配置
+sudo nano /etc/ss.json
+```
+我的配置文件如下：
+```json
+{
+    "server":"::",
+    "server_port":8388,
+    "local_port":1080,
+    "password":"password",
+    "timeout":600,
+    "method":"aes-256-cfb"
+}
+```
+然后启动ss：
+```bash
+sudo ssserver -c /etc/ss.json -d start
+```
+
+当然，还有各种优化ss连接和数据传输速度的方法，我这里不需要，所以就不再进行配置。
+
+通过这种简单的方式完美的解决了一个操蛋的问题:smile:。</description>
+</item>
+<item rdf:about="https://feelncut.com/2018/01/10/52.html">
+<title>Python3使用内置CSV模块读写CSV格式文件</title>
+<link>https://feelncut.com/2018/01/10/52.html</link>
+<dc:date>2018-01-10T20:02:00+08:00</dc:date>
+<description>```python
+import csv
+
+# open的时候可以指定编码
+csv_reader = csv.reader(open('1.csv'))
+csv_writer = csv.writer(open('2.csv','w'))
+for row in csv_reader:
+    print(row)
+    # ['公告编号', '公告内容', ...]
+    csv_writer.writerow(row)
+# 还有writerows方法
+# csv_writer.writerows(rows)
+```</description>
+</item>
+<item rdf:about="https://feelncut.com/2018/01/09/50.html">
+<title>Ubuntu 16.04下安装Jupyter Notebook并开启远程访问</title>
+<link>https://feelncut.com/2018/01/09/50.html</link>
+<dc:date>2018-01-09T20:40:00+08:00</dc:date>
+<description>> 因为电脑在宿舍，所以开一个Jupyter Notebook远程访问还是比较方便测试程序的。
+
+[...]</description>
+</item>
+</rdf:RDF>

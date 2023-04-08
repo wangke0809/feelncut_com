@@ -1,0 +1,281 @@
+<!DOCTYPE HTML>
+<html class="no-js">
+
+<head>
+	  <meta charset="UTF-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="花开花落——Winke's个人博客">
+  <meta name="keywords" content="花开花落——Winke's个人博客,王珂,北方工业大学">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>【数据结构学习】绪论：什么是数据结构？|Winke's blog</title>
+  <link rel="stylesheet" href="../../../../Public/static/amaze/css/amazeui.min.css">
+  <link rel="stylesheet" href="../../../../Public/Home/css/blog.css">
+<style>
+	.g-hd {
+    background-image: url("../../../../picture/bg.png");
+	}
+  .pic{
+  width: 28%;
+  /*height: 100px;*/
+  margin:5px;
+  }
+  .mpic{
+    margin: 10px auto;
+  }
+</style>
+
+<link rel="stylesheet" href="../../../../Public/static/ueditor/third-party/SyntaxHighlighter/shCoreDefault.css" type="text/css" />
+<style type="text/css">
+</style>	
+
+
+<!-- 页面header钩子，一般用于加载插件CSS文件和代码 -->
+
+	<!--<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?e9ff349d5b883760c70a4e220c9ac8ca";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>-->
+</head>
+<body>
+	<!-- 头部 -->
+	<div class="g-hd"></div>
+	<!-- /头部 -->
+	
+	<!-- 主体 -->
+	<div class="am-g box">
+<!-- am-show-lg-only -->
+<div class="">  
+  <div class="g-bd bd">
+    <div class="g-sd">
+			<div class="m-hdimg">
+				<a class="hdimg img" href="../../../../old_index.html">
+					<img src="../../../../picture/avater2.jpg" height="96" width="96">
+				</a>
+			</div>
+			<h1 class="m-ttl">
+				<a href="../../../../index.html">花开花落</a>
+			</h1>
+			<p class="m-about">深情不及久伴。</p>
+
+			<ul class="m-nav">
+				
+				<li>
+                            <a href="../../../Index/index.html" target="_self">首页</a>
+                        </li><li>
+                            <a href="http://www.zhangwenxuan.cn/" target="_blank">好基友</a>
+                        </li><li>
+                            <a href="http://blog.wozhendehaoaini.cn/" target="_blank">老博客</a>
+                        </li><li>
+                            <a href="66.html" target="_self">关于我</a>
+                        </li>				
+				<!-- Search 
+				<li class="m-sch">
+					<a id="j-lnksch" href="#">搜索</a>
+					<form id="j-schform" class="form" method="get" action="/search">
+						<input name="q" class="txt" placeholder="输入关键字" type="text">
+					</form>
+				</li>-->
+			</ul>
+			<ul class="m-nav">
+				
+				
+                    		<li>
+			<a href="../../lists/category/feeling.html">
+				<i class="icon-chevron-right"></i>随笔心情			</a>
+		</li>		<li>
+			<a href="../../lists/category/learnsth.html">
+				<i class="icon-chevron-right"></i>学习研究			</a>
+		</li>		<li>
+			<a href="../../lists/category/sizhou.html">
+				<i class="icon-chevron-right"></i>飞控研究			</a>
+		</li>		<li>
+			<a href="../../lists/category/Python.html">
+				<i class="icon-chevron-right"></i>Python			</a>
+		</li>		<li>
+			<a href="../../lists/category/wxmp.html">
+				<i class="icon-chevron-right"></i>微信平台			</a>
+		</li>				
+				<!-- Search 
+				<li class="m-sch">
+					<a id="j-lnksch" href="#">搜索</a>
+					<form id="j-schform" class="form" method="get" action="/search">
+						<input name="q" class="txt" placeholder="输入关键字" type="text">
+					</form>
+				</li>-->
+			</ul>
+		</div>
+
+        <div class="g-mn">
+            <div class="g-mnc box"> 
+                
+                <div class="m-postlst">
+                
+    <header class="jumbotron subhead" id="overview">
+		<div class="container">
+			<h2>【数据结构学习】绪论：什么是数据结构？</h2>
+			
+		</div>
+	</header>
+
+                
+    <div class="span9 main-content">
+        <!-- Contents
+        ================================================== -->
+        <section id="contents"><p><strong>数据结构的定义</strong></p><p>关于数据结构的定义并没有统一，不过按照中文维基百科上的解释比较好理解一些。</p><blockquote><p>数据结构（data structure）是计算机中存储、组织数据的方式。通常情况下，精心选择的数据结构可以带来最优效率的算法</p></blockquote><p><br/></p><p><strong>通过摆放图书的例子理解数据结构</strong></p><p>如何在书架上摆放图书？<br/></p><p>如何在书架上查找图书？</p><p>如何在书架上新增图书？</p><p><br/></p><p>可以随便放，随地新增，但是图书一旦很多查找很要命。</p><p>可以按字母顺序放，查找通过二分法查找。这样大数据下查找也会很要命。</p><p>再优化一下就是按字母分类放，之后在这个字母的分类里面进行添加，查找，相对于在全部书里面查找快速很多。</p><p><br/></p><p>把这个问题联想到实际生活中书店的书是怎么摆放的？</p><p><br/></p><p><span style="background-color: rgb(216, 216, 216);">得出结论：解决问题方法的效率跟数据的组织方式有关。</span></p><p><br/></p><p><strong>写程序实现一个函数PrintN，使得 传入一个正整数为N的参数后，能顺序打印从1到N的全部正整数</strong></p><pre class="brush:cpp;toolbar:false">//循环实现
+voidPrintN(&nbsp;intN&nbsp;)&nbsp;
+{&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;i;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;for(&nbsp;i=1;&nbsp;i&lt;=N;&nbsp;i++&nbsp;)
+&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf(“%d\n”,&nbsp;i&nbsp;);&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;return;&nbsp;
+}</pre><pre class="brush:cpp;toolbar:false">//递归实现
+voidPrintN(&nbsp;intN&nbsp;)&nbsp;
+{&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;if(&nbsp;N&nbsp;)
+&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PrintN(&nbsp;N&nbsp;–1&nbsp;);&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf(“%d\n”,&nbsp;N&nbsp;);&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;return;&nbsp;
+}</pre><p>当N较大是会发现递归实现的算法会爆炸，因为占用了过多的内存资源，而循环实现只是对同一个内存地址N次赋予不同的值，不会因为N的次数增大而增大保存N的内存资源。<br/></p><p><br/></p><p><span style="background-color: rgb(216, 216, 216);">得出结论：解决问题方法的效率，跟空间的利用效率有关。</span></p><p><br/></p><p><strong>再比如，写程序计算一个多项式</strong><br/></p><pre class="brush:cpp;toolbar:false">//方法1
+doublef1(&nbsp;int&nbsp;n,&nbsp;double&nbsp;a[],&nbsp;double&nbsp;x&nbsp;)
+{
+	inti;&nbsp;double&nbsp;p&nbsp;=&nbsp;a[0];&nbsp;for&nbsp;(&nbsp;i&nbsp;=&nbsp;1;&nbsp;i&nbsp;&lt;=&nbsp;n;&nbsp;i++&nbsp;)
+		p&nbsp;+=&nbsp;(a[i]&nbsp;*&nbsp;pow(&nbsp;x,&nbsp;i&nbsp;)&nbsp;);
+	return&nbsp;p;
+}</pre><pre class="brush:cpp;toolbar:false">//方法2
+doublef2(&nbsp;int&nbsp;n,&nbsp;double&nbsp;a[],&nbsp;double&nbsp;x&nbsp;)
+{
+	int&nbsp;i;&nbsp;double&nbsp;p&nbsp;=&nbsp;a[n];&nbsp;for&nbsp;(&nbsp;i&nbsp;=&nbsp;n;&nbsp;i&nbsp;&gt;&nbsp;0;&nbsp;i--&nbsp;)
+		p&nbsp;=&nbsp;a[i&nbsp;-&nbsp;1]&nbsp;+&nbsp;x&nbsp;*&nbsp;p;
+	return&nbsp;p;
+}</pre><p>显然方法二更加“巧妙”。如何直观的表示这种巧妙呢？</p><p>简单来讲，在不考虑占用资源的情况下，根据算法执行的快慢，也就是时间长短来衡量算法的优劣。<br/></p><p>假如一个算法运行时间极短又该怎么判断时间呢？可以运行N次，取个平均嘛！</p><pre class="brush:cpp;toolbar:false">#include&nbsp;#include&nbsp;#include&nbsp;#defineMAXK&nbsp;1e7&nbsp;/*&nbsp;被测函数最大重复调用次数*/
+int&nbsp;main()
+{
+&nbsp;&nbsp;&nbsp;&nbsp;start&nbsp;=&nbsp;clock();&nbsp;for&nbsp;(&nbsp;i&nbsp;=&nbsp;0;&nbsp;i&nbsp;&lt;&nbsp;MAXK;&nbsp;i++&nbsp;)&nbsp;/*&nbsp;重复调用函数以获得充分多的时钟打点数*/
+&nbsp;&nbsp;&nbsp;&nbsp;user_funtion(&nbsp;MAXN&nbsp;-&nbsp;1,&nbsp;a,&nbsp;1.1&nbsp;);
+&nbsp;&nbsp;&nbsp;&nbsp;stop&nbsp;=&nbsp;clock();&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;duration&nbsp;=&nbsp;(&nbsp;(double)&nbsp;(stop&nbsp;-&nbsp;start)&nbsp;)&nbsp;/&nbsp;CLK_TCK&nbsp;/&nbsp;MAXK;&nbsp;/*&nbsp;计算函数单次运行的时间*/&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;printf(&nbsp;&quot;ticks1&nbsp;=&nbsp;%f\n&quot;,&nbsp;(double)&nbsp;(stop&nbsp;-&nbsp;start)&nbsp;);&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;printf(&nbsp;&quot;duration1&nbsp;=&nbsp;%6.2e\n&quot;,&nbsp;duration&nbsp;);
+&nbsp;&nbsp;&nbsp;&nbsp;return(0);
+}</pre><p><br/></p><p><span style="background-color: rgb(216, 216, 216);">得出结论：解决问题方法的效率，跟算法的巧妙程度有关。</span></p><p><br/></p><p><strong>总结</strong></p><p>数据对象在计算机中的组织方式：逻辑结构，物理存储结构。</p><p>数据对象必定与一系列加在其上的操作相关联。</p><p>完成这些操作所用的方法就是算法。</p><p><br/></p><p><strong>补充</strong></p><p>基本术语概念</p><p>数据，数据元素，数据对象</p><p>数据结构：集合，线性，树形，图或网状</p><p>逻辑结果&nbsp;</p><p>物理结构又称存储结构</p><p>位，串，元素，节点，数据域</p><p>顺序映像和非顺序映像</p><p>对应：顺序存储结果和链式存储结构</p><p>还有索引存储，散列存储</p></section>
+        <hr/>
+        <p>
+				<span  class="pull-left">
+					<span class="author">Winke</span>
+					<span> 发表于 2017-01-19 14:03</span>
+				</span>
+				<span class="pull-right">
+					<a href="229.html">上一篇</a>                    <a href="231.html">下一篇</a>				</span>
+			</p>
+		<hr/>
+            </div>
+ 
+                </div>
+                
+                
+                <!-- Pager -->
+                
+                
+                
+            </div>
+        </div>
+    </div>
+   </div>
+ </div>
+	<!-- /主体 -->
+
+	<!-- 底部 -->
+	
+    <!-- 底部
+    ================================================== -->
+    <footer class="footer">
+       <div class="g-ft">
+		   <p class="m-cprt">©&nbsp;<a href="../../../../index.html">花开花落</a>&nbsp;京ICP备15006955号-1&nbsp;|&nbsp;Powered by <a href="../../../../index.html">Winke</a></p> 
+	   </div>
+    </footer>
+
+    <div style="right: 119.5px;" class="amz-toolbar" id="amz-toolbar">
+    <a href="#top" title="回到顶部" class="am-icon-btn am-icon-arrow-up am-active" id="amz-go-top"></a>
+    </div>
+
+<script type="text/javascript">
+(function(){
+	var ThinkPHP = window.Think = {
+		"ROOT"   : "", //当前网站地址
+		"APP"    : "", //当前项目地址
+		"PUBLIC" : "/Public", //项目公共目录地址
+		"DEEP"   : "/", //PATHINFO分割符
+		"MODEL"  : ["2", "", "html"],
+		"VAR"    : ["m", "c", "a"]
+	}
+})();
+</script>
+<script src="../../../../Public/static/amaze/js/jquery.min.js"></script>
+<script src="../../../../Public/static/amaze/js/amazeui.min.js"></script>
+<script src="../../../../Public/Home/js/blog.js"></script>
+
+<script type="text/javascript" src="../../../../Public/static/ueditor/third-party/SyntaxHighlighter/shCore.js"></script>
+<script type="text/javascript"> SyntaxHighlighter.all(); </script>
+<script type="text/javascript">
+	$(function () { 
+  // Line wrap back 
+  var shLineWrap = function () { 
+    $('.syntaxhighlighter').each(function () { 
+      // Fetch 
+      var $sh = $(this), 
+        $gutter = $sh.find('td.gutter'), 
+        $code = $sh.find('td.code') 
+        ; 
+      // Cycle through lines 
+      $gutter.children('.line').each(function (i) { 
+        // Fetch 
+        var $gutterLine = $(this), 
+          $codeLine = $code.find('.line:nth-child(' + (i + 1) + ')') 
+          ; 
+        //alert($gutterLine); 
+        // Fetch height 
+        var height = $codeLine.height() || 0; 
+        if (!height) { 
+          height = 'auto'; 
+        } 
+        else { 
+          height = height += 'px'; 
+          //alert(height); 
+        } 
+        // Copy height over 
+        $gutterLine.attr('style', 'height: ' + height + ' !important'); // fix by Edi, for JQuery 1.7+ under Firefox 15.0 
+        console.debug($gutterLine.height(), height, $gutterLine.text(), $codeLine); 
+      }); 
+    }); 
+  }; 
+  // Line wrap back when syntax highlighter has done it's stuff 
+  var shLineWrapWhenReady = function () { 
+    if ($('.syntaxhighlighter').length === 0) { 
+      setTimeout(shLineWrapWhenReady, 10); 
+    } 
+    else { 
+      shLineWrap(); 
+    } 
+  }; 
+  // Fire 
+  shLineWrapWhenReady();});
+</script>	
+ <!-- 用于加载js代码 -->
+<!-- 页面footer钩子，一般用于加载插件JS文件和JS代码 -->
+<div class="hidden"><!-- 用于加载统计代码等隐藏元素 -->
+	
+</div>
+
+	<!-- /底部 -->
+</body>
+</html>
